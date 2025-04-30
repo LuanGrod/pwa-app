@@ -1,6 +1,6 @@
 {
-  "name": "Aplicação de exemplo PWA",
-  "short_name": "app pwa teste",
+  "name": "medRQE - Estudos para residentes",
+  "short_name": "medRQE",
   "theme_color": "#00ff00",
   "background_color": "#ffffff",
   "display": "standalone",
