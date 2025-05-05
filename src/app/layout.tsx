@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { comfortaa, sfProDisplay, sfProText } from "./fonts";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import Footer from "./components/footer/Footer";
+import Header from "./components/header/Header";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -19,7 +19,7 @@ export default function RootLayout({
       <body className={`antialiased screen`}>
         <Header />
         <main className="grow p-5 mt-[82px] mb-[70px]">{children}</main>
-        <Footer active="http://localhost:3000/"/>
+        <Footer />
       </body>
     </html>
   );

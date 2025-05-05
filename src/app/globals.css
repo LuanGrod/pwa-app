@@ -6,6 +6,9 @@
   --foreground: #000000;
   --foreground-variation: #828889;
   --emphasis: #00cc77;
+  --divider: #00000015;
+  --footer-link-active: #00cc77;
+  --footer-link-inactive: #7d93a4;
 }
 
 @theme inline {
@@ -14,9 +17,9 @@
   --color-foreground: var(--foreground);
   --color-foreground-variation: var(--foreground-variation);
   --color-emphasis: var(--emphasis);
-  --font-sf-pro-display: var(--font-sfpro-display);
-  --font-sf-pro-text: var(--font-sfpro-text);
-  --font-comfortaa: var(--font-comfortaa);
+  --font-title: var(--font-sfpro-display);
+  --font-text: var(--font-sfpro-text);
+  --font-rounded: var(--font-rounded);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -25,7 +28,10 @@
     --background-variation: #222224;
     --foreground: #ffffff;
     --foreground-variation: #828889;
-    --emphasis: #00ff99;
+    /* --emphasis: #00ff99; */
+    --divider: #ffffff15;
+    --footer-link-active: #ffffff;
+    --footer-link-inactive: #828889;
   }
 
   .icon {
@@ -42,6 +48,7 @@
 body {
   background: var(--background);
   color: var(--foreground);
+  font-family: var(--font-sfpro-text);
 }
 
 .screen {
@@ -61,4 +68,172 @@ body {
 .icon.disabled {
   filter: brightness(0) saturate(100%) invert(39%) sepia(7%) saturate(311%) hue-rotate(149deg) brightness(91%)
     contrast(96%);
+}
+
+.divider {
+  color: var(--divider);
+}
+
+/* header */
+
+.header-container {
+  z-index: 40;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  padding: 18px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--background);
+}
+
+.header-container .icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+}
+
+.header-container .icon-container-overlay {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  background-color: var(--background-variation);
+  border-radius: 100%;
+}
+
+.header-container .title {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  line-height: calc(1.75 / 1.25);
+}
+
+/* bottom-drawer */
+
+.bottom-drawer-container {
+  z-index: 50;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
+
+.bottom-drawer-container.open {
+  background-color: color-mix(in oklab, var(--background) 60%, transparent);
+  visibility: visible;
+}
+
+.bottom-drawer-container.closed {
+  background-color: color-mix(in oklab, var(--background) 0%, transparent);
+  visibility: hidden;
+}
+
+.bottom-drawer-container .close-area {
+  width: 100%;
+  height: 100%;
+}
+
+.bottom-drawer {
+  width: 100%;
+  height: fit-content;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 1.5rem;
+  padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--background-variation);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+}
+
+.bottom-drawer.open {
+  transform: translateY(0);
+}
+
+.bottom-drawer.closed {
+  transform: translateY(100%);
+}
+
+.bottom-drawer .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.bottom-drawer .title {
+  font-size: 1.5rem;
+  line-height: calc(2 / 1.5);
+  font-weight: 700;
+  font-family: var(--font-title);
+}
+
+.bottom-drawer .close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+.bottom-drawer .drawer-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/* footer */
+
+.footer-container {
+  box-sizing: border-box;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  z-index: 30;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 15px;
+  background-color: var(--background-variation);
+}
+
+.footer-container .link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.footer-container .link p {
+  font-size: 10px;
+}
+
+.footer-container .link .active {
+  color: var(--footer-link-active);
+}
+
+.footer-container .link .active path {
+  stroke: var(--footer-link-active);
+}
+
+.footer-container .link .inactive {
+  color: var(--footer-link-inactive);
+}
+
+.footer-container .link .inactive path {
+  stroke: var(--footer-link-inactive);
 }

@@ -1,9 +1,3 @@
-<svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<rect width="100" height="100" fill="url(#pattern0_3462_1519)"/>
-<defs>
-<pattern id="pattern0_3462_1519" patternContentUnits="objectBoundingBox" width="1" height="1">
-<use xlink:href="#image0_3462_1519" transform="scale(0.01)"/>
-</pattern>
-<image id="image0_3462_1519" width="100" height="100" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkCAYAAABw4pVUAAAACXBIWXMAAAsTAAALEwEAmpwYAAACdElEQVR4nO3dzYuNYRiA8cvEwvioKQuMrFCsRKQoVrZ2SijlKxay8xeIGCs7nxskZWlnRwlJYkORjbCwYMxoMEZP3afejZ3TuZ9nrl+dppnV83TN+Xrf+z0HJEmSJEmSJEmS1A/LgDPAC+A7MJPkNgG8AsaAlbMl/d5kEWb+cfsBHKFx+4E/seE7wDZgmDzmA1uAG50wx2nUCmAyNnmC/A7GP89PYDUNuhAxblGPy7Hm8rM5b2Jzm6jH2ljzJxozBPwCpoG51OVbRFlEQ4Y7Lytr8yHWvpyGGCQZgyRjkGQMkoxBkjFIMgZJxiDJGCQZgyRjkGQMkoxBkqk5yDuP9g7WQ+AZMBq/b4gTVB5+H5AncY94D6yJv60CFtOQmh6yRuJeUtb7JaZQmlNTkN5678Wax4GdNKa2IMS5/6ux7ilgNw2pMUgxBzgfa/8NHKURtQbpOdWZuDxLA2oPUhyIUaayj4sx2lStFoIUu2IIu+zlJjCPSrUSpNgBfI393K91gK6lIMVG4HPs6TGwhMr0M8j1BNeSlHf3VelnkGsGyRVkEHzISsQn9UR82ZuIbwwT8dBJEh5cTMTD74l4giqREU/h5vLUIYdcHgCPOmNA64GPjgHl8dZBuVy8Tj0ZgyRjkGQMkoxBkjFIMgZJxiDJGCQZgyRjkGQMkoxBkmkyyFB8QvR0hSP84xFkIY15HRvbTD3WxZrLCarmjMXmblOPK7HmSzRoNIatywZPkt/huK5wKj44oEn7OhdP3gW2AwvINf6zNb4woHftxzEat6fzRJn5NgkcYpZYCpwGnif7tp0J4CVwLr7vRJIkSZIkSZIkSfxffwH6I/1x83qIRwAAAABJRU5ErkJggg=="/>
-</defs>
+<svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M21.875 12.0312V9.29688C21.875 8.57167 21.5869 7.87617 21.0741 7.36338C20.5613 6.85059 19.8658 6.5625 19.1406 6.5625H6.01562C5.29042 6.5625 4.59492 6.85059 4.08213 7.36338C3.56934 7.87617 3.28125 8.57167 3.28125 9.29688V25.7031C3.28125 26.4283 3.56934 27.1238 4.08213 27.6366C4.59492 28.1494 5.29042 28.4375 6.01562 28.4375H19.1406C19.8658 28.4375 20.5613 28.1494 21.0741 27.6366C21.5869 27.1238 21.875 26.4283 21.875 25.7031V22.9688M26.25 12.0312L31.7188 17.5M31.7188 17.5L26.25 22.9688M31.7188 17.5H13.0566" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>

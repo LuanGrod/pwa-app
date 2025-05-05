@@ -13,7 +13,7 @@ export const comfortaa = localFont({
       style: "normal",
     },
   ],
-  variable: "--font-comfortaa",
+  variable: "--font-rounded",
   display: "swap",
   fallback: ["ui-monospace", "monospace"],
 });
