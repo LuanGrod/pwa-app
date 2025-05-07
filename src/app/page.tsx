@@ -7,10 +7,10 @@ import styles from "./page.module.css";
 export default function Home() {
   return (
     <HomeStructure>
-      <PushNotificationManager />
-      <InstallPrompt />
       <div className={styles.container}>
         <h1 className={styles.title}>medRQE</h1>
+        <PushNotificationManager />
+        <InstallPrompt />
         <div className={styles.links_container}>
           <IconFrame href="/hot-topics" image="/assets/HotTopics.svg" label="Hot topics" />
           <IconFrame href="/mapas-mentais" image="/assets/MapasMentais.svg" label="Mapas mentais" />

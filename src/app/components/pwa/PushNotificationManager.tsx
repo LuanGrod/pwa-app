@@ -93,12 +93,14 @@ export function PushNotificationManager() {
         <>
           <p>You are subscribed to push notifications.</p>
           <button onClick={unsubscribeFromPush}>Unsubscribe</button>
+          <br />
           <input
             type="text"
             placeholder="Enter notification message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
+          <br />
           <button onClick={sendTestNotification}>Send Test</button>
         </>
       ) : (
