@@ -2,6 +2,7 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 import { comfortaa, sfProDisplay, sfProText, inter } from "./fonts";
 import styles from "./layout.module.css";
+import SplashScreenProvider from "./providers/SplashScreenProvider";
 
 export const metadata: Metadata = {
   title: "root layout",
@@ -18,7 +19,9 @@ export default function RootLayout({
       lang="en"
       className={`${comfortaa.variable} ${sfProDisplay.variable} ${sfProText.variable} ${inter.variable}`}
     >
-      <body className={styles.screen}>{children}</body>
+      <body className={styles.screen}>
+        <SplashScreenProvider>{children}</SplashScreenProvider>
+      </body>
     </html>
   );
 }
