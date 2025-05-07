@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: var(--color-background);
+}
+
+.textContainer {
+  font-family: var(--font-rounded);
+  color: var(--color-emphasis);
+  font-size: 2rem;
+  font-weight: bold;
+  height: 2rem;
+}
