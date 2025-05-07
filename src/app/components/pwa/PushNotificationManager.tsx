@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { subscribeUser, unsubscribeUser, sendNotification } from "./actions";
 import { urlBase64ToUint8Array } from "./urlBase64ToUint8Array";
