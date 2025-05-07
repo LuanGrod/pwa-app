@@ -1,10 +1,14 @@
 import IconFrame from "./components/IconFrame";
+import { InstallPrompt } from "./components/pwa/InstallPromp";
+import { PushNotificationManager } from "./components/pwa/PushNotificationManager";
 import HomeStructure from "./components/structure/Home";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <HomeStructure>
+      <PushNotificationManager />
+      <InstallPrompt />
       <div className={styles.container}>
         <h1 className={styles.title}>medRQE</h1>
         <div className={styles.links_container}>
