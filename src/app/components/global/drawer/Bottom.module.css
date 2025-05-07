@@ -1,0 +1,74 @@
+.container {
+  z-index: 50;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+}
+
+.container.open {
+  background-color: color-mix(in oklab, var(--background) 60%, transparent);
+  visibility: visible;
+}
+
+.container.closed {
+  background-color: color-mix(in oklab, var(--background) 0%, transparent);
+  visibility: hidden;
+}
+
+.close_area {
+  width: 100%;
+  height: 100%;
+}
+
+.drawer {
+  width: 100%;
+  height: fit-content;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  padding: 1.5rem;
+  padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--background-variation);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+  border-top-left-radius: 1.5rem;
+  border-top-right-radius: 1.5rem;
+}
+
+.drawer.open {
+  transform: translateY(0);
+}
+
+.drawer.closed {
+  transform: translateY(100%);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  line-height: calc(2 / 1.5);
+  font-weight: 700;
+  font-family: var(--font-title);
+}
+
+.close_btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}

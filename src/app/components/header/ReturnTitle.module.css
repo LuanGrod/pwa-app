@@ -1,0 +1,27 @@
+.container {
+  flex: none; /* previne de dar o grow (só o content da grow) */
+  z-index: 40;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  display: flex;
+  padding: 18px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--background);
+}
+
+.icon_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: calc(1.75 / 1.25);
+}

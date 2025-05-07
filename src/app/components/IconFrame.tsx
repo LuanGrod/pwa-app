@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import styles from "./IconFrame.module.css";
 
 type Props = {
   href: string;
@@ -9,9 +10,9 @@ type Props = {
 
 export default function IconFrame({ image, label, href }: Props) {
   return (
-    <Link href={href} className="flex flex-col items-center justify-center gap-y-[10px]">
+    <Link href={href} className={styles.link}>
       <Image src={image} alt={label} width={106} height={106} />
-      <p className="text-center text-base font-bold font-title text-foreground">{label}</p>
+      <p className={styles.label}>{label}</p>
     </Link>
   );
 }

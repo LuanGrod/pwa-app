@@ -1,9 +1,11 @@
 import { Icon } from "@public/global/js/types/Icon";
+import styles from "./Icon.module.css";
+import clsx from "clsx/lite";
 
-export default function Bandeira({ color = "#000", size, className }: Icon) {
+export default function Bandeira({ color = "#000", size, className, changeOnTheme = false }: Icon) {
   return (
     <svg
-      className={className}
+      className={clsx(changeOnTheme && styles.icon, className)}
       width={size}
       height={size}
       viewBox="0 0 30 30"

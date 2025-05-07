@@ -1,10 +1,11 @@
 import { Icon } from "@public/global/js/types/Icon";
+import styles from "./Icon.module.css";
 import clsx from "clsx/lite";
 
-export default function Fechar({ color = "#000", size, className }: Icon) {
+export default function Fechar({ color = "#000", size, className, changeOnTheme = false }: Icon) {
   return (
     <svg
-      className={clsx("icon", className)}
+      className={clsx(changeOnTheme && styles.icon, className)}
       width={size}
       height={size}
       viewBox="0 0 14 14"

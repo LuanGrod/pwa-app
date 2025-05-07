@@ -1,0 +1,16 @@
+.link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 10px;
+}
+
+.label {
+  font-size: 1rem;
+  line-height: calc(1.5 / 1);
+  font-weight: 700;
+  text-align: center;
+  font-family: var(--font-title);
+  color: var(--font-foreground);
+}

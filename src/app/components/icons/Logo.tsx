@@ -1,10 +1,11 @@
 import { Icon } from "@public/global/js/types/Icon";
+import styles from "../global/icons/Icon.module.css";
 import clsx from "clsx/lite";
 
-export default function Logo({ color = "#00FF81", size, className }: Icon) {
+export default function Logo({ color = "#00FF81", size, className, changeOnTheme = false }: Icon) {
   return (
     <svg
-      className={clsx(className)}
+      className={clsx(changeOnTheme && styles.icon, className)}
       width={size}
       height={size}
       viewBox="0 0 140 140"

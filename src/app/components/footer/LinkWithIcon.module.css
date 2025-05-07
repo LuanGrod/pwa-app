@@ -1,0 +1,26 @@
+.link {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.link p {
+  font-size: 10px;
+}
+
+.link .active {
+  color: var(--footer-link-active);
+}
+
+.link .active path {
+  stroke: var(--footer-link-active);
+}
+
+.link .inactive {
+  color: var(--footer-link-inactive);
+}
+
+.link .inactive path {
+  stroke: var(--footer-link-inactive);
+}
