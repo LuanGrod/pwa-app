@@ -20,3 +20,7 @@ self.addEventListener('notificationclick', function (event) {
   event.notification.close()
   event.waitUntil(clients.openWindow('https://pwa-app-ten-beryl.vercel.app'))
 })
+
+self.addEventListener('activate', (event) => {
+  event.waitUntil(self.clients.claim());
+});

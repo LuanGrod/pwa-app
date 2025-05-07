@@ -17,23 +17,56 @@ export function PushNotificationManager() {
   }, []);
 
   async function registerServiceWorker() {
-    const registration = await navigator.serviceWorker.register("/sw.js", {
-      scope: "/",
-      updateViaCache: "none",
-    });
-    const sub = await registration.pushManager.getSubscription();
-    setSubscription(sub);
+    try {
+      const registration = await navigator.serviceWorker.register("/sw.js", {
+        scope: "/",
+        updateViaCache: "none",
+      });
+      
+      // Verifica se já existe uma subscription
+      const existingSubscription = await registration.pushManager.getSubscription();
+      if (existingSubscription) {
+        const serializedSub = serializeSubscription(existingSubscription);
+        await subscribeUser(serializedSub);
+        setSubscription(existingSubscription);
+      }
+    } catch (error) {
+      console.error("Service Worker registration failed:", error);
+    }
   }
 
+  function serializeSubscription(sub: PushSubscription) {
+    const p256dh = sub.getKey('p256dh');
+    const auth = sub.getKey('auth');
+  
+    if (!p256dh || !auth) {
+      throw new Error('Chaves da subscription inválidas');
+    }
+  
+    return {
+      endpoint: sub.endpoint,
+      keys: {
+        p256dh: btoa(String.fromCharCode(...new Uint8Array(p256dh))),
+        auth: btoa(String.fromCharCode(...new Uint8Array(auth))),
+      },
+    };
+  }
   async function subscribeToPush() {
-    const registration = await navigator.serviceWorker.ready;
-    const sub = await registration.pushManager.subscribe({
-      userVisibleOnly: true,
-      applicationServerKey: urlBase64ToUint8Array(process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!),
-    });
-    setSubscription(sub);
-    const serializedSub = JSON.parse(JSON.stringify(sub));
-    await subscribeUser(serializedSub);
+    try {
+      const registration = await navigator.serviceWorker.ready;
+      const sub = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(
+          process.env.NEXT_PUBLIC_VAPID_PUBLIC_KEY!
+        ),
+      });
+      
+      const serializedSub = serializeSubscription(sub);
+      await subscribeUser(serializedSub);
+      setSubscription(sub);
+    } catch (error) {
+      console.error("Subscription failed:", error);
+    }
   }
 
   async function unsubscribeFromPush() {
