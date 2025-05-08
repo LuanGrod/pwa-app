@@ -19,8 +19,8 @@ export default function middleware(request: NextRequest) {
   if (isLogged && isPublicRoute) {
     return NextResponse.redirect(new URL("/", request.url));
   }
-    */
- 
+  */
+
   // dar o refresh no token (definir uma hora de expiração)
   // TODO
 
