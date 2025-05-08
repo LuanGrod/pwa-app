@@ -1,4 +1,4 @@
-import ReturnTitleStructure from "../components/structure/ReturnTitle";
+import ReturnTitleStructure from "../../components/structure/ReturnTitle";
 
 type Props = {};
 

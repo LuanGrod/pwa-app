@@ -1,4 +1,4 @@
-import GreetingsLogoStructure from "../components/structure/GreetingsLogo";
+import GreetingsLogoStructure from "../../components/structure/GreetingsLogo";
 
 type Props = {};
 

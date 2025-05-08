@@ -1,4 +1,4 @@
-import Logo from "../components/icons/Logo";
+import Logo from "../../components/icons/Logo";
 import Form from "./Form";
 import styles from "./page.module.css";
 
