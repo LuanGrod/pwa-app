@@ -20,6 +20,7 @@ export default function SplashScreen({}: Props) {
 
   return (
     <div className={`${styles.container}`}>
+      <div></div>
       <AnimatePresence>
         {isVisible && (
           <>
