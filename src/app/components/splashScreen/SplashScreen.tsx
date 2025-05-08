@@ -25,6 +25,8 @@ export default function SplashScreen({}: Props) {
           <>
             <motion.img
               src="/assets/Logo.svg"
+              width={165}
+              height={165}
               initial="hidden"
               animate="visible"
               exit="exit"
