@@ -13,24 +13,23 @@ export default function SplashScreen({}: Props) {
   const router = useRouter();
 
   const handleEndAnimation = () => {
-    // setIsVisible(false);
+    setIsVisible(false);
     document.cookie = "splash_shown=true; path=/; max-age=1";
-    // router.refresh();
+    router.refresh();
   };
 
   return (
-    <div className={`${styles.container}`}>
-      {/* <div className={styles.textContainer}></div> */}
+    <div className={styles.container}>
       <AnimatePresence>
         {isVisible && (
-          <>
+          <div className={styles.content}>
             <motion.img
               src="/assets/Logo.svg"
               width={165}
               height={165}
               initial="hidden"
               animate="visible"
-              // exit="exit"
+              exit="exit"
               variants={{
                 hidden: {
                   opacity: 1,
@@ -39,52 +38,50 @@ export default function SplashScreen({}: Props) {
                   opacity: 1,
                   transition: { type: "tween", duration: 1.7 },
                 },
-                // exit: {
-                //   opacity: 0,
-                //   transition: {
-                //     delay: 0.1,
-                //   },
-                // },
+                exit: {
+                  opacity: 0,
+                  transition: {
+                    delay: 0.1,
+                  },
+                },
               }}
             />
-            <div className={styles.textContainer}>
-              <motion.div
-                initial="hidden"
-                animate="visible"
-                // exit="exit"
-                variants={{
-                  visible: {
-                    transition: { staggerChildren: 0.1 },
-                  },
-                  // exit: {
-                  //   opacity: 0,
-                  //   scale: 0.95,
-                  //   y: 0.1,
-                  // },
-                }}
-                style={{ display: "flex" }}
-                onAnimationComplete={() => handleEndAnimation()}
-              >
-                {"MedRQE".split("").map((letter, index) => (
-                  <motion.span
-                    key={index}
-                    variants={{
-                      hidden: { opacity: 0 },
-                      visible: {
-                        opacity: 1,
-                        transition: {
-                          type: "spring",
-                          delay: 0.3 + index * 0.13,
-                        },
+            <motion.div
+              className={styles.textContainer}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={{
+                visible: {
+                  transition: { staggerChildren: 0.1 },
+                },
+                exit: {
+                  opacity: 0,
+                  scale: 0.95,
+                  y: 0.1,
+                },
+              }}
+              onAnimationComplete={() => handleEndAnimation()}
+            >
+              {"MedRQE".split("").map((letter, index) => (
+                <motion.span
+                  key={index}
+                  variants={{
+                    hidden: { opacity: 0 },
+                    visible: {
+                      opacity: 1,
+                      transition: {
+                        type: "spring",
+                        delay: 0.3 + index * 0.13,
                       },
-                    }}
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </motion.div>
-            </div>
-          </>
+                    },
+                  }}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </motion.div>
+          </div>
         )}
       </AnimatePresence>
     </div>
