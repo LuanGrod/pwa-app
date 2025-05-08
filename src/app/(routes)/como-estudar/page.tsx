@@ -1,9 +1,9 @@
-import ComoEstudarStructure from "../../components/structure/ComoEstudar"
+import ReturnLogoStructure from "../../components/structure/ReturnLogo"
 
 type Props = {}
 
 export default function page({}: Props) {
   return (
-    <ComoEstudarStructure>como estudar</ComoEstudarStructure>
+    <ReturnLogoStructure>como estudar</ReturnLogoStructure>
   )
 }

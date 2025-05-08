@@ -1,0 +1,14 @@
+.container {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: fit-content;
+  height: 45px;
+  gap: 1rem;
+}
+
+.title {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  line-height: calc(1.75 / 1.25);
+}

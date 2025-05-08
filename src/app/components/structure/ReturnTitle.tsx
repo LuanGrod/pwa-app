@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import Footer from "../footer/Footer";
-import Header from "../header/ReturnTitle";
+import Header from "../global/header/ReturnTitle";
 import styles from "./Structure.module.css";
 
 type Props = {

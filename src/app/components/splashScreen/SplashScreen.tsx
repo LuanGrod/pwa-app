@@ -13,14 +13,14 @@ export default function SplashScreen({}: Props) {
   const router = useRouter();
 
   const handleEndAnimation = () => {
-    setIsVisible(false);
-    document.cookie = "splash_shown=true; path=/; max-age=1"; // 1 ano
-    router.refresh();
+    // setIsVisible(false);
+    document.cookie = "splash_shown=true; path=/; max-age=1";
+    // router.refresh();
   };
 
   return (
     <div className={`${styles.container}`}>
-      <div className={styles.textContainer}></div>
+      {/* <div className={styles.textContainer}></div> */}
       <AnimatePresence>
         {isVisible && (
           <>
@@ -30,7 +30,7 @@ export default function SplashScreen({}: Props) {
               height={165}
               initial="hidden"
               animate="visible"
-              exit="exit"
+              // exit="exit"
               variants={{
                 hidden: {
                   opacity: 1,
@@ -39,28 +39,28 @@ export default function SplashScreen({}: Props) {
                   opacity: 1,
                   transition: { type: "tween", duration: 1.7 },
                 },
-                exit: {
-                  opacity: 0,
-                  transition: {
-                    delay: 0.1,
-                  },
-                },
+                // exit: {
+                //   opacity: 0,
+                //   transition: {
+                //     delay: 0.1,
+                //   },
+                // },
               }}
             />
             <div className={styles.textContainer}>
               <motion.div
                 initial="hidden"
                 animate="visible"
-                exit="exit"
+                // exit="exit"
                 variants={{
                   visible: {
                     transition: { staggerChildren: 0.1 },
                   },
-                  exit: {
-                    opacity: 0,
-                    scale: 0.95,
-                    y: 0.1,
-                  },
+                  // exit: {
+                  //   opacity: 0,
+                  //   scale: 0.95,
+                  //   y: 0.1,
+                  // },
                 }}
                 style={{ display: "flex" }}
                 onAnimationComplete={() => handleEndAnimation()}

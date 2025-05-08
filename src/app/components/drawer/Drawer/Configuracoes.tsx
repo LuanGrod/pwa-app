@@ -1,3 +1,5 @@
+"use client";
+
 import { Modal } from "@public/global/js/types/Modal";
 import { RefObject } from "react";
 import Divider from "../../global/Divider";
@@ -12,12 +14,12 @@ import Usuario from "../../global/icons/Usuario";
 import styles from "./Configuracoes.module.css";
 
 type Props = {
-  drawerRef: RefObject<Modal | null>;
+  menuRef?: RefObject<Modal | null>;
 };
 
-export default function ConfiguracoesDrawer({ drawerRef }: Props) {
+export default function ConfiguracoesDrawer({ menuRef }: Props) {
   return (
-    <BottomDrawer ref={drawerRef} title="Configurações">
+    <BottomDrawer ref={menuRef} title="Configurações">
       <div className={styles.container}>
         <DrawerLinkWithIcon href="/perfil" label="Perfil" icon={<Usuario size={33} changeOnTheme />} />
         <DrawerLinkWithIcon href="/faturas" label="Faturas" icon={<Faturas size={33} changeOnTheme />} />

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import Footer from "../footer/Footer";
-import Header from "../header/GreetingsLogo";
+import Header from "../global/header/GreetingsLogo";
 import styles from "./Structure.module.css";
 
 type Props = {

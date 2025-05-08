@@ -1,0 +1,5 @@
+.title {
+  font-family: var(--font-title);
+  font-size: 1.25rem;
+  line-height: calc(1.75 / 1.25);
+}
