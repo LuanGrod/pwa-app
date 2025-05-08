@@ -1,37 +1,42 @@
 // components/SplashScreenWrapper.js
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useState } from "react";
 import SplashScreen from "../components/splashScreen/SplashScreen";
 
 type Props = {
   children: React.ReactNode;
 };
 
+/**
+ * 
+ * @param param0 nao ta sendo usado mais
+ * @returns 
+ */
 export default function SplashScreenWrapper({ children }: Props) {
-  const [showSplash, setShowSplash] = useState(false);
+  // 1) Começamos assumindo que a splash deve estar lá até provar o contrário
+  const [showSplash, setShowSplash] = useState(true);
 
-  useEffect(() => {
-    // Verifica se já foi exibido usando sessionStorage
-    const splashShown = ""
-    // const splashShown = sessionStorage.getItem("splash_shown");
+  useLayoutEffect(() => {
+    const splashShown = sessionStorage.getItem("splash_shown");
 
     if (!splashShown) {
-      setShowSplash(true);
+      // marca que já mostramos
       sessionStorage.setItem("splash_shown", "true");
-
-      // Tempo total do splash + animação
-      setTimeout(() => setShowSplash(false), 3000);
+      // depois de 3s tira a splash
+      const timer = setTimeout(() => setShowSplash(false), 3000);
+      return () => clearTimeout(timer);
     }
+
+    // se já mostrou, não exibe splash
+    setShowSplash(false);
   }, []);
 
-  return (
-    <>
-      {showSplash && (
-        <SplashScreen/>
-      )}
+  if (showSplash) {
+    // enquanto deve estar na splash, só mostra ela
+    return <SplashScreen />;
+  }
 
-      <div style={{ visibility: showSplash ? "hidden" : "visible" }}>{children}</div>
-    </>
-  );
+  // depois: renderiza o seu app normalmente
+  return <>{children}</>;
 }

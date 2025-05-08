@@ -15,6 +15,7 @@ export default function Home() {
           <IconFrame href="/extensivo" image="/assets/Extensivo.svg" label="Extensivo" />
           <IconFrame href="/simulado" image="/assets/Simulado.svg" label="Simulado" />
         </div>
+        <div></div>
       </div>
     </HomeStructure>
   );
