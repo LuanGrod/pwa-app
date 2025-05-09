@@ -1,5 +1,5 @@
+import Login from "@/app/components/forms/Login.jsx";
 import Logo from "../../components/icons/Logo";
-import Form from "./Form";
 import styles from "./page.module.css";
 
 type Props = {};
@@ -11,7 +11,7 @@ export default function page({}: Props) {
         <h1 className={styles.title}>MedRQE</h1>
         <Logo size={139} />
       </div>
-      <Form />
+      <Login />
     </div>
   );
 }

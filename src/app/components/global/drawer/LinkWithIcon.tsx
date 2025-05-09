@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Icon } from "@public/global/js/types/Icon";
+import { Icon } from "@public/global/js/Types/Icon";
 import { ReactElement } from "react";
 import styles from "./LinkWithIcon.module.css";
 

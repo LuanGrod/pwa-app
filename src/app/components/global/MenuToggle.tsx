@@ -1,6 +1,6 @@
 "use client";
 
-import { Modal } from "@public/global/js/types/Modal";
+import { Modal } from "@public/global/js/Types/Modal";
 import { cloneElement, ReactElement, useRef } from "react";
 import styles from "./MenuToggle.module.css";
 import Elipse from "./icons/Elipse";

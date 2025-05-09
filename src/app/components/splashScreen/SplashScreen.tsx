@@ -1,4 +1,5 @@
 "use client";
+
 import * as motion from "motion/react-client";
 import styles from "./SplashScreen.module.css";
 import { useState } from "react";
@@ -14,7 +15,7 @@ export default function SplashScreen({}: Props) {
 
   const handleEndAnimation = () => {
     setIsVisible(false);
-    document.cookie = "splash_shown=true; path=/; max-age=1";
+    document.cookie = "splash_shown=true; path=/; max-age=300";
     router.refresh();
   };
 
@@ -24,7 +25,7 @@ export default function SplashScreen({}: Props) {
         {isVisible && (
           <div className={styles.content}>
             <motion.img
-              src="/assets/Logo.svg"
+              src="/project/assets/Logo.svg"
               width={165}
               height={165}
               initial="hidden"

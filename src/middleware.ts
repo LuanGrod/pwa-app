@@ -31,6 +31,6 @@ export default function middleware(request: NextRequest) {
 export const config = {
   matcher: [
     // Exclui rotas de API, arquivos estáticos, imagens otimizadas e arquivos comuns
-    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|assets|[\\w-]+\\.\\w+).*)",
+    "/((?!api|_next/static|_next/image|favicon.ico|sitemap.xml|robots.txt|global|project|[\\w-]+\\.\\w+).*)",
   ],
 };

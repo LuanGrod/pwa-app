@@ -3,12 +3,12 @@ import localFont from "next/font/local";
 export const inter = localFont({
   src: [
     {
-      path: "../../public/fonts/Inter/Inter_18pt-Regular.ttf",
+      path: "../../public/project/fonts/Inter/Inter_18pt-Regular.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Inter/Inter_18pt-Bold.ttf",
+      path: "../../public/project/fonts/Inter/Inter_18pt-Bold.ttf",
       weight: "700",
       style: "normal",
     },
@@ -21,12 +21,12 @@ export const inter = localFont({
 export const comfortaa = localFont({
   src: [
     {
-      path: "../../public/fonts/Comfortaa/Comfortaa-Regular.ttf",
+      path: "../../public/project/fonts/Comfortaa/Comfortaa-Regular.ttf",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/Comfortaa/Comfortaa-Bold.ttf",
+      path: "../../public/project/fonts/Comfortaa/Comfortaa-Bold.ttf",
       weight: "700",
       style: "normal",
     },
@@ -39,12 +39,12 @@ export const comfortaa = localFont({
 export const sfProDisplay = localFont({
   src: [
     {
-      path: "../../public/fonts/SF-Pro/Display/sf-pro-display-regular.woff2",
+      path: "../../public/project/fonts/SF-Pro/Display/sf-pro-display-regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/SF-Pro/Display/sf-pro-display-bold.woff2",
+      path: "../../public/project/fonts/SF-Pro/Display/sf-pro-display-bold.woff2",
       weight: "700",
       style: "normal",
     },
@@ -57,12 +57,12 @@ export const sfProDisplay = localFont({
 export const sfProText = localFont({
   src: [
     {
-      path: "../../public/fonts/SF-Pro/Text/sf-pro-text-regular.woff2",
+      path: "../../public/project/fonts/SF-Pro/Text/sf-pro-text-regular.woff2",
       weight: "400",
       style: "normal",
     },
     {
-      path: "../../public/fonts/SF-Pro/Text/sf-pro-text-bold.woff2",
+      path: "../../public/project/fonts/SF-Pro/Text/sf-pro-text-bold.woff2",
       weight: "700",
       style: "normal",
     },

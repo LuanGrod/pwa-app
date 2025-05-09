@@ -1,6 +1,6 @@
 "use client";
 
-import { Modal } from "@public/global/js/types/Modal";
+import { Modal } from "@public/global/js/Types/Modal";
 import { RefObject } from "react";
 import Divider from "../../global/Divider";
 import { BottomDrawer } from "../../global/drawer/Bottom";

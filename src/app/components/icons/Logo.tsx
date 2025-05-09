@@ -1,4 +1,4 @@
-import { Icon } from "@public/global/js/types/Icon";
+import { Icon } from "@public/global/js/Types/Icon";
 import styles from "../global/icons/Icon.module.css";
 import clsx from "clsx/lite";
 

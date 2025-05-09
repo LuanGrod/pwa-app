@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Modal } from "@public/global/js/types/Modal";
+import { Modal } from "@public/global/js/Types/Modal";
 import styles from "./MenuTitleLogo.module.css";
 import BaseHeader from "./Base";
 import MenuToggle from "../MenuToggle";
