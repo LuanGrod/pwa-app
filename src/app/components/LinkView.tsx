@@ -1,4 +1,5 @@
 'use client'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import React from 'react'
 
@@ -21,8 +22,8 @@ export function LinkView({ href, children, ...props }: LinkViewProps) {
   }
 
   return (
-    <a {...props} href={href} onClick={handleClick}>
+    <Link {...props} href={href} onClick={handleClick}>
       {children}
-    </a>
+    </Link>
   )
 }
