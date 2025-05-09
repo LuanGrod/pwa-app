@@ -5,11 +5,11 @@ import ValidatorInterface from "../../ValidatorInterface";
 export default class GreaterThan implements ValidatorInterface {
   // Properties
   messageName: string;
-  message: Message;
+  message: Message = new Message();
   value: number;
 
   // Constructor
-  constructor(messageName, value) {
+  constructor(messageName: string, value: number) {
     this.messageName = messageName;
     this.value = value;
     this.createMessage();

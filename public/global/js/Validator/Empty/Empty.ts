@@ -1,13 +1,13 @@
-import type ValidatorInterface from "@pglobal/assets/js/Validator/ValidatorInterface";
+import ValidatorInterface from "../ValidatorInterface";
 import Message from "./Message/Message";
 
 export class Empty implements ValidatorInterface {
   // Properties
   messageName: string;
-  message: Message;
+  message: Message = new Message();
 
   // Constructor
-  constructor(messageName) {
+  constructor(messageName: string) {
     this.messageName = messageName;
     this.createMessage();
   }

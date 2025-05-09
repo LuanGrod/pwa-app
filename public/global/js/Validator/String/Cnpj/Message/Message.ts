@@ -1,16 +1,16 @@
-import type { Field } from "@pglobal/assets/js/Types/Form/Item/Field";
-import type MessageInterface from "@pglobal/assets/js/Validator/MessageInterface";
+
+import MessageInterface from "../../../MessageInterface";
 import type { Cnpj } from "../Cnpj";
 
 export default class Message implements MessageInterface {
   // Properties
-  validator: Cnpj;
+  validator!: Cnpj;
 
   // Constructor
   constructor() {}
 
   // Methods
-  getContent(field: Field): string {
+  getContent(field: any): string {
     return "O CNPJ informado é inválido.";
   }
 }

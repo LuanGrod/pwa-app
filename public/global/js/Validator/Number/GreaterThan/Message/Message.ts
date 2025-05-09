@@ -1,18 +1,17 @@
-import type { Field } from "@pglobal/assets/js/Types/Form/Item/Field";
-import type MessageInterface from "@pglobal/assets/js/Validator/MessageInterface";
+import MessageInterface from "../../../MessageInterface";
 import type GreaterThan from "../GreaterThan";
 
 export default class Message implements MessageInterface {
   // Properties
-  validator: GreaterThan;
+  validator!: GreaterThan;
 
   // Constructor
   constructor() {}
 
   // Methods
-  getContent(field: Field): string {
+  getContent(field: any): string {
     var validator = this.validator;
-    var messages = [[], []];
+    var messages: string[][] = [[], []];
 
     messages[1][0] = "Os " + field.fieldName + " precisam ser maiores que " + validator.value + ".";
     messages[1][1] = "O " + field.fieldName + " precisa ser maior que " + validator.value + ".";

@@ -1,11 +1,10 @@
-import MessageInterface from "../../MessageInterface";
 import ValidatorInterface from "../../ValidatorInterface";
 import Message from "./Message/Message";
 
 export class Email implements ValidatorInterface {
   // Properties
   messageName: string;
-  message: MessageInterface = new Message();
+  message: Message = new Message();
 
   // Constructor
   constructor(messageName: string) {

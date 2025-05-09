@@ -1,18 +1,17 @@
-import type { Field } from "@pglobal/assets/js/Types/Form/Item/Field";
-import type MessageInterface from "@pglobal/assets/js/Validator/MessageInterface";
+import MessageInterface from "../../../MessageInterface";
 import type { NotBetweenLength } from "../NotBetweenLength";
 
 export default class Message implements MessageInterface {
   // Properties
-  validator: NotBetweenLength;
+  validator!: NotBetweenLength;
 
   // Constructor
   constructor() {}
 
   // Methods
-  getContent(field: Field): string {
+  getContent(field: any): string {
     var validator = this.validator;
-    var messages = [[], []];
+    var messages: string[][] = [[], []];
     messages[1][0] =
       "Os " + field.fieldName + " não podem ter entre " + validator.min + " e " + validator.max + " caracteres.";
     messages[1][1] =

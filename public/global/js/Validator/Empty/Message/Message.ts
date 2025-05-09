@@ -1,17 +1,16 @@
-import type { Field } from "@pglobal/assets/js/Types/Form/Item/Field";
-import type MessageInterface from "@pglobal/assets/js/Validator/MessageInterface";
+import MessageInterface from "../../MessageInterface";
 import type { Empty } from "../Empty";
 
 export default class Message implements MessageInterface {
   // Properties
-  validator: Empty;
+  validator!: Empty;
 
   // Constructor
   constructor() {}
 
   // Methods
-  getContent(field: Field): string {
-    var messages = [[], []];
+  getContent(field: any): string {
+    var messages: string[][] = [[], []];
     messages[1][0] = "Nenhum " + field.fieldName + " deve ser fornecido.";
     messages[1][1] = "O " + field.fieldName + " não pode ser fornecido.";
     messages[0][0] = "Nenhuma " + field.fieldName + " deve ser fornecida.";

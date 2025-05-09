@@ -1,14 +1,14 @@
-import type ValidatorInterface from "@pglobal/assets/js/Validator/ValidatorInterface";
+import ValidatorInterface from "../../ValidatorInterface";
 import Message from "./Message/Message";
 
 export class MaxLength implements ValidatorInterface {
   // Properties
   messageName: string;
-  message: Message;
+  message: Message = new Message();
   max: number;
 
   // Constructor
-  constructor(messageName, max) {
+  constructor(messageName: string, max: number) {
     this.messageName = messageName;
     this.max = max;
     this.createMessage();

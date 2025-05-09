@@ -1,14 +1,14 @@
-import type ValidatorInterface from "@pglobal/assets/js/Validator/ValidatorInterface";
+import ValidatorInterface from "../../ValidatorInterface";
 import Message from "./Message/Message";
 
 export class NotEqualsLength implements ValidatorInterface {
   // Properties
   messageName: string;
-  message: Message;
+  message: Message = new Message();
   value: number;
 
   // Constructor
-  constructor(messageName, value) {
+  constructor(messageName: string, value: number) {
     this.messageName = messageName;
     this.value = value;
     this.createMessage();
