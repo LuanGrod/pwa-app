@@ -18,7 +18,7 @@ export default function Login({}) {
 
   const handleChange = (e) => {
     setFieldValue(e.target.name, e.target.value);
-    console.log(data)
+    console.log(validate())
   };
 
   return (

@@ -4,6 +4,7 @@ import { comfortaa, sfProDisplay, sfProText, inter } from "./fonts";
 import styles from "./layout.module.css";
 import { cookies } from "next/headers";
 import SplashScreen from "./components/splashScreen/SplashScreen";
+import Footer2 from "./components/footer/Footer2";
 
 export const metadata: Metadata = {
   title: "root layout",
@@ -23,7 +24,7 @@ export default async function RootLayout({
       lang="en"
       className={`${comfortaa.variable} ${sfProDisplay.variable} ${sfProText.variable} ${inter.variable}`}
     >
-      <body className={styles.screen}>{!splashShown ? <SplashScreen /> : children}</body>
+      <body className={styles.screen}><Footer2 />{!splashShown ? <SplashScreen /> : children}</body>
     </html>
   );
 }
