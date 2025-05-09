@@ -2,7 +2,6 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 import { comfortaa, sfProDisplay, sfProText, inter } from "./fonts";
 import styles from "./layout.module.css";
-import SplashScreenProvider from "./providers/SplashScreenProvider";
 import { cookies } from "next/headers";
 import SplashScreen from "./components/splashScreen/SplashScreen";
 
