@@ -4,7 +4,6 @@ import { cookies } from "next/headers";
 import SplashScreen from "./components/splashScreen/SplashScreen";
 import { comfortaa, inter, sfProDisplay, sfProText } from "./fonts";
 import styles from "./layout.module.css";
-import { ViewTransitionHandler } from "./components/ViewTransitionHandler";
 
 export const metadata: Metadata = {
   title: "root layout",
@@ -25,7 +24,6 @@ export default async function RootLayout({
       className={`${comfortaa.variable} ${sfProDisplay.variable} ${sfProText.variable} ${inter.variable}`}
     >
       <body className={styles.screen}>
-        <ViewTransitionHandler />
         {!splashShown ? <SplashScreen /> : children}
       </body>
     </html>
