@@ -10,13 +10,12 @@ export function ViewTransitionLink(props: LinkProps & { children: React.ReactNod
 
   const onClick = (e: React.MouseEvent) => {
     e.preventDefault()
-    // Se o browser suportar:
     if (document.startViewTransition) {
-      document.startViewTransition(() => {
-        router.push(href as string)
+      document.startViewTransition(async () => {
+        // aguarda o push terminar antes de iniciar a animação
+        await router.push(href as string)
       })
     } else {
-      // fallback normal
       router.push(href as string)
     }
   }

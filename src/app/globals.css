@@ -54,8 +54,8 @@ footer {
 ::view-transition-old(headerstransition),
 ::view-transition-new(contenttransition),
 ::view-transition-old(contenttransition) {
-  animation-duration: 1000ms;
-  animation-delay: 1000ms;
+  animation-duration: 300ms;
+  /* animation-delay: 500ms; */
   animation-timing-function: ease-out;
   animation-direction: normal;
 }
