@@ -13,10 +13,10 @@ export function ViewTransitionLink(props: LinkProps & { children: React.ReactNod
     if (document.startViewTransition) {
       document.startViewTransition(async () => {
         // aguarda o push terminar antes de iniciar a animação
-        await router.push(href as string, { scroll: false })
+        await router.push(href as string)
       })
     } else {
-      router.push(href as string, { scroll: false })
+      router.push(href as string)
     }
   }
 
