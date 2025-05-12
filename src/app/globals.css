@@ -39,6 +39,15 @@
   }
 }
 
+:global(header),
+:global(main) {
+  view-transition-name: page;
+}
+
+:global(footer) {
+  view-transition-name: none;
+}
+
 /* here we customize the transition, these are the shared styles for the old and new view*/
 ::view-transition-new(page),
 ::view-transition-old(page) {
