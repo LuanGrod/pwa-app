@@ -3,7 +3,7 @@ import { Icon } from "@public/global/js/types/Icon";
 import { usePathname } from "next/navigation";
 import React, { ReactElement } from "react";
 import styles from "./LinkWithIcon.module.css";
-import { LinkView } from "../LinkView";
+import { ViewTransitionLink } from "../ViewTransitionLink";
 
 type Props = {
   href: string;
@@ -20,9 +20,9 @@ export default function FooterLinkWithIcon({ icon, label, href }: Props) {
   });
 
   return (
-    <LinkView href={href} className={styles.link}>
+    <ViewTransitionLink href={href} className={styles.link}>
       {iconWithClass}
       <p className={`${isActive ? styles.active : styles.inactive}`}>{label}</p>
-    </LinkView>
+    </ViewTransitionLink>
   );
 }
