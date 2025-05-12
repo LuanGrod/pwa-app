@@ -18,12 +18,12 @@ export const BottomDrawer = forwardRef(function BottomDrawer({ children, title }
     <div className={clsx(styles.container, isOpen ? styles.open : styles.closed)}>
       <div className={styles.close_area} onClick={() => setIsOpen(false)}></div>
       <div className={clsx(styles.drawer, isOpen ? styles.open : styles.closed)}>
-        <header className={styles.header}>
+        <div className={styles.header}>
           {title && <h1 className={styles.title}>{title}</h1>}
           <div className={styles.close_btn} onClick={() => setIsOpen(false)}>
             <Fechar size={14} changeOnTheme/>
           </div>
-        </header>
+        </div>
         {children}
       </div>
     </div>
