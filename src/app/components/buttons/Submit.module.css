@@ -1,0 +1,16 @@
+.container {
+  font-family: var(--font-rounded);
+  font-size: 15px; /* 1 rem está muito grande */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  background-color: var(--color-emphasis);
+  color: #000;
+  border-radius: 5rem;
+  padding: 0.5rem;
+  padding-bottom: 0.563rem;
+  box-shadow: 0px -3px 0px 1px rgba(0, 0, 0, 0.35) inset;
+  -webkit-box-shadow: 0px -3px 0px 1px rgba(0, 0, 0, 0.35) inset;
+  -moz-box-shadow: 0px -3px 0px 1px rgba(0, 0, 0, 0.35) inset;
+}

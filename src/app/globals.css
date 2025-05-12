@@ -9,8 +9,10 @@
   --divider: #00000015;
   --footer-link-active: #00cc77;
   --footer-link-inactive: #7d93a4;
+  --error: #e7432b;
 }
 
+/* esse inline é para usar no tailwind */
 @theme inline {
   --color-background: var(--background);
   --color-background-variation: var(--background-variation);
@@ -33,6 +35,7 @@
     --divider: #ffffff15;
     --footer-link-active: #ffffff;
     --footer-link-inactive: #828889;
+    --error: #f1543c;
   }
 }
 

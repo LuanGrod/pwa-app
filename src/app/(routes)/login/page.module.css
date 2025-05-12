@@ -8,10 +8,6 @@
   padding: 1.5rem;
 }
 
-.form {
-  width: 100%;
-}
-
 .logoContainer {
   width: 100%;
   display: flex;
@@ -27,46 +23,4 @@
   line-height: calc(2 / 1.5);
   font-family: var(--font-rounded);
   color: var(--color-emphasis);
-}
-
-.inputContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: start;
-  row-gap: 0.5 rem;
-  margin-bottom: 1rem;
-}
-
-.inputContainer label {
-  font-size: 1rem;
-  line-height: calc(2 / 1);
-}
-
-.inputContainer input {
-  width: 100%;
-  padding: 0.5rem 0.875rem;
-  border-radius: 0.5rem;
-  font-size: 1rem;
-  line-height: calc(1.5 / 1);
-  border: 1px solid var(--color-foreground-variation);
-  font-family: var(--font-input);
-  background-color: #fff;
-  color: #000;
-}
-
-.linkContainer {
-  text-align: end;
-  margin-bottom: 1.5rem;
-}
-
-.button {
-  width: 100%;
-  padding: 0.5rem;
-  color: var(--background);
-  background-color: var(--emphasis);
-  border-radius: 25px;
-  box-shadow: 0px -3px 0px 1px rgba(0, 0, 0, 0.21) inset;
-  -webkit-box-shadow: 0px -3px 0px 1px rgba(0, 0, 0, 0.21) inset;
-  -moz-box-shadow: 0px -3px 0px 1px rgba(0, 0, 0, 0.21) inset;
 }

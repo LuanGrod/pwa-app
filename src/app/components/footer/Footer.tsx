@@ -1,7 +1,7 @@
-import Casa from "../global/icons/Casa";
-import Foguete from "../global/icons/Foguete";
-import Bandeira from "../global/icons/Bandeira";
-import Grafico from "../global/icons/Grafico";
+import Casa from "../../../../global/icons/Casa";
+import Foguete from "../../../../global/icons/Foguete";
+import Bandeira from "../../../../global/icons/Bandeira";
+import Grafico from "../../../../global/icons/Grafico";
 import FooterLinkWithIcon from "./LinkWithIcon";
 import styles from "./Footer.module.css";
 

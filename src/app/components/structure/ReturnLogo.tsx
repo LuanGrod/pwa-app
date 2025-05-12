@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Header from "../global/header/ReturnLogo";
+import Header from "../../../../global/header/ReturnLogo";
 import Footer from "../footer/Footer";
 import styles from "./Structure.module.css";
 

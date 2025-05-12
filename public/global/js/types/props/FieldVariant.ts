@@ -1,0 +1,1 @@
+type FieldVariant = "default" | "dark";

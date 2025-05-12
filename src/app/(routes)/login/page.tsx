@@ -1,4 +1,4 @@
-import Login from "@/app/components/forms/Login.jsx";
+import Login from "@/app/components/forms/Login";
 import Logo from "../../components/icons/Logo";
 import styles from "./page.module.css";
 

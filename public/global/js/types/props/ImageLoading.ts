@@ -1,0 +1,1 @@
+type ImageLoading = "lazy" | "eager"

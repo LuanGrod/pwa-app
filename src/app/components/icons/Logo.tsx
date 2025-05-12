@@ -1,5 +1,5 @@
-import { Icon } from "@public/global/js/Types/Icon";
-import styles from "../global/icons/Icon.module.css";
+import { Icon } from "@public/global/js/types/Icon";
+import styles from "@global/icons/Icon.module.css";
 import clsx from "clsx/lite";
 
 export default function Logo({ color = "#00FF81", size, className, changeOnTheme = false }: Icon) {

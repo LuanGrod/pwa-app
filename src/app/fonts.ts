@@ -44,6 +44,11 @@ export const sfProDisplay = localFont({
       style: "normal",
     },
     {
+      path: "../../public/project/fonts/SF-Pro/Display/sf-pro-display-semibold.woff2",
+      weight: "600",
+      style: "normal",
+    },
+    {
       path: "../../public/project/fonts/SF-Pro/Display/sf-pro-display-bold.woff2",
       weight: "700",
       style: "normal",

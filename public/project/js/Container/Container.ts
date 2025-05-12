@@ -1,4 +1,4 @@
-import ContainerBase from "@public/global/js/Container/Base";
+import ContainerBase from "@public/global/js/container/Base";
 
 export default class Container extends ContainerBase {
   // Properties

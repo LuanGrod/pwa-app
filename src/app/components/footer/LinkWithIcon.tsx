@@ -1,5 +1,5 @@
 "use client";
-import { Icon } from "@public/global/js/Types/Icon";
+import { Icon } from "@public/global/js/types/Icon";
 import { usePathname } from "next/navigation";
 import React, { ReactElement } from "react";
 import styles from "./LinkWithIcon.module.css";

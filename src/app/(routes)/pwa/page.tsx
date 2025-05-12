@@ -1,5 +1,5 @@
-import { InstallPrompt } from "../../components/global/pwa/InstallPromp";
-import { PushNotificationManager } from "../../components/global/pwa/PushNotificationManager";
+import { InstallPrompt } from "../../../../global/pwa/InstallPromp";
+import { PushNotificationManager } from "../../../../global/pwa/PushNotificationManager";
 
 type Props = {};
 

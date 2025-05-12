@@ -1,0 +1,14 @@
+.container {
+  width: 100%;
+}
+
+.forgetPasswordContainer {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+  margin-bottom: 1rem;
+}
+
+.forgetPassword {
+  width: fit-content;
+}

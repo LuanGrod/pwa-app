@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import Footer from "../footer/Footer";
-import Header from "../global/header/MenuTitleLogo";
+import Header from "../../../../global/header/MenuTitleLogo";
 import styles from "./Structure.module.css";
 import ConfiguracoesDrawer from "../drawer/Drawer/Configuracoes";
 

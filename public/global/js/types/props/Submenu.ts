@@ -1,0 +1,1 @@
+type Submenu = "dropdown" | "megamenu";
