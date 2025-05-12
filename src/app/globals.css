@@ -40,8 +40,8 @@
 }
 
 /* here we customize the transition, these are the shared styles for the old and new view*/
-::view-transition-new(root),
-::view-transition-old(root) {
+::view-transition-new(page),
+::view-transition-old(page) {
   animation-duration: 300ms;
   animation-delay: 300ms;
   animation-timing-function: ease-out;
@@ -49,12 +49,12 @@
 }
 
 /* old view slides out to the left */
-::view-transition-old(root) {
+::view-transition-old(page) {
   animation-name: slide-out;
 }
 
 /* new view slides in from the right */
-::view-transition-new(root) {
+::view-transition-new(page) {
   animation-name: slide-in;
   mix-blend-mode: normal;
 }
@@ -63,12 +63,12 @@
  * to customize the back transition 
  * new view
  */
-.back-transition::view-transition-new(root) {
+.back-transition::view-transition-new(page) {
   animation-name: slide-out-reverse;
 }
 
 /* customized back transition for old view */
-.back-transition::view-transition-old(root) {
+.back-transition::view-transition-old(page) {
   animation-name: slide-in-reverse;
   mix-blend-mode: normal;
   z-index: 1;
