@@ -9,5 +9,4 @@
   align-items: center;
   justify-content: space-between;
   background-color: var(--background);
-  view-transition-name: page;
 }
