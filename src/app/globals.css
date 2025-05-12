@@ -39,20 +39,21 @@
   }
 }
 
-header,
-main {
-  /* <!-- sem aspas --> */
-  view-transition-name: page;
+header {
+  view-transition-name: headerstransition;
 }
-
-/* footer não recebe view-transition-name e fica estático */
+main {
+  view-transition-name: contenttransition;
+}
 footer {
-  view-transition-name: none;
+  view-transition-name: footertransition;
 }
 
 /* here we customize the transition, these are the shared styles for the old and new view*/
-::view-transition-new(page),
-::view-transition-old(page) {
+::view-transition-new(headerstransition),
+::view-transition-old(headerstransition),
+::view-transition-new(contenttransition),
+::view-transition-old(contenttransition) {
   animation-duration: 300ms;
   animation-delay: 300ms;
   animation-timing-function: ease-out;
@@ -60,12 +61,14 @@ footer {
 }
 
 /* old view slides out to the left */
-::view-transition-old(page) {
+::view-transition-old(headerstransition),
+::view-transition-old(contenttransition) {
   animation-name: slide-out;
 }
 
 /* new view slides in from the right */
-::view-transition-new(page) {
+::view-transition-new(headerstransition),
+::view-transition-new(contenttransition) {
   animation-name: slide-in;
   mix-blend-mode: normal;
 }
@@ -74,12 +77,14 @@ footer {
  * to customize the back transition 
  * new view
  */
-.back-transition::view-transition-new(page) {
+.back-transition::view-transition-new(headerstransition),
+.back-transition::view-transition-new(contenttransition) {
   animation-name: slide-out-reverse;
 }
 
 /* customized back transition for old view */
-.back-transition::view-transition-old(page) {
+.back-transition::view-transition-old(headerstransition),
+.back-transition::view-transition-old(contenttransition) {
   animation-name: slide-in-reverse;
   mix-blend-mode: normal;
   z-index: 1;
