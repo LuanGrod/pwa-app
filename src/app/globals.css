@@ -43,7 +43,7 @@
 
 ::view-transition-new(.handle),
 ::view-transition-old(.handle) {
-  animation-duration: 350ms;
+  animation-duration: 300ms;
   animation-timing-function: ease-out;
   animation-direction: normal;
 }
