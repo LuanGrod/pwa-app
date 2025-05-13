@@ -39,63 +39,34 @@
   }
 }
 
-header {
-  view-transition-name: headerstransition;
-}
-main {
-  view-transition-name: contenttransition;
-}
-footer {
-  view-transition-name: footertransition;
-}
-
 /* here we customize the transition, these are the shared styles for the old and new view*/
-::view-transition-new(headerstransition),
-::view-transition-old(headerstransition),
-::view-transition-new(contenttransition),
-::view-transition-old(contenttransition) {
-  animation-duration: 300ms;
-  /* animation-delay: 300ms; */
+
+::view-transition-new(.handle),
+::view-transition-old(.handle) {
+  animation-duration: 350ms;
   animation-timing-function: ease-out;
   animation-direction: normal;
 }
 
 /* old view slides out to the left */
-::view-transition-old(headerstransition),
-::view-transition-old(contenttransition) {
+::view-transition-old(.handle) {
   animation-name: slide-out;
+  animation-duration: 200ms;
 }
 
 /* new view slides in from the right */
-::view-transition-new(headerstransition),
-::view-transition-new(contenttransition) {
+::view-transition-new(.handle) {
   animation-name: slide-in;
   mix-blend-mode: normal;
 }
 
-/* class "back-transition" is added to the html element 
- * to customize the back transition 
- * new view
- */
-.back-transition::view-transition-new(headerstransition),
-.back-transition::view-transition-new(contenttransition) {
-  animation-name: slide-out-reverse;
-}
-
-/* customized back transition for old view */
-.back-transition::view-transition-old(headerstransition),
-.back-transition::view-transition-old(contenttransition) {
-  animation-name: slide-in-reverse;
-  mix-blend-mode: normal;
-  z-index: 1;
-}
 
 @keyframes slide-out {
   from {
-    transform: translateX(0);
+    opacity: 1;
   }
   to {
-    transform: translateX(-20%);
+    opacity: 0;
   }
 }
 
