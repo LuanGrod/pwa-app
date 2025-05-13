@@ -6,18 +6,21 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence } from "motion/react";
 
-type Props = {};
+type Props = { onEnd?: () => void };
 
-export default function SplashScreen({}: Props) {
+export default function SplashScreen({onEnd}: Props) {
   const [isVisible, setIsVisible] = useState(true);
-
   const router = useRouter();
 
   const handleEndAnimation = () => {
     setIsVisible(false);
-    document.cookie = "splash_shown=true; path=/; max-age=300";
+    // session-cookie: sem max-age nem expires
+    document.cookie = "splash_shown=1; path=/; secure; samesite=strict";
+    onEnd?.();
+    // força re­render no server para pegar o cookie
     router.refresh();
   };
+
 
   return (
     <div className={styles.container}>
