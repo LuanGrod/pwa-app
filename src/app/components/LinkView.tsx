@@ -1,8 +1,6 @@
 "use client";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { startTransition } from "react";
-import { flushSync } from "react-dom";
 
 interface LinkViewProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;

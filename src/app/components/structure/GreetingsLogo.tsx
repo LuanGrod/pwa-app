@@ -12,7 +12,6 @@ export default function GreetingsLogoStructure({ children }: Props) {
   return (
     <>
       <ViewTransition default="handle">
-      {/* <div style={{ display: "flex", height: "100vh", viewTransitionName: "handle" }}> */}
         <Header />
         <main className={styles.content}>{children}</main>
       </ViewTransition>

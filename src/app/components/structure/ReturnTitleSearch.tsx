@@ -13,11 +13,10 @@ type Props = {
 export default function ReturnTitleSearchStructure({ children, title, handleSearch }: Props) {
   return (
     <>
-       <ViewTransition default="handle">
-      {/* <div style={{ display: "flex", height: "100vh", viewTransitionName: "handle" }}> */}
+      <ViewTransition default="handle">
         <Header title={title} handleSearch={handleSearch} />
         <main className={styles.content}>{children}</main>
-       </ViewTransition>
+      </ViewTransition>
       <Footer />
     </>
   );
