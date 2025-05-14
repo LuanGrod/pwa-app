@@ -3,7 +3,7 @@
   flex-direction: column;
   flex-grow: 1;
   padding: 1.25rem;
-  margin-top: 82px;
-  margin-bottom: 70px;
+  padding-top: 102px;
+  padding-bottom: 90px;
   z-index: 20;
 }

@@ -1,7 +1,6 @@
 .screen {
   width: 100vw;
-  min-height: 100vh;
-  height: fit-content;
+  height: var(--app-height);
   overflow-x: hidden;
   overflow-y: auto;
   display: flex;

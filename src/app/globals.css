@@ -10,6 +10,7 @@
   --footer-link-active: #00cc77;
   --footer-link-inactive: #7d93a4;
   --error: #e7432b;
+  --app-height: 100vh;
 }
 
 /* esse inline é para usar no tailwind */
