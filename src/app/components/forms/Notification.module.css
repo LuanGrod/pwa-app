@@ -1,0 +1,29 @@
+.container {
+  background-color: color-mix(in srgb, var(--color-background-variation) 20%, transparent);
+  border-left: 0.25rem solid var(--color-background-variation);
+  padding: 0.5rem;
+  font-family: var(--font-text);
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-foreground);
+}
+
+.success {
+  background-color: color-mix(in srgb, var(--color-success) 20%, transparent);
+  border-left: 0.25rem solid var(--color-success);
+}
+
+.warning {
+  background-color: color-mix(in srgb, var(--color-warning) 20%, transparent);
+  border-left: 0.25rem solid var(--color-warning);
+}
+
+.info {
+  background-color: color-mix(in srgb, var(--color-info) 20%, transparent);
+  border-left: 0.25rem solid var(--color-info);
+}
+
+.danger {
+  background-color: color-mix(in srgb, var(--color-danger) 20%, transparent);
+  border-left: 0.25rem solid var(--color-danger);
+}

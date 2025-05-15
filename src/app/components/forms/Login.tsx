@@ -5,14 +5,23 @@ import Senha from "@global/form/fields/Senha";
 import styles from "./Login.module.css";
 import Link from "next/link";
 import SubmitButton from "../buttons/Submit";
-import { FormEvent } from "react";
+import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
+import Notification from "./Notification";
 
 export default function Login({}) {
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
+  const [notification, setNotification] = useState<{ message: string; type: NotificationType }>({
+    message: "",
+    type: "danger",
+  });
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    setLoading(true);
+    setNotification({ message: "", type: "danger" });
 
     const formData = new FormData(e.currentTarget);
     const email = formData.get("email");
@@ -38,6 +47,9 @@ export default function Login({}) {
     if (response.ok) {
       document.cookie = `token=${data.token}; path=/; max-age=3600`;
       router.push("/");
+    } else {
+      setNotification({ message: data.message, type: "danger" });
+      setLoading(false);
     }
   };
 
@@ -50,7 +62,8 @@ export default function Login({}) {
           Esqueci a senha
         </Link>
       </div>
-      <SubmitButton />
+      <SubmitButton loading={loading} />
+      <Notification type={notification.type} message={notification.message} />
     </form>
   );
 }

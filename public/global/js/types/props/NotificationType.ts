@@ -1,1 +1,1 @@
-type NotificationType = "success" | "danger" | "info";
+type NotificationType = "success" | "danger" | "warning" | "info";

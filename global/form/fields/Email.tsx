@@ -36,7 +36,7 @@ export default function Email({ last }: Props) {
         value={value}
         onChange={(e) => validateField(e)}
         onBlur={(e) => validateField(e)}
-        className={styles.field}
+        className={`${styles.field} ${error ? styles.errorField : ""}`}
         placeholder="Digite aqui seu e-mail..."
       />
       <span className={styles.error}>{error}</span>

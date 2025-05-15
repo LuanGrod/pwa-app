@@ -24,9 +24,20 @@
   margin-bottom: 0.125rem;
 }
 
+.field:focus {
+  outline: none;
+  border: 1px solid #2991d6;
+}
+.field:focus-visible {
+  border: 1px solid #2991d6;
+}
+
+.errorField {
+  border: 1px solid var(--color-danger) !important;
+}
+
 .error {
-  color: var(--error);
-  font-size: 0.875rem;
+  color: var(--color-danger);
   line-height: calc(2/1.5);
   height: 1rem;
 }

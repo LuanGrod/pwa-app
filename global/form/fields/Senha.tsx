@@ -41,7 +41,7 @@ export default function Senha({ last }: Props) {
         value={value}
         onChange={(e) => validateField(e)}
         onBlur={(e) => validateField(e)}
-        className={styles.field}
+        className={`${styles.field} ${error ? styles.errorField : ""}`}
         placeholder="Digite aqui sua senha..."
       ></input>
       <div onClick={() => setIsVisible(!isVisible)} className={stylesSenha.toggleVisibility}>

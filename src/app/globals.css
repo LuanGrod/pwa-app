@@ -9,8 +9,11 @@
   --divider: #00000015;
   --footer-link-active: #00cc77;
   --footer-link-inactive: #7d93a4;
-  --error: #e7432b;
   --app-height: 100vh;
+  --success: #00cc77;
+  --danger: #e7432b;
+  --warning: #f6a600;
+  --info: #2991d6;
 }
 
 /* esse inline é para usar no tailwind */
@@ -20,6 +23,10 @@
   --color-foreground: var(--foreground);
   --color-foreground-variation: var(--foreground-variation);
   --color-emphasis: var(--emphasis);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-warning: var(--warning);
+  --color-info: var(--info);
   --font-title: var(--font-title);
   --font-text: var(--font-text);
   --font-rounded: var(--font-rounded);
@@ -36,7 +43,6 @@
     --divider: #ffffff15;
     --footer-link-active: #ffffff;
     --footer-link-inactive: #828889;
-    --error: #f1543c;
   }
 }
 

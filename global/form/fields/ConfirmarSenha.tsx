@@ -50,7 +50,7 @@ export default function ConfirmarSenha({ last }: Props) {
           value={firstValue}
           onChange={(e) => validateFirstField(e)}
           onBlur={(e) => validateFirstField(e)}
-          className={styles.field}
+          className={`${styles.field} ${firstError ? styles.errorField : ""}`}
           placeholder="Digite aqui sua senha..."
         ></input>
         <div onClick={(e) => setFirstIsVisible(!firstIsVisible)} className={stylesSenha.toggleVisibility}>
@@ -69,7 +69,7 @@ export default function ConfirmarSenha({ last }: Props) {
           value={secondValue}
           onChange={(e) => validateSecondField(e)}
           onBlur={(e) => validateSecondField(e)}
-          className={styles.field}
+          className={`${styles.field} ${secondError ? styles.errorField : ""}`}
           placeholder="Digite aqui sua senha..."
         ></input>
         <div onClick={(e) => setSecondIsVisible(!secondIsVisible)} className={stylesSenha.toggleVisibility}>
