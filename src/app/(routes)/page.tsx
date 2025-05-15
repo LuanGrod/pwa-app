@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <HomeStructure>
       <div className={styles.container}>
-        <h1 className={styles.title}>medRQE</h1>
+        <h1 className={styles.title}>MedRQE</h1>
         <IconFrameContainer
           links={[
             { href: "/hot-topics", image: "/project/assets/HotTopics2.webp", label: "Hot topics" },

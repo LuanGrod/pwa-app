@@ -15,8 +15,13 @@
   row-gap: 10px;
 }
 
+.image {
+  padding: 12px;
+}
+
 .label {
   font-size: 1rem;
+  letter-spacing: 0.5px;
   line-height: calc(1.5 / 1);
   font-weight: 700;
   text-align: center;

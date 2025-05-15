@@ -27,7 +27,7 @@ export default function Email({ last }: Props) {
   return (
     <div className={`${last ? styles.last : ""} ${styles.container}`}>
       <label htmlFor="email" className={styles.label}>
-        E-mail:
+        Email:
       </label>
       <input
         type="email"
