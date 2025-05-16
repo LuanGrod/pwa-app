@@ -21,8 +21,9 @@ export default function IconFrameContainer({ links }: Props) {
     <div className={styles.container}>
       {links.map((item, index) => {
         return (
-          <LinkView href={item.href} className={styles.link} key={index}>
+          <LinkView href={item.href} key={index}>
             <motion.div
+              className={styles.link}
               initial={{ opacity: 0.02, scale: 0.7 }}
               animate={{ opacity: 1, scale: 1, transition: { duration: 1.5, type: "spring", delay: index * 0.15 } }}
             >
