@@ -9,7 +9,7 @@ export default function page({}: Props) {
     <div className={styles.container}>
       <div className={styles.logoContainer}>
         <h1 className={styles.title}>MedRQE</h1>
-        <Logo size={139} />
+        <Logo size={139}/>
       </div>
       <Login />
     </div>
