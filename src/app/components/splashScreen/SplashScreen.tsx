@@ -8,7 +8,7 @@ import { AnimatePresence } from "motion/react";
 
 type Props = { onEnd?: () => void };
 
-export default function SplashScreen({onEnd}: Props) {
+export default function SplashScreen({ onEnd }: Props) {
   const [isVisible, setIsVisible] = useState(true);
   const router = useRouter();
 
@@ -20,7 +20,6 @@ export default function SplashScreen({onEnd}: Props) {
     // força re­render no server para pegar o cookie
     router.refresh();
   };
-
 
   return (
     <div className={styles.container}>
@@ -67,7 +66,22 @@ export default function SplashScreen({onEnd}: Props) {
               }}
               onAnimationComplete={() => handleEndAnimation()}
             >
-              {"MedRQE".split("").map((letter, index) => (
+              <motion.span
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      type: "spring",
+                      delay: 0.15,
+                      duration: 2,
+                    },
+                  },
+                }}
+              >
+                MedRQE
+              </motion.span>
+              {/* {"MedRQE".split("").map((letter, index) => (
                 <motion.span
                   key={index}
                   variants={{
@@ -83,7 +97,7 @@ export default function SplashScreen({onEnd}: Props) {
                 >
                   {letter}
                 </motion.span>
-              ))}
+              ))} */}
             </motion.div>
           </div>
         )}

@@ -11,4 +11,5 @@
   padding-top: 10px;
   padding-bottom: 27px;
   background-color: var(--background-variation);
+  filter: drop-shadow(0px -1px 5px color-mix(in oklab, var(--color-foreground) 20%, transparent));
 }
