@@ -74,7 +74,7 @@ export default function SplashScreen({ onEnd }: Props) {
                     transition: {
                       type: "spring",
                       delay: 0.15,
-                      duration: 2,
+                      duration: 3,
                     },
                   },
                 }}
