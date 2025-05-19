@@ -48,7 +48,7 @@ export default function SplashScreen({ onEnd }: Props) {
                     opacity: 1,
                     transition: {
                       type: "tween",
-                      duration: 0.5,
+                      duration: 1.5,
                       delay: 0,
                     },
                   },
