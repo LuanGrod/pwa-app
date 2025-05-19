@@ -1,10 +1,10 @@
 "use client";
 
 import * as motion from "motion/react-client";
-import { AnimatePresence } from "motion/react";
 import styles from "./SplashScreen.module.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { AnimatePresence } from "motion/react";
 
 type Props = { onEnd?: () => void };
 
@@ -14,8 +14,10 @@ export default function SplashScreen({ onEnd }: Props) {
 
   const handleEndAnimation = () => {
     setIsVisible(false);
+    // session-cookie: sem max-age nem expires
     document.cookie = "splash_shown=1; path=/; secure; samesite=strict";
     onEnd?.();
+    // força re­render no server para pegar o cookie
     router.refresh();
   };
 
@@ -24,39 +26,6 @@ export default function SplashScreen({ onEnd }: Props) {
       <AnimatePresence>
         {isVisible && (
           <div className={styles.content}>
-            <motion.div
-              className={styles.textContainer}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={{
-                hidden: { opacity: 0, scale: 0.95 },
-                visible: { opacity: 1, scale: 1 },
-                exit: { opacity: 0, scale: 0.95 },
-              }}
-              transition={{
-                when: "beforeChildren",
-                delayChildren: 0,
-                staggerChildren: 0,
-              }}
-              onAnimationComplete={handleEndAnimation}
-            >
-              <motion.span
-                variants={{
-                  hidden: { opacity: 0 },
-                  visible: {
-                    opacity: 1,
-                    transition: {
-                      type: "tween",
-                      duration: 1.5,
-                      delay: 0,
-                    },
-                  },
-                }}
-              >
-                MedRQE
-              </motion.span>
-            </motion.div>
             <motion.img
               src="/project/assets/Logo.svg"
               width={165}
@@ -64,10 +33,66 @@ export default function SplashScreen({ onEnd }: Props) {
               initial="visible"
               exit="exit"
               variants={{
-                visible: { opacity: 1 },
-                exit: { opacity: 0, transition: { duration: 0.3 } },
+                visible: {
+                  opacity: 1,
+                },
+                exit: {
+                  opacity: 0,
+                  transition: {
+                    delay: 0.1,
+                  },
+                },
               }}
             />
+            <motion.div
+              className={styles.textContainer}
+              initial="hidden"
+              animate="visible"
+              exit="exit"
+              variants={{
+                visible: {
+                  transition: { staggerChildren: 0.1 },
+                },
+                exit: {
+                  opacity: 0,
+                  scale: 0.95,
+                  y: 0.1,
+                },
+              }}
+              onAnimationComplete={() => handleEndAnimation()}
+            >
+              <motion.span
+                variants={{
+                  hidden: { opacity: 0 },
+                  visible: {
+                    opacity: 1,
+                    transition: {
+                      type: "spring",
+                      duration: 1.5,
+                    },
+                  },
+                }}
+              >
+                MedRQE
+              </motion.span>
+              {/* {"MedRQE".split("").map((letter, index) => (
+                <motion.span
+                  key={index}
+                  variants={{
+                    hidden: { opacity: 0 },
+                    visible: {
+                      opacity: 1,
+                      transition: {
+                        type: "spring",
+                        delay: 0.3 + index * 0.13,
+                      },
+                    },
+                  }}
+                >
+                  {letter}
+                </motion.span>
+              ))} */}
+            </motion.div>
           </div>
         )}
       </AnimatePresence>
