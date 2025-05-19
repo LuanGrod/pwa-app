@@ -13,11 +13,10 @@ export default function SplashScreen({ onEnd }: Props) {
   const router = useRouter();
 
   const handleEndAnimation = () => {
-    // aqui você pode descomentar para fechar a splash e persistir cookie:
-    // setIsVisible(false);
-    // document.cookie = "splash_shown=1; path=/; secure; samesite=strict";
-    // onEnd?.();
-    // router.refresh();
+    setIsVisible(false);
+    document.cookie = "splash_shown=1; path=/; secure; samesite=strict";
+    onEnd?.();
+    router.refresh();
   };
 
   return (
