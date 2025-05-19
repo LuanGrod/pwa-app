@@ -1,10 +1,10 @@
 "use client";
 
 import * as motion from "motion/react-client";
+import { AnimatePresence } from "motion/react";
 import styles from "./SplashScreen.module.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { AnimatePresence } from "motion/react";
 
 type Props = { onEnd?: () => void };
 
@@ -13,12 +13,11 @@ export default function SplashScreen({ onEnd }: Props) {
   const router = useRouter();
 
   const handleEndAnimation = () => {
-    setIsVisible(false);
-    // session-cookie: sem max-age nem expires
-    document.cookie = "splash_shown=1; path=/; secure; samesite=strict";
-    onEnd?.();
-    // força re­render no server para pegar o cookie
-    router.refresh();
+    // aqui você pode descomentar para fechar a splash e persistir cookie:
+    // setIsVisible(false);
+    // document.cookie = "splash_shown=1; path=/; secure; samesite=strict";
+    // onEnd?.();
+    // router.refresh();
   };
 
   return (
@@ -26,45 +25,22 @@ export default function SplashScreen({ onEnd }: Props) {
       <AnimatePresence>
         {isVisible && (
           <div className={styles.content}>
-            <motion.img
-              src="/project/assets/Logo.svg"
-              width={165}
-              height={165}
-              initial="hidden"
-              animate="visible"
-              exit="exit"
-              variants={{
-                hidden: {
-                  opacity: 1,
-                },
-                visible: {
-                  opacity: 1,
-                  transition: { type: "tween", duration: 1.7 },
-                },
-                exit: {
-                  opacity: 0,
-                  transition: {
-                    delay: 0.1,
-                  },
-                },
-              }}
-            />
             <motion.div
               className={styles.textContainer}
               initial="hidden"
               animate="visible"
               exit="exit"
               variants={{
-                visible: {
-                  transition: { staggerChildren: 0.1 },
-                },
-                exit: {
-                  opacity: 0,
-                  scale: 0.95,
-                  y: 0.1,
-                },
+                hidden: { opacity: 0, scale: 0.95 },
+                visible: { opacity: 1, scale: 1 },
+                exit: { opacity: 0, scale: 0.95 },
               }}
-              onAnimationComplete={() => handleEndAnimation()}
+              transition={{
+                when: "beforeChildren",
+                delayChildren: 0,
+                staggerChildren: 0,
+              }}
+              onAnimationComplete={handleEndAnimation}
             >
               <motion.span
                 variants={{
@@ -72,33 +48,27 @@ export default function SplashScreen({ onEnd }: Props) {
                   visible: {
                     opacity: 1,
                     transition: {
-                      type: "spring",
-                      delay: 0.15,
-                      duration: 3,
+                      type: "tween",
+                      duration: 0.5,
+                      delay: 0,
                     },
                   },
                 }}
               >
                 MedRQE
               </motion.span>
-              {/* {"MedRQE".split("").map((letter, index) => (
-                <motion.span
-                  key={index}
-                  variants={{
-                    hidden: { opacity: 0 },
-                    visible: {
-                      opacity: 1,
-                      transition: {
-                        type: "spring",
-                        delay: 0.3 + index * 0.13,
-                      },
-                    },
-                  }}
-                >
-                  {letter}
-                </motion.span>
-              ))} */}
             </motion.div>
+            <motion.img
+              src="/project/assets/Logo.svg"
+              width={165}
+              height={165}
+              initial="visible"
+              exit="exit"
+              variants={{
+                visible: { opacity: 1 },
+                exit: { opacity: 0, transition: { duration: 0.3 } },
+              }}
+            />
           </div>
         )}
       </AnimatePresence>
