@@ -50,9 +50,7 @@ export default function SplashScreen({ onEnd }: Props) {
               animate="visible"
               exit="exit"
               variants={{
-                visible: {
-                  transition: { staggerChildren: 0.1 },
-                },
+                visible: {},
                 exit: {
                   opacity: 0,
                   scale: 0.95,
@@ -68,7 +66,7 @@ export default function SplashScreen({ onEnd }: Props) {
                     opacity: 1,
                     transition: {
                       type: "spring",
-                      duration: 1.5,
+                      duration: 2,
                     },
                   },
                 }}
