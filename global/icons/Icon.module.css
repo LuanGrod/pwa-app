@@ -8,7 +8,7 @@
 }
 
 .logo {
-  filter: brightness(0) saturate(100%) invert(56%) sepia(45%) saturate(2544%) hue-rotate(115deg) brightness(98%)
+  filter: brightness(0) saturate(100%) invert(72%) sepia(26%) saturate(6706%) hue-rotate(108deg) brightness(91%)
     contrast(101%);
 }
 
@@ -24,7 +24,7 @@
   }
 
   .logo {
-    filter: brightness(0) saturate(100%) invert(81%) sepia(17%) saturate(4871%) hue-rotate(97deg) brightness(101%)
-      contrast(101%);
+    filter: brightness(0) saturate(100%) invert(82%) sepia(40%) saturate(2070%) hue-rotate(85deg) brightness(97%)
+      contrast(108%);
   }
 }
