@@ -13,12 +13,12 @@ export default function SplashScreen({ onEnd }: Props) {
   const router = useRouter();
 
   const handleEndAnimation = () => {
-    // setIsVisible(false);
-    // // session-cookie: sem max-age nem expires
-    // document.cookie = "splash_shown=1; path=/; secure; samesite=strict";
-    // onEnd?.();
-    // // força re­render no server para pegar o cookie
-    // router.refresh();
+    setIsVisible(false);
+    // session-cookie: sem max-age nem expires
+    document.cookie = "splash_shown=1; path=/; secure; samesite=strict";
+    onEnd?.();
+    // força re­render no server para pegar o cookie
+    router.refresh();
   };
 
   return (
