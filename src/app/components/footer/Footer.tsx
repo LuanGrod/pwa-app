@@ -12,7 +12,7 @@ export default function Footer({}: Props) {
     <footer className={styles.container}>
       <FooterLinkWithIcon href="/" icon={<Casa size={30}/>} label="Início" />
       <FooterLinkWithIcon href="/estatisticas" icon={<Grafico size={30} />} label="Estatísticas" />
-      <FooterLinkWithIcon href="/conquistas" icon={<Foguete size={30} />} label="Conquistas" />
+      {/* <FooterLinkWithIcon href="/conquistas" icon={<Foguete size={30} />} label="Conquistas" /> */}
       <FooterLinkWithIcon href="/salvos" icon={<Bandeira size={30} />} label="Salvos" />
     </footer>
   );
