@@ -1,0 +1,35 @@
+.contentTitle {
+  font-size: 12px;
+  line-height: 14px;
+  text-transform: uppercase;
+  color: var(--color-emphasis);
+  font-weight: 600;
+  margin-bottom: 9px;
+}
+
+.contentWrapper {
+  background-color: var(--color-background-variation);
+  border-radius: 9px;
+  padding: 20px 24px;
+  margin-bottom: 20px;
+}
+
+.contentParagraph {
+  font-family: var(--font-text);
+  font-size: 12px;
+  line-height: 14px;
+  margin-bottom: 16px;
+  text-align: justify;
+  font-weight: 300;
+}
+
+.contentList {
+}
+
+.contentListItem {
+  font-family: var(--font-text);
+  font-size: 12px;
+  line-height: 14px;
+  font-weight: 300;
+  list-style: disc inside;
+}

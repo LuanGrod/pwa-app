@@ -14,10 +14,10 @@ export default function SplashScreen({ onEnd }: Props) {
 
   const handleEndAnimation = () => {
     setIsVisible(false);
-    // session-cookie: sem max-age nem expires
+    // // session-cookie: sem max-age nem expires
     document.cookie = "splash_shown=1; path=/; secure; samesite=strict";
     onEnd?.();
-    // força re­render no server para pegar o cookie
+    // // força re­render no server para pegar o cookie
     router.refresh();
   };
 
@@ -73,23 +73,6 @@ export default function SplashScreen({ onEnd }: Props) {
               >
                 MedRQE
               </motion.span>
-              {/* {"MedRQE".split("").map((letter, index) => (
-                <motion.span
-                  key={index}
-                  variants={{
-                    hidden: { opacity: 0 },
-                    visible: {
-                      opacity: 1,
-                      transition: {
-                        type: "spring",
-                        delay: 0.3 + index * 0.13,
-                      },
-                    },
-                  }}
-                >
-                  {letter}
-                </motion.span>
-              ))} */}
             </motion.div>
           </div>
         )}

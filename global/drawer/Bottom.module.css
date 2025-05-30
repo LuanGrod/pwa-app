@@ -11,12 +11,12 @@
 }
 
 .container.open {
-  background-color: color-mix(in oklab, var(--background) 60%, transparent);
+  background-color: color-mix(in oklab, #000 25%, transparent);
   visibility: visible;
 }
 
 .container.closed {
-  background-color: color-mix(in oklab, var(--background) 0%, transparent);
+  background-color: color-mix(in oklab, #000 0%, transparent);
   visibility: hidden;
 }
 
@@ -36,7 +36,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: var(--background-variation);
+  background: #fff;
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
@@ -72,4 +72,11 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  .drawer {
+    background-color: #222224;
+  }
 }

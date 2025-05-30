@@ -1,0 +1,32 @@
+.container {
+  padding-top: 40px;
+}
+
+.pageTitle {
+  position: fixed;
+  left: 0;
+  top: 80px;
+  width: 100%;
+  background-color: var(--color-background);
+  font-family: var(--font-rounded);
+  font-size: 20px;
+  font-weight: 600;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.paragraph {
+  font-size: 13px;
+  font-family: var(--font-text);
+  margin-bottom: 20px;
+  text-align: justify;
+  padding: 0 6px;
+}
+
+.method {
+  font-size: 10px;
+  font-family: var(--font-rounded);
+  color: var(--color-emphasis);
+  font-weight: 300;
+  text-align: center;
+}
