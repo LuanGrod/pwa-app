@@ -4,7 +4,7 @@ import { Update as ResponseHandler } from "@request/response/handler/Update";
 type UpdateProps = {
   entity: string;
   data: any;
-  id: number;
+  id: string;
 };
 
 export class Update extends RequestBuilder {
