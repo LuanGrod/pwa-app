@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Logo from "../../src/app/components/icons/Logo";
+import Logo from "../../src/component/icon/Logo";
 import LogoOverlay from "../LogoOverlay";
 import BaseHeader from "./Base";
 import styles from "./GreetingsLogo.module.css";

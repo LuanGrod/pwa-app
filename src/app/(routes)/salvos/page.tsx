@@ -1,6 +1,6 @@
-import GreetingsLogoStructure from "@/app/components/structure/GreetingsLogo";
+import GreetingsLogoStructure from "@/component/structure/GreetingsLogo";
 import styles from "./page.module.css";
-import IconFrameContainer2 from "@/app/components/IconFrameContainer2";
+import IconFrameContainer2 from "@/component/IconFrameContainer2";
 
 type Props = {};
 

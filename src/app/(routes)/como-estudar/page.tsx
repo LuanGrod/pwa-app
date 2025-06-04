@@ -1,5 +1,5 @@
-import HowToStudyContent from "@/app/components/HowToStudyContent";
-import ReturnLogoStructure from "../../components/structure/ReturnLogo";
+import HowToStudyContent from "@/component/HowToStudyContent";
+import ReturnLogoStructure from "../../../component/structure/ReturnLogo";
 import styles from "./page.module.css";
 import { li } from "motion/react-client";
 

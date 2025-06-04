@@ -1,6 +1,6 @@
-import ReturnStructure from "@/app/components/structure/Return";
+import ReturnStructure from "@/component/structure/Return";
 import styles from "./page.module.css";
-import EsqueciSenha from "@/app/components/forms/EsqueciSenha"
+import EsqueciSenha from "@/component/form/EsqueciSenha"
 
 type Props = {};
 

@@ -1,4 +1,4 @@
-import ReturnTitleSearchStructure from "@/app/components/structure/ReturnTitleSearch";
+import ReturnTitleSearchStructure from "@/component/structure/ReturnTitleSearch";
 
 type Props = {};
 

@@ -1,9 +1,9 @@
 import { ReactElement } from "react";
 import { Modal } from "@public/global/js/types/Modal";
 import styles from "./MenuTitleLogo.module.css";
+import LogoOverlay from "@global/LogoOverlay";
+import MenuToggle from "@global/MenuToggle";
 import BaseHeader from "./Base";
-import MenuToggle from "../MenuToggle";
-import LogoOverlay from "../LogoOverlay";
 
 type Props = {
   title: string;

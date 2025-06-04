@@ -1,4 +1,4 @@
-import Logo from "../src/app/components/icons/Logo";
+import Logo from "../src/component/icon/Logo";
 import styles from "./LogoOverlay.module.css";
 
 type Props = {};

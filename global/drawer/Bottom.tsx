@@ -2,8 +2,8 @@
 
 import clsx from "clsx/lite";
 import { forwardRef, ReactNode } from "react";
-import Fechar from "../icons/Fechar";
-import useDrawer from "@/app/hooks/useDrawer";
+import Fechar from "@global/icons/Fechar";
+import useDrawer from "@/hook/useDrawer";
 import styles from "./Bottom.module.css";
 
 type Props = {

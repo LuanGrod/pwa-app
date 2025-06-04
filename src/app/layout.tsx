@@ -1,10 +1,10 @@
+import SplashScreen from "@/component/splashScreen/SplashScreen";
 import "@/app/globals.css";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
-import SplashScreen from "./components/splashScreen/SplashScreen";
 import { comfortaa, inter, sfProDisplay, sfProText } from "./fonts";
 import styles from "./layout.module.css";
-import AppHeightWrapper from "./providers/AppHeightWrapper";
+import AppHeightWrapper from "@provider/AppHeightWrapper";
 
 export const metadata: Metadata = {
   title: "MedRQE",
