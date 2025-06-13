@@ -14,13 +14,13 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  row-gap: 3rem;
-  margin-bottom: 3rem;
+  row-gap: 52px;
+  margin-bottom: 52px;
 }
 
 .title {
   font-size: 1.5rem;
   line-height: calc(2 / 1.5);
   font-family: var(--font-rounded);
-  color: var(--color-emphasis);
+  color: var(--emphasis);
 }

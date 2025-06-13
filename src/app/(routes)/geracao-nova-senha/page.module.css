@@ -29,6 +29,6 @@
   font-size: 0.875rem;
   line-height: calc(2 / 1.5);
   font-family: var(--font-text);
-  color: var(--color-foreground-variation);
+  color: var(--foreground-variation);
   text-align: start;
 }

@@ -1,0 +1,34 @@
+form {
+  width: 100%;
+
+  .submit-return-wrapper {
+    margin-top: 15px;
+    background-color: color-mix(in srgb, var(--background-variation) 20%, transparent);
+    border-left: 0.25rem solid var(--background-variation);
+    padding: 0.5rem;
+    font-family: var(--font-text);
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--foreground);
+
+    &.success {
+      background-color: color-mix(in srgb, var(--success) 20%, transparent);
+      border-left: 0.25rem solid var(--success);
+    }
+
+    &.warning {
+      background-color: color-mix(in srgb, var(--warning) 20%, transparent);
+      border-left: 0.25rem solid var(--warning);
+    }
+
+    &.info {
+      background-color: color-mix(in srgb, var(--info) 20%, transparent);
+      border-left: 0.25rem solid var(--info);
+    }
+
+    &.danger {
+      background-color: color-mix(in srgb, var(--danger) 20%, transparent);
+      border-left: 0.25rem solid var(--danger);
+    }
+  }
+}

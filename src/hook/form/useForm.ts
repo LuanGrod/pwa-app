@@ -3,19 +3,14 @@ import { useItem, Item as ItemDef } from "./item/useItem";
 import { FormEvent, useState } from "react";
 import SubmitHandlerInterface from "@/form/handler/submit/SubmitHandlerInterface";
 
-type submitReturn = {
-  success: boolean;
-  messageType: string;
-  message: string;
-  result: any;
-};
-
 export function useForm(itemsConfig: ItemInterface[], submitHandler: SubmitHandlerInterface, id?: string) {
   const items = itemsConfig.map((config: ItemInterface) => useItem(config));
-  const [submitReturn, setSubmitReturn] = useState<submitReturn>();
+  const [submitReturn, setSubmitReturn] = useState<any>();
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     let isValid = true;
     let values: { [key: string]: string } = {};
     items.forEach((item: ItemDef, idx: number) => {
@@ -24,15 +19,17 @@ export function useForm(itemsConfig: ItemInterface[], submitHandler: SubmitHandl
         isValid = false;
       }
 
-      const index = itemsConfig[idx].name;
+      const index = itemsConfig[idx].getName();
       values[index] = item.value;
     });
 
     if (isValid) {
+      setLoading(true);
       const result = await submitHandler.onSubmit(values, id);
       setSubmitReturn(result);
+      setLoading(false);
     }
   };
 
-  return { items, handleSubmit, submitReturn };
+  return { items, handleSubmit, submitReturn, loading };
 }

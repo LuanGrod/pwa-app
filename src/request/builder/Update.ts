@@ -1,3 +1,4 @@
+import { Methods } from "@/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Update as ResponseHandler } from "@request/response/handler/Update";
 
@@ -9,11 +10,11 @@ type UpdateProps = {
 
 export class Update extends RequestBuilder {
   constructor({ entity, data, id }: UpdateProps) {
-    const apiUrl = process.env.PUBLIC_API_URL;
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const endpoint = `${apiUrl}/${entity}/${id}`;
 
-    const method = "PUT";
+    const method: Methods = "PUT";
 
     const responseHandler = new ResponseHandler({});
 

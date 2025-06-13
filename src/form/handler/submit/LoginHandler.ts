@@ -9,8 +9,7 @@ export class LoginHandler implements SubmitHandlerInterface {
   }
 
   async onSubmit(values: any, id?: string): Promise<any> {
-    const insertRequestBuilder = new Login({ entity: this.entity, data: values });
-
-    return await insertRequestBuilder.build();
+    const loginRequestBuilder = new Login({ entity: this.entity, data: values });
+    return await loginRequestBuilder.build();
   }
 }

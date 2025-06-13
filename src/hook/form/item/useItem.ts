@@ -11,14 +11,14 @@ export type Item = {
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onBlur: (e: FocusEvent<HTMLInputElement, Element>) => void;
   filterAndValidate: () => boolean;
-}
+};
 
 export function useItem(itemConfig: ItemInterface): Item {
   const [value, setValue] = useState("");
 
-  const { applyFilters } = useFilters(itemConfig.filters || []);
-  const { applyMask } = useMask(itemConfig.mask);
-  const { error, validate } = useValidation(itemConfig.validators || [], itemConfig);
+  const { applyFilters } = useFilters(itemConfig.getFilters() || []);
+  const { applyMask } = useMask(itemConfig.getMask());
+  const { error, validate } = useValidation(itemConfig.getValidators() || [], itemConfig);
 
   const onChange = (e: ChangeEvent<HTMLInputElement>) => {
     let val = e.target.value;

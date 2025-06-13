@@ -1,25 +1,11 @@
+import { StripTagsFilter } from "@/filter/StripTagsFilter";
+import { ItemDef } from "@/type/form/ItemDef";
 import { FilterInterface } from "@filter/FilterInterface";
+import { TrimFilter } from "@filter/TrimFilter";
 import { MaskInterface } from "@mask/MaskInterface";
 import { ValidatorInterface } from "@validator/ValidatorInterface";
-import { ItemInterface, MsgPlacement } from "./ItemInterface";
-import { TrimFilter } from "@filter/TrimFilter";
-import { StripTagsFilter } from "../../filter/StripTagsFilter";
 import { HTMLInputTypeAttribute } from "react";
-
-type ItemDef = {
-  name: string;
-  type?: HTMLInputTypeAttribute;
-  entity?: string | null;
-  validators?: ValidatorInterface[];
-  textNameGender?: boolean;
-  fullName?: string | null;
-  formName?: string | null;
-  textName?: string | null;
-  filters?: FilterInterface[];
-  mask?: MaskInterface | null;
-  msgPlacement?: MsgPlacement | null;
-  tags?: string[];
-};
+import { ItemInterface, MsgPlacement } from "./ItemInterface";
 
 export class Item implements ItemInterface {
   public name: string;
@@ -49,7 +35,7 @@ export class Item implements ItemInterface {
     msgPlacement = null,
     tags = [],
   }: ItemDef) {
-    this.name = name;
+    this.name = `${entity}_${name}`;
     this.type = type;
     this.entity = entity;
     this.fullName = null;

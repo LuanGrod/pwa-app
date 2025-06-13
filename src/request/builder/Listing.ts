@@ -1,3 +1,4 @@
+import { Methods } from "@/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Listing as ResponseHandler } from "@request/response/handler/Listing";
 
@@ -10,7 +11,7 @@ type ListingProps = {
 
 export class Listing extends RequestBuilder {
   constructor({ entity, parentEntity = null, parentId = null, params = {} }: ListingProps) {
-    const apiUrl = process.env.PUBLIC_API_URL;
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const endpoint = parentEntity ? `${apiUrl}/${parentEntity}/${parentId}/${entity}` : `${apiUrl}/${entity}`;
 

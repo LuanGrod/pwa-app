@@ -30,6 +30,7 @@
       "@provider/*": ["./src/provider/*"],
       "@request/*": ["./src/request/*"],
       "@type/*": ["./src/type/*"],
+      "@cookie/*": ["./src/cookie/*"],
       "@validator/*": ["./src/validator/*"]
     }
   },

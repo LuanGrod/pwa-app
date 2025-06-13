@@ -1,0 +1,67 @@
+
+/* nomeie os três elementos */
+header { view-transition-name: header; }
+main   { view-transition-name: content; }
+footer { view-transition-name: footer; }
+
+/* defina z-index nos grupos de transição */
+::view-transition-group(header)  { z-index: 40; }
+::view-transition-group(content) { z-index: 20; }
+::view-transition-group(footer)  { z-index: 40; }
+
+/* here we customize the transition, these are the shared styles for the old and new view*/
+::view-transition-new(.handle),
+::view-transition-old(.handle) {
+  animation-duration: 300ms;
+  animation-timing-function: ease-out;
+  animation-direction: normal;
+}
+
+/* old view slides out to the left */
+::view-transition-old(.handle) {
+  animation-name: slide-out;
+  animation-duration: 200ms;
+}
+
+/* new view slides in from the right */
+::view-transition-new(.handle) {
+  animation-name: slide-in;
+  mix-blend-mode: normal;
+}
+
+
+@keyframes slide-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes slide-out-reverse {
+  from {
+    transform: translateX(-20%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-in-reverse {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}

@@ -1,21 +1,8 @@
 import { Form } from "./Form";
-import { RequiredValidatorFactory } from "@validator/required/RequiredValidatorFactory";
-import { Item } from "./item/Item";
-import { EmailValidatorFactory } from "@/validator/email/EmailValidatorFactory";
+import { Email } from "./item/prebuilt/Email";
+import { Senha } from "./item/prebuilt/Senha";
 
-const formItems = [
-  new Item({
-    name: "email",
-    entity: "estudantes",
-    validators: [RequiredValidatorFactory.create(), EmailValidatorFactory.create()],
-  }),
-  new Item({
-    type: "password",
-    name: "senha",
-    entity: "estudantes",
-    validators: [RequiredValidatorFactory.create()],
-  }),
-];
+const formItems = [new Email({ entity: "estudantes" }), new Senha({ entity: "estudantes" })];
 const form = new Form(formItems, "below");
 
 export default form;

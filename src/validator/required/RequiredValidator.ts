@@ -9,7 +9,7 @@ export class RequiredValidator implements ValidatorInterface {
     this.message = message;
   }
 
-  validate(value: string): boolean {
+  validate(value: any): boolean {
     return value.length > 0;
   }
 

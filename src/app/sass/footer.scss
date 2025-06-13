@@ -1,0 +1,43 @@
+.footer-wrapper {
+  flex: none; /* previne de dar o grow (só o content da grow) */
+  box-sizing: border-box;
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  z-index: 30;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 27px;
+  background-color: var(--background-variation);
+  filter: drop-shadow(0px 0px 4px color-mix(in oklab, var(--foreground) 20%, transparent));
+
+  .link {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    p {
+      font-size: 10px;
+      letter-spacing: 0.5px;
+    }
+
+    .active {
+      color: var(--footer-link-active);
+
+      path {
+        stroke: var(--footer-link-active);
+      }
+    }
+
+    .inactive {
+      color: var(--footer-link-inactive);
+
+      path {
+        stroke: var(--footer-link-inactive);
+      }
+    }
+  }
+}

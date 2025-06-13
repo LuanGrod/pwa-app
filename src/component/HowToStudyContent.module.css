@@ -2,13 +2,13 @@
   font-size: 12px;
   line-height: 14px;
   text-transform: uppercase;
-  color: var(--color-emphasis);
+  color: var(--emphasis);
   font-weight: 600;
   margin-bottom: 9px;
 }
 
 .contentWrapper {
-  background-color: var(--color-background-variation);
+  background-color: var(--background-variation);
   border-radius: 9px;
   padding: 20px 24px;
   margin-bottom: 20px;

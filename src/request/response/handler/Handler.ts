@@ -1,5 +1,6 @@
 import { ResponseHandlerInterface } from "./HandlerInterface";
 import { CollectionInterface as ErrorHandlerCollection } from "../../error/handler/collection/CollectionInterface";
+import { HandlerInterface } from "@/request/error/handler/HandlerInterface";
 
 type ResponseHandlerProps = {
   onSuccessFn?: (result: any) => any;
@@ -27,15 +28,19 @@ export class ResponseHandler implements ResponseHandlerInterface {
   }
 
   protected handleError(error: Error): any {
-    this.errorHandlerCollection?.get().forEach((errorHandler: any) => {
+    let errorResponse = {};
+
+    this.errorHandlerCollection?.get().forEach((errorHandler: HandlerInterface) => {
       let errorMessage = errorHandler.handle(error);
       if (errorMessage) {
-        return {
+        errorResponse = {
           success: false,
           messageType: "error",
           message: errorMessage,
         };
       }
     });
+
+    return errorResponse;
   }
 }

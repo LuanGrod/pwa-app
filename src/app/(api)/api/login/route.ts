@@ -1,15 +1,30 @@
 export async function POST(request: Request) {
   const { email, senha } = await request.json();
 
-  await new Promise((resolve) => setTimeout(resolve, 500));
+  const mockResponseValid = {
+    userNotFound: false,
+    id: 1,
+    token:
+      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGl0eSI6ImNhcmxvc0BnbWFpbC5jb20iLCJleHAiOjE3NDkxMzAyOTN9.Ti5hIhCfUaJ3rkOO9BQqcJz0QLkIGJdeieFAddV1RkE",
+    msg: [],
+  };
 
-  if (email == "moisesnovaes5@yahoo.com.br" && senha == "senha123") {
-    return new Response(JSON.stringify({ token: "0000000000000000000" }), {
+  const mockResponseInvalid = {
+    userNotFound: true,
+    id: null,
+    token: null,
+    msg: {
+      userNotFound: ["Usuário não encontrado"],
+    },
+  };
+
+  if (email == "email@email.com" && senha == "Senha123!") {
+    return new Response(JSON.stringify(mockResponseValid), {
       status: 200,
       headers: { "Content-Type": "application/json" },
     });
   } else {
-    return new Response(JSON.stringify({ error: "Invalid credentials", message: "Usuário não encontrado" }), {
+    return new Response(JSON.stringify(mockResponseInvalid), {
       status: 401,
       headers: { "Content-Type": "application/json" },
     });

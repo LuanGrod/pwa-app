@@ -1,3 +1,4 @@
+import { Methods } from "@/type/Methods";
 import { ResponseHandlerInterface } from "@request/response/handler/HandlerInterface";
 
 type BuilderProps = {
@@ -46,13 +47,13 @@ export class RequestBuilder {
         body: this.data ? JSON.stringify(this.data) : null,
       });
 
+      const data = await response.json();
+
       if (!response.ok) {
-        throw new Error(`HTTP error ${response.status}`);
+        throw new Error(`HTTP error ${response.status}`, { cause: data });
       }
 
-      const result = await response.json();
-
-      return this.responseHandler.onSuccess(result);
+      return this.responseHandler.onSuccess(data);
     } catch (error) {
       return this.responseHandler.onError(error as Error);
     }

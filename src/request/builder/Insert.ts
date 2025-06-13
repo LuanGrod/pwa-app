@@ -1,5 +1,6 @@
 import { RequestBuilder } from "./Builder";
 import { Insert as ResponseHandler } from "../response/handler/Insert";
+import { Methods } from "@/type/Methods";
 
 type InsertProps = {
   entity: string;
@@ -10,7 +11,7 @@ type InsertProps = {
 
 export class Insert extends RequestBuilder {
   constructor({ entity, data, parentEntity = null, parentId = null }: InsertProps) {
-    const apiUrl = process.env.PUBLIC_API_URL;
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const endpoint = parentEntity ? `${apiUrl}/${parentEntity}/${parentId}/${entity}` : `${apiUrl}/${entity}`;
 

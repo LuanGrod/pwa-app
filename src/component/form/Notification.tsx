@@ -1,21 +1,16 @@
-import styles from "./Notification.module.css";
-
 type Props = {
   type: NotificationType;
-  message: string;
+  message: string[];
 };
 
 export default function Notification({ message, type }: Props) {
-  const typeClass =
-    type == "success"
-      ? styles.success
-      : type == "danger"
-      ? styles.danger
-      : type == "warning"
-      ? styles.warning
-      : styles.info;
-
   if (message && type) {
-    return <div className={`${styles.container} ${typeClass}`}>{message}</div>;
+    return (
+      <div className={`submit-return-wrapper ${type}`}>
+        {message.map((msg, idx) => (
+          <p key={idx}>{msg}</p>
+        ))}
+      </div>
+    );
   }
 }

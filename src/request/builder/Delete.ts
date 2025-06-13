@@ -1,3 +1,4 @@
+import { Methods } from "@/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Delete as ResponseHandler } from "@request/response/handler/Delete";
 
@@ -8,7 +9,7 @@ type DeleteProps = {
 
 export class Delete extends RequestBuilder {
   constructor({ entity, id }: DeleteProps) {
-    const apiUrl = process.env.PUBLIC_API_URL;
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const endpoint = `${apiUrl}/${entity}/${id}`;
 

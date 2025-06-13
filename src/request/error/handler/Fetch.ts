@@ -1,7 +1,7 @@
-import { Handler } from "./Handler";
+import { HandlerFixed } from "./HandlerFixed";
 
-export class Fetch extends Handler {
+export class Fetch extends HandlerFixed {
   constructor() {
-    super({ errorContent: 'Failed to fetch', msg: 'Erro de conexão - verifique sua internet' });
+    super({ errorContent: "Failed to fetch", msg: "Erro de conexão - verifique sua internet" });
   }
 }

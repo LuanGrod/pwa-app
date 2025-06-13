@@ -1,5 +1,7 @@
+import { Methods } from "@/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Login as ResponseHandler } from "@request/response/handler/Login";
+import { DefaultApi } from "../error/handler/collection/DefaultApi";
 
 type LoginProps = {
   entity?: string | null;
@@ -8,13 +10,13 @@ type LoginProps = {
 
 export class Login extends RequestBuilder {
   constructor({ entity, data }: LoginProps) {
-    const apiUrl = process.env.PUBLIC_API_URL;
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const endpoint = entity ? `${apiUrl}/login/${entity}` : `${apiUrl}/login`;
 
-    const method = "POST";
+    const method: Methods = "POST";
 
-    const responseHandler = new ResponseHandler({});
+    const responseHandler = new ResponseHandler({ errorHandlerCollection: new DefaultApi() });
 
     super({ endpoint, method, data, responseHandler });
   }
