@@ -37,7 +37,9 @@ export class Login extends ResponseHandler {
 
       // useAuthStore.getState().setUser({ id: id, token: token, avatarUrl: "/project/assets/avatar-mock.png", name: "Israel", planType: "1" });
     }
-    // const rootUrl = process.env.NEXT_PUBLIC_ROOT_URL;
-    // return (window.location.href = rootUrl!);
+    
+    window.location.reload()
+
+    return false;
   }
 }
