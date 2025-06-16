@@ -7,7 +7,7 @@ import { ItemInterface } from "@/form/item/ItemInterface";
 import SubmitHandlerInterface from "@/form/handler/submit/SubmitHandlerInterface";
 import { Shadow as ShadowBtn } from "../button/Shadow";
 import Notification from "./Notification";
-import Loading from "../overlay/popup/dialog/Loading";
+import Loading2 from "../overlay/popup/dialog/Loading2";
 
 type FormProps = {
   formConfig: FormConfigProps;
@@ -35,7 +35,7 @@ function Form({ formConfig, submitHandler, id }: FormProps) {
               </div>
             )
         )}
-      <Loading loading={loading} />
+      <Loading2 loading={loading} />
       {submitReturn && (
         <Notification type={submitReturn.success ? "success" : "danger"} message={submitReturn.message} />
       )}

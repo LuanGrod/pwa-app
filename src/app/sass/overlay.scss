@@ -105,15 +105,15 @@
     line-height: 1;
     font-weight: 300;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 
-    .spinner {
-      g {
-        transform-origin: center;
-        animation: rotacao 2s linear infinite;
-        circle {
-          stroke-linecap: round;
-          animation: animacao 1.5s ease-in-out infinite;
-        }
+  .spinner {
+    g {
+      transform-origin: center;
+      animation: rotacao 2s linear infinite;
+      circle {
+        stroke-linecap: round;
+        animation: animacao 1.5s ease-in-out infinite;
       }
     }
   }
@@ -151,6 +151,10 @@
   .popup-wrapper {
     .popup {
       box-shadow: 0 4px 6px rgba(255, 255, 255, 0.2);
+    }
+
+    .spinner {
+      stroke: #fff;
     }
   }
 }

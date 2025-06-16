@@ -26,20 +26,19 @@ export class Login extends ResponseHandler {
     this.expirationDate = new Date();
   }
 
-  protected handleSuccess(result: LoginResponse): any {
-    if (!result.userNotFound) {
-      const { token, id } = result;
-      this.expirationDate.setMonth(this.expirationDate.getMonth() + 1);
-      this.cookie.setCookie("token", token, this.expirationDate);
-      this.cookie.setCookie("id", id.toString(), this.expirationDate);
+ protected async handleSuccess(result: LoginResponse): Promise<any> {
+  if (!result.userNotFound) {
+    const { token, id } = result;
+    this.expirationDate.setMonth(this.expirationDate.getMonth() + 1);
+    this.cookie.setCookie("token", token, this.expirationDate);
+    this.cookie.setCookie("id", id.toString(), this.expirationDate);
 
-      authStore.setUser({ id: id.toString(), token, avatarUrl: "/project/assets/Foto.png", name: "Israel", planType: "1" });
-
-      // useAuthStore.getState().setUser({ id: id, token: token, avatarUrl: "/project/assets/avatar-mock.png", name: "Israel", planType: "1" });
-    }
-    
-    window.location.reload()
-
-    return false;
+    authStore.setUser({ id: id.toString(), token, avatarUrl: "/project/assets/Foto.png", name: "Israel", planType: "1" });
   }
+
+  await new Promise((resolve) => setTimeout(resolve, 200));
+  window.location.reload();
+
+  return result;
+}
 }

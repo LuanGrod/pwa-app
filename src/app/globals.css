@@ -292,11 +292,11 @@ form .submit-return-wrapper.danger {
   font-weight: 300;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
-.popup-wrapper .popup .spinner g {
+.popup-wrapper .spinner g {
   transform-origin: center;
   animation: rotacao 2s linear infinite;
 }
-.popup-wrapper .popup .spinner g circle {
+.popup-wrapper .spinner g circle {
   stroke-linecap: round;
   animation: animacao 1.5s ease-in-out infinite;
 }
@@ -326,6 +326,9 @@ form .submit-return-wrapper.danger {
   }
   .popup-wrapper .popup {
     box-shadow: 0 4px 6px rgba(255, 255, 255, 0.2);
+  }
+  .popup-wrapper .spinner {
+    stroke: #fff;
   }
 }
 .btn-shadow {
