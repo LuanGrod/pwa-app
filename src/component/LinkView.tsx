@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import React, { startTransition } from "react";
+import React, { startTransition, useEffect } from "react";
 
 interface LinkViewProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
   href: string;

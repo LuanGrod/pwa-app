@@ -5,6 +5,7 @@ import { cookies } from "next/headers";
 import { comfortaa, inter, sfProDisplay, sfProText } from "./fonts";
 import styles from "./layout.module.css";
 import AppHeightWrapper from "@provider/AppHeightWrapper";
+import { AuthStoreProvider } from "@/provider/AuthProvider";
 
 export const metadata: Metadata = {
   title: "MedRQE",
@@ -25,8 +26,10 @@ export default async function RootLayout({
       className={`${comfortaa.variable} ${sfProDisplay.variable} ${sfProText.variable} ${inter.variable}`}
     >
       <body className={styles.screen}>
-        <AppHeightWrapper />
-        {!splashShown ? <SplashScreen /> : children}
+        <AuthStoreProvider>
+          <AppHeightWrapper />
+          {!splashShown ? <SplashScreen /> : children}
+        </AuthStoreProvider>
       </body>
     </html>
   );

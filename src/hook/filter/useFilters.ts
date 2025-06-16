@@ -1,7 +1,7 @@
 import { useState } from "react";
 import FilterInterface from "@filter/ui/FilterInterface";
 
-type WithId = { id: string | number };
+type WithId = { id: string | number, title: string };
 
 export function useFilters<T extends WithId>(definitions: FilterInterface[]) {
   const [values, setValues] = useState<Record<string, T[] | boolean>>(() =>

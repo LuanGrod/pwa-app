@@ -4,6 +4,8 @@ import { ResponseHandler } from "./Handler";
 import CookieInterface from "@/cookie/CookieInterface";
 import Cookie from "@cookie/Cookie";
 import { LoginResponse } from "@/type/request/Login";
+import { useAuthStore } from "@/provider/AuthProvider";
+import { authStore } from "@/store/AuthStore";
 
 type LoginProps = {
   successMessage?: string;
@@ -30,8 +32,12 @@ export class Login extends ResponseHandler {
       this.expirationDate.setMonth(this.expirationDate.getMonth() + 1);
       this.cookie.setCookie("token", token, this.expirationDate);
       this.cookie.setCookie("id", id.toString(), this.expirationDate);
+
+      authStore.setUser({ id: id.toString(), token, avatarUrl: "/project/assets/Foto.png", name: "Israel", planType: "1" });
+
+      // useAuthStore.getState().setUser({ id: id, token: token, avatarUrl: "/project/assets/avatar-mock.png", name: "Israel", planType: "1" });
     }
-    const rootUrl = process.env.NEXT_PUBLIC_ROOT_URL;
-    return (window.location.href = rootUrl!);
+    // const rootUrl = process.env.NEXT_PUBLIC_ROOT_URL;
+    // return (window.location.href = rootUrl!);
   }
 }
