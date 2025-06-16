@@ -7,9 +7,5 @@ import LoginForm from "@form/Login";
 export default function Login({}) {
   const submitHandler = new LoginHandler({});
 
-  return (
-    <>
-      <Form formConfig={LoginForm} submitHandler={submitHandler} />
-    </>
-  );
+  return <Form formConfig={LoginForm} submitHandler={submitHandler} />;
 }
