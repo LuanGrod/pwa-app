@@ -36,7 +36,7 @@ export class Login extends ResponseHandler {
     authStore.setUser({ id: id.toString(), token, avatarUrl: "/project/assets/Foto.png", name: "Israel", planType: "1" });
   }
 
-  await new Promise((resolve) => setTimeout(resolve, 200));
+  await new Promise((resolve) => setTimeout(resolve, 2000));
   window.location.reload();
 
   return result;
