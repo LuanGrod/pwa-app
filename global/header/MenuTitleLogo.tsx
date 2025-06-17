@@ -1,20 +1,19 @@
 import { ReactElement } from "react";
-import { Modal } from "@public/global/js/types/Modal";
-import styles from "./MenuTitleLogo.module.css";
-import LogoOverlay from "@global/LogoOverlay";
-import MenuToggle from "@global/MenuToggle";
+import { Overlay } from "@public/global/js/types/Overlay";
+import MenuToggle from "@global/header/item/MenuToggle";
 import BaseHeader from "./Base";
+import LogoOverlay from "./item/LogoOverlay";
 
 type Props = {
   title: string;
-  menu: ReactElement<{ menuRef?: React.RefObject<Modal | null> }>;
+  menu: ReactElement<{ menuRef?: React.RefObject<Overlay | null> }>;
 };
 
 export default function MenuTitleLogo({ title, menu }: Props) {
   return (
     <BaseHeader
       left={<MenuToggle menu={menu} />}
-      center={<p className={styles.title}>{title}</p>}
+      center={<p className="menu-title-logo title">{title}</p>}
       right={<LogoOverlay />}
     />
   );

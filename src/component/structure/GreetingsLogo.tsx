@@ -12,7 +12,7 @@ export default function GreetingsLogoStructure({ children }: Props) {
     <>
       <ViewTransition default="handle">
         <Header />
-        <main className="content-wrapper">{children}</main>
+        <main className="content-wrapper header footer">{children}</main>
       </ViewTransition>
       <Footer />
     </>

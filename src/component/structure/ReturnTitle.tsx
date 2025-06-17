@@ -1,7 +1,6 @@
-import { ReactNode } from "react";
-import Footer from "../footer/Footer";
-import Header from "../../../global/header/ReturnTitle";
-import styles from "./Structure.module.css";
+import { ReactNode, unstable_ViewTransition as ViewTransition } from "react";
+import Footer from "@component/footer/Footer";
+import Header from "@global/header/ReturnTitle";
 
 type Props = {
   children: ReactNode;
@@ -11,8 +10,10 @@ type Props = {
 export default function ReturnTitleStructure({ children, title }: Props) {
   return (
     <>
-      <Header title={title} />
-      <main className={styles.content}>{children}</main>
+      <ViewTransition default="handle">
+        <Header title={title} />
+        <main className="content-wrapper header footer">{children}</main>
+      </ViewTransition>
       <Footer />
     </>
   );

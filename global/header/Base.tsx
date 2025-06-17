@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import styles from "./Base.module.css";
 
 type Props = {
   left?: ReactNode;
@@ -7,10 +6,9 @@ type Props = {
   right?: ReactNode;
 };
 
-export default function BaseHeader
-({ center, left, right }: Props) {
+export default function BaseHeader({ center, left, right }: Props) {
   return (
-    <header className={styles.container}>
+    <header className="header-wrapper">
       {left}
       {center}
       {right}

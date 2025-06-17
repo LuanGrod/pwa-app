@@ -1,7 +1,6 @@
-import ReturnRoute from "../ReturnRoute";
-import SearchBtn from "../SearchBtn";
+import ReturnRoute from "./item/ReturnRoute";
+import SearchBtn from "./item/SearchBtn";
 import BaseHeader from "./Base";
-import styles from "./ReturnTitleSearch.module.css";
 
 type Props = {
   title: string;
@@ -12,7 +11,7 @@ export default function ReturnTitleSearch({ title, handleSearch }: Props) {
   return (
     <BaseHeader
       left={<ReturnRoute />}
-      center={<p className={styles.title}>{title}</p>}
+      center={<p className="return-title-search title">{title}</p>}
       right={<SearchBtn handleSearch={handleSearch} />}
     />
   );

@@ -12,12 +12,12 @@ export default function HowToStudyContent({ listItems, paragraphs, title }: Prop
     <>
       <h2 className={styles.contentTitle}>{title}</h2>
       <div className={styles.contentWrapper}>
-        {paragraphs.map((item) => (
-          <p className={styles.contentParagraph}>{item}</p>
+        {paragraphs.map((item, index) => (
+          <p className={styles.contentParagraph} key={index}>{item}</p>
         ))}
         <ul>
-          {listItems.map((item) => (
-            <li className={styles.contentListItem}>{item}</li>
+          {listItems.map((item, index) => (
+            <li className={styles.contentListItem} key={index}>{item}</li>
           ))}
         </ul>
       </div>

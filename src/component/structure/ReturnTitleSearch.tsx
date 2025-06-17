@@ -1,8 +1,6 @@
-import { ReactNode } from "react";
-import Footer from "../footer/Footer";
-import Header from "../../../global/header/ReturnTitleSearch";
-import styles from "./Structure.module.css";
-import { unstable_ViewTransition as ViewTransition } from "react";
+import { ReactNode, unstable_ViewTransition as ViewTransition } from "react";
+import Footer from "@component/footer/Footer";
+import Header from "@global/header/ReturnTitleSearch";
 
 type Props = {
   children: ReactNode;
@@ -15,7 +13,7 @@ export default function ReturnTitleSearchStructure({ children, title, handleSear
     <>
       <ViewTransition default="handle">
         <Header title={title} handleSearch={handleSearch} />
-        <main className={styles.content}>{children}</main>
+        <main className="content-wrapper header footer">{children}</main>
       </ViewTransition>
       <Footer />
     </>

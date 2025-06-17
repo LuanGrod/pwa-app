@@ -1,5 +1,5 @@
-import { Filter as FilterBtn } from "@/component/button/Filter";
-import { Switch as SwitchBtn } from "@/component/button/Switch";
+import { Filter as FilterBtn } from "@global/button/Filter";
+import { Switch as SwitchBtn } from "@global/button/Switch";
 import FilterInterface from "@filter/ui/FilterInterface";
 
 interface FiltrosGridProps {

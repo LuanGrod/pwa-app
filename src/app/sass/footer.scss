@@ -1,10 +1,6 @@
 .footer-wrapper {
-  flex: none; /* previne de dar o grow (só o content da grow) */
-  box-sizing: border-box;
+  flex-grow: 0; /* previne de dar o grow (só o content da grow) */
   display: flex;
-  position: fixed;
-  bottom: 0;
-  z-index: 30;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;

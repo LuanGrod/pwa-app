@@ -7,7 +7,7 @@ import { useKeyDrawer } from "@hook/useKeyDrawer";
 import MultiSelectFilter from "@filter/ui/MultiSelect";
 import BooleanFilter from "@filter/ui/Boolean";
 import Filtros from "@/component/overlay/drawer/Filtros";
-import { Shadow as ShadowBtn } from "@/component/button/Shadow";
+import { Shadow as ShadowBtn } from "@global/button/Shadow";
 
 type Tipo = { id: string | number; title: string };
 

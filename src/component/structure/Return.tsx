@@ -1,6 +1,5 @@
-import { ReactNode } from "react";
-import Header from "../../../global/header/Return";
-import styles from "./Structure.module.css";
+import { ReactNode, unstable_ViewTransition as ViewTransition } from "react";
+import Header from "@global/header/Return";
 
 type Props = {
   children: ReactNode;
@@ -9,8 +8,10 @@ type Props = {
 export default function ReturnStructure({ children }: Props) {
   return (
     <>
-      <Header />
-      <main className={styles.content}>{children}</main>
+      <ViewTransition default="handle">
+        <Header />
+        <main className="content-wrapper header">{children}</main>
+      </ViewTransition>
     </>
   );
 }

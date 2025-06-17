@@ -1,18 +1,19 @@
-import { ReactNode } from "react";
-import Header from "../../../global/header/ReturnLogo";
-import Footer from "../footer/Footer";
-import styles from "./Structure.module.css";
+import { ReactNode, unstable_ViewTransition as ViewTransition } from "react";
+import Header from "@global/header/ReturnLogo";
+import Footer from "@component/footer/Footer";
 
 type Props = {
   children: ReactNode;
 };
 
-export default function ReturnLogo({children}: Props) {
+export default function ReturnLogo({ children }: Props) {
   return (
     <>
-    <Header />
-    <main className={styles.content}>{children}</main>
-    <Footer />
-  </>
-  )
+      <ViewTransition default="handle">
+        <Header />
+        <main className="content-wrapper header footer">{children}</main>
+      </ViewTransition>
+      <Footer />
+    </>
+  );
 }

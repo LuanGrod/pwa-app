@@ -1,14 +1,10 @@
 import BaseHeader from "./Base";
-import ReturnRoute from "../ReturnRoute";
-import LogoOverlay from "../LogoOverlay";
-import styles from "./ReturnLogo.module.css";
+import LogoOverlay from "./item/LogoOverlay";
+import ReturnRoute from "./item/ReturnRoute";
+import Spacing from "./item/Spacing";
 
 type Props = {};
 
 export default function ReturnLogo({}: Props) {
-  const spacingElement = () => {
-    return <div className={styles.container}></div>;
-  };
-
-  return <BaseHeader left={<ReturnRoute />} center={<LogoOverlay />} right={spacingElement()} />;
+  return <BaseHeader left={<ReturnRoute />} center={<LogoOverlay />} right={<Spacing />} />;
 }

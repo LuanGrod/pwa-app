@@ -58,18 +58,6 @@ footer {
 }
 
 /* defina z-index nos grupos de transição */
-::view-transition-group(header) {
-  z-index: 40;
-}
-
-::view-transition-group(content) {
-  z-index: 20;
-}
-
-::view-transition-group(footer) {
-  z-index: 40;
-}
-
 /* here we customize the transition, these are the shared styles for the old and new view*/
 ::view-transition-new(.handle),
 ::view-transition-old(.handle) {
@@ -194,7 +182,6 @@ form .submit-return-wrapper.danger {
 }
 
 .drawer-wrapper {
-  z-index: 50;
   position: fixed;
   top: 0;
   left: 0;
@@ -259,6 +246,18 @@ form .submit-return-wrapper.danger {
   position: absolute;
   top: 1rem;
   right: 1rem;
+}
+.drawer-wrapper .drawer .link {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.drawer-wrapper .drawer .link p {
+  height: 33px;
+  font-size: 1rem;
+  line-height: 33px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
 }
 
 .popup-wrapper {
@@ -428,22 +427,15 @@ form .submit-return-wrapper.danger {
 }
 
 .content-wrapper {
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  flex-grow: 1;
   padding: 1.25rem;
-  padding-top: 81px;
-  padding-bottom: 102px;
-  z-index: 20;
 }
 
 .footer-wrapper {
-  flex: none; /* previne de dar o grow (só o content da grow) */
-  box-sizing: border-box;
+  flex-grow: 0; /* previne de dar o grow (só o content da grow) */
   display: flex;
-  position: fixed;
-  bottom: 0;
-  z-index: 30;
   justify-content: space-evenly;
   align-items: center;
   width: 100%;
@@ -473,6 +465,76 @@ form .submit-return-wrapper.danger {
 }
 .footer-wrapper .link .inactive path {
   stroke: var(--footer-link-inactive);
+}
+
+.header-wrapper {
+  flex-grow: 0; /* previne de dar o grow (só o content da grow) */
+  width: 100%;
+  display: flex;
+  padding: 18px;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--background);
+}
+.header-wrapper .btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+}
+.header-wrapper .btn.overlay {
+  background-color: var(--background-variation);
+}
+.header-wrapper .greetings {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  width: fit-content;
+  height: 45px;
+  gap: 1rem;
+}
+.header-wrapper .greetings .avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 100%;
+}
+.header-wrapper .greetings .avatar.skeleton {
+  background-color: color-mix(in srgb, var(--foreground) 15%, transparent);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+.header-wrapper .greetings .title {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  line-height: 1.4;
+}
+.header-wrapper .greetings .title.skeleton {
+  width: 120px;
+  height: 25px;
+  background-color: color-mix(in srgb, var(--foreground) 10%, transparent);
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  border-radius: 4px;
+}
+.header-wrapper .menu-title-logo.title {
+  font-family: var(--font-title);
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 1.4;
+}
+.header-wrapper .return-title.title {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1.4;
+}
+.header-wrapper .return-title-search.title {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  font-weight: bold;
+  line-height: 1.4;
 }
 
 /*# sourceMappingURL=globals.css.map */

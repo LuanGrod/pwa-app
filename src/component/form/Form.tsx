@@ -5,9 +5,9 @@ import Item from "./item/Item";
 import { Form as FormConfigProps } from "@/form/Form";
 import { ItemInterface } from "@/form/item/ItemInterface";
 import SubmitHandlerInterface from "@/form/handler/submit/SubmitHandlerInterface";
-import { Shadow as ShadowBtn } from "../button/Shadow";
+import { Shadow as ShadowBtn } from "../../../global/button/Shadow";
 import Notification from "./Notification";
-import Loading2 from "../overlay/popup/dialog/Loading2";
+import Loading2 from "@global/overlay/popup/dialog/Loading2";
 
 type FormProps = {
   formConfig: FormConfigProps;

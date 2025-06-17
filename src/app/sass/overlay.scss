@@ -1,5 +1,4 @@
 .drawer-wrapper {
-  z-index: 50;
   position: fixed;
   top: 0;
   left: 0;
@@ -71,6 +70,20 @@
       position: absolute;
       top: 1rem;
       right: 1rem;
+    }
+
+    .link {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+
+      p {
+        height: 33px;
+        font-size: 1rem;
+        line-height: 33px;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
     }
   }
 }

@@ -1,17 +1,13 @@
-import ReturnRoute from "../ReturnRoute";
+import ReturnRoute from "./item/ReturnRoute";
 import BaseHeader from "./Base";
-import styles from "./ReturnTitle.module.css";
+import Spacing from "./item/Spacing";
 
 type Props = {
   title: string;
 };
 
 export default function ReturnTitle({ title }: Props) {
-  const spacingElement = () => {
-    return <div className={styles.container}></div>;
-  };
-
   return (
-    <BaseHeader left={<ReturnRoute />} center={<p className={styles.title}>{title}</p>} right={spacingElement()} />
+    <BaseHeader left={<ReturnRoute />} center={<p className="return-title title">{title}</p>} right={<Spacing />} />
   );
 }

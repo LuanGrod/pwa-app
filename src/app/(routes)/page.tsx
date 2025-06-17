@@ -1,5 +1,5 @@
 import IconFrameContainer from "@component/IconFrameContainer";
-import HomeStructure from "@component/structure/Home";
+import HomeStructure from "@/component/structure/Home";
 import styles from "./page.module.css";
 
 export default function Home() {

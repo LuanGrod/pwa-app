@@ -2,6 +2,8 @@
 
 import Fechar from "@global/icons/Fechar";
 import clsx from "clsx/lite";
+import { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 
 interface Props<T> {
   open: boolean;
@@ -28,32 +30,42 @@ export default function Filtros<T>({
   getOptionKey,
   isOptionSelected,
 }: Props<T>) {
+  const [drawerRoot, setDrawerRoot] = useState<HTMLElement | null>(null);
+
+  useEffect(() => {
+    setDrawerRoot(document.getElementById("drawer-root"));
+  }, []);
+
   const defaultIsSelected = (opt: T, selectedArr: T[]) =>
     selectedArr.some((sel) => getOptionKey(sel) === getOptionKey(opt));
 
   return (
-    <div className={clsx("drawer-wrapper", open ? "open" : "closed")}>
-      <div className={"close-area"} onClick={onClose}></div>
-      <div className={clsx("drawer", open ? "open" : "closed")}>
-        <div className={"header"}>
-          {title && <h1 className={"title"}>{title}</h1>}
-          <div className={"close-btn"} onClick={onClose}>
-            <Fechar size={14} changeOnTheme />
+    drawerRoot &&
+    createPortal(
+      <div className={clsx("drawer-wrapper", open ? "open" : "closed")}>
+        <div className={"close-area"} onClick={onClose}></div>
+        <div className={clsx("drawer", open ? "open" : "closed")}>
+          <div className={"header"}>
+            {title && <h1 className={"title"}>{title}</h1>}
+            <div className={"close-btn"} onClick={onClose}>
+              <Fechar size={14} changeOnTheme />
+            </div>
           </div>
+          <h1>aaaaaaaaaa</h1>
+          {options.map((opt) => (
+            <label key={getOptionKey(opt)} className="flex items-center mb-2">
+              <input
+                type="checkbox"
+                checked={isOptionSelected ? isOptionSelected(opt, selected) : defaultIsSelected(opt, selected)}
+                onChange={() => onToggle(opt)}
+                className="mr-2"
+              />
+              {getOptionLabel(opt)}
+            </label>
+          ))}
         </div>
-        <h1>aaaaaaaaaa</h1>
-        {options.map((opt) => (
-          <label key={getOptionKey(opt)} className="flex items-center mb-2">
-            <input
-              type="checkbox"
-              checked={isOptionSelected ? isOptionSelected(opt, selected) : defaultIsSelected(opt, selected)}
-              onChange={() => onToggle(opt)}
-              className="mr-2"
-            />
-            {getOptionLabel(opt)}
-          </label>
-        ))}
-      </div>
-    </div>
+      </div>,
+      drawerRoot
+    )
   );
 }

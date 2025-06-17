@@ -22,7 +22,7 @@ export default async function RootLayout({
 
   return (
     <html
-      lang="pt-br"
+      lang="pt-BR"
       className={`${comfortaa.variable} ${sfProDisplay.variable} ${sfProText.variable} ${inter.variable}`}
     >
       <body className={styles.screen}>
@@ -30,6 +30,7 @@ export default async function RootLayout({
           <AppHeightWrapper />
           {!splashShown ? <SplashScreen /> : children}
         </AuthStoreProvider>
+        <div id="drawer-root"></div>
       </body>
     </html>
   );
