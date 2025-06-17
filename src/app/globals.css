@@ -431,6 +431,8 @@ form .submit-return-wrapper.danger {
   display: flex;
   flex-direction: column;
   padding: 1.25rem;
+  height: calc(100vh - 163px);
+  overflow-y: scroll;
 }
 
 .footer-wrapper {
