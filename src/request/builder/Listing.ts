@@ -17,9 +17,14 @@ export class Listing extends RequestBuilder {
 
     const method: Methods = "GET";
 
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+      Authorization: "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZGVudGl0eSI6Im1haWxAbWFpbC5jb20iLCJleHAiOjE3NTAxOTUwMzZ9.sDrRcixmSI2mCPMpTjF611d0R7wlqGmHvy4Yh59q0m4",
+    };
+
     const responseHandler = new ResponseHandler({});
 
-    super({ endpoint, method, data: null, responseHandler });
+    super({ endpoint, method, headers, data: null, responseHandler });
 
     const query = this.buildQuery(params);
     if (query) {

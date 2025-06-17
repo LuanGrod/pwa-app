@@ -11,10 +11,10 @@ export default function page({}: Props) {
         <h1 className={styles.title}>Salvos</h1>
         <IconFrameContainer2
           links={[
-            { href: "/hot-topics-salvos", image: "/project/assets/HotTopics.svg", label: "Hot topics" },
-            { href: "/mapas-mentais-salvos", image: "/project/assets/MapasMentais.svg", label: "Mapas mentais" },
-            { href: "/flashcards-salvos", image: "/project/assets/Flashcards.svg", label: "Flashcards" },
-            { href: "/questoes-salvos", image: "/project/assets/Questoes.svg", label: "Questões" },
+            { href: "/salvos/hot-topics", image: "/project/assets/HotTopics.svg", label: "Hot topics" },
+            { href: "/salvos/mapas-mentais", image: "/project/assets/MapasMentais.svg", label: "Mapas mentais" },
+            { href: "/salvos/flashcards", image: "/project/assets/Flashcards.svg", label: "Flashcards" },
+            { href: "/salvos/questoes", image: "/project/assets/Questoes.svg", label: "Questões" },
           ]}
         />
         <div></div>

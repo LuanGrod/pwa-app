@@ -16,8 +16,12 @@ export class Login extends RequestBuilder {
 
     const method: Methods = "POST";
 
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+    };
+
     const responseHandler = new ResponseHandler({ errorHandlerCollection: new DefaultApi() });
 
-    super({ endpoint, method, data, responseHandler });
+    super({ endpoint, method, headers, data, responseHandler });
   }
 }

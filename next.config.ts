@@ -4,7 +4,17 @@ const nextConfig: NextConfig = {
   /* config options here */
   experimental: {
     viewTransition: true
-  }
+  },
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "sistemasclientes.com.br",
+        port: "",
+        pathname: "/projetos/medrqe/uploads/**"
+      }
+    ]
+  },
 };
 
 export default nextConfig;
