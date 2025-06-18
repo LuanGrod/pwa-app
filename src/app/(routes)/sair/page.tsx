@@ -11,6 +11,8 @@ export default function page({}: Props) {
   useEffect(() => {
     async function handleLogout() {
       document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = "auth-store=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
       router.push("/");
     }
 

@@ -20,7 +20,7 @@ export class RequestBuilder {
   constructor({ endpoint, method = "GET", headers = {}, data = {}, responseHandler }: BuilderProps) {
     this.endpoint = endpoint;
     this.method = method;
-    this.headers = headers;
+    this.headers = { "Content-Type": "application/json", ...headers };
     this.data = data;
     this.responseHandler = responseHandler;
   }

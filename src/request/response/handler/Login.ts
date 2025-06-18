@@ -4,7 +4,6 @@ import { ResponseHandler } from "./Handler";
 import CookieInterface from "@/cookie/CookieInterface";
 import Cookie from "@cookie/Cookie";
 import { LoginResponse } from "@/type/request/Login";
-import { useAuthStore } from "@/provider/AuthProvider";
 import { authStore } from "@/store/AuthStore";
 
 type LoginProps = {

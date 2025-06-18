@@ -58,6 +58,18 @@ footer {
 }
 
 /* defina z-index nos grupos de transição */
+::view-transition-group(header) {
+  z-index: 40;
+}
+
+::view-transition-group(content) {
+  z-index: 20;
+}
+
+::view-transition-group(footer) {
+  z-index: 40;
+}
+
 /* here we customize the transition, these are the shared styles for the old and new view*/
 ::view-transition-new(.handle),
 ::view-transition-old(.handle) {
