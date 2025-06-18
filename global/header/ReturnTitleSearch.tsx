@@ -7,7 +7,7 @@ type Props = {
   handleSearch?: (e?: unknown) => unknown;
 };
 
-export default function ReturnTitleSearch({ title, handleSearch = () => {} }: Props) {
+export default function ReturnTitleSearch({ title, handleSearch}: Props) {
   return (
     <BaseHeader
       left={<ReturnRoute />}
