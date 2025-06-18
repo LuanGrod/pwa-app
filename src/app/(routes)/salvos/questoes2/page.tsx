@@ -13,7 +13,7 @@ export default async function page({}: Props) {
     headers: {
       Authorization: `Bearer ${token}`,
     },
-    cache: "default",
+    cache: "force-cache",
   });
 
   if (!response.ok) {
