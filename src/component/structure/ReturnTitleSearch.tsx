@@ -9,16 +9,10 @@ type Props = {
 };
 
 export default function ReturnTitleSearchStructure({ children, title, handleSearch }: Props) {
-  const handleSearchFunction =
-    handleSearch ||
-    function (e: any) {
-      console.log("No search function provided");
-    };
-
   return (
     <>
       <ViewTransition default="handle">
-        <Header title={title} handleSearch={handleSearchFunction} />
+        <Header title={title} />
         <main className="content-wrapper header footer">{children}</main>
       </ViewTransition>
       <Footer />

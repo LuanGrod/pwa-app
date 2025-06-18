@@ -4,10 +4,10 @@ import BaseHeader from "./Base";
 
 type Props = {
   title: string;
-  handleSearch: (e?: unknown) => unknown;
+  handleSearch?: (e?: unknown) => unknown;
 };
 
-export default function ReturnTitleSearch({ title, handleSearch }: Props) {
+export default function ReturnTitleSearch({ title, handleSearch = () => {} }: Props) {
   return (
     <BaseHeader
       left={<ReturnRoute />}

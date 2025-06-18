@@ -1,9 +1,0 @@
-.container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 45px;
-  height: 45px;
-  background-color: var(--background-variation);
-  border-radius: 100%;
-}
