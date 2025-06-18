@@ -12,7 +12,7 @@ footer { view-transition-name: footer; }
 /* here we customize the transition, these are the shared styles for the old and new view*/
 ::view-transition-new(.handle),
 ::view-transition-old(.handle) {
-  animation-duration: 300ms;
+  animation-duration: 100ms;
   animation-timing-function: ease-out;
   animation-direction: normal;
 }
@@ -20,7 +20,7 @@ footer { view-transition-name: footer; }
 /* old view slides out to the left */
 ::view-transition-old(.handle) {
   animation-name: slide-out;
-  animation-duration: 200ms;
+  animation-duration: 50ms;
 }
 
 /* new view slides in from the right */
