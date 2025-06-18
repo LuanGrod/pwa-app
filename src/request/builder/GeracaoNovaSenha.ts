@@ -6,10 +6,11 @@ import { DefaultApi } from "../error/handler/collection/DefaultApi";
 type GeracaoNovaSenhaProps = {
   entity?: string | null;
   data: any;
+  headers?: HeadersInit;
 };
 
 export class GeracaoNovaSenha extends RequestBuilder {
-  constructor({ entity, data }: GeracaoNovaSenhaProps) {
+  constructor({ entity, data, headers = {} }: GeracaoNovaSenhaProps) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const endpoint = entity ? `${apiUrl}/geracao-nova-senha/${entity}` : `${apiUrl}/geracao-nova-senha`;
@@ -18,6 +19,6 @@ export class GeracaoNovaSenha extends RequestBuilder {
 
     const responseHandler = new ResponseHandler({ errorHandlerCollection: new DefaultApi() });
 
-    super({ endpoint, method, data, responseHandler });
+    super({ endpoint, method, data, responseHandler, headers });
   }
 }

@@ -11,7 +11,16 @@ export default class Authorization implements HeaderHandlerInterface {
   handle(headers: HeadersInit, tokenName: string = "token"): HeadersInit {
     const cookiesHandler = new Cookie();
     const token = cookiesHandler.getCookie(tokenName);
-    headers["Authorization"] = `Bearer ${token}`;
-    return headers;
+
+    // If headers is a Headers object, use set; otherwise, mutate the object
+    if (headers instanceof Headers) {
+      headers.set("Authorization", `Bearer ${token}`);
+      return headers;
+    } else {
+      return {
+        ...headers,
+        Authorization: `Bearer ${token}`,
+      };
+    }
   }
 }

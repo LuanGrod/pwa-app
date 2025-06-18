@@ -11,8 +11,7 @@ type Props = {
 export default function ReturnTitleSearchStructure({ children, title, handleSearch }: Props) {
   const handleSearchFunction =
     handleSearch ||
-    async function (e: any) {
-      "use server";
+    function (e: any) {
       console.log("No search function provided");
     };
 

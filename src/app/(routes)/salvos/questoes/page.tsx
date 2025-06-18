@@ -1,7 +1,5 @@
 import ReturnTitleSearchStructure from "@/component/structure/ReturnTitleSearch";
 import styles from "./page.module.css";
-import { cookies } from "next/headers";
-import { Item as ListItem } from "@/component/listing/Item";
 import Questoes from "@/component/listing/Questoes";
 
 type Props = {};

@@ -6,10 +6,11 @@ import { DefaultApi } from "../error/handler/collection/DefaultApi";
 type RecuperacaoSenhaProps = {
   entity?: string | null;
   data: any;
+  headers?: HeadersInit;
 };
 
 export class RecuperacaoSenha extends RequestBuilder {
-  constructor({ entity, data }: RecuperacaoSenhaProps) {
+  constructor({ entity, data, headers = {} }: RecuperacaoSenhaProps) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const endpoint = entity ? `${apiUrl}/recuperacao-senha/${entity}` : `${apiUrl}/recuperacao-senha`;
@@ -18,6 +19,6 @@ export class RecuperacaoSenha extends RequestBuilder {
 
     const responseHandler = new ResponseHandler({ errorHandlerCollection: new DefaultApi() });
 
-    super({ endpoint, method, data, responseHandler });
+    super({ endpoint, method, data, responseHandler, headers });
   }
 }

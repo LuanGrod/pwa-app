@@ -6,10 +6,11 @@ type UpdateProps = {
   entity: string;
   data: any;
   id: string;
+  headers?: HeadersInit;
 };
 
 export class Update extends RequestBuilder {
-  constructor({ entity, data, id }: UpdateProps) {
+  constructor({ entity, data, id, headers = {} }: UpdateProps) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const endpoint = `${apiUrl}/${entity}/${id}`;
@@ -18,6 +19,6 @@ export class Update extends RequestBuilder {
 
     const responseHandler = new ResponseHandler({});
 
-    super({ endpoint, method, data, responseHandler });
+    super({ endpoint, method, data, responseHandler, headers });
   }
 }
