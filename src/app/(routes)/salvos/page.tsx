@@ -13,8 +13,8 @@ export default function page({}: Props) {
           links={[
             { href: "/salvos/hot-topics", image: "/project/assets/HotTopics.svg", label: "Hot topics" },
             { href: "/salvos/mapas-mentais", image: "/project/assets/MapasMentais.svg", label: "Mapas mentais" },
-            { href: "/salvos/flashcards", image: "/project/assets/Flashcards.svg", label: "Flashcards" },
-            { href: "/salvos/questoes", image: "/project/assets/Questoes.svg", label: "Questões" },
+            { href: "/salvos/questoes", image: "/project/assets/Flashcards.svg", label: "Flashcards" },
+            { href: "/salvos/questoes2", image: "/project/assets/Questoes.svg", label: "Questões" },
           ]}
         />
         <div></div>
