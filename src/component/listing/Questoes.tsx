@@ -1,10 +1,9 @@
 "use client";
 
 import { useListing } from "@/hook/listing/useListing";
-import { Listing } from "./Listing";
 import { Item as ListItem } from "@/component/listing/Item";
-import { div } from "motion/react-client";
 import SkeletonGroup from "./SkeletonGroup";
+import { Listing } from "./Listing";
 
 type Props = {};
 
