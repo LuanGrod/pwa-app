@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Listing } from "@request/builder/Listing";
-import { Delete } from "@request/builder/Delete";
 
 type UseListingProps = {
   entity: string;
@@ -12,7 +11,7 @@ type UseListingProps = {
 
 type UseListingReturn<T> = {
   // deleteItem: (id: number) => Promise<void>;
-  data: Listagem<T>;
+  data: Listagem<T> | [];
   loading: boolean;
   deleting: boolean;
   error: string | null;
@@ -25,8 +24,8 @@ export function useListing<T = any>({
   autoFetch = true,
   needsAuthorization = false,
 }: UseListingProps): UseListingReturn<T> {
-  const [data, setData] = useState<Listagem<T>>({ currentPage: 1, rows: [], resultsPerPage: 0, totalRows: 0 });
-  const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<Listagem<T> | []>([]);
+  const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
@@ -35,8 +34,17 @@ export function useListing<T = any>({
     setError(null);
 
     try {
-      const listing = new Listing({ entity: entity, parentEntity: parentEntity || "", parentId: parentId || 0 });
-      const result = await listing.build();
+      const listing = new Listing({
+        entity: entity,
+        parentEntity: parentEntity || "",
+        parentId: parentId || 0,
+      });
+      const result = await listing.build(needsAuthorization);
+
+      if (!result.success) {
+        setError(result.message[0]);
+      }
+
       setData(result.data || []);
     } finally {
       setLoading(false);
@@ -60,7 +68,6 @@ export function useListing<T = any>({
     if (autoFetch) {
       fetchData();
     }
-    console.log(data);
   }, [entity, parentEntity, parentId, autoFetch]);
 
   return {

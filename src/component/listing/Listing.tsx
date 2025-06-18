@@ -1,11 +1,11 @@
 // components/Listing.tsx
-import React, { ReactNode } from "react";
+import React, { Fragment, ReactNode } from "react";
 import { LoadingMessage } from "../message/loading";
 import { ErrorMessage } from "../message/error";
 import { EmptyMessage } from "../message/empty";
 
 interface ListingProps<T> {
-  data: Listagem<T>;
+  data: Listagem<T> | [];
   loading: boolean;
   error: string | null;
   renderItem: (item: T, index: number) => ReactNode;
@@ -31,9 +31,9 @@ export function Listing<T>({
     return <>{errorComponent}</>;
   }
 
-  if (data.rows.length === 0) {
+  if (!("rows" in data) || data.rows.length === 0) {
     return <>{emptyComponent}</>;
   }
 
-  return data.rows.map((item, index) => <>{renderItem(item, index)}</>);
+  return data.rows.map((item, index) => <Fragment key={index}>{renderItem(item, index)}</Fragment>);
 }

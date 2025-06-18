@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { LinkView } from "../LinkView";
+import UploadImage from "@global/atomic/UploadImage";
 
 type Props = {
   href: string;
@@ -12,9 +12,9 @@ type Props = {
 
 export function Item({ href, imageSrc, subtitle, title, hasViewed = false, viewed = false }: Props) {
   return (
-    <LinkView href={href} className="list-item-wrapper" key={title}>
+    <LinkView href={href} className="list-item-wrapper" key={href}>
       <div className="content">
-        <Image className="image" alt={title} src={imageSrc} width={45} height={45} />
+        <UploadImage className="image" alt={title} src={imageSrc} width={45} height={45} />
         <div className="title-wrapper">
           <p className="title">{title}</p>
           <p className="subtitle">{subtitle}</p>

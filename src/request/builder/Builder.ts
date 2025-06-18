@@ -1,10 +1,11 @@
 import { Methods } from "@/type/Methods";
 import { ResponseHandlerInterface } from "@request/response/handler/HandlerInterface";
+import Authorization from "../header/handler/Authorization";
 
 type BuilderProps = {
   endpoint: string;
   method: Methods;
-  headers: Record<string, string>;
+  headers: HeadersInit;
   data: any;
   responseHandler: ResponseHandlerInterface;
 };
@@ -12,7 +13,7 @@ type BuilderProps = {
 export class RequestBuilder {
   protected endpoint: string;
   protected method: Methods;
-  protected headers: Record<string, string>;
+  protected headers: HeadersInit;
   protected data: any;
   protected responseHandler: ResponseHandlerInterface;
 
@@ -44,15 +45,25 @@ export class RequestBuilder {
     this.responseHandler = responseHandler;
   }
 
-  async build(): Promise<any> {
+  async build(needsAuthorization?: boolean): Promise<any> {
     try {
+      if (needsAuthorization) {
+        const authorization = new Authorization();
+        this.headers = authorization.handle(this.headers);
+      }
+
       const response = await fetch(this.endpoint, {
         method: this.method,
         headers: this.headers,
         body: this.data ? JSON.stringify(this.data) : null,
       });
 
-      const data = await response.json();
+      let data;
+      try {
+        data = await response.json();
+      } catch {
+        data = [];
+      }
 
       if (!response.ok) {
         throw new Error(`HTTP error ${response.status}`, { cause: data });

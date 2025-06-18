@@ -7,21 +7,21 @@ import Questoes from "@/component/listing/Questoes";
 type Props = {};
 
 export default async function page({}: Props) {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("token")?.value;
+  // const cookieStore = await cookies();
+  // const token = cookieStore.get("token")?.value;
 
-  const response = await fetch("https://sistemasclientes.com.br/projetos/api-medrqe/questoes-salvos", {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-    cache: "no-store",
-  });
+  // const response = await fetch("https://sistemasclientes.com.br/projetos/api-medrqe/questoes-salvos", {
+  //   headers: {
+  //     Authorization: `Bearer ${token}`,
+  //   },
+  //   cache: "no-store",
+  // });
 
-  if (!response.ok) {
-    return <div>Erro ao carregar questões</div>;
-  }
+  // if (!response.ok) {
+  //   return <div>Erro ao carregar questões</div>;
+  // }
 
-  const questoes = await response.json();
+  // const questoes = await response.json();
 
   return (
     <ReturnTitleSearchStructure title="Salvos">
