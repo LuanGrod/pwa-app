@@ -13,10 +13,11 @@ type Questao = {
   questoes_enunciado: string;
   areas_url_imagem: string;
 };
+
 export default function Questoes({}: Props) {
   const { data, loading, error } = useListing<Questao>({ entity: "questoes-salvos", needsAuthorization: true });
   return (
-    <Listing
+    <Listing<Questao>
       data={data}
       loading={loading}
       error={error}
