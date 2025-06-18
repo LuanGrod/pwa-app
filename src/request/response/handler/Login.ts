@@ -41,7 +41,7 @@ export class Login extends ResponseHandler {
       });
     }
 
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    // await new Promise((resolve) => setTimeout(resolve, 1500));
     window.location.reload();
 
     return result;
