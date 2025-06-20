@@ -3,7 +3,6 @@ import "@/app/globals.css";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { comfortaa, inter, sfProDisplay, sfProText } from "./fonts";
-import styles from "./layout.module.css";
 import AppHeightWrapper from "@provider/AppHeightWrapper";
 import { AuthStoreProvider } from "@/provider/AuthProvider";
 
@@ -25,7 +24,7 @@ export default async function RootLayout({
       lang="pt-BR"
       className={`${comfortaa.variable} ${sfProDisplay.variable} ${sfProText.variable} ${inter.variable}`}
     >
-      <body className={styles.screen}>
+      <body className="screen">
         <AuthStoreProvider>
           <AppHeightWrapper />
           {!splashShown ? <SplashScreen /> : children}

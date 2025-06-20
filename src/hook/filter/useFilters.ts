@@ -1,13 +1,11 @@
 import { useState } from "react";
 import FilterInterface from "@filter/ui/FilterInterface";
 
-type WithId = { id: string | number, title: string };
-
-export function useFilters<T extends WithId>(definitions: FilterInterface[]) {
-  const [values, setValues] = useState<Record<string, T[] | boolean>>(() =>
+export function useFilters(definitions: FilterInterface[]) {
+  const [values, setValues] = useState<any>(() =>
     Object.fromEntries(definitions.map((def) => [def.getKey(), def.getValue()]))
   );
-  const [options, setOptions] = useState<Record<string, T[]>>({});
+  const [options, setOptions] = useState<Record<string, any[]>>({});
   const [loadingOptions, setLoadingOptions] = useState<Record<string, boolean>>({});
 
   const openDrawer = async (key: string) => {
@@ -21,17 +19,17 @@ export function useFilters<T extends WithId>(definitions: FilterInterface[]) {
     setLoadingOptions((prev) => ({ ...prev, [key]: false }));
   };
 
-  const toggleOption = (key: string, value: T) => {
-    setValues((prev) => {
-      const arr = prev[key] as T[];
-      const exists = arr.some((item) => item.id === value.id);
-      const newArr = exists ? arr.filter((item) => !(item.id === value.id)) : [...arr, value];
+  const toggleOption = (key: string, value: any) => {
+    setValues((prev: any) => {
+      const arr = prev[key];
+      const exists = arr.some((item: any) => item === value);
+      const newArr = exists ? arr.filter((item: any) => !(item === value)) : [...arr, value];
       return { ...prev, [key]: newArr };
     });
   };
 
   const toggleBoolean = (key: string) => {
-    setValues((prev) => {
+    setValues((prev: any) => {
       const current = prev[key] as boolean;
       return { ...prev, [key]: !current };
     });
@@ -43,7 +41,7 @@ export function useFilters<T extends WithId>(definitions: FilterInterface[]) {
     for (const def of definitions) {
       let titles: any = [];
       if (def.getType() == "multi-select") {
-        titles = (values[def.getKey()] as T[]).map((item) => item.id);
+        titles = values[def.getKey()].map((item: any) => item);
       }
 
       if (def.getType() === "multi-select" && titles.length) {

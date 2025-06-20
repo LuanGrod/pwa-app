@@ -3,7 +3,7 @@ type Props = {};
 export default function SkeletonGroup({}: Props) {
   return (
     <div className="list-item-wrapper skeleton">
-      {Array.from({ length: 10 }).map((_, index) => (
+      {Array.from({ length: 8 }).map((_, index) => (
         <div className="content" key={index}>
           <div className="image"></div>
           <div className="title-wrapper">

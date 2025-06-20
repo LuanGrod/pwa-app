@@ -9,7 +9,7 @@ export function useEstudar({ buildFilterString, entity }: useEstudarProps) {
   const handleEstudar = async () => {
     const filtros = buildFilterString(entity);
     const listing = new ListingRequestBuilder({ entity: entity, params: { filters: filtros } });
-    const result = await listing.build();
+    const result = await listing.build(true);
     /**
      * TODO: Redirecionar o usuário para a página de visualização do hot topic após a filtragem
      */

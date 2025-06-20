@@ -23,6 +23,7 @@ function Form({ formConfig, submitHandler, id }: FormProps) {
       {formConfig.items.map((config: ItemInterface, idx: number) => (
         <Item key={config.getName()} form={formConfig} item={config} itemHook={items[idx]} />
       ))}
+      <input type="hidden" name="lembrar_senha" id="lembrar_senha" value="1" />
       <ShadowBtn type="submit" disabled={loading}>
         ENTRAR
       </ShadowBtn>

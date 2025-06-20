@@ -28,4 +28,14 @@ export default abstract class AbstractFilter implements FilterInterface {
   abstract loadOptions(): Promise<any>;
 
   abstract getOptions(): any;
+
+  abstract getIdParamName(): string;
+
+  abstract getLabelParamName(): string;
+
+  abstract getParentKey(): string;
+
+  abstract getParentIdParamName(): string;
+
+  abstract getParentLabelParamName(): string;
 }

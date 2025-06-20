@@ -7,9 +7,10 @@ interface FiltrosGridProps {
   definitions: FilterInterface[];
   onOpenDrawer: (key: string) => void;
   onToggleBoolean: (key: string) => void;
+  big?: boolean;
 }
 
-export function Grid({ filters, definitions, onOpenDrawer, onToggleBoolean }: FiltrosGridProps) {
+export function Grid({ filters, definitions, onOpenDrawer, onToggleBoolean, big = false }: FiltrosGridProps) {
   const multiSelectFIlters = definitions.filter((def) => def.getType() === "multi-select");
   const booleanFilters = definitions.filter((def) => def.getType() === "boolean");
 
@@ -17,7 +18,12 @@ export function Grid({ filters, definitions, onOpenDrawer, onToggleBoolean }: Fi
     <div>
       <div className="multi-select-wrapper">
         {multiSelectFIlters.map((def) => (
-          <FilterBtn key={def.getKey()} onClick={() => onOpenDrawer(def.getKey())} label={def.getLabel()} />
+          <FilterBtn
+            big={big}
+            key={def.getKey()}
+            onClick={() => onOpenDrawer(def.getKey())}
+            label={def.getLabel()}
+          />
         ))}
       </div>
       <div className="boolean-wrapper">

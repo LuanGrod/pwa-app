@@ -22,9 +22,8 @@ export default function Questoes({}: Props) {
       loading={loading}
       error={error}
       loadingComponent={<SkeletonGroup />}
-      renderItem={(item, index) => (
+      renderItem={(item) => (
         <ListItem
-          key={index}
           href={`/questoes/${item.questoes_salvos_id_questao}`}
           imageSrc={item.areas_url_imagem}
           subtitle={item.questoes_enunciado}

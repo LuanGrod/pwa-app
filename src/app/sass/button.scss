@@ -61,8 +61,14 @@
   align-items: center;
   background-color: var(--background-variation);
   border-radius: 8px;
-  gap: 3px;
-  
+  gap: 5px;
+
+  &.big {
+    width: 45%;
+    height: 136px;
+    gap: 28px;
+  }
+
   .label {
     font-family: var(--font-title);
     font-weight: 600;

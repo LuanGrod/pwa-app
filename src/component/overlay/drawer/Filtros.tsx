@@ -5,20 +5,20 @@ import clsx from "clsx/lite";
 import { useState, useEffect } from "react";
 import { createPortal } from "react-dom";
 
-interface Props<T> {
+interface Props {
   open: boolean;
   title?: string;
-  options: T[];
-  selected: T[];
+  options: any;
+  selected: any;
   onClose: () => void;
-  onToggle: (opt: T) => void;
+  onToggle: (opt: any) => void;
   loading: boolean;
-  getOptionLabel: (opt: T) => string;
-  getOptionKey: (opt: T) => string | number;
-  isOptionSelected?: (opt: T, selected: T[]) => boolean; // opcional, pode ter lógica padrão
+  optionLabel?: string;
+  optionId?: string;
+  isOptionSelected?: (opt: any, selected: any[]) => boolean; // opcional, pode ter lógica padrão
 }
 
-export default function Filtros<T>({
+export default function Filtros({
   open,
   title,
   options,
@@ -26,18 +26,17 @@ export default function Filtros<T>({
   onClose,
   onToggle,
   loading,
-  getOptionLabel,
-  getOptionKey,
+  optionLabel,
+  optionId,
   isOptionSelected,
-}: Props<T>) {
+}: Props) {
   const [drawerRoot, setDrawerRoot] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
     setDrawerRoot(document.getElementById("drawer-root"));
   }, []);
 
-  const defaultIsSelected = (opt: T, selectedArr: T[]) =>
-    selectedArr.some((sel) => getOptionKey(sel) === getOptionKey(opt));
+  const defaultIsSelected = (opt: any, selectedArr: any[]) => selectedArr.some((sel) => sel == opt);
 
   return (
     drawerRoot &&
@@ -51,16 +50,19 @@ export default function Filtros<T>({
               <Fechar size={14} changeOnTheme />
             </div>
           </div>
-          <h1>aaaaaaaaaa</h1>
-          {options.map((opt) => (
-            <label key={getOptionKey(opt)} className="flex items-center mb-2">
+          {options.map((opt: any) => (
+            <label key={`${opt[optionId!]}_${opt[optionLabel!]}`} className="custom-checkbox">
               <input
                 type="checkbox"
-                checked={isOptionSelected ? isOptionSelected(opt, selected) : defaultIsSelected(opt, selected)}
+                checked={
+                  isOptionSelected
+                    ? isOptionSelected(opt[optionId!], selected)
+                    : defaultIsSelected(opt[optionId!], selected)
+                }
                 onChange={() => onToggle(opt)}
-                className="mr-2"
               />
-              {getOptionLabel(opt)}
+              <span className="checkmark"></span>
+              {opt[optionLabel!]}
             </label>
           ))}
         </div>

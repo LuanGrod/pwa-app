@@ -44,6 +44,20 @@
     --footer-link-inactive: #828889;
   }
 }
+.screen {
+  width: 100vw;
+  height: var(--app-height);
+  overflow-x: hidden;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-title);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 /* nomeie os três elementos */
 header {
   view-transition-name: header;
@@ -218,7 +232,7 @@ form .submit-return-wrapper.danger {
 .drawer-wrapper .drawer {
   width: 100%;
   height: fit-content;
-  max-height: 654px;
+  max-height: 70%;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -401,7 +415,12 @@ form .submit-return-wrapper.danger {
   align-items: center;
   background-color: var(--background-variation);
   border-radius: 8px;
-  gap: 3px;
+  gap: 5px;
+}
+.btn-filter.big {
+  width: 45%;
+  height: 136px;
+  gap: 28px;
 }
 .btn-filter .label {
   font-family: var(--font-title);
@@ -415,13 +434,46 @@ form .submit-return-wrapper.danger {
     background-color: color-mix(in srgb, var(--emphasis) 75%, #000);
   }
 }
-.filter-wrapper {
+.page-filter {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+}
+.page-filter .quantity-selected {
+  font-size: 16px;
+  line-height: 1.5;
+  font-weight: 300;
+  font-family: var(--font-title);
+  color: var(--emphasis);
+  margin-bottom: 24px;
+  text-align: center;
+}
+.page-filter .title {
+  font-weight: 600;
+  text-align: center;
+  font-size: 20px;
+  line-height: 1.25;
+  font-family: var(--font-rounded);
+  margin-bottom: 17px;
+}
+.page-filter .subtitle {
+  font-weight: 600;
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.5;
+  font-family: var(--font-title);
+  margin-bottom: 29px;
+}
+.page-filter .filter-wrapper {
+  width: 100%;
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
 }
-.filter-wrapper .multi-select-wrapper {
+.page-filter .filter-wrapper .multi-select-wrapper {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
@@ -429,7 +481,7 @@ form .submit-return-wrapper.danger {
   align-items: center;
   margin-bottom: 34px;
 }
-.filter-wrapper .boolean-wrapper {
+.page-filter .filter-wrapper .boolean-wrapper {
   display: flex;
   flex-direction: column;
   gap: 13px;
@@ -438,12 +490,60 @@ form .submit-return-wrapper.danger {
   margin-bottom: 34px;
 }
 
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff; /* Cor do texto, ajuste conforme necessário */
+  margin-bottom: 20px;
+}
+
+.custom-checkbox input[type=checkbox] {
+  display: none;
+}
+
+.custom-checkbox .checkmark {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #fff; /* Cor da borda do círculo */
+  display: inline-block;
+  margin-right: 16px;
+  position: relative;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.custom-checkbox input[type=checkbox]:checked + .checkmark {
+  border-color: #00ffae; /* Cor de destaque ao marcar */
+  background: #00ffae;
+}
+
+.custom-checkbox .checkmark::after {
+  content: "";
+  display: none;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #191919; /* Cor do fundo interno, igual ao fundo do painel */
+}
+
+.custom-checkbox input[type=checkbox]:checked + .checkmark::after {
+  display: block;
+}
+
 .content-wrapper {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
   padding: 1.25rem;
   height: calc(100vh - 163px);
+  overflow: auto;
+  scroll-behavior: smooth;
 }
 
 .footer-wrapper {

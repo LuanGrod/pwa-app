@@ -24,10 +24,10 @@ export default function IconFrameContainer({ links }: Props) {
           <LinkView href={item.href} key={index} className={styles.linkWrapper}>
             <motion.div
               className={styles.link}
-              initial={{ opacity: 0.02, scale: 0.7 }}
+              initial={{ opacity: 0.1, scale: 0.7}}
               animate={{ opacity: 1, scale: 1, transition: { duration: 1.5, type: "spring", delay: index * 0.15 } }}
             >
-              <Image className={styles.image} src={item.image} alt={item.label} width={106} height={106} />
+              <Image className={styles.image} src={item.image} alt={item.label} width={106} height={106} loading="eager" />
               <p className={styles.label}>{item.label}</p>
             </motion.div>
           </LinkView>

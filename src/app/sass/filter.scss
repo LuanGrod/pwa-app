@@ -1,24 +1,109 @@
-.filter-wrapper {
+.page-filter {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
+  align-items: center;
 
-  .multi-select-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 34px;
+  .quantity-selected {
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 300;
+    font-family: var(--font-title);
+    color: var(--emphasis);
+    margin-bottom: 24px;
+    text-align: center;
   }
 
-  .boolean-wrapper {
+  .title {
+    font-weight: 600;
+    text-align: center;
+    font-size: 20px;
+    line-height: 1.25;
+    font-family: var(--font-rounded);
+    margin-bottom: 17px;
+  }
+
+  .subtitle {
+    font-weight: 600;
+    text-align: center;
+    font-size: 14px;
+    line-height: 1.5;
+    font-family: var(--font-title);
+    margin-bottom: 29px;
+  }
+  
+  .filter-wrapper {
+    width: 100%;
+    flex-grow: 1;
     display: flex;
     flex-direction: column;
-    gap: 13px;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 34px;
+    justify-content: space-between;
+  
+    .multi-select-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 34px;
+    }
+  
+    .boolean-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 34px;
+    }
   }
+}
+
+
+
+.custom-checkbox {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  color: #fff; /* Cor do texto, ajuste conforme necessário */
+  margin-bottom: 20px;
+}
+
+.custom-checkbox input[type="checkbox"] {
+  display: none;
+}
+
+.custom-checkbox .checkmark {
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 2px solid #fff; /* Cor da borda do círculo */
+  display: inline-block;
+  margin-right: 16px;
+  position: relative;
+  background: transparent;
+  transition: border-color 0.2s;
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark {
+  border-color: #00ffae; /* Cor de destaque ao marcar */
+  background: #00ffae;
+}
+
+.custom-checkbox .checkmark::after {
+  content: "";
+  display: none;
+  position: absolute;
+  top: 4px;
+  left: 4px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #191919; /* Cor do fundo interno, igual ao fundo do painel */
+}
+
+.custom-checkbox input[type="checkbox"]:checked + .checkmark::after {
+  display: block;
 }

@@ -11,26 +11,18 @@ import { Shadow as ShadowBtn } from "@global/button/Shadow";
 
 type Tipo = { id: string | number; title: string };
 
-export function Questoes() {
+export function HotTopics() {
   const filterDefinitions = [
     new MultiSelectFilter("temas", "Área / Tema", "temas"),
-    new MultiSelectFilter("instituicoes", "Instituição", "instituicoes"),
-    new MultiSelectFilter("anos", "Ano da prova", "anos"),
-    new MultiSelectFilter("tipos", "Tipo de questão", "tipos"),
-    new MultiSelectFilter("cidades", "Cidade / Estado", "cidades"),
     new MultiSelectFilter("salvos", "Salvos", "salvos"),
-    new BooleanFilter("anulada", "Excluir anuladas ou desatualizadas"),
-    new BooleanFilter("sem_comentario", "Excluir questões sem comentários"),
-    new BooleanFilter("resolvida", "Excluir já resolvidas"),
-    new BooleanFilter("acerto", "Excluir questões que acertei"),
-    new BooleanFilter("erro", "Excluir questões que errei"),
+    new BooleanFilter("visualizado", "Excluir já visualizados"),
   ];
 
   const { values, options, loadingOptions, openDrawer, toggleOption, toggleBoolean, buildFilterString, definitions } =
     useFilters(filterDefinitions);
 
   const { drawerKey, setDrawerKey, handleOpenDrawer } = useKeyDrawer({ openDrawer });
-  const handleEstudar = useEstudar({ buildFilterString: buildFilterString, entity: "questoes" });
+  const handleEstudar = useEstudar({ buildFilterString: buildFilterString, entity: "hot-topics" });
 
   return (
     <div className="filter-wrapper">
@@ -39,6 +31,7 @@ export function Questoes() {
         definitions={definitions}
         onOpenDrawer={handleOpenDrawer}
         onToggleBoolean={toggleBoolean}
+        big
       />
       <ShadowBtn onClick={handleEstudar}>ESTUDAR</ShadowBtn>
       <Filtros<Tipo>
