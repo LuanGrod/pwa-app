@@ -23,7 +23,7 @@
     height: 100%;
   }
 
-  .drawer {
+  .drawer-bottom {
     width: 100%;
     height: fit-content;
     max-height: 70%;
@@ -34,13 +34,14 @@
     padding-bottom: 3rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: start;
     background: #fff;
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 500ms;
     border-top-left-radius: 1.5rem;
     border-top-right-radius: 1.5rem;
+    overflow-y: auto;
 
     &.open {
       transform: translateY(0);
@@ -156,7 +157,7 @@
 
 @media (prefers-color-scheme: dark) {
   .drawer-wrapper {
-    .drawer {
+    .drawer-bottom {
       background-color: #222224;
     }
   }

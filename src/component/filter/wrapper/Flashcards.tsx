@@ -1,11 +1,11 @@
 "use client";
 
 import { useFilters } from "@hook/filter/useFilters";
-import { Grid as FiltersGrid } from "@component/filter/grid/grid";
 import { useEstudar } from "@hook/useEstudar";
 import { useKeyDrawer } from "@hook/useKeyDrawer";
 import MultiSelectFilter from "@filter/ui/MultiSelect";
 import BooleanFilter from "@filter/ui/Boolean";
+import { Grid as FiltersGrid } from "@component/filter/grid/grid";
 import Filtros from "@/component/overlay/drawer/Filtros";
 import { Shadow as ShadowBtn } from "@global/button/Shadow";
 
@@ -20,9 +20,9 @@ type FlashcardsSalvos = {
 export function Flashcards() {
   const filterDefinitions = [
     new MultiSelectFilter(
-      "id_tema",
-      "Área / Tema",
       "temas",
+      "Área / Tema",
+      "id_tema",
       "temas_id",
       "temas_nome",
       "id_area",
@@ -30,20 +30,30 @@ export function Flashcards() {
       "areas_nome"
     ),
     new MultiSelectFilter(
-      "id_area",
-      "Salvos",
       "flashcards-salvos",
+      "Salvos",
+      "id_salvo",
       "flashcards_salvos_id_flashcard",
       "flashcards_pergunta"
     ),
     new BooleanFilter("resolvido", "Excluir já resolvidos"),
-    new BooleanFilter("nao_resolvido", "Excluir não resolvidos"),
+    new BooleanFilter("resolvido", "Excluir não resolvidos", "0", "nao_resolvido"),
   ];
 
-  const { values, options, loadingOptions, openDrawer, toggleOption, toggleBoolean, buildFilterString, definitions } =
-    useFilters(filterDefinitions);
+  const {
+    values,
+    options,
+    loadingOptions,
+    openDrawer,
+    toggleChild,
+    toggleParent,
+    toggleBoolean,
+    buildFilterString,
+    definitions,
+  } = useFilters(filterDefinitions);
 
   const { drawerKey, setDrawerKey, handleOpenDrawer } = useKeyDrawer({ openDrawer });
+
   const handleEstudar = useEstudar({ buildFilterString: buildFilterString, entity: "flashcards" });
 
   return (
@@ -55,22 +65,29 @@ export function Flashcards() {
         onToggleBoolean={toggleBoolean}
         big
       />
-      {JSON.stringify(values)}
+      {JSON.stringify(values, null, 2)}
       <ShadowBtn onClick={handleEstudar}>ESTUDAR</ShadowBtn>
       <Filtros
         open={!!drawerKey}
         title={drawerKey ? definitions.find((d) => d.getKey() === drawerKey)?.getLabel() : ""}
         options={drawerKey ? options[drawerKey] || [] : []}
-        selected={drawerKey ? values[drawerKey] || [] : []}
+        selected={drawerKey ? values || [] : []}
         onClose={() => setDrawerKey(null)}
-        onToggle={(opt) =>
-          drawerKey &&
-          toggleOption(drawerKey, opt[definitions.find((d) => d.getKey() === drawerKey)?.getIdParamName()!])
+        onToggleParent={(filterKey: any, parentKey: any, parentId: any, childrenIds: any[]) =>
+          drawerKey && toggleParent(filterKey, parentKey, parentId, childrenIds)
         }
-        // onToggle={(opt) => drawerKey && toggleOption(drawerKey, opt)}
+        onToggleChild={(filterKey: any, childId: any, parentKey?: any, parentId?: any, allChildrenIds?: any[]) =>
+          drawerKey && toggleChild(filterKey, childId, parentKey, parentId, allChildrenIds)
+        }
         loading={drawerKey ? loadingOptions[drawerKey] : false}
         optionLabel={drawerKey ? definitions.find((d) => d.getKey() === drawerKey)?.getLabelParamName() : ""}
         optionId={drawerKey ? definitions.find((d) => d.getKey() === drawerKey)?.getIdParamName() : ""}
+        parentOptionLabel={
+          drawerKey ? definitions.find((d) => d.getKey() === drawerKey)?.getParentLabelParamName() : ""
+        }
+        parentOptionId={drawerKey ? definitions.find((d) => d.getKey() === drawerKey)?.getParentIdParamName() : ""}
+        filterKey={drawerKey ? definitions.find((d) => d.getKey() === drawerKey)?.getKey() : ""}
+        parentKey={drawerKey ? definitions.find((d) => d.getKey() === drawerKey)?.getParentKey() : ""}
       />
     </div>
   );

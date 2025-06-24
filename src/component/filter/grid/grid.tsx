@@ -6,7 +6,7 @@ interface FiltrosGridProps {
   filters: Record<string, any>;
   definitions: FilterInterface[];
   onOpenDrawer: (key: string) => void;
-  onToggleBoolean: (key: string) => void;
+  onToggleBoolean: (key: string, value: any) => void;
   big?: boolean;
 }
 
@@ -18,17 +18,21 @@ export function Grid({ filters, definitions, onOpenDrawer, onToggleBoolean, big 
     <div>
       <div className="multi-select-wrapper">
         {multiSelectFIlters.map((def) => (
-          <FilterBtn
-            big={big}
-            key={def.getKey()}
-            onClick={() => onOpenDrawer(def.getKey())}
-            label={def.getLabel()}
-          />
+          <FilterBtn big={big} key={def.getKey()} onClick={() => onOpenDrawer(def.getKey())} label={def.getLabel()} />
         ))}
       </div>
       <div className="boolean-wrapper">
         {booleanFilters.map((def) => (
-          <SwitchBtn key={def.getKey()} active={filters[def.getKey()]} onClick={() => onToggleBoolean(def.getKey())}>
+          <SwitchBtn
+            key={def.getKey()}
+            active={filters[def.getQueryField()] === def.getActiveValue()}
+            onClick={() =>
+              onToggleBoolean(
+                def.getQueryField(),
+                filters[def.getQueryField()] === def.getActiveValue() ? "" : def.getActiveValue()
+              )
+            }
+          >
             {def.getLabel()}
           </SwitchBtn>
         ))}

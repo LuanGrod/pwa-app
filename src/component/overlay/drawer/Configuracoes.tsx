@@ -7,11 +7,11 @@ import Info from "@global/icons/Info";
 import MudarTema from "@global/icons/MudarTema";
 import Sair from "@global/icons/Sair";
 import Usuario from "@global/icons/Usuario";
-import { BottomDrawer } from "@global/overlay/drawer/Bottom";
 import DrawerLinkWithIcon from "@global/overlay/drawer/LinkWithIcon";
 import { Overlay } from "@public/global/js/types/Overlay";
 import { RefObject } from "react";
 import styles from "./Configuracoes.module.css";
+import { BottomRefDrawer } from "@global/overlay/drawer/BottomRef";
 
 type Props = {
   menuRef?: RefObject<Overlay | null>;
@@ -19,7 +19,7 @@ type Props = {
 
 export default function ConfiguracoesDrawer({ menuRef }: Props) {
   return (
-    <BottomDrawer ref={menuRef} title="Configurações">
+    <BottomRefDrawer ref={menuRef} title="Configurações">
       <div className={styles.container}>
         <DrawerLinkWithIcon href="/perfil" label="Perfil" icon={<Usuario size={33} changeOnTheme />} />
         <DrawerLinkWithIcon href="/faturas" label="Faturas" icon={<Faturas size={33} changeOnTheme />} />
@@ -33,6 +33,6 @@ export default function ConfiguracoesDrawer({ menuRef }: Props) {
         <Divider />
         <DrawerLinkWithIcon href="/sair" label="Sair" icon={<Sair size={33} changeOnTheme />} />
       </div>
-    </BottomDrawer>
+    </BottomRefDrawer>
   );
 }

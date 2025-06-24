@@ -11,16 +11,17 @@ export default class MultiSelect extends AbstractFilter {
   parentLabelParamName: string;
 
   constructor(
-    key: string,
-    label: string,
     entity: string,
+    label: string,
+    queryField: string,
     idParamName: string,
     labelParamName: string,
     parentKey?: string,
     parentIdParamName?: string,
-    parentLabelParamName?: string
+    parentLabelParamName?: string,
+    key?: string
   ) {
-    super(key, label, "multi-select");
+    super(queryField, label, "multi-select", key);
     this.options = [];
     this.entity = entity;
     this.idParamName = idParamName;
@@ -33,8 +34,45 @@ export default class MultiSelect extends AbstractFilter {
   async loadOptions() {
     const listing = new Listing({ entity: this.entity });
     const result = await listing.build(true);
-    this.options = result.data.rows || [];
-    console.log(this.options);
+    const data = result.data.rows || [];
+
+    // Se tem parentKey, é uma estrutura pai-filho
+    if (this.parentKey && this.parentIdParamName && this.parentLabelParamName) {
+      const agrupado: string[] = Object.values(
+        data.reduce((acc: any, item: any) => {
+          const parentId = item[this.parentIdParamName];
+          const parentLabel = item[this.parentLabelParamName];
+
+          // Se o pai ainda não existe, cria
+          if (!acc[parentId]) {
+            acc[parentId] = {
+              [this.parentIdParamName]: parentId,
+              [this.parentLabelParamName]: parentLabel,
+              children: [],
+              isParent: true,
+            };
+          }
+
+          // Adiciona o filho ao pai correspondente
+          acc[parentId].children.push({
+            [this.idParamName]: item[this.idParamName],
+            [this.labelParamName]: item[this.labelParamName],
+            isParent: false,
+          });
+
+          return acc;
+        }, {})
+      );
+
+      this.options = agrupado;
+    } else {
+      // Estrutura simples, uma entidade apenas
+      this.options = data.map((item: any) => ({
+        [this.idParamName]: item[this.idParamName],
+        [this.labelParamName]: item[this.labelParamName],
+        isParent: false,
+      }));
+    }
   }
 
   getOptions(): any {

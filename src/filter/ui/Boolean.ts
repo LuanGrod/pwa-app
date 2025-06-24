@@ -1,8 +1,9 @@
 import AbstractFilter from "./AbstractFilter";
 
 export default class Boolean extends AbstractFilter {
-  constructor(key: string, label: string) {
-    super(key, label, "boolean");
+  constructor(queryField: string, label: string, activeValue?: string, key?: string) {
+    super(queryField, label, "boolean", key);
+    this.activeValue = activeValue || "1";
   }
 
   getValue(): boolean {
