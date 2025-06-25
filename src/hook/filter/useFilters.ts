@@ -7,6 +7,7 @@ export function useFilters(definitions: FilterInterface[]) {
   );
   const [options, setOptions] = useState<Record<string, any[]>>({});
   const [loadingOptions, setLoadingOptions] = useState<Record<string, boolean>>({});
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     definitions.map((def) => {
@@ -22,6 +23,8 @@ export function useFilters(definitions: FilterInterface[]) {
   const openDrawer = async (key: string) => {
     const filter = definitions.find((def) => def.getQueryField() === key);
     if (!(filter?.getType() == "multi-select")) return;
+
+    setSearchTerm("");
 
     setLoadingOptions((prev) => ({ ...prev, [key]: true }));
     await filter.loadOptions();
@@ -117,6 +120,49 @@ export function useFilters(definitions: FilterInterface[]) {
     });
   };
 
+  const clearFilter = (key: string) => {
+    setValues((prev: any) => {
+      const newValues = { ...prev };
+      const definition = definitions.find((def) => def.getKey() === key);
+
+      if (definition) {
+        // Limpa o valor principal
+        newValues[definition.getQueryField()] = definition.getValue();
+
+        // Se houver parentKey, limpa também
+        if (definition.getParentKey()) {
+          newValues[definition.getParentKey()] = definition.getValue();
+        }
+      }
+
+      return newValues;
+    });
+  };
+
+  const filterOptionsBySearch = (options: any[], searchTerm: string, labelParam: string, parentLabelParam?: string) => {
+    if (!searchTerm.trim()) return options;
+
+    const searchLower = searchTerm.toLowerCase();
+
+    return options.filter((option: any) => {
+      // Para itens pai, busca no nome do pai e dos filhos
+      if (option.isParent && option.children) {
+        // Busca no nome do pai
+        const parentMatch = parentLabelParam && option[parentLabelParam]?.toLowerCase().includes(searchLower);
+
+        // Busca nos filhos
+        const childrenMatch = option.children.some((child: any) =>
+          child[labelParam]?.toLowerCase().includes(searchLower)
+        );
+
+        return parentMatch || childrenMatch;
+      }
+
+      // Para itens simples, busca no label do item
+      return option[labelParam]?.toLowerCase().includes(searchLower);
+    });
+  };
+
   const buildFilterString = (entity: string) => {
     const parts: string[] = [];
     entity = entity.replace("-", "_");
@@ -155,7 +201,11 @@ export function useFilters(definitions: FilterInterface[]) {
     toggleParent,
     toggleChild,
     toggleBoolean,
+    clearFilter,
     buildFilterString,
     definitions,
+    searchTerm,
+    setSearchTerm,
+    filterOptionsBySearch,
   };
 }

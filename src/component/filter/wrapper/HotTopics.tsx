@@ -1,50 +1,30 @@
 "use client";
 
-import { useFilters } from "@hook/filter/useFilters";
-import { Grid as FiltersGrid } from "@component/filter/grid/grid";
-import { useEstudar } from "@hook/useEstudar";
-import { useKeyDrawer } from "@hook/useKeyDrawer";
 import MultiSelectFilter from "@filter/ui/MultiSelect";
 import BooleanFilter from "@filter/ui/Boolean";
-import Filtros from "@/component/overlay/drawer/Filtros";
-import { Shadow as ShadowBtn } from "@global/button/Shadow";
-
-type Tipo = { id: string | number; title: string };
+import FilterWrapperBase from "./Base";
 
 export function HotTopics() {
   const filterDefinitions = [
-    new MultiSelectFilter("temas", "Área / Tema", "temas"),
-    new MultiSelectFilter("salvos", "Salvos", "salvos"),
+    new MultiSelectFilter(
+      "temas",
+      "Área / Tema",
+      "id_tema",
+      "temas_id",
+      "temas_nome",
+      "id_area",
+      "temas_id_area",
+      "areas_nome"
+    ),
+    new MultiSelectFilter(
+      "hot-topics-salvos",
+      "Salvos",
+      "id_salvo",
+      "hot_topics_salvos_id_hot_topic",
+      "hot_topics_nome"
+    ),
     new BooleanFilter("visualizado", "Excluir já visualizados"),
   ];
 
-  const { values, options, loadingOptions, openDrawer, toggleOption, toggleBoolean, buildFilterString, definitions } =
-    useFilters(filterDefinitions);
-
-  const { drawerKey, setDrawerKey, handleOpenDrawer } = useKeyDrawer({ openDrawer });
-  const handleEstudar = useEstudar({ buildFilterString: buildFilterString, entity: "hot-topics" });
-
-  return (
-    <div className="filter-wrapper">
-      <FiltersGrid
-        filters={values}
-        definitions={definitions}
-        onOpenDrawer={handleOpenDrawer}
-        onToggleBoolean={toggleBoolean}
-        big
-      />
-      <ShadowBtn onClick={handleEstudar}>ESTUDAR</ShadowBtn>
-      <Filtros<Tipo>
-        open={!!drawerKey}
-        title={drawerKey ? definitions.find((d) => d.getKey() === drawerKey)?.getLabel() : ""}
-        options={drawerKey ? options[drawerKey] || [] : []}
-        selected={drawerKey ? (values[drawerKey] as Tipo[]) || [] : []}
-        onClose={() => setDrawerKey(null)}
-        onToggle={(opt) => drawerKey && toggleOption(drawerKey, opt)}
-        loading={drawerKey ? loadingOptions[drawerKey] : false}
-        getOptionLabel={(opt) => opt.title}
-        getOptionKey={(opt) => opt.id}
-      />
-    </div>
-  );
+  return <FilterWrapperBase filterDefinitions={filterDefinitions} entity="hot-topics" bigButton />;
 }

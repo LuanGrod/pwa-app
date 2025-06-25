@@ -45,3 +45,40 @@
     min-height: 22px;
   }
 }
+
+.search-container {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 15px;
+  line-height: 1;
+  padding: 8px 20px;
+  border-radius: 20px;
+  background-color: var(--background-variation);
+  margin-bottom: 40px;
+
+  .search-icon {
+    display: flex;
+    align-items: center;
+    margin-right: 18px;
+  }
+
+  .search-input {
+    border: none;
+    background: transparent;
+    outline: none;
+    font-size: 16px;
+    color: var(--foreground);
+    width: 100%;
+
+    &::placeholder {
+      color: #b0b0b0;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .search-container {
+    background-color: var(--background);
+  }
+}

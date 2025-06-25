@@ -27,6 +27,12 @@
   &:active {
     transform: translateY(0);
   }
+
+  &.filter {
+    width: 216px;
+    height: 48px;
+    align-self: center;
+  }
 }
 
 .btn-switch {

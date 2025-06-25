@@ -207,6 +207,39 @@ form .submit-return-wrapper.danger {
   min-height: 22px;
 }
 
+.search-container {
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+  font-size: 15px;
+  line-height: 1;
+  padding: 8px 20px;
+  border-radius: 20px;
+  background-color: var(--background-variation);
+  margin-bottom: 40px;
+}
+.search-container .search-icon {
+  display: flex;
+  align-items: center;
+  margin-right: 18px;
+}
+.search-container .search-input {
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 16px;
+  color: var(--foreground);
+  width: 100%;
+}
+.search-container .search-input::placeholder {
+  color: #b0b0b0;
+}
+
+@media (prefers-color-scheme: dark) {
+  .search-container {
+    background-color: var(--background);
+  }
+}
 .drawer-wrapper {
   position: fixed;
   top: 0;
@@ -232,7 +265,6 @@ form .submit-return-wrapper.danger {
 .drawer-wrapper .drawer-bottom {
   width: 100%;
   height: fit-content;
-  max-height: 70%;
   position: fixed;
   bottom: 0;
   left: 0;
@@ -255,12 +287,14 @@ form .submit-return-wrapper.danger {
 .drawer-wrapper .drawer-bottom.closed {
   transform: translateY(100%);
 }
+.drawer-wrapper .drawer-bottom.semi-full {
+  height: 70vh;
+}
 .drawer-wrapper .drawer-bottom .header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 1.25rem;
-  margin-top: 0.5rem;
 }
 .drawer-wrapper .drawer-bottom .title {
   font-size: 1.5rem;
@@ -274,6 +308,15 @@ form .submit-return-wrapper.danger {
   top: 1rem;
   right: 1rem;
 }
+.drawer-wrapper .drawer-bottom .clear {
+  position: absolute;
+  top: 35px;
+  right: 50px;
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 800;
+  color: var(--emphasis);
+}
 .drawer-wrapper .drawer-bottom .link {
   display: flex;
   align-items: center;
@@ -285,6 +328,10 @@ form .submit-return-wrapper.danger {
   line-height: 33px;
   font-weight: 600;
   letter-spacing: 0.5px;
+}
+.drawer-wrapper .drawer-bottom .filter-items {
+  flex: 1;
+  overflow-y: auto;
 }
 
 .popup-wrapper {
@@ -383,6 +430,11 @@ form .submit-return-wrapper.danger {
 }
 .btn-shadow:active {
   transform: translateY(0);
+}
+.btn-shadow.filter {
+  width: 216px;
+  height: 48px;
+  align-self: center;
 }
 
 .btn-switch {
@@ -561,6 +613,7 @@ form .submit-return-wrapper.danger {
 .custom-checkbox + .children.closed {
   display: none;
 }
+
 .content-wrapper {
   flex-grow: 1;
   display: flex;

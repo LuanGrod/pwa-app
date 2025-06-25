@@ -1,9 +1,8 @@
 "use client";
 
 import clsx from "clsx/lite";
-import { forwardRef, ReactNode, useEffect, useState } from "react";
+import { ReactNode, useEffect, useState } from "react";
 import Fechar from "@global/icons/Fechar";
-import useDrawer from "@/hook/useDrawer";
 import { createPortal } from "react-dom";
 
 type Props = {
@@ -11,9 +10,10 @@ type Props = {
   title?: string;
   open?: boolean;
   onClose?: () => void;
+  customClass?: string;
 };
 
-export function BottomDrawer({ children, title, onClose, open }: Props) {
+export function BottomDrawer({ children, title, onClose, open, customClass = "" }: Props) {
   const [drawerRoot, setDrawerRoot] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -25,7 +25,7 @@ export function BottomDrawer({ children, title, onClose, open }: Props) {
     createPortal(
       <div className={clsx("drawer-wrapper", open ? "open" : "closed")}>
         <div className={"close-area"} onClick={onClose}></div>
-        <div className={clsx("drawer-bottom", open ? "open" : "closed")}>
+        <div className={clsx("drawer-bottom", open ? "open" : "closed", customClass)}>
           <div className={"header"}>
             {title && <h1 className={"title"}>{title}</h1>}
             <div className={"close-btn"} onClick={onClose}>
