@@ -1,16 +1,8 @@
 "use client";
 
-import { useFilters } from "@hook/filter/useFilters";
-import { Grid as FiltersGrid } from "@component/filter/grid/grid";
-import { useEstudar } from "@hook/useEstudar";
-import { useKeyDrawer } from "@hook/useKeyDrawer";
 import MultiSelectFilter from "@filter/ui/MultiSelect";
 import BooleanFilter from "@filter/ui/Boolean";
-import Filtros from "@/component/overlay/drawer/Filtros";
-import { Shadow as ShadowBtn } from "@global/button/Shadow";
 import FilterWrapperBase from "./Base";
-
-type Tipo = { id: string | number; title: string };
 
 export function Questoes() {
   const filterDefinitions = [
