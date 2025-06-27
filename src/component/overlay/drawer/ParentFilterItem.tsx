@@ -31,36 +31,40 @@ export default function ParentFilterItem({
   onToggleParent,
   onToggleChild,
 }: ParentFilterItemProps) {
+  if (!parentOptionId || !parentOptionLabel || !parentKey || !filterKey || !optionId || !optionLabel) {
+    return null;
+  }
+
   return (
     <div>
       <div className="custom-checkbox">
         <label>
           <input
             type="checkbox"
-            checked={selected[parentKey!].includes(opt[parentOptionId!])}
+            checked={selected[parentKey].includes(opt[parentOptionId])}
             onChange={() =>
               onToggleParent(
-                filterKey!,
-                parentKey!,
-                opt[parentOptionId!],
-                opt.children.map((c: any) => c[optionId!])
+                filterKey,
+                parentKey,
+                opt[parentOptionId],
+                opt.children.map((c: any) => c[optionId])
               )
             }
           />
-          <span className={clsx("checkmark", selected[parentKey!].includes(opt[parentOptionId!]) && "checked")}></span>
+          <span className={clsx("checkmark", selected[parentKey].includes(opt[parentOptionId]) && "checked")}></span>
         </label>
         <button
-          className={`expand-icon ${parentOpen === opt[parentOptionId!] ? "open" : "closed"}`}
-          onClick={() => setParentOpen(parentOpen === opt[parentOptionId!] ? "" : opt[parentOptionId!])}
+          className={`expand-icon ${parentOpen === opt[parentOptionId] ? "open" : "closed"}`}
+          onClick={() => setParentOpen(parentOpen === opt[parentOptionId] ? "" : opt[parentOptionId])}
         >
-          <span className="label">{opt[parentOptionLabel!]}</span>
+          <span className="label">{opt[parentOptionLabel]}</span>
           <Seta size={17} />
         </button>
       </div>
-      <div className={`children ${parentOpen === opt[parentOptionId!] ? "open" : "closed"}`}>
+      <div className={`children ${parentOpen === opt[parentOptionId] ? "open" : "closed"}`}>
         {opt.children.map((child: any) => (
           <ChildFilterItem
-            key={`${child[optionId!]}_${child[optionLabel!]}`}
+            key={`${child[optionId]}_${child[optionLabel]}`}
             child={child}
             parent={opt}
             selected={selected}

@@ -7,7 +7,7 @@ export function useFilters(definitions: FilterInterface[]) {
   );
   const [options, setOptions] = useState<Record<string, any[]>>({});
   const [loadingOptions, setLoadingOptions] = useState<Record<string, boolean>>({});
-  const [searchTerm, setSearchTerm] = useState<string>("");
+  // const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     definitions.map((def) => {
@@ -24,7 +24,7 @@ export function useFilters(definitions: FilterInterface[]) {
     const filter = definitions.find((def) => def.getQueryField() === key);
     if (!(filter?.getType() == "multi-select")) return;
 
-    setSearchTerm("");
+    // setSearchTerm("");
 
     setLoadingOptions((prev) => ({ ...prev, [key]: true }));
     await filter.loadOptions();
@@ -139,29 +139,29 @@ export function useFilters(definitions: FilterInterface[]) {
     });
   };
 
-  const filterOptionsBySearch = (options: any[], searchTerm: string, labelParam: string, parentLabelParam?: string) => {
-    if (!searchTerm.trim()) return options;
+  // const filterOptionsBySearch = (options: any[], labelParam: string, parentLabelParam?: string) => {
+  //   if (!searchTerm.trim()) return options;
 
-    const searchLower = searchTerm.toLowerCase();
+  //   const searchLower = searchTerm.toLowerCase();
 
-    return options.filter((option: any) => {
-      // Para itens pai, busca no nome do pai e dos filhos
-      if (option.isParent && option.children) {
-        // Busca no nome do pai
-        const parentMatch = parentLabelParam && option[parentLabelParam]?.toLowerCase().includes(searchLower);
+  //   return options.filter((option: any) => {
+  //     // Para itens pai, busca no nome do pai e dos filhos
+  //     if (option.isParent && option.children) {
+  //       // Busca no nome do pai
+  //       const parentMatch = parentLabelParam && option[parentLabelParam]?.toLowerCase().includes(searchLower);
 
-        // Busca nos filhos
-        const childrenMatch = option.children.some((child: any) =>
-          child[labelParam]?.toLowerCase().includes(searchLower)
-        );
+  //       // Busca nos filhos
+  //       const childrenMatch = option.children.some((child: any) =>
+  //         child[labelParam]?.toLowerCase().includes(searchLower)
+  //       );
 
-        return parentMatch || childrenMatch;
-      }
+  //       return parentMatch || childrenMatch;
+  //     }
 
-      // Para itens simples, busca no label do item
-      return option[labelParam]?.toLowerCase().includes(searchLower);
-    });
-  };
+  //     // Para itens simples, busca no label do item
+  //     return option[labelParam]?.toLowerCase().includes(searchLower);
+  //   });
+  // };
 
   const buildFilterString = (entity: string) => {
     const parts: string[] = [];
@@ -204,8 +204,8 @@ export function useFilters(definitions: FilterInterface[]) {
     clearFilter,
     buildFilterString,
     definitions,
-    searchTerm,
-    setSearchTerm,
-    filterOptionsBySearch,
+    // searchTerm,
+    // setSearchTerm,
+    // filterOptionsBySearch,
   };
 }

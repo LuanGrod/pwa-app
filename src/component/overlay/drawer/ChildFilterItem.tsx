@@ -23,8 +23,13 @@ export default function ChildFilterItem({
   parentKey,
   onToggleChild,
 }: ChildFilterItemProps) {
+
+  if(!filterKey || !optionId || !optionLabel || !parentOptionId || !parentKey) {
+    return null;
+  }
+
   const isSelected =
-    selected[filterKey!].includes(child[optionId!]) || selected[parentKey!].includes(parent[parentOptionId!]);
+    selected[filterKey].includes(child[optionId]) || selected[parentKey].includes(parent[parentOptionId]);
 
   return (
     <div className="custom-checkbox child-checkbox">
@@ -34,17 +39,17 @@ export default function ChildFilterItem({
           checked={isSelected}
           onChange={() =>
             onToggleChild(
-              filterKey!,
-              child[optionId!],
-              parentKey!,
-              parent[parentOptionId!],
-              parent.children.map((c: any) => c[optionId!])
+              filterKey,
+              child[optionId],
+              parentKey,
+              parent[parentOptionId],
+              parent.children.map((c: any) => c[optionId])
             )
           }
         />
         <span className={clsx("checkmark", isSelected && "checked")}></span>
       </label>
-      <span className="label">{child[optionLabel!]}</span>
+      <span className="label">{child[optionLabel]}</span>
     </div>
   );
 }

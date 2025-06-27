@@ -6,6 +6,7 @@ import SimpleFilterItem from "./SimpleFilterItem";
 import ParentFilterItem from "./ParentFilterItem";
 import SearchBar from "@global/atomic/SearchBar";
 import Loading2 from "@global/overlay/popup/dialog/Loading2";
+import useSearch from "@/hook/useSearch";
 
 interface Props {
   open: boolean;
@@ -23,9 +24,7 @@ interface Props {
   onToggleParent: (filterKey: any, parentKey: any, parentId: any, childrenIds: any[]) => any;
   onToggleChild: (filterKey: any, childId: any, parentKey?: any, parentId?: any, allChildrenIds?: any[]) => any;
   onClearFilter?: (filterKey: any) => void;
-  searchTerm?: string;
-  onSearchChange?: (term: string) => void;
-  onFilterOptions?: (options: any[], searchTerm: string, labelParam: string, parentLabelParam?: string) => any[];
+  hasSearch?: boolean;
 }
 
 export default function Filtros({
@@ -35,17 +34,19 @@ export default function Filtros({
   selected,
   onClose,
   onClearFilter,
-  searchTerm,
-  onSearchChange,
-  onFilterOptions,
+  hasSearch,
   ...props
 }: Props) {
   const [parentOpen, setParentOpen] = useState("");
 
-  const filteredOptions =
-    searchTerm && onFilterOptions && props.optionLabel
-      ? onFilterOptions(options, searchTerm, props.optionLabel, props.parentOptionLabel)
-      : options;
+  const {
+    filteredData: filteredOptions,
+    searchTerm,
+    setSearchTerm,
+  } = useSearch({
+    options: options,
+    keyParams: [props.optionLabel ? props.optionLabel : "", props.parentOptionLabel ? props.parentOptionLabel : ""],
+  });
 
   return (
     <BottomDrawer customClass="semi-full" open={open} title={title} onClose={onClose}>
@@ -54,15 +55,18 @@ export default function Filtros({
           Limpar filtro
         </button>
       )}
-      {onSearchChange && (
+      {hasSearch && (
         <div className="search-wrapper">
-          <SearchBar value={searchTerm || ""} onChange={onSearchChange} />
+          <SearchBar value={searchTerm || ""} onChange={(e) => setSearchTerm(e)} />
         </div>
       )}
       {props.loading ? (
         <Loading2 loading />
       ) : (
         <div className="filter-items">
+          {filteredOptions.length === 0 && searchTerm !== "" ? (
+            <div className="no-results">Nenhum resultado encontrado</div>
+          ) : null}
           {filteredOptions.map((opt: any, idx: number) => {
             if (opt["isParent"]) {
               return (

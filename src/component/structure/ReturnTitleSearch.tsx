@@ -5,14 +5,14 @@ import Header from "@global/header/ReturnTitleSearch";
 type Props = {
   children: ReactNode;
   title: string;
-  handleSearch?: (e?: unknown) => unknown;
+  handleSearch?: () => void;
 };
 
 export default function ReturnTitleSearchStructure({ children, title, handleSearch }: Props) {
   return (
     <>
       <ViewTransition default="handle">
-        <Header title={title} />
+        <Header title={title} handleSearch={handleSearch} />
         <main className="content-wrapper header footer">{children}</main>
       </ViewTransition>
       <Footer />

@@ -5,13 +5,15 @@ type UseListingProps = {
   entity: string;
   parentEntity?: string;
   parentId?: number;
+  params?: Record<string, any>;
+  headers?: HeadersInit;
   autoFetch?: boolean;
   needsAuthorization?: boolean;
 };
 
 type UseListingReturn<T> = {
   // deleteItem: (id: number) => Promise<void>;
-  data: Listagem<T> | [];
+  data: Listagem<T>;
   loading: boolean;
   deleting: boolean;
   error: string | null;
@@ -21,10 +23,17 @@ export function useListing<T = any>({
   entity,
   parentEntity,
   parentId,
+  headers,
+  params,
   autoFetch = true,
   needsAuthorization = false,
 }: UseListingProps): UseListingReturn<T> {
-  const [data, setData] = useState<Listagem<T> | []>([]);
+  const [data, setData] = useState<Listagem<T>>({
+    currentPage: 1,
+    resultsPerPage: 5,
+    totalRows: 0,
+    rows: [],
+  });
   const [loading, setLoading] = useState(true);
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -38,6 +47,8 @@ export function useListing<T = any>({
         entity: entity,
         parentEntity: parentEntity || "",
         parentId: parentId || 0,
+        headers: headers || {},
+        params: params || {},
       });
       const result = await listing.build(needsAuthorization);
 
@@ -45,7 +56,14 @@ export function useListing<T = any>({
         setError(result.message[0]);
       }
 
-      setData(result.data || []);
+      setData(
+        result.data || {
+          currentPage: 1,
+          resultsPerPage: 5,
+          totalRows: 0,
+          rows: [],
+        }
+      );
     } finally {
       setLoading(false);
     }

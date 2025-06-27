@@ -9,12 +9,14 @@
   transition-duration: 500ms;
 
   &.open {
-    background-color: color-mix(in oklab, #000 25%, transparent);
+    &.overlay {
+      background-color: color-mix(in oklab, #000 25%, transparent);
+    }
+
     visibility: visible;
   }
 
   &.closed {
-    background-color: color-mix(in oklab, #000 0%, transparent);
     visibility: hidden;
   }
 
@@ -34,7 +36,7 @@
     display: flex;
     flex-direction: column;
     justify-content: start;
-    background: #fff;
+    background: var(--background);
     transition-property: all;
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 500ms;
@@ -102,12 +104,41 @@
     .filter-items {
       flex: 1;
       overflow-y: auto;
+      margin-top: 30px;
+    }
+  }
+
+  .drawer-under-header {
+    width: 100%;
+    height: fit-content;
+    position: fixed;
+    top: 81px;
+    left: 0;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background);
+    justify-content: start;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+    transition-duration: 500ms;
+    box-shadow: 0px 6px 5px 0px color-mix(in oklab, var(--foreground) 10%, transparent);
+    -webkit-box-shadow: 0px 6px 5px 0px color-mix(in oklab, var(--foreground) 10%, transparent);
+    -moz-box-shadow: 0px 6px 5px 0px color-mix(in oklab, var(--foreground) 10%, transparent);
+
+    &.open {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    &.closed {
+      transform: translateY(-50%);
+      opacity: 0;
     }
   }
 }
 
 .popup-wrapper {
-  z-index: 50;
   position: fixed;
   top: 0;
   left: 0;
@@ -116,18 +147,20 @@
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
-  background-color: color-mix(in oklab, #000 25%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
+
+  &.overlay {
+    background-color: color-mix(in oklab, #000 15%, transparent);
+  }
 
   .popup {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #fff;
-    color: #000;
+    background-color: var(--background);
     width: 150px;
     height: 100px;
     border-radius: 20px;
@@ -175,7 +208,7 @@
 @media (prefers-color-scheme: dark) {
   .drawer-wrapper {
     .drawer-bottom {
-      background-color: #222224;
+      background-color: var(--background-variation);
     }
   }
 

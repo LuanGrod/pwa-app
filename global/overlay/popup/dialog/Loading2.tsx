@@ -1,12 +1,13 @@
 type Props = {
   loading?: boolean;
+  overlay?: boolean;
 };
 
-export default function Loading2({ loading }: Props) {
+export default function Loading2({ loading, overlay = false }: Props) {
   if (!loading) return null;
 
   return (
-    <div className="popup-wrapper">
+    <div className={`popup-wrapper ${overlay ? "overlay" : ""}`}>
       <svg
         className="spinner theme"
         width="30"

@@ -216,7 +216,6 @@ form .submit-return-wrapper.danger {
   padding: 8px 20px;
   border-radius: 20px;
   background-color: var(--background-variation);
-  margin-bottom: 40px;
 }
 .search-container .search-icon {
   display: flex;
@@ -251,11 +250,12 @@ form .submit-return-wrapper.danger {
   transition-duration: 500ms;
 }
 .drawer-wrapper.open {
-  background-color: color-mix(in oklab, #000 25%, transparent);
   visibility: visible;
 }
+.drawer-wrapper.open.overlay {
+  background-color: color-mix(in oklab, #000 25%, transparent);
+}
 .drawer-wrapper.closed {
-  background-color: color-mix(in oklab, #000 0%, transparent);
   visibility: hidden;
 }
 .drawer-wrapper .close-area {
@@ -273,7 +273,7 @@ form .submit-return-wrapper.danger {
   display: flex;
   flex-direction: column;
   justify-content: start;
-  background: #fff;
+  background: var(--background);
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
@@ -332,10 +332,36 @@ form .submit-return-wrapper.danger {
 .drawer-wrapper .drawer-bottom .filter-items {
   flex: 1;
   overflow-y: auto;
+  margin-top: 30px;
+}
+.drawer-wrapper .drawer-under-header {
+  width: 100%;
+  height: fit-content;
+  position: fixed;
+  top: 81px;
+  left: 0;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--background);
+  justify-content: start;
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+  box-shadow: 0px 6px 5px 0px color-mix(in oklab, var(--foreground) 10%, transparent);
+  -webkit-box-shadow: 0px 6px 5px 0px color-mix(in oklab, var(--foreground) 10%, transparent);
+  -moz-box-shadow: 0px 6px 5px 0px color-mix(in oklab, var(--foreground) 10%, transparent);
+}
+.drawer-wrapper .drawer-under-header.open {
+  transform: translateY(0);
+  opacity: 1;
+}
+.drawer-wrapper .drawer-under-header.closed {
+  transform: translateY(-50%);
+  opacity: 0;
 }
 
 .popup-wrapper {
-  z-index: 50;
   position: fixed;
   top: 0;
   left: 0;
@@ -344,18 +370,19 @@ form .submit-return-wrapper.danger {
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
-  background-color: color-mix(in oklab, #000 25%, transparent);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+.popup-wrapper.overlay {
+  background-color: color-mix(in oklab, #000 15%, transparent);
 }
 .popup-wrapper .popup {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #fff;
-  color: #000;
+  background-color: var(--background);
   width: 150px;
   height: 100px;
   border-radius: 20px;
@@ -395,7 +422,7 @@ form .submit-return-wrapper.danger {
 }
 @media (prefers-color-scheme: dark) {
   .drawer-wrapper .drawer-bottom {
-    background-color: #222224;
+    background-color: var(--background-variation);
   }
   .popup-wrapper .popup {
     box-shadow: 0 4px 6px rgba(255, 255, 255, 0.2);
@@ -746,6 +773,7 @@ form .submit-return-wrapper.danger {
 }
 .list-item-wrapper .content {
   display: flex;
+  width: 90%;
 }
 .list-item-wrapper .content .image {
   width: 55px;
@@ -757,7 +785,7 @@ form .submit-return-wrapper.danger {
   justify-content: center;
   align-items: start;
   margin-left: 23px;
-  width: 70%;
+  width: 100%;
 }
 .list-item-wrapper .content .title-wrapper .title {
   font-family: var(--font-title);
@@ -787,7 +815,7 @@ form .submit-return-wrapper.danger {
   height: 26px;
   background-color: var(--background-variation);
   border-radius: 100%;
-  border: 1px solid #828889;
+  border: 2px solid var(--foreground-variation);
 }
 .list-item-wrapper .viewed.active {
   background-color: #828889;

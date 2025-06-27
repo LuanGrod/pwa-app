@@ -36,7 +36,7 @@ function Form({ formConfig, submitHandler, id }: FormProps) {
               </div>
             )
         )}
-      <Loading2 loading={loading} />
+      <Loading2 loading={loading} overlay />
       {submitReturn && (
         <Notification type={submitReturn.success ? "success" : "danger"} message={submitReturn.message} />
       )}

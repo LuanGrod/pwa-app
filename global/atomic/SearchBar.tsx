@@ -14,6 +14,7 @@ export default function SearchBar({ value, onChange, placeholder = "Buscar" }: S
         <Lupa size={17} color="#B0B0B0" />
       </span>
       <input
+        autoFocus
         className="search-input"
         type="text"
         placeholder={placeholder}

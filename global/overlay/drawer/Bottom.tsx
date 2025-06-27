@@ -9,11 +9,12 @@ type Props = {
   children: ReactNode;
   title?: string;
   open?: boolean;
+  overlay?: boolean;
   onClose?: () => void;
   customClass?: string;
 };
 
-export function BottomDrawer({ children, title, onClose, open, customClass = "" }: Props) {
+export function BottomDrawer({ children, title, onClose, open, customClass = "", overlay = true }: Props) {
   const [drawerRoot, setDrawerRoot] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -23,7 +24,7 @@ export function BottomDrawer({ children, title, onClose, open, customClass = "" 
   return (
     drawerRoot &&
     createPortal(
-      <div className={clsx("drawer-wrapper", open ? "open" : "closed")}>
+      <div className={clsx("drawer-wrapper", open ? "open" : "closed", overlay && "overlay")}>
         <div className={"close-area"} onClick={onClose}></div>
         <div className={clsx("drawer-bottom", open ? "open" : "closed", customClass)}>
           <div className={"header"}>

@@ -4,7 +4,7 @@ import BaseHeader from "./Base";
 
 type Props = {
   title: string;
-  handleSearch?: (e?: unknown) => unknown;
+  handleSearch?: () => void;
 };
 
 export default function ReturnTitleSearch({ title, handleSearch}: Props) {

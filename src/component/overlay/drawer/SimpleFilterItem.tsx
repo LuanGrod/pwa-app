@@ -17,17 +17,22 @@ export default function SimpleFilterItem({
   optionLabel,
   onToggleChild,
 }: SimpleFilterItemProps) {
+
+  if(!filterKey || !optionId || !optionLabel) {
+    return null;
+  }
+
   return (
     <div className="custom-checkbox">
       <label>
         <input
           type="checkbox"
-          checked={selected[filterKey!].includes(opt[optionId!])}
-          onChange={() => onToggleChild(filterKey!, opt[optionId!])}
+          checked={selected[filterKey].includes(opt[optionId])}
+          onChange={() => onToggleChild(filterKey, opt[optionId])}
         />
-        <span className={clsx("checkmark", selected[filterKey!].includes(opt[optionId!]) && "checked")}></span>
+        <span className={clsx("checkmark", selected[filterKey].includes(opt[optionId]) && "checked")}></span>
       </label>
-      <span className="label">{opt[optionLabel!]}</span>
+      <span className="label">{opt[optionLabel]}</span>
     </div>
   );
 }

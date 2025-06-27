@@ -6,7 +6,7 @@ import { ErrorMessage } from "../message/error";
 import { EmptyMessage } from "../message/empty";
 
 interface ListingProps<T> {
-  data: Listagem<T> | [];
+  data: T[] | [];
   loading: boolean;
   error: string | null;
   renderItem: (item: T) => ReactNode;
@@ -32,9 +32,9 @@ export function Listing<T>({
     return <>{errorComponent}</>;
   }
 
-  if (!("rows" in data) || data.rows.length === 0) {
+  if (data.length === 0) {
     return <>{emptyComponent}</>;
   }
 
-  return data.rows.map((item, index) => <Fragment key={index}>{renderItem(item)}</Fragment>);
+  return data.map((item, index) => <Fragment key={index}>{renderItem(item)}</Fragment>);
 }

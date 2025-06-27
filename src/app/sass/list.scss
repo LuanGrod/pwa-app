@@ -19,6 +19,7 @@
 
   .content {
     display: flex;
+    width: 90%;
 
     .image {
       width: 55px;
@@ -31,7 +32,7 @@
       justify-content: center;
       align-items: start;
       margin-left: 23px;
-      width: 70%;
+      width: 100%;
 
       .title {
         font-family: var(--font-title);
@@ -65,7 +66,7 @@
     height: 26px;
     background-color: var(--background-variation);
     border-radius: 100%;
-    border: 1px solid #828889;
+    border: 2px solid var(--foreground-variation);
 
     &.active {
       background-color: #828889;

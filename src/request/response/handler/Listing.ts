@@ -18,4 +18,10 @@ export class Listing extends ResponseHandler {
       data: data,
     };
   }
+
+  protected handleError(error: Error) {
+    if(error.message.includes("401")) {
+      window.location.href = "/sair";
+    }
+  }
 }
