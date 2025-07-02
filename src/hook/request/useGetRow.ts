@@ -1,7 +1,7 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
-import { Viewing } from "@request/builder/Viewing";
+import { GetRow } from "@/request/builder/GetRow";
 
-type UseViewingProps = {
+type UseGetRowProps = {
   entity: string;
   id: string;
   parentEntity?: string;
@@ -12,17 +12,14 @@ type UseViewingProps = {
   needsAuthorization?: boolean;
 };
 
-type UseViewingReturn<T> = {
-  // deleteItem: (id: number) => Promise<void>;
+type UseGetRowReturn<T> = {
   data: T | null;
   setData: Dispatch<SetStateAction<T | null>>;
   loading: boolean;
-  deleting: boolean;
   error: string | null;
 };
 
-//useGetRow
-export function useViewing<T = any>({
+export function useGetRow<T = any>({
   entity,
   id,
   parentEntity,
@@ -31,10 +28,9 @@ export function useViewing<T = any>({
   params,
   autoFetch = true,
   needsAuthorization = false,
-}: UseViewingProps): UseViewingReturn<T> {
+}: UseGetRowProps): UseGetRowReturn<T> {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
-  const [deleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   const fetchData = async () => {
@@ -42,7 +38,7 @@ export function useViewing<T = any>({
     setError(null);
 
     try {
-      const viweing = new Viewing({
+      const getRow = new GetRow({
         entity: entity,
         id: id,
         parentEntity: parentEntity || "",
@@ -50,7 +46,7 @@ export function useViewing<T = any>({
         headers: headers || {},
         params: params || {},
       });
-      const result = await viweing.build(needsAuthorization);
+      const result = await getRow.build(needsAuthorization);
 
       if (!result.success) {
         setError(result.message[0]);
@@ -62,19 +58,6 @@ export function useViewing<T = any>({
     }
   };
 
-  // const deleteItem = async (id: number) => {
-  //   setDeleting(true);
-  //   setError(null);
-
-  //   try {
-  //     const deleteItem = new Delete({ entity: entity, id: id });
-  //     await deleteItem.build();
-  //     setData((prevData) => prevData.rows.filter((item: any) => item.id !== id));
-  //   } finally {
-  //     setDeleting(false);
-  //   }
-  // };
-
   useEffect(() => {
     if (autoFetch) {
       fetchData();
@@ -82,11 +65,9 @@ export function useViewing<T = any>({
   }, [entity, id, parentEntity, parentId, autoFetch]);
 
   return {
-    // deleteItem,
     data,
     setData,
     loading,
     error,
-    deleting,
   };
 }

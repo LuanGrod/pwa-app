@@ -2,7 +2,7 @@ import { Default as DefaultErrorHandlerCollection } from "../../error/handler/co
 import { CollectionInterface as ErrorHandlerCollection } from "../../error/handler/collection/CollectionInterface";
 import { ResponseHandler } from "./Handler";
 
-export class Viewing extends ResponseHandler {
+export class GetRow extends ResponseHandler {
   protected errorHandlerCollection: ErrorHandlerCollection;
 
   constructor({ errorHandlerCollection = null }: { errorHandlerCollection?: ErrorHandlerCollection | null }) {
@@ -17,11 +17,5 @@ export class Viewing extends ResponseHandler {
       success: true,
       data: data,
     };
-  }
-
-  protected handleError(error: Error) {
-    if(error.message.includes("401")) {
-      window.location.href = "/sair";
-    }
   }
 }

@@ -1,8 +1,8 @@
 import { Methods } from "@/type/Methods";
 import { RequestBuilder } from "./Builder";
-import { Viewing as ResponseHandler } from "@request/response/handler/Viewing";
+import { GetRow as ResponseHandler } from "@request/response/handler/GetRow";
 
-type ViewingProps = {
+type GetRowProps = {
   entity: string;
   id: string;
   parentEntity?: string | null;
@@ -11,8 +11,8 @@ type ViewingProps = {
   headers?: HeadersInit;
 };
 
-export class Viewing extends RequestBuilder {
-  constructor({ entity, id, parentEntity = null, parentId = null, params = {}, headers = {} }: ViewingProps) {
+export class GetRow extends RequestBuilder {
+  constructor({ entity, id, parentEntity = null, parentId = null, params = {}, headers = {} }: GetRowProps) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const endpoint = parentEntity ? `${apiUrl}/${parentEntity}/${parentId}/${entity}/${id}` : `${apiUrl}/${entity}/${id}`;

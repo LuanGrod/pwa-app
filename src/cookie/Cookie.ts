@@ -1,4 +1,3 @@
-import { cookies } from "next/headers";
 import CookieInterface from "./CookieInterface";
 
 export default class Cookie implements CookieInterface {

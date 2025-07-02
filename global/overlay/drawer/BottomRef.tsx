@@ -1,10 +1,7 @@
 "use client";
 
-import clsx from "clsx/lite";
-import { forwardRef, ReactNode, useEffect, useState } from "react";
-import Fechar from "@global/icons/Fechar";
-import useDrawer from "@/hook/useDrawer";
-import { createPortal } from "react-dom";
+import { forwardRef, ReactNode } from "react";
+import useDrawer from "@/hook/overlay/useDrawer";
 import { BottomDrawer } from "./Bottom";
 
 type Props = {

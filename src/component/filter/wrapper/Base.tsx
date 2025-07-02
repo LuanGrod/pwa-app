@@ -3,7 +3,7 @@
 import FilterInterface from "@/filter/ui/FilterInterface";
 import { useFilters } from "@/hook/filter/useFilters";
 import { useEstudar } from "@/hook/useEstudar";
-import { useKeyDrawer } from "@/hook/useKeyDrawer";
+import { useKeyDrawer } from "@/hook/overlay/useKeyDrawer";
 import { Grid as FiltersGrid } from "@component/filter/grid/grid";
 import Filtros from "@/component/overlay/drawer/Filtros";
 import { Shadow as ShadowBtn } from "@global/button/Shadow";

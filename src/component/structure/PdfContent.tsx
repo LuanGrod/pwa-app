@@ -3,14 +3,16 @@
 import { useEffect, useState, unstable_ViewTransition as ViewTransition } from "react";
 import Footer from "@component/footer/Footer";
 import Header from "@global/header/PdfContent";
-import { useViewing } from "@/hook/request/useViewing";
+import { useGetRow } from "@/hook/request/useGetRow";
 import { Viewing } from "../viewing/Viewing";
 import Loading2 from "@global/overlay/popup/dialog/Loading2";
 import Cookie from "@/cookie/Cookie";
 import EdicaoSugerida from "../overlay/popup/dialog/EdicaoSugerida";
-import useDialog from "@/hook/useDialog";
+import useDialog from "@/hook/overlay/useDialog";
 import useToggleAddRemove from "@/hook/useToggleAddRemove";
 import LazyPdfVisualizer from "../pdf/LazyPdfVisualizer";
+import { useContainer } from "@/hook/useContainer";
+import { useUser } from "@/hook/auth/useUser";
 
 type EdicaoSugeridaProps = {
   conteudoName: string;
@@ -42,25 +44,20 @@ export default function PdfContent({
   edicaoSugerida,
   ToggleAddRemove,
 }: Props) {
-  const uploadUrl = process.env.NEXT_PUBLIC_UPLOAD_URL;
+  const { uploadUrl } = useContainer();
   const { isOpen, toggleDialog } = useDialog({});
-  const [userId, setUserId] = useState("");
-
-  useEffect(() => {
-    const cookie = new Cookie();
-    setUserId(cookie.getCookie("id") || "");
-  }, []);
-
-  const { data, setData, loading, error } = useViewing({
-    entity: entity,
-    id: entityId,
-    needsAuthorization: true,
-  });
+  const { id: userId } = useUser();
 
   const insertData = {
     [`${ToggleAddRemove.insertDataEntityParamName}_${ToggleAddRemove.insertDataIdParamName}`]: entityId,
     [`${ToggleAddRemove.insertDataEntityParamName}_id_estudante`]: userId,
   };
+
+  const { data, setData, loading, error } = useGetRow({
+    entity: entity,
+    id: entityId,
+    needsAuthorization: true,
+  });
 
   const { toggleAddRemove } = useToggleAddRemove({
     data,
