@@ -844,9 +844,15 @@ form .submit-return-wrapper.danger {
   display: flex;
   width: 90%;
 }
+.list-item-wrapper .content.salvos {
+  width: 100%;
+}
 .list-item-wrapper .content .image {
   width: 55px;
   height: 55px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .list-item-wrapper .content .title-wrapper {
   display: flex;
@@ -858,10 +864,9 @@ form .submit-return-wrapper.danger {
 }
 .list-item-wrapper .content .title-wrapper .title {
   font-family: var(--font-title);
-  font-size: 12px;
+  font-size: 16px;
   line-height: 1.5;
   font-weight: 700;
-  color: var(--emphasis);
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;

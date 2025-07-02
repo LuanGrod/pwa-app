@@ -21,9 +21,16 @@
     display: flex;
     width: 90%;
 
+    &.salvos {
+      width: 100%;
+    }
+
     .image {
       width: 55px;
       height: 55px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     .title-wrapper {
@@ -36,10 +43,9 @@
 
       .title {
         font-family: var(--font-title);
-        font-size: 12px;
+        font-size: 16px;
         line-height: 1.5;
         font-weight: 700;
-        color: var(--emphasis);
         display: -webkit-box;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;

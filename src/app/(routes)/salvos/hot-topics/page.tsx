@@ -12,27 +12,28 @@ import { UnderHeader } from "@global/overlay/drawer/UnderHeader";
 
 type Props = {};
 
-type Questao = {
-  questoes_salvos_id_questao: string;
-  questoes_enunciado: string;
-  instituicoes_nome_instituicao_com_ano: string;
+type HotTopic = {
+  hot_topics_salvos_id_hot_topic: string;
+  hot_topics_nome: string;
+  temas_nome: string;
+  areas_nome: string;
 };
 
 export default function page({}: Props) {
   const { status: searchActive, toggle: toggleSearch } = useToggle();
 
-  const { data, loading, error } = useListing<Questao>({
-    entity: "questoes-salvos",
+  const { data, loading, error } = useListing<HotTopic>({
+    entity: "hot-topics-salvos",
     needsAuthorization: true,
   });
 
-  const { filteredData, searchTerm, setSearchTerm } = useSearch<Questao>({
+  const { filteredData, searchTerm, setSearchTerm } = useSearch<HotTopic>({
     options: data.rows,
-    keyParams: ["questoes_enunciado", "instituicoes_nome_instituicao_com_ano"],
+    keyParams: ["hot_topics_nome", "temas_nome", "areas_nome"],
   });
 
   return (
-    <ReturnTitleSearchStructure title="Questões salvas" handleSearch={toggleSearch}>
+    <ReturnTitleSearchStructure title="Hot Topics salvos" handleSearch={toggleSearch}>
       <UnderHeader open={searchActive} onClose={toggleSearch}>
         <SearchBar
           value={searchTerm || ""}
@@ -41,17 +42,17 @@ export default function page({}: Props) {
           }}
         />
       </UnderHeader>
-      <Listing<Questao>
+      <Listing<HotTopic>
         data={filteredData}
         loading={loading}
         error={error}
         loadingComponent={<Loading2 loading={loading} />}
         renderItem={(item) => (
           <ListItemSalvo
-            subtitle={item.instituicoes_nome_instituicao_com_ano}
-            title={item.questoes_enunciado}
-            entity="questoes"
-            entityId={item.questoes_salvos_id_questao}
+            subtitle={`${item.areas_nome} - ${item.temas_nome}`}
+            title={item.hot_topics_nome}
+            entity="hot-topics"
+            entityId={item.hot_topics_salvos_id_hot_topic}
           />
         )}
       />

@@ -12,9 +12,9 @@ export default function page({}: Props) {
         <IconFrameContainer2
           links={[
             { href: "/salvos/hot-topics", image: "/project/assets/HotTopics.svg", label: "Hot topics" },
-            { href: "/salvos/questoes", image: "/project/assets/Flashcards.svg", label: "Skeleton" },
-            { href: "/salvos/questoes2", image: "/project/assets/Questoes.svg", label: "SSR" },
-            { href: "/salvos/questoes3", image: "/project/assets/MapasMentais.svg", label: "Spinner" },
+            { href: "/salvos/flashcards", image: "/project/assets/Flashcards.svg", label: "Flashcards" },
+            { href: "/salvos/mapas-mentais", image: "/project/assets/Questoes.svg", label: "Mapas Mentais" },
+            { href: "/salvos/questoes", image: "/project/assets/MapasMentais.svg", label: "Questões" },
           ]}
         />
         <div></div>

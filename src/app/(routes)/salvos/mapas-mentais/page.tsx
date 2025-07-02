@@ -12,27 +12,28 @@ import { UnderHeader } from "@global/overlay/drawer/UnderHeader";
 
 type Props = {};
 
-type Questao = {
-  questoes_salvos_id_questao: string;
-  questoes_enunciado: string;
-  instituicoes_nome_instituicao_com_ano: string;
+type MapaMental = {
+  mapas_mentais_salvos_id_mapa_mental: string;
+  mapas_mentais_nome: string;
+  temas_nome: string;
+  areas_nome: string;
 };
 
 export default function page({}: Props) {
   const { status: searchActive, toggle: toggleSearch } = useToggle();
 
-  const { data, loading, error } = useListing<Questao>({
-    entity: "questoes-salvos",
+  const { data, loading, error } = useListing<MapaMental>({
+    entity: "mapas-mentais-salvos",
     needsAuthorization: true,
   });
 
-  const { filteredData, searchTerm, setSearchTerm } = useSearch<Questao>({
+  const { filteredData, searchTerm, setSearchTerm } = useSearch<MapaMental>({
     options: data.rows,
-    keyParams: ["questoes_enunciado", "instituicoes_nome_instituicao_com_ano"],
+    keyParams: ["mapas_mentais_nome", "temas_nome", "areas_nome"],
   });
 
   return (
-    <ReturnTitleSearchStructure title="Questões salvas" handleSearch={toggleSearch}>
+    <ReturnTitleSearchStructure title="Mapas Mentais salvos" handleSearch={toggleSearch}>
       <UnderHeader open={searchActive} onClose={toggleSearch}>
         <SearchBar
           value={searchTerm || ""}
@@ -41,17 +42,17 @@ export default function page({}: Props) {
           }}
         />
       </UnderHeader>
-      <Listing<Questao>
+      <Listing<MapaMental>
         data={filteredData}
         loading={loading}
         error={error}
         loadingComponent={<Loading2 loading={loading} />}
         renderItem={(item) => (
           <ListItemSalvo
-            subtitle={item.instituicoes_nome_instituicao_com_ano}
-            title={item.questoes_enunciado}
-            entity="questoes"
-            entityId={item.questoes_salvos_id_questao}
+            subtitle={`${item.areas_nome} - ${item.temas_nome}`}
+            title={item.mapas_mentais_nome}
+            entity="mapas-mentais"
+            entityId={item.mapas_mentais_salvos_id_mapa_mental}
           />
         )}
       />

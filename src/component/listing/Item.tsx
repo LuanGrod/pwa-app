@@ -17,8 +17,8 @@ type ToggleAddRemoveProps = {
 };
 
 type Props = {
-  data: any;
-  setData: Dispatch<SetStateAction<Listagem<any>>>;
+  data?: any;
+  setData?: Dispatch<SetStateAction<Listagem<any>>>;
   entity: string;
   entityId: string;
   imageSrc: string;
@@ -43,7 +43,7 @@ export function Item({
 }: Props) {
   const { id: userId } = useUser();
 
-  if (!ToggleAddRemove || !hasViewed) {
+  if (!ToggleAddRemove || !hasViewed || !setData || !data) {
     return (
       <div className="list-item-wrapper">
         <LinkView href={`/${entity}/${entityId}`} className="content">

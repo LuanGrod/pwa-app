@@ -2,7 +2,7 @@ import { Icon } from "@public/global/js/types/Icon";
  
 import clsx from "clsx/lite";
 
-export default function Bandeira({ color = "#000", size, className, changeOnTheme = false }: Icon) {
+export default function Grafico({ color = "#000", size, className, changeOnTheme = false }: Icon) {
   return (
     <svg
       className={clsx(changeOnTheme && "icon", className)}
