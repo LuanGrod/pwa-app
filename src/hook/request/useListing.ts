@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { Listing } from "@request/builder/Listing";
 
 type UseListingProps = {
@@ -14,6 +14,7 @@ type UseListingProps = {
 type UseListingReturn<T> = {
   // deleteItem: (id: number) => Promise<void>;
   data: Listagem<T>;
+  setData: Dispatch<SetStateAction<Listagem<T>>>;
   loading: boolean;
   deleting: boolean;
   error: string | null;
@@ -91,6 +92,7 @@ export function useListing<T = any>({
   return {
     // deleteItem,
     data,
+    setData,
     loading,
     error,
     deleting,

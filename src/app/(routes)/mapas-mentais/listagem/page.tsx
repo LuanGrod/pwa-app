@@ -13,31 +13,31 @@ import { useToggle } from "@/hook/useToggle";
 
 type Props = {};
 
-type HotTopics = {
-  hot_topics_id: string;
-  hot_topics_nome: string;
+type MapasMentais = {
+  mapas_mentais_id: string;
+  mapas_mentais_nome: string;
   temas_nome: string;
   areas_url_imagem: string;
-  hot_topics_estudantes_id: string | null;
+  mapas_mentais_estudantes_id: string | null;
 };
 
 export default function page({}: Props) {
   const filters = useSearchParams().get("filters") || "";
   const { status: searchActive, toggle: toggleSearch } = useToggle();
 
-  const { data, setData, loading, error } = useListing<HotTopics>({
-    entity: "hot-topics",
+  const { data, setData, loading, error } = useListing<MapasMentais>({
+    entity: "mapas-mentais",
     params: { filters: filters },
     needsAuthorization: true,
   });
 
-  const { filteredData, searchTerm, setSearchTerm } = useSearch<HotTopics>({
+  const { filteredData, searchTerm, setSearchTerm } = useSearch<MapasMentais>({
     options: data.rows,
-    keyParams: ["hot_topics_nome", "temas_nome"],
+    keyParams: ["mapas_mentais_nome", "temas_nome"],
   });
 
   return (
-    <ReturnTitleSearchStructure title="Hot Topics" handleSearch={toggleSearch}>
+    <ReturnTitleSearchStructure title="Mapas Mentais" handleSearch={toggleSearch}>
       <UnderHeader open={searchActive} onClose={toggleSearch}>
         <SearchBar
           value={searchTerm || ""}
@@ -46,7 +46,7 @@ export default function page({}: Props) {
           }}
         />
       </UnderHeader>
-      <Listing<HotTopics>
+      <Listing<MapasMentais>
         data={filteredData}
         loading={loading}
         error={error}
@@ -55,18 +55,18 @@ export default function page({}: Props) {
           <ListItem
             data={item}
             setData={setData}
-            entity="hot-topics"
-            entityId={item.hot_topics_id}
+            entity="mapas-mentais"
+            entityId={item.mapas_mentais_id}
             imageSrc={item.areas_url_imagem}
-            subtitle={item.hot_topics_nome}
+            subtitle={item.mapas_mentais_nome}
             title={item.temas_nome}
             hasViewed
-            viewed={item.hot_topics_estudantes_id}
+            viewed={item.mapas_mentais_estudantes_id}
             ToggleAddRemove={{
-              entity: "hot-topics-estudantes",
-              idParamName: "hot_topics_estudantes_id",
-              insertDataIdParamName: "id_hot_topic",
-              insertDataEntityParamName: "hot_topics_estudantes",
+              entity: "mapas-mentais-estudantes",
+              idParamName: "mapas_mentais_estudantes_id",
+              insertDataIdParamName: "id_mapa_mental",
+              insertDataEntityParamName: "mapas_mentais_estudantes",
             }}
           />
         )}

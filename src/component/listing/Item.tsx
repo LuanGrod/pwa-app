@@ -5,8 +5,20 @@ import { LinkView } from "../LinkView";
 import UploadImage from "@global/atomic/UploadImage";
 import { Insert } from "@/request/builder/Insert";
 import Cookie from "@/cookie/Cookie";
+import useToggleAddRemove from "@/hook/useToggleAddRemove";
+import { useUser } from "@/hook/auth/useUser";
+import { Dispatch, SetStateAction } from "react";
+
+type ToggleAddRemoveProps = {
+  entity: string;
+  idParamName: string;
+  insertDataIdParamName: string;
+  insertDataEntityParamName: string;
+};
 
 type Props = {
+  data: any;
+  setData: Dispatch<SetStateAction<Listagem<any>>>;
   entity: string;
   entityId: string;
   imageSrc: string;
@@ -14,25 +26,49 @@ type Props = {
   subtitle: string;
   hasViewed?: boolean;
   viewed?: string | null;
+  ToggleAddRemove?: ToggleAddRemoveProps;
 };
 
-export function Item({ entity, entityId, imageSrc, subtitle, title, hasViewed = false, viewed = null }: Props) {
-  const handleToggleViewed = async () => {
-    if (viewed) {
-      const deleteItem = new Delete({ entity: "hot-topics-estudantes", id: parseInt(viewed) });
-      const response = await deleteItem.build(true);
-      console.log(JSON.stringify(response, null, 2));
-    } else {
-      const cookies = new Cookie();
-      const data = {
-        hot_topics_estudantes_id_hot_topic: entityId,
-        hot_topics_estudantes_id_estudante: cookies.getCookie("id"),
-      };
-      const insertItem = new Insert({ entity: "hot-topics-estudantes", data });
-      const response = await insertItem.build(true);
-      console.log(JSON.stringify(response, null, 2));
-    }
+export function Item({
+  data,
+  setData,
+  entity,
+  entityId,
+  imageSrc,
+  subtitle,
+  title,
+  hasViewed = false,
+  viewed = null,
+  ToggleAddRemove,
+}: Props) {
+  const { id: userId } = useUser();
+
+  if (!ToggleAddRemove || !hasViewed) {
+    return (
+      <div className="list-item-wrapper">
+        <LinkView href={`/${entity}/${entityId}`} className="content">
+          <UploadImage className="image" alt={title} src={imageSrc} width={45} height={45} />
+          <div className="title-wrapper">
+            <p className="title">{title}</p>
+            <p className="subtitle">{subtitle}</p>
+          </div>
+        </LinkView>
+      </div>
+    );
+  }
+
+  const insertData = {
+    [`${ToggleAddRemove.insertDataEntityParamName}_${ToggleAddRemove.insertDataIdParamName}`]: entityId,
+    [`${ToggleAddRemove.insertDataEntityParamName}_id_estudante`]: userId,
   };
+
+  const { toggleAddRemove } = useToggleAddRemove({
+    data,
+    entity: ToggleAddRemove.entity,
+    idParamName: ToggleAddRemove.idParamName,
+    insertData,
+    setData,
+  });
 
   return (
     <div className="list-item-wrapper">
@@ -43,7 +79,7 @@ export function Item({ entity, entityId, imageSrc, subtitle, title, hasViewed = 
           <p className="subtitle">{subtitle}</p>
         </div>
       </LinkView>
-      {hasViewed && <button onClick={handleToggleViewed} className={`viewed ${viewed ? "active" : ""}`}></button>}
+      <button onClick={toggleAddRemove} className={`viewed ${viewed ? "active" : ""}`}></button>
     </div>
   );
 }
