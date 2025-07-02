@@ -6,10 +6,11 @@ import { MaskInterface } from "@mask/MaskInterface";
 import { ValidatorInterface } from "@validator/ValidatorInterface";
 import { HTMLInputTypeAttribute } from "react";
 import { ItemInterface, MsgPlacement } from "./ItemInterface";
+import { Form } from "../Form";
 
-export class Item implements ItemInterface {
+export abstract class AbstractItem implements ItemInterface {
   public name: string;
-  public type: HTMLInputTypeAttribute;
+  public type: HTMLInputTypeAttribute | "select" | "textarea";
   public entity: string | null;
   public fullName: string | null;
   public formName: string | null;
@@ -20,8 +21,13 @@ export class Item implements ItemInterface {
   public mask: MaskInterface | null;
   public msgPlacement: MsgPlacement | null;
   public tags: string[];
+  public widgetType: any;
+  public itemType: any;
+  public defaultValue: any;
 
   constructor({
+    widgetType,
+    itemType,
     name,
     type = "text",
     entity = null,
@@ -34,7 +40,10 @@ export class Item implements ItemInterface {
     mask = null,
     msgPlacement = null,
     tags = [],
+    defaultValue = null,
   }: ItemDef) {
+    this.widgetType = widgetType;
+    this.itemType = itemType;
     this.name = `${entity}_${name}`;
     this.type = type;
     this.entity = entity;
@@ -48,6 +57,7 @@ export class Item implements ItemInterface {
     this.mask = mask;
     this.msgPlacement = msgPlacement;
     this.tags = tags;
+    this.defaultValue = defaultValue;
   }
 
   setDefaultFullName(fullName: string | null) {
@@ -107,4 +117,20 @@ export class Item implements ItemInterface {
   getTags(): string[] {
     return this.tags;
   }
+
+  getWidgetType(): any {
+    return this.widgetType;
+  }
+
+  getItemType(): any {
+    return this.itemType;
+  }
+
+  getDefaultValue(): any {
+    return this.defaultValue;
+  }
+
+  abstract getWidgetProps(form: Form, itemHook: any, data?: any): Object | null;
+
+  abstract getItemProps(form: Form, itemHook: any): Object | null;
 }

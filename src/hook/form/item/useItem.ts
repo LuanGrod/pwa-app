@@ -14,7 +14,7 @@ export type Item = {
 };
 
 export function useItem(itemConfig: ItemInterface): Item {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState(itemConfig.getDefaultValue() || "");
 
   const { applyFilters } = useFilters(itemConfig.getFilters() || []);
   const { applyMask } = useMask(itemConfig.getMask());

@@ -30,6 +30,7 @@ export default async function RootLayout({
           {!splashShown ? <SplashScreen /> : children}
         </AuthStoreProvider>
         <div id="drawer-root"></div>
+        <div id="dialog-root"></div>
       </body>
     </html>
   );

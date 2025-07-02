@@ -12,4 +12,6 @@ export default interface FilterInterface {
   getParentKey(): string;
   getParentIdParamName(): string;
   getParentLabelParamName(): string;
+  getQueryFieldEntity(): string | null;
+  getParentKeyEntity(): string | null;
 }

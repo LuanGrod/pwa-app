@@ -6,7 +6,7 @@ import { HTMLInputTypeAttribute } from "react";
 
 export type ItemDef = {
   name: string;
-  type?: HTMLInputTypeAttribute;
+  type?: HTMLInputTypeAttribute | "textarea" | "select";
   entity?: string | null;
   validators?: ValidatorInterface[];
   textNameGender?: boolean;
@@ -17,4 +17,7 @@ export type ItemDef = {
   mask?: MaskInterface | null;
   msgPlacement?: MsgPlacement | null;
   tags?: string[];
+  widgetType: any;
+  itemType: any;
+  defaultValue?: any;
 };

@@ -1,9 +1,10 @@
 "use client";
 
 import React, { Fragment, ReactNode } from "react";
-import { LoadingMessage } from "../message/loading";
-import { ErrorMessage } from "../message/error";
 import { EmptyMessage } from "../message/empty";
+import { ErrorMessage } from "../message/error";
+import { LoadingMessage } from "../message/loading";
+
 
 interface ListingProps<T> {
   data: T[] | [];

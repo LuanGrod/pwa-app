@@ -1,7 +1,7 @@
 import { RequiredValidatorFactory } from "@/validator/required/RequiredValidatorFactory";
 import { MaxLengthValidatorFactory } from "@/validator/string/maxLength/MaxLengthValidatorFactory";
 import { Form } from "./Form";
-import { Item } from "./item/Item";
+import { Item } from "./item/AbstractItem";
 import { DataNascimento } from "./item/prebuilt/DataNascimento";
 import { Email } from "./item/prebuilt/Email";
 import { Whatsapp } from "./item/prebuilt/Whatsapp";

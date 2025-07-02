@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   /* config options here */
   experimental: {
-    viewTransition: true
+    viewTransition: true,
   },
   images: {
     remotePatterns: [
@@ -11,10 +11,11 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: "sistemasclientes.com.br",
         port: "",
-        pathname: "/projetos/medrqe/uploads/**"
-      }
-    ]
+        pathname: "/projetos/medrqe/uploads/**",
+      },
+    ],
   },
+  swcMinify: false,
 };
 
 export default nextConfig;

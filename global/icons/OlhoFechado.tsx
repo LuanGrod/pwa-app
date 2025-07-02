@@ -1,11 +1,11 @@
 import { Icon } from "@public/global/js/types/Icon";
-import styles from "./Icon.module.css";
+ 
 import clsx from "clsx/lite";
 
 export default function OlhoFechado({ color = "#000", size, className, changeOnTheme = false }: Icon) {
   return (
     <svg
-      className={clsx(changeOnTheme && styles.icon, className)}
+      className={clsx(changeOnTheme && "icon", className)}
       width={size}
       height={size}
       viewBox="0 0 25 25"

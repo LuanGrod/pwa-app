@@ -20,6 +20,15 @@
     }
   }
 
+  .btn2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 35px;
+    height: 45px;
+    border-radius: 100%;
+  }
+
   .greetings {
     display: flex;
     justify-content: start;
@@ -80,6 +89,23 @@
       font-size: 1.5rem;
       font-weight: bold;
       line-height: calc(1.75 / 1.25);
+    }
+  }
+
+  .pdf-content {
+    &.title {
+      font-family: var(--font-title);
+      font-size: 1.5rem;
+      font-weight: bold;
+      line-height: calc(1.75 / 1.25);
+      width: 100%;
+      text-align: center;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+      overflow: hidden;
+      word-break: break-all;
     }
   }
 }

@@ -28,19 +28,23 @@ export class ResponseHandler implements ResponseHandlerInterface {
   }
 
   protected handleError(error: Error): any {
-    let errorResponse = {};
-    console.log("response handler -> handleError -> \n", error);
-    this.errorHandlerCollection?.get().forEach((errorHandler: HandlerInterface) => {
-      let errorMessage = errorHandler.handle(error);
-      if (errorMessage) {
-        errorResponse = {
-          success: false,
-          messageType: "error",
-          message: errorMessage,
-        };
-      }
-    });
+    if (error.message.includes("401")) {
+      window.location.href = "/sair";
+    } else {
+      let errorResponse = {};
+      console.log("response handler -> handleError -> \n", error);
+      this.errorHandlerCollection?.get().forEach((errorHandler: HandlerInterface) => {
+        let errorMessage = errorHandler.handle(error);
+        if (errorMessage) {
+          errorResponse = {
+            success: false,
+            messageType: "error",
+            message: errorMessage,
+          };
+        }
+      });
 
-    return errorResponse;
+      return errorResponse;
+    }
   }
 }

@@ -1,10 +1,14 @@
 import { ItemDef } from "@/type/form/ItemDef";
-import { Item } from "../Item";
 import { RequiredValidatorFactory } from "@/validator/required/RequiredValidatorFactory";
 import { PasswordValidatorFactory } from "@/validator/string/password/PasswordValidatorFactory";
+import PasswordItem from "@/component/form/item/item/Password";
+import PasswordWidget from "@/component/form/item/widgets/Password";
+import { Password } from "../Password";
 
-export class Senha extends Item {
+export class Senha extends Password {
   constructor({
+    widgetType = PasswordWidget,
+    itemType = PasswordItem,
     name = "senha",
     type = "password",
     entity = null,
@@ -20,8 +24,11 @@ export class Senha extends Item {
     mask = null,
     msgPlacement = null,
     tags = [],
+    defaultValue = null,
   }: Partial<ItemDef>) {
     super({
+      widgetType,
+      itemType,
       name,
       type,
       entity,
@@ -34,6 +41,7 @@ export class Senha extends Item {
       mask,
       msgPlacement,
       tags,
+      defaultValue,
     });
   }
 }

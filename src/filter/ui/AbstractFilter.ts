@@ -21,6 +21,20 @@ export default abstract class AbstractFilter implements FilterInterface {
 
   abstract getOptions(): any;
 
+  abstract getIdParamName(): string;
+
+  abstract getLabelParamName(): string;
+
+  abstract getParentKey(): string;
+
+  abstract getParentIdParamName(): string;
+
+  abstract getParentLabelParamName(): string;
+
+  abstract getQueryFieldEntity(): string | null;
+
+  abstract getParentKeyEntity(): string | null;
+
   getQueryField(): string {
     return this.queryField;
   }
@@ -39,25 +53,5 @@ export default abstract class AbstractFilter implements FilterInterface {
 
   getType(): string {
     return this.type;
-  }
-
-  getIdParamName(): string {
-    throw new Error("Method not implemented.");
-  }
-
-  getLabelParamName(): string {
-    throw new Error("Method not implemented.");
-  }
-
-  getParentKey(): string {
-    throw new Error("Method not implemented.");
-  }
-
-  getParentIdParamName(): string {
-    throw new Error("Method not implemented.");
-  }
-
-  getParentLabelParamName(): string {
-    throw new Error("Method not implemented.");
   }
 }

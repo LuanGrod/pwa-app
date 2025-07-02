@@ -45,7 +45,7 @@ export default function useSearch<T = any>({ options, keyParams, caseSensitive =
   };
 
   useEffect(() => {
-    if(options.length !== 0) {
+    if(options && options.length !== 0) {
       const filtered = filterData(options, searchTerm);
       setFilteredData(filtered);
     }

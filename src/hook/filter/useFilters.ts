@@ -177,10 +177,12 @@ export function useFilters(definitions: FilterInterface[]) {
       }
 
       if (def.getType() === "multi-select" && keyFilteredValues.length) {
-        parts.push(`${entity}_${def.getQueryField()}_0{in}${keyFilteredValues.join(",")}`);
+        const queryFieldEntity = def.getQueryFieldEntity() || entity;
+        parts.push(`${queryFieldEntity}_${def.getQueryField()}_0{in}${keyFilteredValues.join(",")}`);
       }
       if (def.getType() === "multi-select" && parentKeyFilteredValues.length) {
-        parts.push(`${entity}_${def.getParentKey()}_0{in}${parentKeyFilteredValues.join(",")}`);
+        const parentKeyEntity = def.getParentKeyEntity() || entity;
+        parts.push(`${parentKeyEntity}_${def.getParentKey()}_0{in}${parentKeyFilteredValues.join(",")}`);
       }
 
       if (def.getType() === "boolean" && values[def.getQueryField()]) {

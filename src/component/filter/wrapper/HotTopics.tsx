@@ -14,7 +14,9 @@ export function HotTopics() {
       "temas_nome",
       "id_area",
       "temas_id_area",
-      "areas_nome"
+      "areas_nome",
+      "",
+      "temas"
     ),
     new MultiSelectFilter(
       "hot-topics-salvos",

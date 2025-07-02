@@ -1,6 +1,6 @@
 "use client";
 
-import { useListing } from "@/hook/listing/useListing";
+import { useListing } from "@/hook/request/useListing";
 import { Item as ListItem } from "@/component/listing/Item";
 import SkeletonGroup from "./SkeletonGroup";
 import { Listing } from "./Listing";

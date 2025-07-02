@@ -1,9 +1,13 @@
 import { ItemDef } from "@/type/form/ItemDef";
-import { Item } from "../Item";
 import { RequiredValidatorFactory } from "@/validator/required/RequiredValidatorFactory";
+import { Text } from "../Text";
+import Item from "@/component/form/item/item/Item";
+import InputWidget from "@/component/form/item/widgets/Input";
 
-export class DataNascimento extends Item {
+export class DataNascimento extends Text {
   constructor({
+    widgetType = InputWidget,
+    itemType = Item,
     name = "data de nascimento",
     type = "date",
     entity = null,
@@ -16,8 +20,11 @@ export class DataNascimento extends Item {
     mask = null,
     msgPlacement = null,
     tags = [],
+    defaultValue = null,
   }: Partial<ItemDef>) {
     super({
+      widgetType,
+      itemType,
       name,
       type,
       entity,
@@ -30,6 +37,7 @@ export class DataNascimento extends Item {
       mask,
       msgPlacement,
       tags,
+      defaultValue,
     });
   }
 }

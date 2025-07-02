@@ -1,11 +1,15 @@
 import { ItemDef } from "@/type/form/ItemDef";
-import { Item } from "../Item";
 import { RequiredValidatorFactory } from "@/validator/required/RequiredValidatorFactory";
 import { BrazilianValidatorFactory } from "@/validator/string/phone/brazilian/BrazilianValidatorFactory";
 import { PhoneMask } from "@/mask/PhoneMask";
+import { Text } from "../Text";
+import InputWidget from "@/component/form/item/widgets/Input";
+import Item from "@/component/form/item/item/Item";
 
-export class Whatsapp extends Item {
+export class Whatsapp extends Text {
   constructor({
+    widgetType = InputWidget,
+    itemType = Item,
     name = "whatsapp",
     type = "text",
     entity = null,
@@ -18,8 +22,11 @@ export class Whatsapp extends Item {
     mask = new PhoneMask(),
     msgPlacement = null,
     tags = [],
+    defaultValue = null,
   }: Partial<ItemDef>) {
     super({
+      widgetType,
+      itemType,
       name,
       type,
       entity,
@@ -32,6 +39,7 @@ export class Whatsapp extends Item {
       mask,
       msgPlacement,
       tags,
+      defaultValue,
     });
   }
 }

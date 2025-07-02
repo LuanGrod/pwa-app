@@ -6,4 +6,8 @@
   height: calc(100vh - 163px);
   overflow: auto;
   scroll-behavior: smooth;
+
+  &.pdf {
+    padding: 0;
+  }
 }

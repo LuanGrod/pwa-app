@@ -1,7 +1,7 @@
 "use client";
 import { Listing } from "@/component/listing/Listing";
 import ReturnTitleSearchStructure from "@/component/structure/ReturnTitleSearch";
-import { useListing } from "@/hook/listing/useListing";
+import { useListing } from "@/hook/request/useListing";
 import { Item as ListItem } from "@/component/listing/Item";
 import Loading2 from "@global/overlay/popup/dialog/Loading2";
 import { useSearchParams } from "next/navigation";
@@ -17,6 +17,7 @@ type HotTopics = {
   hot_topics_nome: string;
   temas_nome: string;
   areas_url_imagem: string;
+  hot_topics_estudantes_id: string | null;
 };
 
 export default function page({}: Props) {
@@ -55,12 +56,13 @@ export default function page({}: Props) {
         loadingComponent={<Loading2 loading={loading} />}
         renderItem={(item) => (
           <ListItem
-            href={`/hot-topics/${item.hot_topics_id}`}
+            entity="hot-topics"
+            entityId={item.hot_topics_id}
             imageSrc={item.areas_url_imagem}
             subtitle={item.hot_topics_nome}
             title={item.temas_nome}
             hasViewed
-            viewed={parseInt(item.hot_topics_id) % 2 === 0}
+            viewed={item.hot_topics_estudantes_id}
           />
         )}
       />
