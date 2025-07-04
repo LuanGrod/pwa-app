@@ -10,28 +10,21 @@ import { UnderHeader } from "@global/overlay/drawer/UnderHeader";
 import SearchBar from "@global/atomic/SearchBar";
 import useSearch from "@/hook/useSearch";
 import { useToggle } from "@/hook/useToggle";
+import { MapasMentaisListagem } from "@/type/Entities";
 
 type Props = {};
-
-type MapasMentais = {
-  mapas_mentais_id: string;
-  mapas_mentais_nome: string;
-  temas_nome: string;
-  areas_url_imagem: string;
-  mapas_mentais_estudantes_id: string | null;
-};
 
 export default function page({}: Props) {
   const filters = useSearchParams().get("filters") || "";
   const { status: searchActive, toggle: toggleSearch } = useToggle();
 
-  const { data, setData, loading, error } = useListing<MapasMentais>({
+  const { data, setData, loading, error } = useListing<MapasMentaisListagem>({
     entity: "mapas-mentais",
     params: { filters: filters },
     needsAuthorization: true,
   });
 
-  const { filteredData, searchTerm, setSearchTerm } = useSearch<MapasMentais>({
+  const { filteredData, searchTerm, setSearchTerm } = useSearch<MapasMentaisListagem>({
     options: data.rows,
     keyParams: ["mapas_mentais_nome", "temas_nome"],
   });
@@ -46,7 +39,7 @@ export default function page({}: Props) {
           }}
         />
       </UnderHeader>
-      <Listing<MapasMentais>
+      <Listing<MapasMentaisListagem>
         data={filteredData}
         loading={loading}
         error={error}

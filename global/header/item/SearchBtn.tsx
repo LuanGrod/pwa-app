@@ -2,9 +2,8 @@
 
 import Lupa from "@global/icons/Lupa";
 
-
 type Props = {
-  handleSearch?: (e?: unknown) => unknown;
+  handleSearch?: () => void;
 };
 
 export default function SearchBtn({ handleSearch = () => {} }: Props) {

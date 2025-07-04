@@ -9,25 +9,19 @@ import { useToggle } from "@/hook/useToggle";
 import useSearch from "@/hook/useSearch";
 import SearchBar from "@global/atomic/SearchBar";
 import { UnderHeader } from "@global/overlay/drawer/UnderHeader";
+import { MapasMentaisSalvos } from "@/type/Entities";
 
 type Props = {};
-
-type MapaMental = {
-  mapas_mentais_salvos_id_mapa_mental: string;
-  mapas_mentais_nome: string;
-  temas_nome: string;
-  areas_nome: string;
-};
 
 export default function page({}: Props) {
   const { status: searchActive, toggle: toggleSearch } = useToggle();
 
-  const { data, loading, error } = useListing<MapaMental>({
+  const { data, loading, error } = useListing<MapasMentaisSalvos>({
     entity: "mapas-mentais-salvos",
     needsAuthorization: true,
   });
 
-  const { filteredData, searchTerm, setSearchTerm } = useSearch<MapaMental>({
+  const { filteredData, searchTerm, setSearchTerm } = useSearch<MapasMentaisSalvos>({
     options: data.rows,
     keyParams: ["mapas_mentais_nome", "temas_nome", "areas_nome"],
   });
@@ -42,7 +36,7 @@ export default function page({}: Props) {
           }}
         />
       </UnderHeader>
-      <Listing<MapaMental>
+      <Listing<MapasMentaisSalvos>
         data={filteredData}
         loading={loading}
         error={error}

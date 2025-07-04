@@ -1,0 +1,47 @@
+.questao-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  #area-tema {
+  font-size: 12px;
+    line-height: 1.25;
+    font-weight: 700;
+    color: var(--emphasis);
+    text-align: center;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    overflow: hidden;
+    word-break: break-all;
+  }
+
+  #ano {
+    font-size: 12px;
+    line-height: 1;
+    font-weight: 300;
+    text-align: center;
+    margin-bottom: 22px;
+  }
+
+  #enunciado {
+    font-family: var(--font-text);
+    font-size: 15px;
+    font-weight: 400;
+    text-align: justify;
+    margin-bottom: 20px;
+  }
+
+  .imagem {
+    max-height: 200px;
+    width: auto;
+    margin-bottom: 21px;
+  }
+
+  .alternativas-wrapper {
+    #alternativa {
+    }
+  }
+}

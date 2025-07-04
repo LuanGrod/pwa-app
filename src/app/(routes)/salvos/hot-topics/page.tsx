@@ -9,25 +9,19 @@ import { useToggle } from "@/hook/useToggle";
 import useSearch from "@/hook/useSearch";
 import SearchBar from "@global/atomic/SearchBar";
 import { UnderHeader } from "@global/overlay/drawer/UnderHeader";
+import { HotTopicSalvos } from "@/type/Entities";
 
 type Props = {};
-
-type HotTopic = {
-  hot_topics_salvos_id_hot_topic: string;
-  hot_topics_nome: string;
-  temas_nome: string;
-  areas_nome: string;
-};
 
 export default function page({}: Props) {
   const { status: searchActive, toggle: toggleSearch } = useToggle();
 
-  const { data, loading, error } = useListing<HotTopic>({
+  const { data, loading, error } = useListing<HotTopicSalvos>({
     entity: "hot-topics-salvos",
     needsAuthorization: true,
   });
 
-  const { filteredData, searchTerm, setSearchTerm } = useSearch<HotTopic>({
+  const { filteredData, searchTerm, setSearchTerm } = useSearch<HotTopicSalvos>({
     options: data.rows,
     keyParams: ["hot_topics_nome", "temas_nome", "areas_nome"],
   });
@@ -42,7 +36,7 @@ export default function page({}: Props) {
           }}
         />
       </UnderHeader>
-      <Listing<HotTopic>
+      <Listing<HotTopicSalvos>
         data={filteredData}
         loading={loading}
         error={error}

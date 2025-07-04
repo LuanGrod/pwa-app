@@ -9,24 +9,19 @@ import { useToggle } from "@/hook/useToggle";
 import useSearch from "@/hook/useSearch";
 import SearchBar from "@global/atomic/SearchBar";
 import { UnderHeader } from "@global/overlay/drawer/UnderHeader";
+import { QuestoesSalvos } from "@/type/Entities";
 
 type Props = {};
-
-type Questao = {
-  questoes_salvos_id_questao: string;
-  questoes_enunciado: string;
-  instituicoes_nome_instituicao_com_ano: string;
-};
 
 export default function page({}: Props) {
   const { status: searchActive, toggle: toggleSearch } = useToggle();
 
-  const { data, loading, error } = useListing<Questao>({
+  const { data, loading, error } = useListing<QuestoesSalvos>({
     entity: "questoes-salvos",
     needsAuthorization: true,
   });
 
-  const { filteredData, searchTerm, setSearchTerm } = useSearch<Questao>({
+  const { filteredData, searchTerm, setSearchTerm } = useSearch<QuestoesSalvos>({
     options: data.rows,
     keyParams: ["questoes_enunciado", "instituicoes_nome_instituicao_com_ano"],
   });
@@ -41,7 +36,7 @@ export default function page({}: Props) {
           }}
         />
       </UnderHeader>
-      <Listing<Questao>
+      <Listing<QuestoesSalvos>
         data={filteredData}
         loading={loading}
         error={error}

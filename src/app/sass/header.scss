@@ -7,6 +7,10 @@
   justify-content: space-between;
   background-color: var(--background);
 
+  &.flashcards-header {
+    background-color: var(--background-variation);
+  }
+
   .btn {
     display: flex;
     justify-content: center;
@@ -83,6 +87,23 @@
     }
   }
 
+  .flashcard-header {
+    &.title {
+      font-family: var(--font-rounded);
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 1.25;
+      width: 100%;
+      text-align: center;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 1;
+      line-clamp: 1;
+      overflow: hidden;
+      word-break: break-all;
+    }
+  }
+
   .return-title-search {
     &.title {
       font-family: var(--font-title);
@@ -98,7 +119,7 @@
       font-size: 1.5rem;
       font-weight: bold;
       line-height: calc(1.75 / 1.25);
-      width: 100%;
+      flex-grow: 1;
       text-align: center;
       display: -webkit-box;
       -webkit-box-orient: vertical;
@@ -106,6 +127,14 @@
       line-clamp: 1;
       overflow: hidden;
       word-break: break-all;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .header-wrapper {
+    &.flashcards-header {
+      background-color: var(--background);
     }
   }
 }

@@ -9,25 +9,19 @@ import { useToggle } from "@/hook/useToggle";
 import useSearch from "@/hook/useSearch";
 import SearchBar from "@global/atomic/SearchBar";
 import { UnderHeader } from "@global/overlay/drawer/UnderHeader";
+import { FlashcardsSalvos } from "@/type/Entities";
 
 type Props = {};
-
-type Flashcard = {
-  flashcards_salvos_id_flashcard: string;
-  flashcards_pergunta: string;
-  temas_nome: string;
-  areas_nome: string;
-};
 
 export default function page({}: Props) {
   const { status: searchActive, toggle: toggleSearch } = useToggle();
 
-  const { data, loading, error } = useListing<Flashcard>({
+  const { data, loading, error } = useListing<FlashcardsSalvos>({
     entity: "flashcards-salvos",
     needsAuthorization: true,
   });
 
-  const { filteredData, searchTerm, setSearchTerm } = useSearch<Flashcard>({
+  const { filteredData, searchTerm, setSearchTerm } = useSearch<FlashcardsSalvos>({
     options: data.rows,
     keyParams: ["flashcards_pergunta", "temas_nome", "areas_nome"],
   });
@@ -42,7 +36,7 @@ export default function page({}: Props) {
           }}
         />
       </UnderHeader>
-      <Listing<Flashcard>
+      <Listing<FlashcardsSalvos>
         data={filteredData}
         loading={loading}
         error={error}

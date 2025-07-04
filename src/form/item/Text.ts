@@ -17,6 +17,7 @@ export class Text extends AbstractItem {
     mask = null,
     msgPlacement = null,
     tags = [],
+    defaultValue = null,
   }: ItemDef) {
     super({
       widgetType,
@@ -33,6 +34,7 @@ export class Text extends AbstractItem {
       mask,
       msgPlacement,
       tags,
+      defaultValue,
     });
   }
 

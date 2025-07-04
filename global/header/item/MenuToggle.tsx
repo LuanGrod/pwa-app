@@ -7,9 +7,10 @@ import { cloneElement, ReactElement, useRef } from "react";
 type Props = {
   menu: ReactElement<{ menuRef?: React.RefObject<Overlay | null> }>;
   icon?: ReactElement;
+  iconSize?: number;
 };
 
-export default function MenuToggle({ menu, icon = <Elipse size={29} changeOnTheme /> }: Props) {
+export default function MenuToggle({ menu, iconSize = 29, icon = <Elipse size={iconSize} changeOnTheme /> }: Props) {
   const menuRef = useRef<Overlay>(null);
 
   const menuWithRef = cloneElement(menu, { menuRef });

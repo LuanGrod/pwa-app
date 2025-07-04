@@ -1,11 +1,5 @@
 import PdfContentStructure from "@/component/structure/PdfContent";
 
-type HotTopics = {
-  hot_topics_nome: string;
-  hot_topics_url_conteudo: string;
-  hot_topics_salvos_id: string | null;
-};
-
 export default async function page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 

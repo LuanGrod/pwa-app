@@ -5,7 +5,7 @@ type Props = {};
 export default function LogoOverlay({}: Props) {
   return (
     <div className="btn overlay">
-      <Logo size={25} />
+      <Logo size={25} className="logo" />
     </div>
   );
 }

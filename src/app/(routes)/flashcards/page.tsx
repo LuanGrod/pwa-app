@@ -1,5 +1,4 @@
 import { Flashcards as FlashcardsFiltersWrapper } from "@/component/filter/wrapper/Flashcards";
-import Logo from "@/component/icon/Logo";
 import GreetingsLogoStructure from "@/component/structure/GreetingsLogo";
 
 type Props = {};

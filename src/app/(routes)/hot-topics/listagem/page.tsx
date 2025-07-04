@@ -10,28 +10,21 @@ import { UnderHeader } from "@global/overlay/drawer/UnderHeader";
 import SearchBar from "@global/atomic/SearchBar";
 import useSearch from "@/hook/useSearch";
 import { useToggle } from "@/hook/useToggle";
+import { HotTopicsListagem } from "@/type/Entities";
 
 type Props = {};
-
-type HotTopics = {
-  hot_topics_id: string;
-  hot_topics_nome: string;
-  temas_nome: string;
-  areas_url_imagem: string;
-  hot_topics_estudantes_id: string | null;
-};
 
 export default function page({}: Props) {
   const filters = useSearchParams().get("filters") || "";
   const { status: searchActive, toggle: toggleSearch } = useToggle();
 
-  const { data, setData, loading, error } = useListing<HotTopics>({
+  const { data, setData, loading, error } = useListing<HotTopicsListagem>({
     entity: "hot-topics",
     params: { filters: filters },
     needsAuthorization: true,
   });
 
-  const { filteredData, searchTerm, setSearchTerm } = useSearch<HotTopics>({
+  const { filteredData, searchTerm, setSearchTerm } = useSearch<HotTopicsListagem>({
     options: data.rows,
     keyParams: ["hot_topics_nome", "temas_nome"],
   });
@@ -46,7 +39,7 @@ export default function page({}: Props) {
           }}
         />
       </UnderHeader>
-      <Listing<HotTopics>
+      <Listing<HotTopicsListagem>
         data={filteredData}
         loading={loading}
         error={error}

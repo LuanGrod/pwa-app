@@ -1,7 +1,6 @@
 import GreetingsLogoStructure from "@component/structure/GreetingsLogo";
 import { MapasMentais as MapasMentaisFiltersWrapper } from "@/component/filter/wrapper/MapasMentais";
 
-
 type Props = {};
 
 export default function page({}: Props) {

@@ -10,9 +10,9 @@ export default function Login({}) {
   const router = useRouter();
   const submitHandler = new LoginHandler({ router });
 
-  // useEffect(() => {
-  //   router.prefetch("/");
-  // }, []);
+  useEffect(() => {
+    router.prefetch("/");
+  }, []);
 
   return <Form formConfig={LoginForm} submitHandler={submitHandler} />;
 }

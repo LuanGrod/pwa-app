@@ -1,7 +1,6 @@
 import GreetingsLogoStructure from "@component/structure/GreetingsLogo";
 import { HotTopics as HotTopicsFiltersWrapper } from "@/component/filter/wrapper/HotTopics";
 
-
 type Props = {};
 
 export default function page({}: Props) {

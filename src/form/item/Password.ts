@@ -17,6 +17,7 @@ export class Password extends AbstractItem {
     mask = null,
     msgPlacement = null,
     tags = [],
+    defaultValue = null,
   }: ItemDef) {
     super({
       widgetType,
@@ -33,6 +34,7 @@ export class Password extends AbstractItem {
       mask,
       msgPlacement,
       tags,
+      defaultValue,
     });
   }
 
@@ -46,7 +48,7 @@ export class Password extends AbstractItem {
       onBlur: itemHook.onBlur,
       className: itemHook.error ? "field-error" : "",
       placeholder: `Digite aqui ${this.getTextNameGender() ? "seu" : "sua"} ${this.getTextName()}...`,
-      data
+      data,
     };
   }
 

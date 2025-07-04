@@ -4,7 +4,7 @@ import clsx from "clsx/lite";
 export default function Logo({ color = "#000", size, className, changeOnTheme = false }: Icon) {
   return (
     <svg
-      className={clsx(changeOnTheme && "icon", className, "logo")}
+      className={clsx(changeOnTheme && "icon", className)}
       width={size}
       height={size}
       viewBox="0 0 140 140"
