@@ -1,8 +1,7 @@
 import { useState } from "react";
 
-type Props = {};
 
-export default function useDialog({}: Props) {
+export default function useDialog() {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleDialog = async () => {

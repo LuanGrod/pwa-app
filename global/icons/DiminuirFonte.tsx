@@ -8,7 +8,7 @@ export default function DiminuirFonte({ color = "#000", size, className, changeO
       className={clsx(changeOnTheme && "icon", className)}
       width={size}
       height={size}
-      viewBox="0 0 30 30"
+      viewBox="0 -3 30 30"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >

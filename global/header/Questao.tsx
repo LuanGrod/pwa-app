@@ -12,19 +12,11 @@ type Props = {
   status: boolean;
   handleSave: () => void;
   handleAddSugestion: () => void;
-  elementsIds?: string[];
+  elementsClassNames?: string[];
 };
 
-export default function Questao({ elementsIds, status, handleAddSugestion, handleSave }: Props) {
-  const RightWrapper = (
-    <div className="flex">
-      <IncreaseFontSizeBtn elementsIds={elementsIds} />
-      <DecreaseFontSizeBtn elementsIds={elementsIds} />
-      <SaveBtn handleSave={handleSave} status={status} />
-      <EditBtn handleEdit={handleAddSugestion} size={24} />
-      <MenuToggle menu={<ConfiguracoesDrawer />} iconSize={26} />
-    </div>
-  );
+export default function Questao({ elementsClassNames, status, handleAddSugestion, handleSave }: Props) {
 
-  return <BaseHeader left={<ReturnRoute />} right={RightWrapper} className="questoes-header" />;
+
+  return ;
 }

@@ -3,17 +3,20 @@
 import DiminuirFonte from "@global/icons/DiminuirFonte";
 
 type Props = {
-  elementsIds?: string[];
+  elementsClassNames?: string[];
 };
 
-export default function DecreaseFontSizeBtn({ elementsIds }: Props) {
+export default function DecreaseFontSizeBtn({ elementsClassNames }: Props) {
   const handleClick = () => {
-    elementsIds?.forEach((id) => {
-      const element = document.getElementById(id);
-      if (element) {
-        const fontSizeStr = window.getComputedStyle(element).getPropertyValue("font-size");
-        const fontSizePx = parseFloat(fontSizeStr);
-        element.style.fontSize = `${fontSizePx - 2}px`;
+    elementsClassNames?.forEach((id) => {
+      const element = document.getElementsByClassName(id);
+      if (element.length > 0) {
+        for (let i = 0; i < element.length; i++) {
+          const el = element[i] as HTMLElement;
+          const fontSizeStr = window.getComputedStyle(el).getPropertyValue("font-size");
+          const fontSizePx = parseFloat(fontSizeStr);
+          el.style.fontSize = `${fontSizePx - 2}px`;
+        }
       }
     });
   };

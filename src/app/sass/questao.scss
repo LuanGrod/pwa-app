@@ -4,8 +4,8 @@
   justify-content: center;
   align-items: center;
 
-  #area-tema {
-  font-size: 12px;
+  .area-tema {
+    font-size: 12px;
     line-height: 1.25;
     font-weight: 700;
     color: var(--emphasis);
@@ -18,7 +18,7 @@
     word-break: break-all;
   }
 
-  #ano {
+  .ano {
     font-size: 12px;
     line-height: 1;
     font-weight: 300;
@@ -26,7 +26,7 @@
     margin-bottom: 22px;
   }
 
-  #enunciado {
+  .enunciado {
     font-family: var(--font-text);
     font-size: 15px;
     font-weight: 400;
@@ -41,7 +41,118 @@
   }
 
   .alternativas-wrapper {
-    #alternativa {
+    display: flex;
+    flex-direction: column;
+    gap: 17px;
+    width: 100%;
+
+    .multiplo {
+      width: 100%;
+      padding: 10px;
+      background: var(--background-variation);
+      border-radius: 6px;
+      display: flex;
+      gap: 15px;
+
+      &.ativo {
+        -webkit-box-shadow: inset 0px 0px 0px 1px var(--foreground);
+        -moz-box-shadow: inset 0px 0px 0px 1px var(--foreground);
+        box-shadow: inset 0px 0px 0px 1px var(--foreground);
+      }
+
+      .letra {
+        height: 40px;
+        width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        line-height: 1;
+        font-weight: 700;
+        background-color: var(--background);
+        border-radius: 10px;
+      }
+
+      .conteudo {
+        font-size: 14px;
+        line-height: 1.25;
+        font-weight: 500;
+        text-align: start;
+        width: 80%;
+        align-self: center;
+        font-family: var(--font-text);
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+        word-break: break-all;
+      }
     }
+  }
+}
+
+.questoes-footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  background: var(--background);
+  filter: drop-shadow(0px 0px 2px color-mix(in oklab, var(--foreground) 20%, transparent));
+  padding: 20px 22px 34px;
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+
+    .enviar-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+
+      .enviar {
+        width: 216px;
+        height: 48px;
+        font-size: 15px;
+        line-height: 1.25;
+        font-weight: 800;
+        background-color: var(--emphasis);
+        color: var(--background);
+        border-radius: 6px;
+        cursor: pointer;
+
+        &:disabled {
+          background-color: color-mix(in srgb, var(--emphasis) 20%, transparent);
+          cursor: not-allowed;
+        }
+      }
+    }
+
+    .navigation {
+      height: 48px;
+      width: 48px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--emphasis);
+      border-radius: 100%;
+
+      &:disabled {
+        background-color: color-mix(in srgb, var(--emphasis) 20%, transparent);
+        cursor: not-allowed;
+      }
+    }
+  }
+
+  .summary {
+    font-size: 12px;
+    line-height: 1.25;
+    font-weight: 400;
+    text-align: center;
   }
 }

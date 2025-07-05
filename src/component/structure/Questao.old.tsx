@@ -9,30 +9,35 @@ import EdicaoSugerida from "../overlay/popup/dialog/EdicaoSugerida";
 import { Questao as QuestaoType } from "@/type/Entities";
 
 type Props = {
+  data: QuestaoType;
+  setData: Dispatch<any>;
   children: ReactNode;
+  questaoId: string;
+  handleNext: () => void;
+  elementsClassNames?: string[];
 };
 
-export default function QuestaoStructure({ children }: Props) {
+export default function Questao({ data, setData, children, questaoId, handleNext, elementsClassNames }: Props) {
   const { isOpen, toggleDialog } = useDialog({});
   const { id: userId } = useUser();
   const { status, toggle } = useToggle();
 
+  const insertData = {
+    ["questoes_salvos_id_questao"]: questaoId,
+    ["questoes_salvos_id_estudante"]: userId,
+  };
 
-  // const { toggleAddRemove } = useToggleAddRemove({
-  //   data,
-  //   entity: "questoes-salvos",
-  //   idParamName: "questoes_salvos_id",
-  //   insertData,
-  // });
+  const { toggleAddRemove } = useToggleAddRemove({
+    data,
+    entity: "questoes-salvos",
+    idParamName: "questoes_salvos_id",
+    insertData,
+    setData,
+  });
 
   return (
     <>
-      <Header
-        status={false}
-        elementsClassNames={["enunciado", "area-tema", "ano", "conteudo"]}
-        handleSave={toggleAddRemove}
-        handleAddSugestion={toggleDialog}
-      />
+      <Header status={false} elementsClassNames={elementsClassNames} handleSave={toggleAddRemove} handleAddSugestion={toggleDialog} />
       <main className="content-wrapper questoes">
         {children}
         {isOpen && (

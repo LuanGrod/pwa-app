@@ -29,5 +29,5 @@ export default function UploadImage(props: UploadImageProps) {
 
   const { src, ...restProps } = props;
 
-  return <Image src={`${uploadUrl}/${src}`} {...restProps} />;
+  return <Image draggable={false} src={`${uploadUrl}/${src}`} {...restProps} />;
 }

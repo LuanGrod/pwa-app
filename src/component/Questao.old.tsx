@@ -1,12 +1,15 @@
 import { Questao as QuestaoType } from "@/type/Entities";
 import UploadImage from "@global/atomic/UploadImage";
+import { Dispatch } from "react";
 import QuestaoAlternativa from "./QuestaoAlternativa";
 
 type Props = {
   data: QuestaoType;
+  setData: Dispatch<any>;
+  showingAnswer?: boolean;
 };
 
-export default function Questao({ data }: Props) {
+export default function Questao({ data, setData, showingAnswer }: Props) {
   const alternativas = [
     data.questoes_alternativa_a,
     data.questoes_alternativa_b,
