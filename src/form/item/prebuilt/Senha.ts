@@ -29,7 +29,7 @@ export class Senha extends Password {
     super({
       widgetType,
       itemType,
-      name,
+      name: `${entity}_senha`,
       type,
       entity,
       validators,

@@ -13,7 +13,7 @@ type Props = {
   formEntity: string;
   estudanteId: string;
   estudanteName?: string;
-  conteudoId: string;
+  conteudoId: string | null;
   conteudoName: string;
 };
 

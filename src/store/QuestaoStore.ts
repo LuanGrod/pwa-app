@@ -1,222 +1,214 @@
 import { create } from "zustand";
 import { Questao as QuestaoType } from "@/type/Entities";
 import { Insert } from "@/request/builder/Insert";
+import { Delete } from "@/request/builder/Delete";
+
+type QuestaoAnswerType = {
+  answer: string;
+  correct: string;
+  confirmed: boolean;
+};
 
 type QuestoesStore = {
-  questoesLista: QuestaoType[];
-  setQuestoesLista: (questoes: QuestaoType[]) => void;
+  questoesList: QuestaoType[] | null;
+  questoesAnswers: QuestaoAnswerType[] | null;
   index: number;
+  isShowingAnswer: boolean;
+  isShowingAlert: boolean;
+  setQuestoesList: (questoes: QuestaoType[]) => void;
+  getCurrentQuestao: () => QuestaoType | null;
   nextIndex: () => void;
-  getCurrentQuestao: () => QuestaoType;
   previousIndex: () => void;
   countQuestoes: () => number;
-  getInsertData: (userId: string) => any;
-  currentAnswer: string;
-  setCurrentAnswer: (value: string) => void;
-  registerAnswer: (userId: string) => Promise<void>;
+  setAnswer: (value: string) => void;
+  getCurrentAnswer: () => QuestaoAnswerType | null;
+  registerAnswer: (userId: string) => Promise<null | void>;
+  handleSave: (userId: string) => Promise<null | void>;
+  toggleIsShowingAnswer: () => void;
+  getCurrentQuestaoSavedStatus: () => boolean;
+  toggleAlert: () => void;
 };
 
 const useQuestoes = create<QuestoesStore>((set, get) => ({
-  questoesLista: [
-    {
-      questoes_id: "1",
-      questoes_enunciado: "Qual é a capital do Brasil?",
-      questoes_alternativa_a: "Rio de Janeiro",
-      questoes_alternativa_b: "Brasília",
-      questoes_alternativa_c: "São Paulo",
-      questoes_alternativa_d: "Salvador",
-      questoes_alternativa_e: "Belo Horizonte",
-      questoes_gabarito: "B",
-      questoes_comentario_resposta: "A capital do Brasil é Brasília, inaugurada em 1960.",
-      questoes_comentario_resposta_url_imagem:
-        "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_referencia_comentario: null,
-      questoes_url_imagem: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      provas_ano: "2022",
-      temas_nome: "Geografia",
-      areas_nome: "Ciências Humanas",
-      questoes_salvos_id: "",
-    },
-    {
-      questoes_id: "2",
-      questoes_enunciado: "Quem escreveu Dom Casmurro?",
-      questoes_alternativa_a: "Machado de Assis",
-      questoes_alternativa_b: "José de Alencar",
-      questoes_alternativa_c: "Carlos Drummond de Andrade",
-      questoes_alternativa_d: "Cecília Meireles",
-      questoes_alternativa_e: "Clarice Lispector",
-      questoes_gabarito: "A",
-      questoes_comentario_resposta: "Machado de Assis é o autor de Dom Casmurro.",
-      questoes_comentario_resposta_url_imagem:
-        "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_referencia_comentario: null,
-      questoes_url_imagem: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      provas_ano: "2021",
-      temas_nome: "Literatura",
-      areas_nome: "Linguagens",
-      questoes_salvos_id: "1002",
-    },
-    {
-      questoes_id: "3",
-      questoes_enunciado: "Qual elemento químico tem o símbolo O?",
-      questoes_alternativa_a: "Ouro",
-      questoes_alternativa_b: "Oxigênio",
-      questoes_alternativa_c: "Osmio",
-      questoes_alternativa_d: "Organésio",
-      questoes_alternativa_e: "",
-      questoes_gabarito: "B",
-      questoes_comentario_resposta: "O símbolo O representa o elemento Oxigênio.",
-      questoes_comentario_resposta_url_imagem:
-        "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_referencia_comentario: null,
-      questoes_url_imagem: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      provas_ano: "2020",
-      temas_nome: "Química",
-      areas_nome: "Ciências da Natureza",
-      questoes_salvos_id: "",
-    },
-    {
-      questoes_id: "4",
-      questoes_enunciado: "Em que ano ocorreu a Proclamação da República no Brasil?",
-      questoes_alternativa_a: "1888",
-      questoes_alternativa_b: "1889",
-      questoes_alternativa_c: "1890",
-      questoes_alternativa_d: "1879",
-      questoes_alternativa_e: "",
-      questoes_gabarito: "B",
-      questoes_comentario_resposta: "A Proclamação da República ocorreu em 15 de novembro de 1889.",
-      questoes_comentario_resposta_url_imagem:
-        "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_referencia_comentario: null,
-      questoes_url_imagem: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      provas_ano: "2019",
-      temas_nome: "História do Brasil",
-      areas_nome: "Ciências Humanas",
-      questoes_salvos_id: "1004",
-    },
-    {
-      questoes_id: "5",
-      questoes_enunciado: "Qual é o resultado de 7 x 8?",
-      questoes_alternativa_a: "54",
-      questoes_alternativa_b: "56",
-      questoes_alternativa_c: "",
-      questoes_alternativa_d: "",
-      questoes_alternativa_e: "",
-      questoes_gabarito: "B",
-      questoes_comentario_resposta: "7 vezes 8 é igual a 56.",
-      questoes_comentario_resposta_url_imagem:
-        "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_referencia_comentario: null,
-      questoes_url_imagem: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      provas_ano: "2023",
-      temas_nome: "Matemática Básica",
-      areas_nome: "Matemática",
-      questoes_salvos_id: "",
-    },
-    {
-      questoes_id: "6",
-      questoes_enunciado: "Qual planeta é conhecido como o planeta vermelho?",
-      questoes_alternativa_a: "Terra",
-      questoes_alternativa_b: "Marte",
-      questoes_alternativa_c: "",
-      questoes_alternativa_d: "",
-      questoes_alternativa_e: "",
-      questoes_gabarito: "B",
-      questoes_comentario_resposta: "Marte é conhecido como o planeta vermelho devido à cor de sua superfície.",
-      questoes_comentario_resposta_url_imagem:
-        "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_referencia_comentario: null,
-      questoes_url_imagem: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      provas_ano: "2022",
-      temas_nome: "Astronomia",
-      areas_nome: "Ciências da Natureza",
-      questoes_salvos_id: "1006",
-    },
-    {
-      questoes_id: "7",
-      questoes_enunciado: "Quem foi o primeiro presidente do Brasil?",
-      questoes_alternativa_a: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_alternativa_b: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_alternativa_c: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_alternativa_d: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_alternativa_e: "",
-      questoes_gabarito: "B",
-      questoes_comentario_resposta: "Deodoro da Fonseca foi o primeiro presidente do Brasil.",
-      questoes_comentario_resposta_url_imagem:
-        "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_referencia_comentario: null,
-      questoes_url_imagem: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      provas_ano: "2018",
-      temas_nome: "História do Brasil",
-      areas_nome: "Ciências Humanas",
-      questoes_salvos_id: "",
-    },
-    {
-      questoes_id: "8",
-      questoes_enunciado: "Qual é a fórmula da água?",
-      questoes_alternativa_a: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_alternativa_b: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_alternativa_c: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_alternativa_d: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_alternativa_e: "",
-      questoes_gabarito: "B",
-      questoes_comentario_resposta: "A fórmula da água é H2O.",
-      questoes_comentario_resposta_url_imagem:
-        "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      questoes_referencia_comentario: null,
-      questoes_url_imagem: "Screenshot%20from%202025-05-29%2010-51-32-47af7fca91dd663217384fadcd58c8ab.png",
-      provas_ano: "2023",
-      temas_nome: "Química",
-      areas_nome: "Ciências da Natureza",
-      questoes_salvos_id: "1008",
-    },
-  ],
-  setQuestoesLista: (questoes: QuestaoType[]) => set({ questoesLista: questoes }),
+  questoesList: [],
+  questoesAnswers: [],
   index: 0,
-  countQuestoes: () => get().questoesLista.length || 0,
-  getCurrentQuestao: () => {
-    const { questoesLista, index } = get();
-    return questoesLista[index];
+  isShowingAnswer: false,
+  isShowingAlert: false,
+  setQuestoesList: (questoes: QuestaoType[]) => {
+    set({
+      questoesList: questoes,
+      questoesAnswers: questoes.map((questao) => ({
+        answer: "",
+        correct: questao.questoes_gabarito,
+        confirmed: false,
+      })),
+    });
   },
-  nextIndex: () =>
-    set((state) => ({
-      index: state.index + 1 < state.questoesLista.length ? state.index + 1 : state.index,
-    })),
-  previousIndex: () =>
+  setAnswer: (value: string) => {
+    const { questoesAnswers, index } = get();
+
+    if (!questoesAnswers || questoesAnswers.length === 0) return;
+
+    set((state: QuestoesStore) => ({
+      questoesAnswers:
+        state.questoesAnswers &&
+        state.questoesAnswers.map((questao, i) =>
+          i === index ? { ...questao, answer: value === questao.answer ? "" : value } : questao
+        ),
+    }));
+  },
+  getCurrentQuestao: () => {
+    const { questoesList, index } = get();
+    if (!questoesList || questoesList.length === 0) return null;
+    return questoesList[index];
+  },
+  getCurrentAnswer: () => {
+    const { questoesAnswers, index } = get();
+    if (!questoesAnswers || questoesAnswers.length === 0) return null;
+    return questoesAnswers[index];
+  },
+  countQuestoes: () => {
+    const { questoesList } = get();
+    if (!questoesList || questoesList.length === 0) return 0;
+    return questoesList.length;
+  },
+  nextIndex: () => {
+    const { questoesList } = get();
+    if (!questoesList || questoesList.length === 0) return null;
+    set((state: QuestoesStore) => ({
+      index:
+        state.questoesList && state.index + 1 < state.questoesList.length ? state.index + 1 : state.index,
+    }));
+  },
+  previousIndex: () => {
     set((state) => ({
       index: state.index - 1 < 0 ? 0 : state.index - 1,
-    })),
+    }));
+  },
   registerAnswer: async (userId: string) => {
-    const { getCurrentQuestao, currentAnswer } = get();
-    if (!getCurrentQuestao() || !currentAnswer ) return;
+    const {
+      getCurrentQuestao,
+      getCurrentAnswer,
+      toggleIsShowingAnswer,
+      questoesList,
+      questoesAnswers,
+      toggleAlert,
+    } = get();
+    const currentQuestao = getCurrentQuestao();
+    const currentAnswer = getCurrentAnswer();
+
+    if (
+      !questoesList ||
+      questoesList.length === 0 ||
+      !questoesAnswers ||
+      questoesAnswers.length === 0 ||
+      !currentQuestao ||
+      !currentAnswer
+    )
+      return null;
 
     const insertData = {
       respostas_questoes_id_estudante: userId,
-      respostas_questoes_id_questao: getCurrentQuestao().questoes_id,
-      respostas_questoes_alternativa2: currentAnswer,
+      respostas_questoes_id_questao: currentQuestao.questoes_id,
+      respostas_questoes_alternativa2: currentAnswer.answer,
     };
 
-    const insert = new Insert({
-      entity: "respostas-questoes",
-      data: insertData,
-    });
+    if (currentAnswer.answer) {
+      toggleIsShowingAnswer();
 
-    await insert.build(true);
+      if (!currentAnswer.confirmed) {
+        const insert = new Insert({
+          entity: "respostas-questoes",
+          data: insertData,
+        });
 
+        const response = await insert.build(true);
+
+        if (response.success) {
+          set({
+            questoesAnswers: questoesAnswers.map((questao, i) =>
+              i === get().index ? { ...questao, confirmed: true } : questao
+            ),
+          });
+          toggleAlert();
+        }
+      }
+    }
+  },
+  handleSave: async (userId: string) => {
+    const { getCurrentQuestao, questoesList } = get();
+
+    if (!questoesList || questoesList.length === 0) return null;
+
+    const currentQuestao = getCurrentQuestao();
+    if (!currentQuestao) return null;
+
+    if (currentQuestao.questoes_salvos_id) {
+      const deleting = new Delete({
+        entity: "questoes-salvos",
+        id: currentQuestao.questoes_salvos_id,
+      });
+
+      const response = await deleting.build(true);
+
+      if (response.success) {
+        set((state) => ({
+          questoesList:
+            state.questoesList &&
+            state.questoesList.map((questao) =>
+              questao.questoes_id === currentQuestao.questoes_id
+                ? { ...questao, questoes_salvos_id: "" }
+                : questao
+            ),
+        }));
+      }
+    } else {
+      const insertData = {
+        ["questoes_salvos_id_questao"]: currentQuestao.questoes_id,
+        ["questoes_salvos_id_estudante"]: userId,
+      };
+
+      const insert = new Insert({
+        entity: "questoes-salvos",
+        data: insertData,
+      });
+
+      const response = await insert.build(true);
+
+      if (response.success) {
+        set((state) => ({
+          questoesList:
+            state.questoesList &&
+            state.questoesList.map((questao) =>
+              questao.questoes_id === currentQuestao.questoes_id
+                ? { ...questao, questoes_salvos_id: response.data.id || "" }
+                : questao
+            ),
+        }));
+      }
+    }
+  },
+  toggleIsShowingAnswer: () => {
     set((state) => ({
-      currentAnswer: "",
-      index: state.index + 1 < state.questoesLista.length ? state.index + 1 : state.index,
+      isShowingAnswer: !state.isShowingAnswer,
     }));
   },
-  getInsertData: (userId: string) => {
+  getCurrentQuestaoSavedStatus: () => {
     const { getCurrentQuestao } = get();
-    return {
-      ["questoes_salvos_id_questao"]: getCurrentQuestao().questoes_id,
-      ["questoes_salvos_id_estudante"]: userId,
-    };
+
+    const currentQuestao = getCurrentQuestao();
+
+    if (!currentQuestao) return false;
+
+    return !!currentQuestao.questoes_salvos_id;
   },
-  currentAnswer: "",
-  setCurrentAnswer: (value: string) => set({ currentAnswer: value }),
+  toggleAlert: () => {
+    set({ isShowingAlert: true });
+    setTimeout(() => {
+      set({ isShowingAlert: false });
+    }, 1500);
+  }
 }));
 
 export default useQuestoes;

@@ -26,7 +26,7 @@ export class Email extends Text {
     super({
       widgetType,
       itemType,
-      name,
+      name: `${entity}_email`,
       type,
       entity,
       validators,

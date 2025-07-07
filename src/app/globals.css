@@ -262,6 +262,57 @@ form .submit-return-wrapper.danger {
   width: 100%;
   height: 100%;
 }
+.drawer-wrapper .drawer-top {
+  width: 100%;
+  height: fit-content;
+  position: fixed;
+  top: 0;
+  left: 0;
+  padding: 22px;
+  padding-top: 79px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  background: var(--background);
+  transition-property: all;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 500ms;
+  overflow-y: auto;
+  filter: drop-shadow(0px 0px 2px color-mix(in oklab, var(--foreground) 20%, transparent));
+}
+.drawer-wrapper .drawer-top.open {
+  transform: translateY(0);
+}
+.drawer-wrapper .drawer-top.closed {
+  transform: translateY(-100%);
+}
+.drawer-wrapper .drawer-top .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+.drawer-wrapper .drawer-top .title {
+  font-size: 1.5rem;
+  line-height: 1.3333333333;
+  letter-spacing: 0.5px;
+  font-weight: 700;
+  font-family: var(--font-title);
+}
+.drawer-wrapper .drawer-top .close-btn {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+.drawer-wrapper .drawer-top .clear {
+  position: absolute;
+  top: 35px;
+  right: 50px;
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 800;
+  color: var(--emphasis);
+}
 .drawer-wrapper .drawer-bottom {
   width: 100%;
   height: fit-content;
@@ -280,6 +331,7 @@ form .submit-return-wrapper.danger {
   border-top-left-radius: 1.5rem;
   border-top-right-radius: 1.5rem;
   overflow-y: auto;
+  filter: drop-shadow(0px 0px 2px color-mix(in oklab, var(--foreground) 20%, transparent));
 }
 .drawer-wrapper .drawer-bottom.open {
   transform: translateY(0);
@@ -1218,6 +1270,26 @@ form .submit-return-wrapper.danger {
   -moz-box-shadow: inset 0px 0px 0px 1px var(--foreground);
   box-shadow: inset 0px 0px 0px 1px var(--foreground);
 }
+.questao-wrapper .alternativas-wrapper .multiplo.correto {
+  background-color: #00cc77;
+}
+.questao-wrapper .alternativas-wrapper .multiplo.correto .letra {
+  background-color: rgba(255, 255, 255, 0.4588235294);
+}
+.questao-wrapper .alternativas-wrapper .multiplo.correto .conteudo {
+  color: #fff;
+  font-weight: 700;
+}
+.questao-wrapper .alternativas-wrapper .multiplo.incorreto {
+  background-color: #ff1ac6;
+}
+.questao-wrapper .alternativas-wrapper .multiplo.incorreto .letra {
+  background-color: rgba(255, 255, 255, 0.4588235294);
+}
+.questao-wrapper .alternativas-wrapper .multiplo.incorreto .conteudo {
+  color: #fff;
+  font-weight: 700;
+}
 .questao-wrapper .alternativas-wrapper .multiplo .letra {
   height: 40px;
   width: 40px;
@@ -1302,6 +1374,64 @@ form .submit-return-wrapper.danger {
   line-height: 1.25;
   font-weight: 400;
   text-align: center;
+}
+
+.questoes-drawer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+.questoes-drawer .gabarito {
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.questoes-drawer .alternativa {
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--emphasis);
+  margin-bottom: 10px;
+}
+.questoes-drawer .imagem {
+  max-height: 200px;
+  width: auto;
+  margin-bottom: 21px;
+  align-self: center;
+}
+.questoes-drawer .comentario,
+.questoes-drawer .referencia,
+.questoes-drawer .titulo-referencia {
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 400;
+  text-align: start;
+  margin-bottom: 16px;
+  font-family: var(--font-text);
+}
+.questoes-drawer .titulo-referencia {
+  font-weight: 700;
+  margin-bottom: 0px;
+}
+.questoes-drawer .referencia {
+  color: var(--empashis);
+  margin-bottom: 0px;
+}
+
+.questoes-alerta {
+  text-align: center;
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: #fff;
+}
+.questoes-alerta.correto {
+  background-color: #00cc77;
+}
+.questoes-alerta.incorreto {
+  background-color: #ff1ac6;
 }
 
 /*# sourceMappingURL=globals.css.map */

@@ -3,7 +3,7 @@
 import Bandeira from "@global/icons/Bandeira";
 
 type Props = {
-  handleSave?: () => void;
+  handleSave?: (e?: any) => any;
   status?: boolean;
 };
 

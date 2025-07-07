@@ -1,4 +1,5 @@
 import useQuestoes from "@/store/QuestaoStore";
+import cls from "clsx/lite";
 
 type Props = {
   tipo: "multiplo" | "verdadeiro" | "imagem";
@@ -7,7 +8,7 @@ type Props = {
 };
 
 export default function QuestaoAlternativa({ tipo, conteudo, alternativa }: Props) {
-  const { currentAnswer, setCurrentAnswer } = useQuestoes();
+  const { getCurrentAnswer, setAnswer } = useQuestoes();
 
   if (!conteudo || conteudo.trim() === "") {
     return null;
@@ -18,7 +19,20 @@ export default function QuestaoAlternativa({ tipo, conteudo, alternativa }: Prop
   }
 
   return (
-    <button onClick={(e) => setCurrentAnswer(alternativa)} className={`${tipo} ${currentAnswer === alternativa ? "ativo" : ""}`}>
+    <button
+      onClick={() => setAnswer(alternativa)}
+      disabled={getCurrentAnswer()?.confirmed}
+      className={cls(
+        tipo,
+        !getCurrentAnswer()?.confirmed && getCurrentAnswer()?.answer === alternativa && "ativo",
+        getCurrentAnswer()?.confirmed &&
+        (alternativa === getCurrentAnswer()?.correct
+          ? "correto"
+          : alternativa === getCurrentAnswer()?.answer
+            ? "incorreto"
+            : "")
+      )}
+    >
       <p className="letra">{alternativa}</p>
       <p className="conteudo">{conteudo}</p>
     </button>

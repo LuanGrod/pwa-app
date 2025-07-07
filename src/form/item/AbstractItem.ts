@@ -44,7 +44,8 @@ export abstract class AbstractItem implements ItemInterface {
   }: ItemDef) {
     this.widgetType = widgetType;
     this.itemType = itemType;
-    this.name = `${entity}_${name}`;
+    this.name = name;
+    // this.name = `${entity}_${name}`;
     this.type = type;
     this.entity = entity;
     this.fullName = null;

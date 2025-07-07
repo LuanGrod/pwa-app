@@ -11,7 +11,7 @@ export type Questao = {
   questoes_gabarito: string;
   questoes_comentario_resposta: string;
   questoes_comentario_resposta_url_imagem?: string;
-  questoes_referencia_comentario?: null;
+  questoes_referencia_comentario?: string;
   questoes_url_imagem?: string;
   provas_ano: string;
   temas_nome: string;

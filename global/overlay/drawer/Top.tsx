@@ -13,11 +13,11 @@ type Props = {
   hasCloseBtn?: boolean;
 };
 
-export function BottomDrawer({ children, title, onClose, open, customClass = "", overlay = true, hasCloseBtn = true }: Props) {
+export function TopDrawer({ children, title, onClose, open, customClass = "", overlay = false, hasCloseBtn = false }: Props) {
 
   return (
     <BaseDrawer
-      position="bottom"
+      position="top"
       customClass={customClass}
       onClose={onClose}
       open={open}
