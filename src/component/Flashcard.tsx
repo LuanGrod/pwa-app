@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function Flashcard({ data, setData, showingAnswer }: Props) {
-  const { isOpen, toggleDialog } = useDialog({});
+  const { isOpen, toggleDialog } = useDialog();
   const { id: userId } = useUser();
 
   const insertData = {
