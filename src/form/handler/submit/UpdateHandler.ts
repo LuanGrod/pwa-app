@@ -3,9 +3,11 @@ import { Update } from "@request/builder/Update";
 
 export class UpdateHandler implements SubmitHandlerInterface {
   protected entity: string;
+  public needsAuthorization: boolean;
 
-  constructor({ entity }: { entity: string }) {
+  constructor({ entity, needsAuthorization }: { entity: string, needsAuthorization?: boolean }) {
     this.entity = entity;
+    this.needsAuthorization = needsAuthorization || false;
   }
 
   async onSubmit(values: any, id: string): Promise<any> {
