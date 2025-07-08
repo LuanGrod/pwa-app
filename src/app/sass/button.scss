@@ -83,7 +83,8 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+.dark-theme {
+// @media (prefers-color-scheme: dark) {
   .btn-shadow {
     &.disabled {
       background-color: color-mix(in srgb, var(--emphasis) 75%, #000);

@@ -92,7 +92,8 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+.dark-theme {
+// @media (prefers-color-scheme: dark) {
   .flashcard-footer {
     background-color: var(--background-variation);
   }

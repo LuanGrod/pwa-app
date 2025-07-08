@@ -57,6 +57,7 @@ export type HotTopicsListagem = {
   temas_nome: string;
   areas_url_imagem: string;
   hot_topics_estudantes_id: string | null;
+  hot_topics_salvo: string;
 };
 
 export type HotTopicSalvos = {

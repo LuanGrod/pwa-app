@@ -31,15 +31,16 @@
   --font-input: var(--font-input);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --background-variation: #222224;
-    --foreground: #ffffff;
-    --foreground-variation: #828889;
-    --emphasis: #00ff99;
-    --divider: #ffffff15;
-    --footer-link-active: #ffffff;
-    --footer-link-inactive: #828889;
-  }
+.dark-theme {
+  // @media (prefers-color-scheme: dark) {
+  // :root {
+  --background: #000000;
+  --background-variation: #222224;
+  --foreground: #ffffff;
+  --foreground-variation: #828889;
+  --emphasis: #00ff99;
+  --divider: #ffffff15;
+  --footer-link-active: #ffffff;
+  --footer-link-inactive: #828889;
+  // }
 }

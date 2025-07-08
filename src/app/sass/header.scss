@@ -131,7 +131,8 @@
   }
 }
 
-@media (prefers-color-scheme: dark) {
+.dark-theme {
+  // @media (prefers-color-scheme: dark) {
   .header-wrapper {
     &.flashcards-header {
       background-color: var(--background);

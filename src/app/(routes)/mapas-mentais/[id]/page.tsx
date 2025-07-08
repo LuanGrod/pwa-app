@@ -5,20 +5,20 @@ export default async function page({ params }: { params: Promise<{ id: string }>
 
   return (
     <PdfContentStructure
-      entity="hot-topics"
+      entity="mapas-mentais"
       entityId={id}
-      titleParamName="hot_topics_nome"
-      pdfParamName="hot_topics_url_conteudo"
+      titleParamName="mapas_mentais_nome"
+      pdfParamName="mapas_mentais_url_conteudo"
       edicaoSugerida={{
-        conteudoName: "id_hot_topic",
-        formEntity: "edicoes_sugeridas_hot_topics",
-        insertEntity: "edicoes-sugeridas-hot-topics",
+        conteudoName: "id_mapa_mental",
+        formEntity: "edicoes_sugeridas_mapas_mentais",
+        insertEntity: "edicoes-sugeridas-mapas-mentais",
       }}
       ToggleAddRemove={{
-        entity: "hot-topics-salvos",
-        idParamName: "hot_topics_salvos_id",
-        insertDataIdParamName: "id_hot_topic",
-        insertDataEntityParamName: "hot_topics_salvos",
+        entity: "mapas-mentais-salvos",
+        idParamName: "mapas_mentais_salvos_id",
+        insertDataIdParamName: "id_mapa_mental",
+        insertDataEntityParamName: "mapas_mentais_salvos",
       }}
     />
   );

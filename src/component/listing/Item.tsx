@@ -1,10 +1,7 @@
 "use client";
 
-import { Delete } from "@/request/builder/Delete";
 import { LinkView } from "../LinkView";
 import UploadImage from "@global/atomic/UploadImage";
-import { Insert } from "@/request/builder/Insert";
-import Cookie from "@/cookie/Cookie";
 import useToggleAddRemove from "@/hook/useToggleAddRemove";
 import { useUser } from "@/hook/auth/useUser";
 import { Dispatch, SetStateAction } from "react";
@@ -12,20 +9,21 @@ import { Dispatch, SetStateAction } from "react";
 type ToggleAddRemoveProps = {
   entity: string;
   idParamName: string;
+  keyParamName: string;
   insertDataIdParamName: string;
   insertDataEntityParamName: string;
 };
 
 type Props = {
   data?: any;
-  setData?: Dispatch<SetStateAction<Listagem<any>>>;
+  setData: Dispatch<SetStateAction<any[]>>
   entity: string;
   entityId: string;
   imageSrc: string;
   title: string;
   subtitle: string;
   hasViewed?: boolean;
-  viewed?: string | null;
+  viewed?: boolean;
   ToggleAddRemove?: ToggleAddRemoveProps;
 };
 
@@ -38,7 +36,7 @@ export function Item({
   subtitle,
   title,
   hasViewed = false,
-  viewed = null,
+  viewed = false,
   ToggleAddRemove,
 }: Props) {
   const { id: userId } = useUser();
@@ -66,6 +64,7 @@ export function Item({
     data,
     entity: ToggleAddRemove.entity,
     idParamName: ToggleAddRemove.idParamName,
+    keyParamName: ToggleAddRemove.keyParamName,
     insertData,
     setData,
   });

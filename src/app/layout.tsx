@@ -18,11 +18,12 @@ export default async function RootLayout({
 }>) {
   const cookieStore = await cookies();
   const splashShown = cookieStore.get("splash_shown")?.value;
+  const theme = cookieStore.get("theme")?.value || "light";
 
   return (
     <html
       lang="pt-BR"
-      className={`${comfortaa.variable} ${sfProDisplay.variable} ${sfProText.variable} ${inter.variable}`}
+      className={`${comfortaa.variable} ${sfProDisplay.variable} ${sfProText.variable} ${inter.variable} ${theme === "dark" ? "dark-theme" : ""}`}
     >
       <body className="screen">
         <AuthStoreProvider>

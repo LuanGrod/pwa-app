@@ -14,3 +14,8 @@
 @use "pdf";
 @use "flashcard";
 @use "questao";
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+}

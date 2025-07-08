@@ -14,7 +14,7 @@ import { HotTopicsListagem } from "@/type/Entities";
 
 type Props = {};
 
-export default function page({}: Props) {
+export default function page({ }: Props) {
   const filters = useSearchParams().get("filters") || "";
   const { status: searchActive, toggle: toggleSearch } = useToggle();
 
@@ -24,7 +24,7 @@ export default function page({}: Props) {
     needsAuthorization: true,
   });
 
-  const { filteredData, searchTerm, setSearchTerm } = useSearch<HotTopicsListagem>({
+  const { filteredData, setFilteredData, searchTerm, setSearchTerm } = useSearch<HotTopicsListagem>({
     options: data.rows,
     keyParams: ["hot_topics_nome", "temas_nome"],
   });
@@ -47,17 +47,18 @@ export default function page({}: Props) {
         renderItem={(item) => (
           <ListItem
             data={item}
-            setData={setData}
+            setData={setFilteredData}
             entity="hot-topics"
             entityId={item.hot_topics_id}
             imageSrc={item.areas_url_imagem}
             subtitle={item.hot_topics_nome}
             title={item.temas_nome}
             hasViewed
-            viewed={item.hot_topics_estudantes_id}
+            viewed={!!item.hot_topics_estudantes_id}
             ToggleAddRemove={{
               entity: "hot-topics-estudantes",
               idParamName: "hot_topics_estudantes_id",
+              keyParamName: "hot_topics_id",
               insertDataIdParamName: "id_hot_topic",
               insertDataEntityParamName: "hot_topics_estudantes",
             }}

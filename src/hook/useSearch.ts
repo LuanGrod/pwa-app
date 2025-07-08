@@ -58,6 +58,7 @@ export default function useSearch<T = any>({ options, keyParams, caseSensitive =
     filteredData, 
     searchTerm, 
     setSearchTerm,
+    setFilteredData,
     filterOptions // Para compatibilidade com código existente
   };
 }

@@ -7,10 +7,11 @@ type Props = {
   setData: Dispatch<SetStateAction<any>>;
   entity: string;
   idParamName: string;
+  keyParamName?: string;
   insertData: any;
 };
 
-export default function useToggleAddRemove({ data, setData, entity, idParamName, insertData }: Props) {
+export default function useToggleAddRemove({ data, setData, entity, idParamName, insertData, keyParamName }: Props) {
   const toggleAddRemove = async () => {
     console.log(JSON.stringify(data, null, 2));
     console.log(JSON.stringify(insertData, null, 2));
@@ -26,11 +27,20 @@ export default function useToggleAddRemove({ data, setData, entity, idParamName,
       const response = await deleting.build(true);
 
       setData((prevData: any) => {
-        if (prevData) {
-          return {
-            ...prevData,
-            [idParamName]: "",
-          };
+        if (Array.isArray(prevData)) {
+          return prevData.map((item: any) => {
+            if (item[idParamName] === data[idParamName]) {
+              item[idParamName] = "";
+            }
+            return item;
+          });
+        } else {
+          if (prevData) {
+            return {
+              ...prevData,
+              [idParamName]: "",
+            };
+          }
         }
         return prevData;
       });
@@ -45,11 +55,20 @@ export default function useToggleAddRemove({ data, setData, entity, idParamName,
       const response = await insert.build(true);
 
       setData((prevData: any) => {
-        if (prevData) {
-          return {
-            ...prevData,
-            [idParamName]: response.data.id || "",
-          };
+        if (Array.isArray(prevData)) {
+          return prevData.map((item: any) => {
+            if (item[keyParamName!] === data[keyParamName!]) {
+              item[idParamName] = response.data.id;
+            }
+            return item;
+          });
+        } else {
+          if (prevData) {
+            return {
+              ...prevData,
+              [idParamName]: response.data.id || "",
+            };
+          }
         }
         return prevData;
       });

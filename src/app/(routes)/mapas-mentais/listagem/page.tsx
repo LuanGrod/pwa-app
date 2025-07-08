@@ -24,7 +24,7 @@ export default function page({}: Props) {
     needsAuthorization: true,
   });
 
-  const { filteredData, searchTerm, setSearchTerm } = useSearch<MapasMentaisListagem>({
+  const { filteredData, setFilteredData, searchTerm, setSearchTerm } = useSearch<MapasMentaisListagem>({
     options: data.rows,
     keyParams: ["mapas_mentais_nome", "temas_nome"],
   });
@@ -47,17 +47,18 @@ export default function page({}: Props) {
         renderItem={(item) => (
           <ListItem
             data={item}
-            setData={setData}
+            setData={setFilteredData}
             entity="mapas-mentais"
             entityId={item.mapas_mentais_id}
             imageSrc={item.areas_url_imagem}
             subtitle={item.mapas_mentais_nome}
             title={item.temas_nome}
             hasViewed
-            viewed={item.mapas_mentais_estudantes_id}
+            viewed={!!item.mapas_mentais_estudantes_id}
             ToggleAddRemove={{
               entity: "mapas-mentais-estudantes",
               idParamName: "mapas_mentais_estudantes_id",
+              keyParamName: "mapas_mentais_id",
               insertDataIdParamName: "id_mapa_mental",
               insertDataEntityParamName: "mapas_mentais_estudantes",
             }}
