@@ -1,14 +1,13 @@
 import UploadImage from "@global/atomic/UploadImage";
 import EditBtn from "@global/header/item/EditBtn";
 import SaveBtn from "@global/header/item/SaveBtn";
-import { data } from "motion/react-client";
 import Logo from "./icon/Logo";
 import EdicaoSugerida from "./overlay/popup/dialog/EdicaoSugerida";
 
 type Props = {
   side: "front" | "back";
   logoColor?: string;
-  handleSave: () => void;
+  handleSave: (userId: string) => Promise<null | undefined>;
   toggleDialog: () => void;
   status: boolean;
   isOpen: boolean;
@@ -56,7 +55,7 @@ export default function FlashcardSide({
       <div className="content">
         <h1 className="title">{title}</h1>
         <p className="text">{text}</p>
-        {imageUrl && <UploadImage src={imageUrl} width={284} height={284} alt={title} />}
+        {imageUrl && <UploadImage src={imageUrl} width={284} height={284} alt={title} className="image" />}
       </div>
       <div className="footer"></div>
     </div>

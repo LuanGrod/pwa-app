@@ -31,8 +31,8 @@ export default function EdicaoSugerida({
 
   const formItems = [
     new Conteudo({ entity: formEntity }),
-    new Hidden({ entity: formEntity, name: conteudoName, defaultValue: conteudoId }),
-    new Hidden({ entity: formEntity, name: estudanteName, defaultValue: estudanteId }),
+    new Hidden({ entity: formEntity, name: `${formEntity}_${conteudoName}`, defaultValue: conteudoId }),
+    new Hidden({ entity: formEntity, name: `${formEntity}_${estudanteName}`, defaultValue: estudanteId }),
   ];
   const form = new Form(formItems, "below");
 

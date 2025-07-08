@@ -26,7 +26,7 @@ export class Conteudo extends Textarea {
     super({
       widgetType,
       itemType,
-      name,
+      name: `${entity}_conteudo`,
       type,
       entity,
       validators,

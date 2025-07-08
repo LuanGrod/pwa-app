@@ -29,7 +29,7 @@
       contrast(101%) !important;
 
     &.inverted {
-      filter: brightness(0) saturate(100%);
+      filter: brightness(0) saturate(100%) !important;
     }
 
     &.disabled {
