@@ -5,7 +5,7 @@ import Form from "@component/form/Form";
 import RecuperacaoSenhaForm from "@form/RecuperacaoSenha";
 
 export default function RecuperacaoSenha({}) {
-  const submitHandler = new RecuperacaoSenhaHandler({});
+  const submitHandler = new RecuperacaoSenhaHandler({entity: "estudantes"});
 
   return <Form formConfig={RecuperacaoSenhaForm} submitHandler={submitHandler} />;
 }

@@ -45,7 +45,7 @@ export default function PdfContent({
   ToggleAddRemove,
 }: Props) {
   const { uploadUrl } = useContainer();
-  const { isOpen, toggleDialog } = useDialog({});
+  const { isOpen, toggleDialog } = useDialog();
   const { id: userId } = useUser();
 
   const insertData = {

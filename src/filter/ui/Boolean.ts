@@ -17,4 +17,26 @@ export default class Boolean extends AbstractFilter {
   getOptions(): any {
     return null;
   }
+
+  getIdParamName(): string {
+    throw new Error("Method not implemented.");
+  }
+  getLabelParamName(): string {
+    throw new Error("Method not implemented.");
+  }
+  getParentKey(): string {
+    throw new Error("Method not implemented.");
+  }
+  getParentIdParamName(): string {
+    throw new Error("Method not implemented.");
+  }
+  getParentLabelParamName(): string {
+    throw new Error("Method not implemented.");
+  }
+  getQueryFieldEntity(): string | null {
+    throw new Error("Method not implemented.");
+  }
+  getParentKeyEntity(): string | null {
+    throw new Error("Method not implemented.");
+  }
 }
