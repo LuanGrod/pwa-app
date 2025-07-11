@@ -45,7 +45,9 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
       flashcardsAnswers:
         state.flashcardsAnswers &&
         state.flashcardsAnswers.map((flashcard, i) =>
-          i === index ? { ...flashcard, answer: value === flashcard.answer ? "" : value } : flashcard
+          i === index
+            ? { ...flashcard, answer: value === flashcard.answer ? "" : value }
+            : flashcard
         ),
     }));
   },
@@ -64,7 +66,9 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
     if (!flashcardsList || flashcardsList.length === 0) return null;
     set((state) => ({
       index:
-        state.flashcardsList && state.index + 1 < state.flashcardsList.length ? state.index + 1 : state.index,
+        state.flashcardsList && state.index + 1 < state.flashcardsList.length
+          ? state.index + 1
+          : state.index,
     }));
   },
   handleSave: async (userId: string) => {
@@ -164,24 +168,24 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
       respostas_flashcards_resposta2: value,
     };
 
+    nextIndex();
+    toggleIsShowingAnswer();
+    set((state) => ({
+      flashcardsAnswers:
+        state.flashcardsAnswers &&
+        state.flashcardsAnswers.map((flashcard, i) =>
+          i === index
+            ? { ...flashcard, answer: value === flashcard.answer ? "" : value }
+            : flashcard
+        ),
+    }));
+
     const insert = new Insert({
       entity: "respostas-flashcards",
       data: insertData,
     });
 
     const response = await insert.build(true);
-
-    if (response.success) {
-      nextIndex();
-      toggleIsShowingAnswer();
-      set((state) => ({
-        flashcardsAnswers:
-          state.flashcardsAnswers &&
-          state.flashcardsAnswers.map((flashcard, i) =>
-            i === index ? { ...flashcard, answer: value === flashcard.answer ? "" : value } : flashcard
-          ),
-      }));
-    }
   },
 }));
 

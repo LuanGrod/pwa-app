@@ -1,25 +1,23 @@
 import { ItemDef } from "@/type/form/ItemDef";
 import { RequiredValidatorFactory } from "@/validator/required/RequiredValidatorFactory";
 import { PasswordValidatorFactory } from "@/validator/string/password/password/PasswordValidatorFactory";
+import { MatchPasswordValidatorFactory } from "@/validator/string/password/match/MatchPasswordValidatorFactory";
 import PasswordItem from "@/component/form/item/item/Password";
 import PasswordWidget from "@/component/form/item/widgets/Password";
 import { Password } from "../Password";
 
-export class Senha extends Password {
+export class ConfirmarSenha extends Password {
   constructor({
     widgetType = PasswordWidget,
     itemType = PasswordItem,
     name = null,
-    fieldName = "senha",
+    fieldName = "confirmar_senha",
     type = "password",
     entity = null,
-    validators = [
-      RequiredValidatorFactory.create(),
-      PasswordValidatorFactory.create({ minLength: 8, minLowercase: 1, minUppercase: 1, minNumber: 1 }),
-    ],
+    validators = [],
     textNameGender = false,
-    formName = "Senha",
-    textName = "senha",
+    formName = "Confirmar Senha",
+    textName = "confirmação da senha",
     filters = [],
     mask = null,
     msgPlacement = null,
@@ -29,7 +27,15 @@ export class Senha extends Password {
     itemClassName = null,
     widgetClassName = null,
   }: Partial<ItemDef>) {
-    name = name ?? `${entity}_${fieldName}`;
+    (validators =
+      validators.length > 0
+        ? validators
+        : [
+            RequiredValidatorFactory.create(),
+            PasswordValidatorFactory.create({ minLength: 8, minLowercase: 1, minUppercase: 1, minNumber: 1 }),
+            MatchPasswordValidatorFactory.create(`${entity}_senha`),
+          ]),
+      (name = name ?? `${entity}_${fieldName}`);
     super({
       widgetType,
       itemType,

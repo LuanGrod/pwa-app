@@ -6,7 +6,11 @@ type Props<T> = {
   caseSensitive?: boolean;
 };
 
-export default function useSearch<T = any>({ options, keyParams, caseSensitive = false }: Props<T>) {
+export default function useSearch<T = any>({
+  options,
+  keyParams,
+  caseSensitive = false,
+}: Props<T>) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(options);
 
@@ -45,20 +49,18 @@ export default function useSearch<T = any>({ options, keyParams, caseSensitive =
   };
 
   useEffect(() => {
-    if(options && options.length !== 0) {
-      const filtered = filterData(options, searchTerm);
-      setFilteredData(filtered);
-    }
-  }, [options, searchTerm]);
+    const filtered = filterData(options, searchTerm);
+    setFilteredData(filtered);
+  }, [options, searchTerm, setSearchTerm]);
 
   // Função auxiliar para uso externo (mantém compatibilidade)
   const filterOptions = (data: any[], term: string) => filterData(data, term);
 
-  return { 
-    filteredData, 
-    searchTerm, 
+  return {
+    filteredData,
+    searchTerm,
     setSearchTerm,
     setFilteredData,
-    filterOptions // Para compatibilidade com código existente
+    filterOptions, // Para compatibilidade com código existente
   };
 }

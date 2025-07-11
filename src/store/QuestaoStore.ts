@@ -78,7 +78,9 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
     if (!questoesList || questoesList.length === 0) return null;
     set((state: QuestoesStore) => ({
       index:
-        state.questoesList && state.index + 1 < state.questoesList.length ? state.index + 1 : state.index,
+        state.questoesList && state.index + 1 < state.questoesList.length
+          ? state.index + 1
+          : state.index,
     }));
   },
   previousIndex: () => {
@@ -115,7 +117,13 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
     };
 
     if (currentAnswer.answer) {
+      set({
+        questoesAnswers: questoesAnswers.map((questao, i) =>
+          i === get().index ? { ...questao, confirmed: true } : questao
+        ),
+      });
       toggleIsShowingAnswer();
+      toggleAlert();
 
       if (!currentAnswer.confirmed) {
         const insert = new Insert({
@@ -124,15 +132,6 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
         });
 
         const response = await insert.build(true);
-
-        if (response.success) {
-          set({
-            questoesAnswers: questoesAnswers.map((questao, i) =>
-              i === get().index ? { ...questao, confirmed: true } : questao
-            ),
-          });
-          toggleAlert();
-        }
       }
     }
   },
@@ -208,7 +207,7 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
     setTimeout(() => {
       set({ isShowingAlert: false });
     }, 1500);
-  }
+  },
 }));
 
 export default useQuestoes;

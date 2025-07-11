@@ -15,7 +15,7 @@ type Props = {};
 export default function page({ }: Props) {
   const filters = useSearchParams().get("filters") || "";
 
-  const { setFlashcardsList, getCurrentFlashcard } = useFlashcards();
+  const { setFlashcardsList, getCurrentFlashcard, flashcardsList } = useFlashcards();
 
   const { data, loading, error } = useListing<FlashcardType>({
     entity: "flashcards",
@@ -170,7 +170,7 @@ export default function page({ }: Props) {
     if (data.rows && data.rows.length > 0) {
       setFlashcardsList(data.rows);
     }
-  }, [])
+  }, [data])
 
   const currentTitle = getCurrentFlashcard() ? `${getCurrentFlashcard()?.areas_nome}: ${getCurrentFlashcard()?.temas_nome}` : "";
 

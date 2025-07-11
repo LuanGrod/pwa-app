@@ -9,10 +9,10 @@ import { ItemInterface, MsgPlacement } from "./ItemInterface";
 import { Form } from "../Form";
 
 export abstract class AbstractItem implements ItemInterface {
-  public name: string;
+  public name: string | null;
   public type: HTMLInputTypeAttribute | "select" | "textarea";
   public entity: string | null;
-  public fullName: string | null;
+  public fieldName: string | null;
   public formName: string | null;
   public textName: string | null;
   public textNameGender: boolean;
@@ -24,16 +24,19 @@ export abstract class AbstractItem implements ItemInterface {
   public widgetType: any;
   public itemType: any;
   public defaultValue: any;
+  public widgetClassName: string | null = null;
+  public itemClassName: string | null = null;
+  public data: Map<string, any> = new Map();
 
   constructor({
     widgetType,
     itemType,
-    name,
+    name = null,
+    fieldName,
     type = "text",
     entity = null,
     validators = [],
     textNameGender = true,
-    fullName = null,
     formName = null,
     textName = null,
     filters = [],
@@ -41,17 +44,18 @@ export abstract class AbstractItem implements ItemInterface {
     msgPlacement = null,
     tags = [],
     defaultValue = null,
+    widgetClassName = null,
+    itemClassName = null,
+    data,
   }: ItemDef) {
     this.widgetType = widgetType;
     this.itemType = itemType;
     this.name = name;
-    // this.name = `${entity}_${name}`;
+    this.fieldName = fieldName;
     this.type = type;
     this.entity = entity;
-    this.fullName = null;
-    this.setDefaultFullName(fullName);
-    this.formName = formName || name.charAt(0).toUpperCase() + name.slice(1);
-    this.textName = textName || name;
+    this.formName = formName || fieldName.charAt(0).toUpperCase() + fieldName.slice(1);
+    this.textName = textName || fieldName;
     this.textNameGender = textNameGender;
     this.filters = filters.length > 0 ? filters : [new TrimFilter(), new StripTagsFilter()];
     this.validators = validators;
@@ -59,19 +63,12 @@ export abstract class AbstractItem implements ItemInterface {
     this.msgPlacement = msgPlacement;
     this.tags = tags;
     this.defaultValue = defaultValue;
+    this.widgetClassName = widgetClassName;
+    this.itemClassName = itemClassName;
+    this.data = data;
   }
 
-  setDefaultFullName(fullName: string | null) {
-    if (fullName) {
-      this.fullName = fullName;
-    } else if (this.entity) {
-      this.fullName = `${this.entity}_${this.name}`;
-    } else {
-      this.fullName = this.name;
-    }
-  }
-
-  getName(): string {
+  getName(): string | null {
     return this.name;
   }
 
@@ -81,10 +78,6 @@ export abstract class AbstractItem implements ItemInterface {
 
   getEntity(): string | null {
     return this.entity;
-  }
-
-  getFullName(): string | null {
-    return this.fullName;
   }
 
   getFormName(): string | null {
@@ -129,6 +122,18 @@ export abstract class AbstractItem implements ItemInterface {
 
   getDefaultValue(): any {
     return this.defaultValue;
+  }
+
+  getWidgetClassName(): string | null {
+    return this.widgetClassName;
+  }
+
+  getItemClassName(): string | null {
+    return this.itemClassName;
+  }
+
+  getData(): Map<string, any> {
+    return this.data;
   }
 
   abstract getWidgetProps(form: Form, itemHook: any, data?: any): Object | null;

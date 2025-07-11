@@ -7,12 +7,12 @@ export class Hidden extends HiddenClass {
   constructor({
     widgetType = HiddenWidget,
     itemType = HiddenItem,
-    name = "hidden",
+    name = null,
+    fieldName = "hidden",
     type = "hidden",
     entity = null,
     validators = [],
     textNameGender = true,
-    fullName = null,
     formName = null,
     textName = "",
     filters = [],
@@ -20,16 +20,20 @@ export class Hidden extends HiddenClass {
     msgPlacement = null,
     tags = [],
     defaultValue = null,
+    data = new Map<string, any>(),
+    itemClassName = null,
+    widgetClassName = null,
   }: Partial<ItemDef>) {
+    name = name ?? `${entity}_${fieldName}`;
     super({
       widgetType,
       itemType,
       name,
+      fieldName,
       type,
       entity,
       validators,
       textNameGender,
-      fullName,
       formName,
       textName,
       filters,
@@ -37,6 +41,9 @@ export class Hidden extends HiddenClass {
       msgPlacement,
       tags,
       defaultValue,
+      data,
+      itemClassName,
+      widgetClassName,
     });
   }
 }

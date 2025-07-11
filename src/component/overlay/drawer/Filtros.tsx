@@ -1,7 +1,7 @@
 "use client";
 
 import { BottomDrawer } from "@global/overlay/drawer/Bottom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SimpleFilterItem from "./SimpleFilterItem";
 import ParentFilterItem from "./ParentFilterItem";
 import SearchBar from "@global/atomic/SearchBar";
@@ -48,6 +48,10 @@ export default function Filtros({
     keyParams: [props.optionLabel ? props.optionLabel : "", props.parentOptionLabel ? props.parentOptionLabel : ""],
   });
 
+  useEffect(() => {
+    setSearchTerm("");
+  }, [open])
+
   return (
     <BottomDrawer customClass="semi-full" open={open} title={title} onClose={onClose}>
       {onClearFilter && (
@@ -64,9 +68,6 @@ export default function Filtros({
         <Loading2 loading />
       ) : (
         <div className="filter-items">
-          {filteredOptions.length === 0 && searchTerm !== "" ? (
-            <div className="no-results">Nenhum resultado encontrado</div>
-          ) : null}
           {filteredOptions.map((opt: any, idx: number) => {
             if (opt["isParent"]) {
               return (

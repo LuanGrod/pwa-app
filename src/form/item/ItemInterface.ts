@@ -8,9 +8,8 @@ export type MsgPlacement = "form" | "below";
 
 export interface ItemInterface {
   getType(): HTMLInputTypeAttribute | "select" | "textarea";
-  getName(): string;
+  getName(): string | null;
   getEntity(): string | null;
-  getFullName(): string | null;
   getFormName(): string | null;
   getTextName(): string | null;
   getTextNameGender(): boolean;
@@ -21,7 +20,10 @@ export interface ItemInterface {
   getTags(): string[];
   getWidgetType(): any;
   getWidgetProps(form: Form, itemHook: any, data?: any): Object | null;
+  getWidgetClassName(): string | null;
   getItemType(): any;
   getItemProps(form: Form, itemHook: any): Object | null;
+  getItemClassName(): string | null;
   getDefaultValue(): any;
+  getData(): Map<string, any>;
 }

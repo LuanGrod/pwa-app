@@ -30,7 +30,7 @@
     backface-visibility: hidden;
     background-color: var(--background);
     border-radius: 16px;
-    filter: drop-shadow(0px 0px 2px color-mix(in oklab, var(--foreground) 20%, transparent));
+    filter: var(--filter-shadow);
 
     .header,
     .footer {
@@ -95,11 +95,10 @@
 }
 
 .dark-theme {
-// @media (prefers-color-scheme: dark) {
+  // @media (prefers-color-scheme: dark) {
   .flashcard {
     .front,
     .back {
-      filter: drop-shadow(0px);
       background-color: #1a1f2b;
     }
   }

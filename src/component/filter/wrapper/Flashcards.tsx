@@ -6,25 +6,36 @@ import FilterWrapperBase from "./Base";
 
 export function Flashcards() {
   const filterDefinitions = [
-    new MultiSelectFilter(
-      "temas",
-      "Área / Tema",
-      "id_tema",
-      "temas_id",
-      "temas_nome",
-      "id_area",
-      "temas_id_area",
-      "areas_nome"
-    ),
-    new MultiSelectFilter(
-      "flashcards-salvos",
-      "Salvos",
-      "id_salvo",
-      "flashcards_salvos_id_flashcard",
-      "flashcards_pergunta"
-    ),
-    new BooleanFilter("resolvido", "Excluir já resolvidos"),
-    new BooleanFilter("resolvido", "Excluir não resolvidos", "0", "nao_resolvido"),
+    new MultiSelectFilter({
+      entity: "temas",
+      label: "Área / Tema",
+      queryField: "id_tema",
+      idParamName: "temas_id",
+      labelParamName: "temas_nome",
+      parentKey: "id_area",
+      parentIdParamName: "temas_id_area",
+      parentLabelParamName: "areas_nome",
+    }),
+    new MultiSelectFilter({
+      entity: "flashcards-salvos",
+      label: "Salvos",
+      queryField: "id_flashcard",
+      idParamName: "flashcards_salvos_id_flashcard",
+      labelParamName: "flashcards_pergunta",
+      queryFieldEntity: "flashcards_salvos",
+    }),
+    new BooleanFilter({
+      queryField: "resolvido",
+      label: "Excluir já resolvidos",
+      denialOperator: true
+    }),
+    new BooleanFilter({
+      queryField: "resolvido",
+      label: "Excluir não resolvidos",
+      denialOperator: true,
+      activeValue: "0",
+      key: "nao_resolvido",
+    }),
   ];
 
   return <FilterWrapperBase filterDefinitions={filterDefinitions} entity="flashcards" bigButton />;

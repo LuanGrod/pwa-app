@@ -1,13 +1,16 @@
 import { ItemDef } from "@/type/form/ItemDef";
-import { AbstractItem } from "./AbstractItem";
-import { Form } from "../Form";
+import { AbstractItem } from "../AbstractItem";
+import LinkWidget from "@/component/form/item/widgets/Link";
+import { Form } from "@/form/Form";
+import HiddenItem from "@/component/form/item/item/Hidden";
 
-export class Password extends AbstractItem {
+export class Link extends AbstractItem {
   constructor({
-    widgetType,
-    itemType,
-    name = null,
-    fieldName,
+    widgetType = LinkWidget,
+    itemType = HiddenItem,
+    name = "",
+    fieldName = "",
+    type = "",
     entity = null,
     validators = [],
     textNameGender = true,
@@ -18,16 +21,17 @@ export class Password extends AbstractItem {
     msgPlacement = null,
     tags = [],
     defaultValue = null,
-    data,
+    data = new Map<string, any>(),
     itemClassName = null,
     widgetClassName = null,
-  }: ItemDef) {
+  }: Partial<ItemDef>) {
+    name = name ?? `${entity}_${fieldName}`;
     super({
       widgetType,
       itemType,
       name,
       fieldName,
-      type: "password",
+      type,
       entity,
       validators,
       textNameGender,
@@ -46,23 +50,13 @@ export class Password extends AbstractItem {
 
   getWidgetProps(form: Form, itemHook: any, data?: any): Object | null {
     return {
-      type: this.getType() == "password" ? (data.isVisible ? "text" : "password") : this.getType(),
-      name: this.getName(),
-      id: this.getName(),
-      value: itemHook.value,
-      onChange: itemHook.onChange,
-      onBlur: itemHook.onBlur,
-      className: itemHook.error ? "field-error" : "",
-      placeholder: `Digite aqui ${this.getTextNameGender() ? "seu" : "sua"} ${this.getTextName()}...`,
-      data,
+      formName: this.getFormName(),
+      data: this.getData(),
+      className: this.getWidgetClassName(),
     };
   }
 
   getItemProps(form: Form, itemHook: any): Object | null {
-    return {
-      item: this,
-      form,
-      itemHook,
-    };
+    return { item: this, form, itemHook };
   }
 }

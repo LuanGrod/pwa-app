@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import FilterInterface from "@filter/ui/FilterInterface";
+import FilterInterface, { ConnectionOperator } from "@filter/ui/FilterInterface";
+import { format } from "path";
 
 export function useFilters(definitions: FilterInterface[]) {
   const [values, setValues] = useState<any>(() =>
@@ -7,7 +8,6 @@ export function useFilters(definitions: FilterInterface[]) {
   );
   const [options, setOptions] = useState<Record<string, any[]>>({});
   const [loadingOptions, setLoadingOptions] = useState<Record<string, boolean>>({});
-  // const [searchTerm, setSearchTerm] = useState<string>("");
 
   useEffect(() => {
     definitions.map((def) => {
@@ -24,8 +24,6 @@ export function useFilters(definitions: FilterInterface[]) {
     const filter = definitions.find((def) => def.getQueryField() === key);
     if (!(filter?.getType() == "multi-select")) return;
 
-    // setSearchTerm("");
-
     setLoadingOptions((prev) => ({ ...prev, [key]: true }));
     await filter.loadOptions();
 
@@ -33,7 +31,12 @@ export function useFilters(definitions: FilterInterface[]) {
     setLoadingOptions((prev) => ({ ...prev, [key]: false }));
   };
 
-  const toggleParent = (filterKey: any, parentKey: any, parentId: string, allChildrenIds: string[]) => {
+  const toggleParent = (
+    filterKey: any,
+    parentKey: any,
+    parentId: string,
+    allChildrenIds: string[]
+  ) => {
     setValues((prev: any) => {
       const newValues = { ...prev };
       const parentSelected = prev[parentKey].includes(parentId);
@@ -139,59 +142,86 @@ export function useFilters(definitions: FilterInterface[]) {
     });
   };
 
-  // const filterOptionsBySearch = (options: any[], labelParam: string, parentLabelParam?: string) => {
-  //   if (!searchTerm.trim()) return options;
-
-  //   const searchLower = searchTerm.toLowerCase();
-
-  //   return options.filter((option: any) => {
-  //     // Para itens pai, busca no nome do pai e dos filhos
-  //     if (option.isParent && option.children) {
-  //       // Busca no nome do pai
-  //       const parentMatch = parentLabelParam && option[parentLabelParam]?.toLowerCase().includes(searchLower);
-
-  //       // Busca nos filhos
-  //       const childrenMatch = option.children.some((child: any) =>
-  //         child[labelParam]?.toLowerCase().includes(searchLower)
-  //       );
-
-  //       return parentMatch || childrenMatch;
-  //     }
-
-  //     // Para itens simples, busca no label do item
-  //     return option[labelParam]?.toLowerCase().includes(searchLower);
-  //   });
-  // };
-
   const buildFilterString = (entity: string) => {
-    const parts: string[] = [];
+    let parts: { value: string; connector: ConnectionOperator }[] = [];
     entity = entity.replace("-", "_");
-    for (const def of definitions) {
+
+    definitions.forEach((def, index) => {
+      const type = def.getType();
+      const queryFieldEntity = def.getQueryFieldEntity() ? `${def.getQueryFieldEntity()}_` : "";
+      const queryField = def.getQueryField();
+      const conditionalOperator = def.getConditionalOperator();
+      const connectionOperator = def.getConnectionOperator();
+      const denialOperator = def.getDenialOperator();
+
       let keyFilteredValues: any = [];
       let parentKeyFilteredValues: any = [];
-      if (def.getType() == "multi-select") {
-        if (def.getParentKey()) {
-          parentKeyFilteredValues = values[def.getParentKey()].map((item: any) => item);
-        }
-        keyFilteredValues = values[def.getQueryField()].map((item: any) => item);
-      }
 
-      if (def.getType() === "multi-select" && keyFilteredValues.length) {
-        const queryFieldEntity = def.getQueryFieldEntity() || entity;
-        parts.push(`${queryFieldEntity}_${def.getQueryField()}_0{in}${keyFilteredValues.join(",")}`);
-      }
-      if (def.getType() === "multi-select" && parentKeyFilteredValues.length) {
-        const parentKeyEntity = def.getParentKeyEntity() || entity;
-        parts.push(`${parentKeyEntity}_${def.getParentKey()}_0{in}${parentKeyFilteredValues.join(",")}`);
-      }
+      //verificar o tipo de conexao (and/or)
+      //verificar o tipo de condicional (eq, in, etc)
+      //verificar se é "not" !()
 
-      if (def.getType() === "boolean" && values[def.getQueryField()]) {
-        if (def.getActiveValue() == values[def.getQueryField()]) {
-          parts.push(`${entity}_${def.getQueryField()}_0={eq}${def.getActiveValue()}`);
+      if (type === "multi-select") {
+        const parentKey = def.getParentKey();
+        const parentKeyEntity = def.getParentKeyEntity() ? `${def.getParentKeyEntity()}_` : "";
+        const parentConnectionOperator = def.getParentConnectionOperator();
+        const parentConditionalOperator = def.getParentConditionalOperator();
+        const parentDenialOperator = def.getParentDenialOperator();
+
+        // coleta os valores selecionados
+        if (values[queryField]?.length > 0) {
+          keyFilteredValues = values[queryField].map((item: any) => item);
+        }
+        if (parentKey && values[parentKey]?.length > 0) {
+          parentKeyFilteredValues = values[parentKey].map((item: any) => item);
+        }
+
+        // adiciona os filtros multiple do child na query
+        if (keyFilteredValues.length) {
+          let currentFilter = `${queryFieldEntity}${queryField}_0{${conditionalOperator}}${keyFilteredValues.join(
+            ","
+          )}`;
+          currentFilter = denialOperator ? `!(${currentFilter})` : currentFilter;
+
+          parts.push({ value: currentFilter, connector: connectionOperator });
+        }
+
+        // adiciona os filtros multiple do parent na query
+        if (parentKeyFilteredValues.length) {
+          let currentFilter = `${parentKeyEntity}${parentKey}_0{${parentConditionalOperator}}${parentKeyFilteredValues.join(
+            ","
+          )}`;
+          currentFilter = parentDenialOperator ? `!(${currentFilter})` : currentFilter;
+
+          parts.push({ value: currentFilter, connector: parentConnectionOperator });
+        }
+      } else if (type === "boolean" && values[queryField]) {
+        const activeValue = def.getActiveValue();
+        if (activeValue == values[queryField]) {
+          let currentFilter = `${queryFieldEntity}${queryField}_0{${conditionalOperator}}${activeValue}`;
+          currentFilter = denialOperator ? `!(${currentFilter})` : currentFilter;
+
+          parts.push({ value: currentFilter, connector: connectionOperator });
         }
       }
-    }
-    return parts.join("{and}");
+    });
+
+    const format = parts.map((item, index) => {
+      if (index === 0) {
+        return `${item.value}{${item.connector}}`;
+      } else {
+        return `{${item.connector}}${item.value}`;
+      }
+    });
+    // console.log(JSON.stringify(parts, null, 2));
+
+    // console.log(format.join("").replace("{and}{or}", "{or}").replace("{ir}{and}", "{or}"));
+
+    return format.join("").replace("{and}{or}", "{or}").replace("{ir}{and}", "{or}")
+
+    // return JSON.stringify(parts, null, 2);
+    // return format.join("").replace(/\{[^{}]*\}/, '');
+    // return parts.replace(/\{[^{}]*\}$/, "");
   };
 
   return {
@@ -206,8 +236,5 @@ export function useFilters(definitions: FilterInterface[]) {
     clearFilter,
     buildFilterString,
     definitions,
-    // searchTerm,
-    // setSearchTerm,
-    // filterOptionsBySearch,
   };
 }

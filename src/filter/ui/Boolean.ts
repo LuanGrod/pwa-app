@@ -1,8 +1,40 @@
 import AbstractFilter from "./AbstractFilter";
+import { ConditionalOperator, ConnectionOperator } from "./FilterInterface";
+
+type BooleanProps = {
+  queryField: string;
+  label: string;
+  activeValue?: string;
+  key?: string;
+  queryFieldEntity?: string;
+  conditionalOperator?: ConditionalOperator;
+  connectionOperator?: ConnectionOperator;
+  denialOperator?: boolean;
+};
 
 export default class Boolean extends AbstractFilter {
-  constructor(queryField: string, label: string, activeValue?: string, key?: string) {
-    super(queryField, label, "boolean", key);
+  activeValue: string;
+
+  constructor({
+    label,
+    queryField,
+    activeValue,
+    conditionalOperator,
+    connectionOperator,
+    denialOperator,
+    key,
+    queryFieldEntity,
+  }: BooleanProps) {
+    super(
+      queryField,
+      label,
+      "boolean",
+      key,
+      queryFieldEntity,
+      conditionalOperator,
+      connectionOperator,
+      denialOperator
+    );
     this.activeValue = activeValue || "1";
   }
 
@@ -16,6 +48,10 @@ export default class Boolean extends AbstractFilter {
 
   getOptions(): any {
     return null;
+  }
+
+  getActiveValue(): string | null {
+    return this.activeValue || null;
   }
 
   getIdParamName(): string {
@@ -33,10 +69,16 @@ export default class Boolean extends AbstractFilter {
   getParentLabelParamName(): string {
     throw new Error("Method not implemented.");
   }
-  getQueryFieldEntity(): string | null {
+  getParentKeyEntity(): string {
     throw new Error("Method not implemented.");
   }
-  getParentKeyEntity(): string | null {
+  getParentConditionalOperator(): ConditionalOperator {
+    throw new Error("Method not implemented.");
+  }
+  getParentConnectionOperator(): ConnectionOperator {
+    throw new Error("Method not implemented.");
+  }
+  getParentDenialOperator(): boolean {
     throw new Error("Method not implemented.");
   }
 }

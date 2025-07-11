@@ -10,12 +10,12 @@ export class Whatsapp extends Text {
   constructor({
     widgetType = InputWidget,
     itemType = Item,
-    name = "whatsapp",
+    name = null,
+    fieldName = "whatsapp",
     type = "text",
     entity = null,
     validators = [RequiredValidatorFactory.create(), BrazilianValidatorFactory.create()],
     textNameGender = true,
-    fullName = null,
     formName = null,
     textName = null,
     filters = [],
@@ -23,16 +23,20 @@ export class Whatsapp extends Text {
     msgPlacement = null,
     tags = [],
     defaultValue = null,
+    data = new Map<string, any>(),
+    itemClassName = null,
+    widgetClassName = null,
   }: Partial<ItemDef>) {
+    name = name ?? `${entity}_${fieldName}`;
     super({
       widgetType,
       itemType,
       name,
+      fieldName,
       type,
       entity,
       validators,
       textNameGender,
-      fullName,
       formName,
       textName,
       filters,
@@ -40,6 +44,9 @@ export class Whatsapp extends Text {
       msgPlacement,
       tags,
       defaultValue,
+      data,
+      itemClassName,
+      widgetClassName,
     });
   }
 }

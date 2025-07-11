@@ -20,7 +20,7 @@ export function useForm(itemsConfig: ItemInterface[], submitHandler: SubmitHandl
       }
 
       const index = itemsConfig[idx].getName();
-      values[index] = item.value;
+      index ? values[index] = item.value : false;
     });
 
     if (isValid) {

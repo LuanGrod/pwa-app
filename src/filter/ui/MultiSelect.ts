@@ -1,5 +1,26 @@
 import AbstractFilter from "./AbstractFilter";
 import { Listing } from "@request/builder/Listing";
+import { ConditionalOperator, ConnectionOperator } from "./FilterInterface";
+
+type MultiSelectProps = {
+  entity: string;
+  label: string;
+  queryField: string;
+  idParamName: string;
+  labelParamName: string;
+  parentKey?: string;
+  parentIdParamName?: string;
+  parentLabelParamName?: string;
+  queryFieldEntity?: string;
+  parentKeyEntity?: string;
+  key?: string;
+  conditionalOperator?: ConditionalOperator;
+  connectionOperator?: ConnectionOperator;
+  denialOperator?: boolean;
+  parentConditionalOperator?: ConditionalOperator;
+  parentConnectionOperator?: ConnectionOperator;
+  parentDenialOperator?: boolean;
+};
 
 export default class MultiSelect extends AbstractFilter {
   options: string[];
@@ -9,23 +30,40 @@ export default class MultiSelect extends AbstractFilter {
   parentKey: string;
   parentIdParamName: string;
   parentLabelParamName: string;
-  queryFieldEntity?: string;
-  parentKeyEntity?: string;
+  parentKeyEntity: string;
+  parentConditionalOperator: ConditionalOperator;
+  parentConnectionOperator: ConnectionOperator;
+  parentDenialOperator: boolean;
 
-  constructor(
-    entity: string,
-    label: string,
-    queryField: string,
-    idParamName: string,
-    labelParamName: string,
-    parentKey?: string,
-    parentIdParamName?: string,
-    parentLabelParamName?: string,
-    queryFieldEntity?: string,
-    parentKeyEntity?: string,
-    key?: string
-  ) {
-    super(queryField, label, "multi-select", key);
+  constructor({
+    entity,
+    label,
+    queryField,
+    idParamName,
+    labelParamName,
+    parentKey,
+    parentIdParamName,
+    parentLabelParamName,
+    queryFieldEntity,
+    parentKeyEntity,
+    key,
+    conditionalOperator = "in",
+    connectionOperator,
+    denialOperator,
+    parentConditionalOperator,
+    parentConnectionOperator,
+    parentDenialOperator,
+  }: MultiSelectProps) {
+    super(
+      queryField,
+      label,
+      "multi-select",
+      key,
+      queryFieldEntity,
+      conditionalOperator,
+      connectionOperator,
+      denialOperator
+    );
     this.options = [];
     this.entity = entity;
     this.idParamName = idParamName;
@@ -33,8 +71,10 @@ export default class MultiSelect extends AbstractFilter {
     this.parentKey = parentKey || "";
     this.parentIdParamName = parentIdParamName || "";
     this.parentLabelParamName = parentLabelParamName || "";
-    this.queryFieldEntity = queryFieldEntity || "";
     this.parentKeyEntity = parentKeyEntity || "";
+    this.parentConditionalOperator = parentConditionalOperator || "in";
+    this.parentConnectionOperator = parentConnectionOperator || "and";
+    this.parentDenialOperator = parentDenialOperator || false;
   }
 
   async loadOptions() {
@@ -109,11 +149,23 @@ export default class MultiSelect extends AbstractFilter {
     return this.parentLabelParamName;
   }
 
-  getQueryFieldEntity(): string | null {
-    return this.queryFieldEntity || null;
+  getParentKeyEntity(): string {
+    return this.parentKeyEntity;
   }
 
-  getParentKeyEntity(): string | null {
-    return this.parentKeyEntity || null;
+  getParentConditionalOperator(): ConditionalOperator {
+    return this.parentConditionalOperator;
+  }
+
+  getParentConnectionOperator(): ConnectionOperator {
+    return this.parentConnectionOperator;
+  }
+
+  getParentDenialOperator(): boolean {
+    return this.parentDenialOperator;
+  }
+
+  getActiveValue(): string | null {
+    throw new Error("Method not implemented.");
   }
 }

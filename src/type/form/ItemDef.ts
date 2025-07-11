@@ -4,20 +4,25 @@ import { MaskInterface } from "@/mask/MaskInterface";
 import { ValidatorInterface } from "@/validator/ValidatorInterface";
 import { HTMLInputTypeAttribute } from "react";
 
+type tags = "multipleRows" | "example"
+
 export type ItemDef = {
-  name: string;
+  fieldName: string;
+  name?: string | null;
   type?: HTMLInputTypeAttribute | "textarea" | "select";
   entity?: string | null;
   validators?: ValidatorInterface[];
   textNameGender?: boolean;
-  fullName?: string | null;
   formName?: string | null;
   textName?: string | null;
   filters?: FilterInterface[];
   mask?: MaskInterface | null;
   msgPlacement?: MsgPlacement | null;
-  tags?: string[];
+  tags?: tags[];
   widgetType: any;
+  widgetClassName: string | null;
   itemType: any;
+  itemClassName: string | null;
   defaultValue?: any;
+  data: Map<string, any>;
 };

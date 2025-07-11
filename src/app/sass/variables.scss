@@ -12,6 +12,7 @@
   --danger: #e7432b;
   --warning: #f6a600;
   --info: #2991d6;
+  --filter-shadow: drop-shadow(0px 0px 2px color-mix(in oklab, var(--foreground) 20%, transparent));
 }
 
 /* esse inline é para usar no tailwind */
@@ -42,5 +43,6 @@
   --divider: #ffffff15;
   --footer-link-active: #ffffff;
   --footer-link-inactive: #828889;
+  --filter-shadow: drop-shadow(0);
   // }
 }

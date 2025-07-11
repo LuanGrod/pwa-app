@@ -6,11 +6,11 @@ export class Text extends AbstractItem {
   constructor({
     widgetType,
     itemType,
-    name,
+    name = null,
+    fieldName,
     entity = null,
     validators = [],
     textNameGender = true,
-    fullName = null,
     formName = null,
     textName = null,
     filters = [],
@@ -18,16 +18,19 @@ export class Text extends AbstractItem {
     msgPlacement = null,
     tags = [],
     defaultValue = null,
+    data,
+    itemClassName = null,
+    widgetClassName = null,
   }: ItemDef) {
     super({
       widgetType,
       itemType,
       name,
+      fieldName,
       type: "text",
       entity,
       validators,
       textNameGender,
-      fullName,
       formName,
       textName,
       filters,
@@ -35,6 +38,9 @@ export class Text extends AbstractItem {
       msgPlacement,
       tags,
       defaultValue,
+      data,
+      itemClassName,
+      widgetClassName,
     });
   }
 

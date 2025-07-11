@@ -1,8 +1,12 @@
 .form-item {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
   position: relative;
+
+  // vai aplicar a mb se tiver outro form-item ou um botão de submit
+  &:has(+ .form-item), &:has(+ button[type="submit"]) {
+    margin-bottom: 1rem;
+  }
 
   label {
     font-size: 1rem;
@@ -73,5 +77,12 @@
     &::placeholder {
       color: #b0b0b0;
     }
+  }
+}
+
+.dark-theme {
+  // @media (prefers-color-scheme: dark) {
+  .search-container {
+    background-color: var(--background);
   }
 }

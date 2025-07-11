@@ -9,29 +9,33 @@ export class Email extends Text {
   constructor({
     widgetType = InputWidget,
     itemType = Item,
-    name = "email",
+    name = null,
+    fieldName = "email",
     type = "text",
     entity = null,
     validators = [RequiredValidatorFactory.create(), EmailValidatorFactory.create()],
     textNameGender = true,
-    fullName = null,
-    formName = null,
+    formName = "E-mail",
     textName = "e-mail",
     filters = [],
     mask = null,
     msgPlacement = null,
     tags = [],
     defaultValue = null,
+    data = new Map<string, any>(),
+    itemClassName = null,
+    widgetClassName = null,
   }: Partial<ItemDef>) {
+    name = name ?? `${entity}_${fieldName}`;
     super({
       widgetType,
       itemType,
-      name: `${entity}_email`,
+      name,
+      fieldName,
       type,
       entity,
       validators,
       textNameGender,
-      fullName,
       formName,
       textName,
       filters,
@@ -39,6 +43,9 @@ export class Email extends Text {
       msgPlacement,
       tags,
       defaultValue,
+      data,
+      itemClassName,
+      widgetClassName,
     });
   }
 }

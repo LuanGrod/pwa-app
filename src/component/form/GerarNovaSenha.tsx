@@ -7,5 +7,5 @@ import GeracaoNovaSenhaForm from "@form/GeracaoNovaSenha";
 export default function GeracaoNovaSenha({}) {
   const submitHandler = new GeracaoNovaSenhaHandler({entity: "estudantes"});
 
-  return <Form formConfig={GeracaoNovaSenhaForm} submitHandler={submitHandler} />;
+  return <Form formConfig={GeracaoNovaSenhaForm} submitHandler={submitHandler} submitLabel="SALVAR" />;
 }

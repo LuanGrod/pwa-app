@@ -41,7 +41,7 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
     transition-duration: 500ms;
     overflow-y: auto;
-    filter: drop-shadow(0px 0px 2px color-mix(in oklab, var(--foreground) 20%, transparent));
+    filter: var(--filter-shadow);
 
     &.open {
       transform: translateY(0);
@@ -101,7 +101,7 @@
     border-top-left-radius: 1.5rem;
     border-top-right-radius: 1.5rem;
     overflow-y: auto;
-    filter: drop-shadow(0px 0px 2px color-mix(in oklab, var(--foreground) 20%, transparent));
+    filter: var(--filter-shadow);
 
     &.open {
       transform: translateY(0);
@@ -245,7 +245,7 @@
     font-size: 14px;
     line-height: 1;
     font-weight: 300;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px 3px rgba(0, 0, 0, 0.1);
 
     .header {
       display: flex;
@@ -318,7 +318,7 @@
 }
 
 .dark-theme {
-// @media (prefers-color-scheme: dark) {
+  // @media (prefers-color-scheme: dark) {
   .drawer-wrapper {
     .drawer-bottom {
       background-color: var(--background-variation);
@@ -327,7 +327,8 @@
 
   .popup-wrapper {
     .popup {
-      box-shadow: 0 4px 6px rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 6px 3px rgba(255, 255, 255, 0.2);
+      background-color: var(--background-variation);
     }
 
     .spinner {

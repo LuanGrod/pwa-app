@@ -9,12 +9,12 @@ export class Conteudo extends Textarea {
   constructor({
     widgetType = TextareaWidget,
     itemType = TextAreaItem,
-    name = "conteudo",
+    name = null,
+    fieldName = "conteudo",
     type = "textarea",
     entity = null,
     validators = [RequiredValidatorFactory.create(), MaxLengthValidatorFactory.create(500)],
     textNameGender = true,
-    fullName = null,
     formName = null,
     textName = "conteúdo",
     filters = [],
@@ -22,23 +22,30 @@ export class Conteudo extends Textarea {
     msgPlacement = null,
     tags = [],
     defaultValue = null,
+    data = new Map<string, any>(),
+    itemClassName = null,
+    widgetClassName = null,
   }: Partial<ItemDef>) {
+    name = name ?? `${entity}_${fieldName}`;
     super({
       widgetType,
       itemType,
-      name: `${entity}_conteudo`,
+      name,
+      fieldName,
       type,
       entity,
       validators,
       textNameGender,
-      fullName,
       formName,
       textName,
       filters,
       mask,
       msgPlacement,
       tags,
-      defaultValue
+      defaultValue,
+      data,
+      itemClassName,
+      widgetClassName,
     });
   }
 }

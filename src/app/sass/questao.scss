@@ -126,7 +126,7 @@
   gap: 10px;
   width: 100%;
   background: var(--background);
-  filter: drop-shadow(0px 0px 2px color-mix(in oklab, var(--foreground) 20%, transparent));
+  filter: var(--filter-shadow);
   padding: 20px 22px 34px;
 
   .buttons {

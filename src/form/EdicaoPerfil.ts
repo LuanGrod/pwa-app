@@ -11,13 +11,6 @@ import InputWidget from "@/component/form/item/widgets/Input";
 const formItems = [
   new Email({ entity: "estudantes" }),
   new Whatsapp({ entity: "estudantes" }),
-  new Text({
-    name: "objetivo de especialidade",
-    entity: "estudantes",
-    validators: [MaxLengthValidatorFactory.create(200)],
-    widgetType: InputWidget,
-    itemType: Item,
-  }),
   new DataNascimento({ entity: "estudantes" }),
 ];
 const form = new Form(formItems, "below");

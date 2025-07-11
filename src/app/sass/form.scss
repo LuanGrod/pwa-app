@@ -31,4 +31,13 @@ form {
       border-left: 0.25rem solid var(--danger);
     }
   }
+
+  .link-recuperacao-senha {
+    display: block;
+    text-align: end;
+    margin-bottom: 22px;
+    font-size: 16px;
+    line-height: 1.25;
+    font-weight: 400;
+  }
 }

@@ -14,6 +14,7 @@
   --danger: #e7432b;
   --warning: #f6a600;
   --info: #2991d6;
+  --filter-shadow: drop-shadow(0px 0px 2px color-mix(in oklab, var(--foreground) 20%, transparent));
 }
 
 /* esse inline é para usar no tailwind */
@@ -41,6 +42,7 @@
   --divider: #ffffff15;
   --footer-link-active: #ffffff;
   --footer-link-inactive: #828889;
+  --filter-shadow: drop-shadow(0);
 }
 
 .screen {
@@ -164,12 +166,22 @@ form .submit-return-wrapper.danger {
   background-color: color-mix(in srgb, var(--danger) 20%, transparent);
   border-left: 0.25rem solid var(--danger);
 }
+form .link-recuperacao-senha {
+  display: block;
+  text-align: end;
+  margin-bottom: 22px;
+  font-size: 16px;
+  line-height: 1.25;
+  font-weight: 400;
+}
 
 .form-item {
   display: flex;
   flex-direction: column;
-  margin-bottom: 1rem;
   position: relative;
+}
+.form-item:has(+ .form-item), .form-item:has(+ button[type=submit]) {
+  margin-bottom: 1rem;
 }
 .form-item label {
   font-size: 1rem;
@@ -233,6 +245,10 @@ form .submit-return-wrapper.danger {
   color: #b0b0b0;
 }
 
+.dark-theme .search-container {
+  background-color: var(--background);
+}
+
 .drawer-wrapper {
   position: fixed;
   top: 0;
@@ -272,7 +288,7 @@ form .submit-return-wrapper.danger {
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   transition-duration: 500ms;
   overflow-y: auto;
-  filter: drop-shadow(0px 0px 2px color-mix(in oklab, var(--foreground) 20%, transparent));
+  filter: var(--filter-shadow);
 }
 .drawer-wrapper .drawer-top.open {
   transform: translateY(0);
@@ -325,7 +341,7 @@ form .submit-return-wrapper.danger {
   border-top-left-radius: 1.5rem;
   border-top-right-radius: 1.5rem;
   overflow-y: auto;
-  filter: drop-shadow(0px 0px 2px color-mix(in oklab, var(--foreground) 20%, transparent));
+  filter: var(--filter-shadow);
 }
 .drawer-wrapper .drawer-bottom.open {
   transform: translateY(0);
@@ -451,7 +467,7 @@ form .submit-return-wrapper.danger {
   font-size: 14px;
   line-height: 1;
   font-weight: 300;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 6px 3px rgba(0, 0, 0, 0.1);
 }
 .popup-wrapper .popup .header {
   display: flex;
@@ -514,7 +530,8 @@ form .submit-return-wrapper.danger {
   background-color: var(--background-variation);
 }
 .dark-theme .popup-wrapper .popup {
-  box-shadow: 0 4px 6px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 6px 3px rgba(255, 255, 255, 0.2);
+  background-color: var(--background-variation);
 }
 .dark-theme .popup-wrapper .spinner {
   stroke: #fff;
@@ -536,9 +553,6 @@ form .submit-return-wrapper.danger {
   padding: 0.5rem 0.5rem 0.563rem;
   box-shadow: inset 0 -3px 0px 1px rgba(0, 0, 0, 0.35);
   transition: transform 200ms ease, box-shadow 200ms ease, filter 200ms ease, background-color 200ms ease;
-}
-.btn-shadow.disabled {
-  background-color: color-mix(in srgb, var(--emphasis) 85%, #000);
 }
 .btn-shadow:hover {
   cursor: pointer;
@@ -596,10 +610,6 @@ form .submit-return-wrapper.danger {
   font-weight: 600;
   font-size: 12px;
   line-height: 1;
-}
-
-.dark-theme .btn-shadow.disabled {
-  background-color: color-mix(in srgb, var(--emphasis) 75%, #000);
 }
 
 .page-filter {
@@ -763,7 +773,7 @@ form .submit-return-wrapper.danger {
   padding-top: 10px;
   padding-bottom: 27px;
   background-color: var(--background-variation);
-  filter: drop-shadow(0px 0px 4px color-mix(in oklab, var(--foreground) 20%, transparent));
+  filter: var(--filter-shadow);
 }
 .footer-wrapper .link {
   display: flex;
@@ -795,6 +805,7 @@ form .submit-return-wrapper.danger {
   align-items: center;
   width: 100%;
   background-color: var(--background);
+  filter: var(--filter-shadow);
 }
 .flashcard-footer:has(.btn) {
   padding: 20px 18px 57px;
@@ -1138,7 +1149,7 @@ form .submit-return-wrapper.danger {
   backface-visibility: hidden;
   background-color: var(--background);
   border-radius: 16px;
-  filter: drop-shadow(0px 0px 2px color-mix(in oklab, var(--foreground) 20%, transparent));
+  filter: var(--filter-shadow);
 }
 .flashcard .front .header,
 .flashcard .front .footer,
@@ -1205,7 +1216,6 @@ form .submit-return-wrapper.danger {
 
 .dark-theme .flashcard .front,
 .dark-theme .flashcard .back {
-  filter: drop-shadow(0px);
   background-color: #1a1f2b;
 }
 
@@ -1322,7 +1332,7 @@ form .submit-return-wrapper.danger {
   gap: 10px;
   width: 100%;
   background: var(--background);
-  filter: drop-shadow(0px 0px 2px color-mix(in oklab, var(--foreground) 20%, transparent));
+  filter: var(--filter-shadow);
   padding: 20px 22px 34px;
 }
 .questoes-footer .buttons {
