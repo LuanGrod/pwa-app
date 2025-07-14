@@ -39,37 +39,6 @@ export function useListing<T = any>({
   const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const fetchData = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const listing = new Listing({
-        entity: entity,
-        parentEntity: parentEntity || "",
-        parentId: parentId || 0,
-        headers: headers || {},
-        params: params || {},
-      });
-      const result = await listing.build(needsAuthorization);
-
-      if (!result.success) {
-        setError(result.message[0]);
-      }
-
-      setData(
-        result.data || {
-          currentPage: 1,
-          resultsPerPage: 5,
-          totalRows: 0,
-          rows: [],
-        }
-      );
-    } finally {
-      setLoading(false);
-    }
-  };
-
   // const deleteItem = async (id: number) => {
   //   setDeleting(true);
   //   setError(null);
@@ -84,10 +53,39 @@ export function useListing<T = any>({
   // };
 
   useEffect(() => {
-    if (autoFetch) {
-      fetchData();
-    }
-  }, [entity, parentEntity, parentId, autoFetch]);
+    const fetchData = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const listing = new Listing({
+          entity: entity,
+          parentEntity: parentEntity || "",
+          parentId: parentId || 0,
+          headers: headers || {},
+          params: params || {},
+        });
+        const result = await listing.build(needsAuthorization);
+
+        if (!result.success) {
+          setError(result.message[0]);
+        }
+
+        setData(
+          result.data || {
+            currentPage: 1,
+            resultsPerPage: 5,
+            totalRows: 0,
+            rows: [],
+          }
+        );
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return {
     // deleteItem,

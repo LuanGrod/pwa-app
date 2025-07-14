@@ -15,6 +15,8 @@ export function Flashcards() {
       parentKey: "id_area",
       parentIdParamName: "temas_id_area",
       parentLabelParamName: "areas_nome",
+      queryFieldEntity: "flashcards",
+      parentKeyEntity: "temas",
     }),
     new MultiSelectFilter({
       entity: "flashcards-salvos",
@@ -23,18 +25,17 @@ export function Flashcards() {
       idParamName: "flashcards_salvos_id_flashcard",
       labelParamName: "flashcards_pergunta",
       queryFieldEntity: "flashcards_salvos",
+      connectionOperator: "or",
     }),
     new BooleanFilter({
       queryField: "resolvido",
       label: "Excluir já resolvidos",
-      denialOperator: true
     }),
     new BooleanFilter({
-      queryField: "resolvido",
+      queryField: "nao_resolvido",
       label: "Excluir não resolvidos",
-      denialOperator: true,
-      activeValue: "0",
-      key: "nao_resolvido",
+      // activeValue: "0",
+      // key: "nao_resolvido",
     }),
   ];
 

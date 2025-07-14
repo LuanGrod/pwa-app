@@ -80,25 +80,35 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
     if (!currentFlashcard) return null;
 
     if (currentFlashcard.flashcards_salvos_id) {
+      let tempId = currentFlashcard.flashcards_salvos_id;
+
+      set((state) => ({
+        flashcardsList:
+          state.flashcardsList &&
+          state.flashcardsList.map((flashcards) =>
+            flashcards.flashcards_id === currentFlashcard.flashcards_id
+              ? { ...flashcards, flashcards_salvos_id: "" }
+              : flashcards
+          ),
+      }));
+
       const deleting = new Delete({
         entity: "flashcards-salvos",
-        id: currentFlashcard.flashcards_salvos_id,
+        id: tempId,
       });
 
       const response = await deleting.build(true);
-
-      if (response.success) {
-        set((state) => ({
-          flashcardsList:
-            state.flashcardsList &&
-            state.flashcardsList.map((flashcards) =>
-              flashcards.flashcards_id === currentFlashcard.flashcards_id
-                ? { ...flashcards, flashcards_salvos_id: "" }
-                : flashcards
-            ),
-        }));
-      }
     } else {
+      set((state) => ({
+        flashcardsList:
+          state.flashcardsList &&
+          state.flashcardsList.map((flashcard) =>
+            flashcard.flashcards_id === currentFlashcard.flashcards_id
+              ? { ...flashcard, flashcards_salvos_id: "response.data.id" }
+              : flashcard
+          ),
+      }));
+
       const insertData = {
         ["flashcards_salvos_id_flashcard"]: currentFlashcard.flashcards_id,
         ["flashcards_salvos_id_estudante"]: userId,

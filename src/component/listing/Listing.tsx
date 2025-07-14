@@ -33,7 +33,7 @@ export function Listing<T>({
     return <>{errorComponent}</>;
   }
 
-  if (data.length === 0) {
+  if (!data || data.length === 0) {
     return <>{emptyComponent}</>;
   }
 

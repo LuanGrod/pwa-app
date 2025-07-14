@@ -1,7 +1,6 @@
 import HowToStudyContent from "@/component/HowToStudyContent";
 import ReturnLogoStructure from "../../../component/structure/ReturnLogo";
 import styles from "./page.module.css";
-import { li } from "motion/react-client";
 
 type Props = {};
 

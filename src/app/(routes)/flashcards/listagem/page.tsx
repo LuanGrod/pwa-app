@@ -15,7 +15,7 @@ type Props = {};
 export default function page({ }: Props) {
   const filters = useSearchParams().get("filters") || "";
 
-  const { setFlashcardsList, getCurrentFlashcard, flashcardsList } = useFlashcards();
+  const { setFlashcardsList, getCurrentFlashcard } = useFlashcards();
 
   const { data, loading, error } = useListing<FlashcardType>({
     entity: "flashcards",

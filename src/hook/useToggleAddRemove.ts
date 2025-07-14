@@ -11,21 +11,16 @@ type Props = {
   insertData: any;
 };
 
-export default function useToggleAddRemove({ data, setData, entity, idParamName, insertData, keyParamName }: Props) {
+export default function useToggleAddRemove({
+  data,
+  setData,
+  entity,
+  idParamName,
+  insertData,
+  keyParamName,
+}: Props) {
   const toggleAddRemove = async () => {
-    console.log(JSON.stringify(data, null, 2));
-    console.log(JSON.stringify(insertData, null, 2));
-
     if (data[idParamName]) {
-      console.log("Remover item");
-
-      const deleting = new Delete({
-        entity: entity,
-        id: data[idParamName],
-      });
-
-      const response = await deleting.build(true);
-
       setData((prevData: any) => {
         if (Array.isArray(prevData)) {
           return prevData.map((item: any) => {
@@ -44,8 +39,33 @@ export default function useToggleAddRemove({ data, setData, entity, idParamName,
         }
         return prevData;
       });
+
+      const deleting = new Delete({
+        entity: entity,
+        id: data[idParamName],
+      });
+
+      const response = await deleting.build(true);
     } else {
-      console.log("Salvar item");
+      //atualizacao inicial p/ icone
+      setData((prevData: any) => {
+        if (Array.isArray(prevData)) {
+          return prevData.map((item: any) => {
+            if (item[keyParamName!] === data[keyParamName!]) {
+              item[idParamName] = "response.data.id";
+            }
+            return item;
+          });
+        } else {
+          if (prevData) {
+            return {
+              ...prevData,
+              [idParamName]: "response.data.id",
+            };
+          }
+        }
+        return prevData;
+      });
 
       const insert = new Insert({
         entity: entity,
@@ -54,6 +74,7 @@ export default function useToggleAddRemove({ data, setData, entity, idParamName,
 
       const response = await insert.build(true);
 
+      //atualizacao real com valor da response
       setData((prevData: any) => {
         if (Array.isArray(prevData)) {
           return prevData.map((item: any) => {

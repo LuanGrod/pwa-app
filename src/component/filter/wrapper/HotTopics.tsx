@@ -15,6 +15,8 @@ export function HotTopics() {
       parentKey: "id_area",
       parentIdParamName: "temas_id_area",
       parentLabelParamName: "areas_nome",
+      queryFieldEntity: "hot_topics",
+      parentKeyEntity: "temas",
     }),
     new MultiSelectFilter({
       entity: "hot-topics-salvos",
@@ -23,12 +25,12 @@ export function HotTopics() {
       idParamName: "hot_topics_salvos_id_hot_topic",
       labelParamName: "hot_topics_nome",
       queryFieldEntity: "hot_topics_salvos",
-    }), 
+      connectionOperator: "or",
+    }),
     new BooleanFilter({
       queryField: "nao_visto",
       label: "Excluir já visualizados",
-      denialOperator: true,
-      queryFieldEntity: "hot_topics_estudantes"
+      denialOperator: true
     }),
   ];
 

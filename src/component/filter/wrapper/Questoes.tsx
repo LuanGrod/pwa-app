@@ -15,6 +15,8 @@ export function Questoes() {
       parentKey: "id_area",
       parentIdParamName: "temas_id_area",
       parentLabelParamName: "areas_nome",
+      queryFieldEntity: "questoes",
+      parentKeyEntity: "temas",
     }),
     new MultiSelectFilter({
       entity: "instituicoes",
@@ -75,7 +77,7 @@ export function Questoes() {
       label: "Excluir questões sem comentários",
     }),
     new BooleanFilter({
-      queryField: "nao_resolvido",
+      queryField: "questoes_nao_resolvido",
       label: "Excluir já resolvidas",
       queryFieldEntity: "respostas_questoes",
     }),

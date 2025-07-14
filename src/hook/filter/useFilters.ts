@@ -206,18 +206,24 @@ export function useFilters(definitions: FilterInterface[]) {
       }
     });
 
-    const format = parts.map((item, index) => {
+    const andFilters = parts.filter((item) => item.connector === "and");
+    const orFilters = parts.filter((item) => item.connector === "or");
+    const fullFilters = Array.from(orFilters).concat(andFilters);
+    const format = fullFilters.map((item, index) => {
       if (index === 0) {
         return `${item.value}{${item.connector}}`;
       } else {
         return `{${item.connector}}${item.value}`;
       }
     });
-    // console.log(JSON.stringify(parts, null, 2));
 
-    // console.log(format.join("").replace("{and}{or}", "{or}").replace("{ir}{and}", "{or}"));
-
-    return format.join("").replace("{and}{or}", "{or}").replace("{ir}{and}", "{or}")
+    return format
+      .join("")
+      .replace("{and}{or}", "{or}")
+      .replace("{or}{and}", "{or}")
+      .replace("{and}{and}", "{and}")
+      .replace("{or}{or}", "{or}")
+      .replace(/\{[^{}]*\}$/, ""); //tira o ultimo conector {and} ou {or}
 
     // return JSON.stringify(parts, null, 2);
     // return format.join("").replace(/\{[^{}]*\}/, '');

@@ -15,6 +15,8 @@ export function MapasMentais() {
       parentKey: "id_area",
       parentIdParamName: "temas_id_area",
       parentLabelParamName: "areas_nome",
+      queryFieldEntity: "mapas_mentais",
+      parentKeyEntity: "temas",
     }),
     new MultiSelectFilter({
       entity: "mapas-mentais-salvos",
@@ -23,12 +25,12 @@ export function MapasMentais() {
       idParamName: "mapas_mentais_salvos_id_mapa_mental",
       labelParamName: "mapas_mentais_nome",
       queryFieldEntity: "mapas_mentais_salvos",
+      connectionOperator: "or",
     }),
     new BooleanFilter({
       queryField: "nao_visto",
       label: "Excluir já visualizados",
       denialOperator: true,
-      queryFieldEntity: "mapas_mentais_estudantes"
     }),
   ];
 
