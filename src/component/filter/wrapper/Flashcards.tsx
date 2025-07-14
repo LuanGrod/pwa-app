@@ -32,10 +32,10 @@ export function Flashcards() {
       label: "Excluir já resolvidos",
     }),
     new BooleanFilter({
-      queryField: "nao_resolvido",
+      queryField: "resolvido",
       label: "Excluir não resolvidos",
-      // activeValue: "0",
-      // key: "nao_resolvido",
+      activeValue: "0",
+      key: "nao_resolvido",
     }),
   ];
 
