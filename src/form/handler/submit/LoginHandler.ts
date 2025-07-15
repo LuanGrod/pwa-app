@@ -4,7 +4,7 @@ import { Login } from "@request/builder/Login";
 
 export class LoginHandler implements SubmitHandlerInterface {
   protected entity?: string | null;
-  protected props: Map<string, any>;
+  protected props?: Map<string, any>;
   public needsAuthorization: boolean;
 
   constructor({
@@ -13,12 +13,11 @@ export class LoginHandler implements SubmitHandlerInterface {
     needsAuthorization,
   }: {
     entity?: string | null;
-    props: Map<string, any>;
+    props?: Map<string, any>;
     needsAuthorization?: boolean;
   }) {
     this.entity = entity;
     this.props = props;
-
     this.needsAuthorization = needsAuthorization || false;
   }
 

@@ -8,7 +8,7 @@ import { useEffect } from "react";
 
 export default function Login({ }) {
   const router = useRouter();
-  const submitHandler = new LoginHandler({ props: new Map([["router", router]]) });
+  const submitHandler = new LoginHandler({});
 
   useEffect(() => {
     router.prefetch("/");

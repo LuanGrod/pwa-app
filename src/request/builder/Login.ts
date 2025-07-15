@@ -2,13 +2,12 @@ import { Methods } from "@/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Login as ResponseHandler } from "@request/response/handler/Login";
 import { DefaultApi } from "../error/handler/collection/DefaultApi";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 
 type LoginProps = {
   entity?: string | null;
   data: any;
   headers?: HeadersInit;
-  props: Map<string, any>;
+  props?: Map<string, any>;
 };
 
 export class Login extends RequestBuilder {

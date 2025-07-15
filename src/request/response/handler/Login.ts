@@ -11,14 +11,14 @@ import { HandlerInterface } from "@/request/error/handler/HandlerInterface";
 type LoginProps = {
   successMessage?: string;
   errorHandlerCollection?: ErrorHandlerCollection | null;
-  props: Map<string, any>;
+  props?: Map<string, any>;
 };
 
 export class Login extends ResponseHandler {
   protected successMessage: string;
   protected cookie: CookieInterface;
   protected expirationDate: Date;
-  protected props: Map<string, any>;
+  protected props?: Map<string, any>;
 
   constructor({
     successMessage = "Login realizado com sucesso!",
@@ -53,12 +53,8 @@ export class Login extends ResponseHandler {
     }
 
     startTransition(() => {
-      this.props.get("router").push("/");
       window.location.href = "/";
     });
-
-
-    return this.props.get("router").push("/");
   }
 
   protected handleError(error: Error): any {
