@@ -5,8 +5,8 @@ import { Link } from "./item/prebuilt/Link";
 import { Senha } from "./item/prebuilt/Senha";
 
 const formItems = [
-  new Email({ entity: "estudantes" }),
-  new Senha({ entity: "estudantes" }),
+  new Email({ entity: "estudantes", defaultValue: "mail@mail.com" }),
+  new Senha({ entity: "estudantes", defaultValue: "Senha123!" }),
   new Hidden({ name: "lembrar_senha", defaultValue: "1" }),
   new Link({
     formName: "Esqueci a senha",

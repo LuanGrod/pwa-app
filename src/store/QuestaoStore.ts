@@ -144,25 +144,35 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
     if (!currentQuestao) return null;
 
     if (currentQuestao.questoes_salvos_id) {
+      let tempId = currentQuestao.questoes_salvos_id;
+
+      set((state) => ({
+        questoesList:
+          state.questoesList &&
+          state.questoesList.map((questao) =>
+            questao.questoes_id === currentQuestao.questoes_id
+              ? { ...questao, questoes_salvos_id: "" }
+              : questao
+          ),
+      }));
+
       const deleting = new Delete({
         entity: "questoes-salvos",
-        id: currentQuestao.questoes_salvos_id,
+        id: tempId,
       });
 
       const response = await deleting.build(true);
-
-      if (response.success) {
-        set((state) => ({
-          questoesList:
-            state.questoesList &&
-            state.questoesList.map((questao) =>
-              questao.questoes_id === currentQuestao.questoes_id
-                ? { ...questao, questoes_salvos_id: "" }
-                : questao
-            ),
-        }));
-      }
     } else {
+      set((state) => ({
+        questoesList:
+          state.questoesList &&
+          state.questoesList.map((questao) =>
+            questao.questoes_id === currentQuestao.questoes_id
+              ? { ...questao, questoes_salvos_id: "response.data.id" }
+              : questao
+          ),
+      }));
+
       const insertData = {
         ["questoes_salvos_id_questao"]: currentQuestao.questoes_id,
         ["questoes_salvos_id_estudante"]: userId,

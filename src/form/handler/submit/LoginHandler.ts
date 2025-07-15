@@ -4,26 +4,26 @@ import { Login } from "@request/builder/Login";
 
 export class LoginHandler implements SubmitHandlerInterface {
   protected entity?: string | null;
-  protected router: AppRouterInstance;
+  protected props: Map<string, any>;
   public needsAuthorization: boolean;
 
   constructor({
     entity,
-    router,
+    props,
     needsAuthorization,
   }: {
     entity?: string | null;
-    router: AppRouterInstance;
+    props: Map<string, any>;
     needsAuthorization?: boolean;
   }) {
     this.entity = entity;
-    this.router = router;
+    this.props = props;
 
     this.needsAuthorization = needsAuthorization || false;
   }
 
   async onSubmit(values: any, id?: string): Promise<any> {
-    const loginRequestBuilder = new Login({ entity: this.entity, data: values, router: this.router });
+    const loginRequestBuilder = new Login({ entity: this.entity, data: values, props: this.props });
     return await loginRequestBuilder.build();
   }
 }

@@ -6,9 +6,9 @@ import LoginForm from "@form/Login";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 
-export default function Login({}) {
+export default function Login({ }) {
   const router = useRouter();
-  const submitHandler = new LoginHandler({ router });
+  const submitHandler = new LoginHandler({ props: new Map([["router", router]]) });
 
   useEffect(() => {
     router.prefetch("/");

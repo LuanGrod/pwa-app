@@ -5,30 +5,35 @@ import CookieInterface from "@/cookie/CookieInterface";
 import Cookie from "@cookie/Cookie";
 import { LoginResponse } from "@/type/request/Login";
 import { authStore } from "@/store/AuthStore";
-import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { startTransition } from "react";
 import { HandlerInterface } from "@/request/error/handler/HandlerInterface";
 
 type LoginProps = {
   successMessage?: string;
   errorHandlerCollection?: ErrorHandlerCollection | null;
-  router: AppRouterInstance;
+  props: Map<string, any>;
 };
 
 export class Login extends ResponseHandler {
   protected successMessage: string;
   protected cookie: CookieInterface;
   protected expirationDate: Date;
-  protected router: AppRouterInstance;
+  protected props: Map<string, any>;
 
-  constructor({ successMessage = "Login realizado com sucesso!", errorHandlerCollection = null, router }: LoginProps) {
-    super({ errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection() });
+  constructor({
+    successMessage = "Login realizado com sucesso!",
+    errorHandlerCollection = null,
+    props,
+  }: LoginProps) {
+    super({
+      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+    });
     this.successMessage = successMessage;
     this.onSuccessFn = this.handleSuccess.bind(this);
     this.onErrorFn = this.handleError.bind(this);
     this.cookie = new Cookie();
     this.expirationDate = new Date();
-    this.router = router;
+    this.props = props;
   }
 
   protected async handleSuccess(result: LoginResponse): Promise<any> {
@@ -48,7 +53,7 @@ export class Login extends ResponseHandler {
     }
 
     startTransition(() => {
-      this.router.push("/");
+      this.props.get("router").push("/");
     });
 
     // window.location.href = "/";

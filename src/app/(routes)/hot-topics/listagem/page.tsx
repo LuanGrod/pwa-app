@@ -11,6 +11,7 @@ import SearchBar from "@global/atomic/SearchBar";
 import useSearch from "@/hook/useSearch";
 import { useToggle } from "@/hook/useToggle";
 import { HotTopicsListagem } from "@/type/Entities";
+import { Profiler, StrictMode } from "react";
 
 type Props = {};
 
@@ -28,6 +29,18 @@ export default function page({ }: Props) {
     options: data.rows,
     keyParams: ["hot_topics_nome", "temas_nome"],
   });
+
+
+  const onRender = (id: any, phase: any, actualDuration: any, baseDuration: any, startTime: any, commitTime: any) => {
+    console.log({
+      id,
+      phase,
+      actualDuration,
+      baseDuration,
+      startTime,
+      commitTime,
+    })
+  }
 
   return (
     <ReturnTitleSearchStructure title="Hot Topics" handleSearch={toggleSearch}>
@@ -66,5 +79,6 @@ export default function page({ }: Props) {
         )}
       />
     </ReturnTitleSearchStructure>
+
   );
 }
