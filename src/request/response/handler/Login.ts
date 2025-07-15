@@ -56,7 +56,7 @@ export class Login extends ResponseHandler {
       this.props.get("router").push("/");
     });
 
-    // window.location.href = "/";
+    window.location.href = "/";
 
     return this.props.get("router").push("/");
   }
