@@ -7,7 +7,11 @@ import { Error500 } from "../Error500";
 import { Fetch } from "../Fetch";
 import { Collection } from "./Collection";
 
-
+/**
+ * Mostra as mensagens de erro vindo da api
+ * Usado para as telas do sistema 
+ * 401 -> /sair
+ */
 export class DefaultApi extends Collection {
     constructor() {
       super({

@@ -1,6 +1,7 @@
 import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Listing as ResponseHandler } from "@global/request/response/handler/Listing";
+import { DefaultApi } from "../error/handler/collection/DefaultApi";
 
 type ListingProps = {
   entity: string;
@@ -11,14 +12,24 @@ type ListingProps = {
 };
 
 export class Listing extends RequestBuilder {
-  constructor({ entity, parentEntity = null, parentId = null, params = {}, headers = {} }: ListingProps) {
+  constructor({
+    entity,
+    parentEntity = null,
+    parentId = null,
+    params = {},
+    headers = {},
+  }: ListingProps) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    const endpoint = parentEntity ? `${apiUrl}/${parentEntity}/${parentId}/${entity}` : `${apiUrl}/${entity}`;
+    const endpoint = parentEntity
+      ? `${apiUrl}/${parentEntity}/${parentId}/${entity}`
+      : `${apiUrl}/${entity}`;
 
     const method: Methods = "GET";
 
-    const responseHandler = new ResponseHandler({});
+    const responseHandler = new ResponseHandler({
+      errorHandlerCollection: new DefaultApi(),
+    });
 
     super({ endpoint, method, headers, data: null, responseHandler });
 

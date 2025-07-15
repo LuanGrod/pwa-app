@@ -1,5 +1,5 @@
-import { Default as DefaultErrorHandlerCollection } from "../../error/handler/collection/Default";
-import { CollectionInterface as ErrorHandlerCollection } from "../../error/handler/collection/CollectionInterface";
+import { Default as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/Default";
+import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
 import { ResponseHandler } from "./Handler";
 
 type UpdateProps = {

@@ -5,7 +5,6 @@ import CookieInterface from "@global/cookie/CookieInterface";
 import Cookie from "@global/cookie/Cookie";
 import { LoginResponse } from "@global/type/request/Login";
 import { startTransition } from "react";
-import { HandlerInterface } from "@global/request/error/handler/HandlerInterface";
 import { GetRow } from "@global/request/builder/GetRow";
 
 type LoginProps = {
@@ -62,21 +61,5 @@ export class Login extends ResponseHandler {
     startTransition(() => {
       window.location.href = "/";
     });
-  }
-
-  protected handleError(error: Error): any {
-    let errorResponse = {};
-    this.errorHandlerCollection?.get().forEach((errorHandler: HandlerInterface) => {
-      let errorMessage = errorHandler.handle(error);
-      if (errorMessage) {
-        errorResponse = {
-          success: false,
-          messageType: "error",
-          message: errorMessage,
-        };
-      }
-    });
-
-    return errorResponse;
   }
 }

@@ -1,7 +1,7 @@
 import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Login as ResponseHandler } from "@global/request/response/handler/Login";
-import { DefaultApi } from "../error/handler/collection/DefaultApi";
+import { DefaultApi2 } from "../error/handler/collection/DefaultApi2";
 
 type LoginProps = {
   entity?: string | null;
@@ -19,7 +19,7 @@ export class Login extends RequestBuilder {
     const method: Methods = "POST";
 
     const responseHandler = new ResponseHandler({
-      errorHandlerCollection: new DefaultApi(),
+      errorHandlerCollection: new DefaultApi2(),
       props,
     });
 

@@ -7,7 +7,9 @@ import { Error500 } from "../Error500";
 import { Fetch } from "../Fetch";
 import { Collection } from "./Collection";
 
-
+/**
+ * Mostra as mensagens de erro padrão da classe
+ */
 export class Default extends Collection {
     constructor() {
       super({

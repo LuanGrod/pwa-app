@@ -1,6 +1,7 @@
 import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Delete as ResponseHandler } from "@global/request/response/handler/Delete";
+import { DefaultApi } from "../error/handler/collection/DefaultApi";
 
 type DeleteProps = {
   entity: string;
@@ -16,7 +17,9 @@ export class Delete extends RequestBuilder {
 
     const method: Methods = "POST";
 
-    const responseHandler = new ResponseHandler({});
+    const responseHandler = new ResponseHandler({
+      errorHandlerCollection: new DefaultApi(),
+    });
 
     super({ endpoint, method, data: null, responseHandler, headers });
   }

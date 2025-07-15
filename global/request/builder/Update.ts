@@ -1,6 +1,7 @@
 import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Update as ResponseHandler } from "@global/request/response/handler/Update";
+import { DefaultApi } from "../error/handler/collection/DefaultApi";
 
 type UpdateProps = {
   entity: string;
@@ -17,7 +18,9 @@ export class Update extends RequestBuilder {
 
     const method: Methods = "PUT";
 
-    const responseHandler = new ResponseHandler({});
+    const responseHandler = new ResponseHandler({
+      errorHandlerCollection: new DefaultApi(),
+    });
 
     super({ endpoint, method, data, responseHandler, headers });
   }
