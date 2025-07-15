@@ -1,8 +1,9 @@
 "use client";
 
-import MultiSelectFilter from "@filter/ui/MultiSelect";
-import BooleanFilter from "@filter/ui/Boolean";
-import FilterWrapperBase from "./Base";
+import MultiSelectFilter from "@global/filter/ui/MultiSelect";
+import BooleanFilter from "@global/filter/ui/Boolean";
+import FilterWrapperBase from "@global/component/filter/wrapper/Base";
+import Logo from "@/component/icon/Logo";
 
 export function Flashcards() {
   const filterDefinitions = [
@@ -39,5 +40,5 @@ export function Flashcards() {
     }),
   ];
 
-  return <FilterWrapperBase filterDefinitions={filterDefinitions} entity="flashcards" bigButton />;
+  return <FilterWrapperBase filterBtnIcon={<Logo size={26} className="logo" />} filterDefinitions={filterDefinitions} entity="flashcards" bigButton />;
 }

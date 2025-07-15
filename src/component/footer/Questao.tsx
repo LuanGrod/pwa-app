@@ -1,9 +1,9 @@
 "use client";
 
-import SetaDireita from "@global/icons/SetaDireita";
-import SetaEsquerda from "@global/icons/SetaEsquerda";
+import SetaDireita from "@global/component/icons/SetaDireita";
+import SetaEsquerda from "@global/component/icons/SetaEsquerda";
 import useQuestoes from "@/store/QuestaoStore";
-import { useUser } from "@/hook/auth/useUser";
+import { useUser } from "@global/hook/auth/useUser";
 
 type Props = {};
 

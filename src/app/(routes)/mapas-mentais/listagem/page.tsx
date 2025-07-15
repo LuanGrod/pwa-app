@@ -1,16 +1,16 @@
 "use client";
 
-import { Listing } from "@/component/listing/Listing";
+import { Listing } from "@global/component/listing/Listing";
 import ReturnTitleSearchStructure from "@/component/structure/ReturnTitleSearch";
-import { useListing } from "@/hook/request/useListing";
+import { useListing } from "@global/hook/request/useListing";
 import { Item as ListItem } from "@/component/listing/Item";
-import Loading2 from "@global/overlay/popup/dialog/Loading2";
 import { useSearchParams } from "next/navigation";
-import { UnderHeader } from "@global/overlay/drawer/UnderHeader";
-import SearchBar from "@global/atomic/SearchBar";
-import useSearch from "@/hook/useSearch";
-import { useToggle } from "@/hook/useToggle";
+import SearchBar from "@global/component/atomic/SearchBar";
+import useSearch from "@global/hook/useSearch";
+import { useToggle } from "@global/hook/useToggle";
 import { MapasMentaisListagem } from "@/type/Entities";
+import { UnderHeader } from "@global/component/overlay/drawer/UnderHeader";
+import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 
 type Props = {};
 

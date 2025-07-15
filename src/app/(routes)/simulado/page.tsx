@@ -1,4 +1,4 @@
-import GreetingsLogoStructure from "../../../component/structure/GreetingsLogo"
+import GreetingsLogoStructure from "@/component/structure/GreetingsLogo"
 
 type Props = {}
 

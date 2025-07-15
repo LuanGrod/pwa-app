@@ -22,17 +22,6 @@
       "@/*": ["./src/*"],
       "@public/*": ["./public/*"],
       "@global/*": ["./global/*"],
-      "@component/*": ["./src/component/*"],
-      "@filter/*": ["./src/filter/*"],
-      "@form/*": ["./src/form/*"],
-      "@hook/*": ["./src/hook/*"],
-      "@mask/*": ["./src/mask/*"],
-      "@provider/*": ["./src/provider/*"],
-      "@request/*": ["./src/request/*"],
-      "@type/*": ["./src/type/*"],
-      "@cookie/*": ["./src/cookie/*"],
-      "@validator/*": ["./src/validator/*"],
-      "@store/*": ["./src/store/*"]
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

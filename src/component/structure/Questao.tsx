@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Header from "@global/header/Questao";
+import Header from "@global/component/header/Questao";
 import Footer from "../footer/Questao";
 
 type Props = {

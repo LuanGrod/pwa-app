@@ -1,7 +1,7 @@
 "use client";
 
-import { LinkView } from "../LinkView";
-import Bandeira from "@global/icons/Bandeira";
+import { LinkView } from "../../../global/component/atomic/LinkView";
+import Bandeira from "@global/component/icons/Bandeira";
 
 type Props = {
   entity: string;

@@ -894,6 +894,9 @@ form .link-recuperacao-senha {
   width: 45px;
   height: 45px;
   border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .header-wrapper .greetings .avatar.skeleton {
   background-color: color-mix(in srgb, var(--foreground) 15%, transparent);
@@ -907,8 +910,8 @@ form .link-recuperacao-senha {
   line-height: 1.4;
 }
 .header-wrapper .greetings .title.skeleton {
-  width: 120px;
-  height: 25px;
+  width: 150px;
+  height: 24px;
   background-color: color-mix(in srgb, var(--foreground) 10%, transparent);
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
   border-radius: 4px;

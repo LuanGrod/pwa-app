@@ -1,9 +1,9 @@
 "use client";
 
-import Form from "@/component/form/Form";
-import Dialog from "@global/overlay/popup/dialog/Dialog";
-import { Form as FormConfigProps } from "@/form/Form";
-import SubmitHandlerInterface from "@/form/handler/submit/SubmitHandlerInterface";
+import Form from "@global/component/form/Form";
+import Dialog from "@global/component/overlay/popup/dialog/Dialog";
+import { Form as FormConfigProps } from "@global/form/Form";
+import SubmitHandlerInterface from "@global/form/handler/submit/SubmitHandlerInterface";
 
 type Props = {
   insertHandler: SubmitHandlerInterface;

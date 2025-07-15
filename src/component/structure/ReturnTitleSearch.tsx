@@ -1,6 +1,6 @@
 import { ReactNode, unstable_ViewTransition as ViewTransition } from "react";
-import Footer from "@component/footer/Footer";
-import Header from "@global/header/ReturnTitleSearch";
+import Footer from "@/component/footer/Footer";
+import Header from "@global/component/header/ReturnTitleSearch";
 
 type Props = {
   children: ReactNode;

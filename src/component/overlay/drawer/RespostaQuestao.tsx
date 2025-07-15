@@ -1,8 +1,8 @@
 "use client";
 
-import { BottomDrawer } from "@global/overlay/drawer/Bottom";
+import { BottomDrawer } from "@global/component/overlay/drawer/Bottom";
 import { Questao as QuestaoType } from "@/type/Entities";
-import UploadImage from "@global/atomic/UploadImage";
+import UploadImage from "@global/component/atomic/UploadImage";
 
 type Props = {
   open?: boolean;

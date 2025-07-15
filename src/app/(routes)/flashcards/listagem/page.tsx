@@ -1,14 +1,14 @@
 "use client";
 
-import { useListing } from "@/hook/request/useListing";
-import Loading2 from "@global/overlay/popup/dialog/Loading2";
+import { useListing } from "@global/hook/request/useListing";
 import { useSearchParams } from "next/navigation";
-import { Viewing } from "@/component/viewing/Viewing";
-import Flashcard from "@/component/Flashcard";
+import { Viewing } from "@global/component/viewing/Viewing";
+import Flashcard from "@/component/atomic/Flashcard";
 import { Flashcard as FlashcardType } from "@/type/Entities";
 import { useEffect } from "react";
 import useFlashcards from "@/store/FlashcardStore";
 import FlashcardStructure from "@/component/structure/Flashcard";
+import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 
 type Props = {};
 

@@ -1,5 +1,5 @@
 import styles from "./page.module.css";
-import GerarNovaSenha from "@/component/form/GerarNovaSenha";
+import GerarNovaSenha from "@global/component/form/GerarNovaSenha";
 
 type Props = {};
 

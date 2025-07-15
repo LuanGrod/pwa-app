@@ -1,7 +1,7 @@
 "use client";
 
 import useQuestoes from "@/store/QuestaoStore";
-import { TopDrawer } from "@global/overlay/drawer/Top";
+import { TopDrawer } from "@global/component/overlay/drawer/Top";
 
 type Props = {
   open?: boolean;

@@ -1,19 +1,19 @@
 "use client";
 
-import Divider from "@global/atomic/Divider";
-import Email from "@global/icons/Email";
-import Faturas from "@global/icons/Faturas";
-import Info from "@global/icons/Info";
-import MudarTema from "@global/icons/MudarTema";
-import Sair from "@global/icons/Sair";
-import Usuario from "@global/icons/Usuario";
-import DrawerLinkWithIcon from "@global/overlay/drawer/LinkWithIcon";
-import DrawerBtnWithIcon from "@global/overlay/drawer/BtnWithIcon";
+import Divider from "@global/component/atomic/Divider";
+import Email from "@global/component/icons/Email";
+import Faturas from "@global/component/icons/Faturas";
+import Info from "@global/component/icons/Info";
+import MudarTema from "@global/component/icons/MudarTema";
+import Sair from "@global/component/icons/Sair";
+import Usuario from "@global/component/icons/Usuario";
+import DrawerLinkWithIcon from "@global/component/overlay/drawer/item/LinkWithIcon";
+import DrawerBtnWithIcon from "@global/component/overlay/drawer/item/BtnWithIcon";
 import { Overlay } from "@public/global/js/types/Overlay";
 import { RefObject } from "react";
 import styles from "./Configuracoes.module.css";
-import { BottomRefDrawer } from "@global/overlay/drawer/BottomRef";
-import Cookie from "@/cookie/Cookie";
+import { BottomRefDrawer } from "@global/component/overlay/drawer/BottomRef";
+import Cookie from "@global/cookie/Cookie";
 
 type Props = {
   menuRef?: RefObject<Overlay | null>;

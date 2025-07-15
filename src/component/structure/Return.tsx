@@ -1,5 +1,5 @@
 import { ReactNode, unstable_ViewTransition as ViewTransition } from "react";
-import Header from "@global/header/Return";
+import Header from "@global/component/header/Return";
 
 type Props = {
   children: ReactNode;

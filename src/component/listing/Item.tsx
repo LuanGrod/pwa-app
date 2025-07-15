@@ -1,9 +1,9 @@
 "use client";
 
-import { LinkView } from "../LinkView";
-import UploadImage from "@global/atomic/UploadImage";
-import useToggleAddRemove from "@/hook/useToggleAddRemove";
-import { useUser } from "@/hook/auth/useUser";
+import { LinkView } from "../../../global/component/atomic/LinkView";
+import UploadImage from "@global/component/atomic/UploadImage";
+import useToggleAddRemove from "@global/hook/useToggleAddRemove";
+import { useUser } from "@global/hook/auth/useUser";
 import { Dispatch, SetStateAction } from "react";
 
 type ToggleAddRemoveProps = {

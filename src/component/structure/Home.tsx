@@ -1,7 +1,7 @@
 import ConfiguracoesDrawer from "@/component/overlay/drawer/Configuracoes";
-import Header from "@global/header/MenuTitleLogo";
+import Header from "@global/component/header/MenuTitleLogo";
 import { ReactNode, unstable_ViewTransition as ViewTransition } from "react";
-import Footer from "@component/footer/Footer";
+import Footer from "@/component/footer/Footer";
 
 type Props = {
   children: ReactNode;

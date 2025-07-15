@@ -1,6 +1,6 @@
 import GreetingsLogoStructure from "@/component/structure/GreetingsLogo";
 import styles from "./page.module.css";
-import IconFrameContainer2 from "@/component/IconFrameContainer2";
+import IconFrameContainer from "@/component/atomic/IconFrameContainer";
 
 type Props = {};
 
@@ -9,7 +9,7 @@ export default function page({}: Props) {
     <GreetingsLogoStructure>
       <div className={styles.container}>
         <h1 className={styles.title}>Salvos</h1>
-        <IconFrameContainer2
+        <IconFrameContainer
           links={[
             { href: "/salvos/hot-topics", image: "/project/assets/HotTopics.svg", label: "Hot topics" },
             { href: "/salvos/flashcards", image: "/project/assets/Flashcards.svg", label: "Flashcards" },

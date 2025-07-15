@@ -1,4 +1,4 @@
-import HowToStudyContent from "@/component/HowToStudyContent";
+import HowToStudyContent from "@/component/atomic/HowToStudyContent";
 import ReturnLogoStructure from "../../../component/structure/ReturnLogo";
 import styles from "./page.module.css";
 

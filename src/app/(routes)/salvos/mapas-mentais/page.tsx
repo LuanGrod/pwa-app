@@ -1,14 +1,14 @@
 "use client";
 
 import ReturnTitleSearchStructure from "@/component/structure/ReturnTitleSearch";
-import { useListing } from "@/hook/request/useListing";
-import { Listing } from "@/component/listing/Listing";
-import Loading2 from "@global/overlay/popup/dialog/Loading2";
+import { useListing } from "@global/hook/request/useListing";
+import { Listing } from "@global/component/listing/Listing";
+import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import { ItemSalvo as ListItemSalvo } from "@/component/listing/ItemSalvo";
-import { useToggle } from "@/hook/useToggle";
-import useSearch from "@/hook/useSearch";
-import SearchBar from "@global/atomic/SearchBar";
-import { UnderHeader } from "@global/overlay/drawer/UnderHeader";
+import { useToggle } from "@global/hook/useToggle";
+import useSearch from "@global/hook/useSearch";
+import SearchBar from "@global/component/atomic/SearchBar";
+import { UnderHeader } from "@global/component/overlay/drawer/UnderHeader";
 import { MapasMentaisSalvos } from "@/type/Entities";
 
 type Props = {};

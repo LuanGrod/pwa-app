@@ -1,15 +1,15 @@
 "use client";
 
-import Loading2 from "@global/overlay/popup/dialog/Loading2";
+import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import { useSearchParams } from "next/navigation";
-import { Viewing } from "@/component/viewing/Viewing";
+import { Viewing } from "@global/component/viewing/Viewing";
 import { Questao as QuestaoType } from "@/type/Entities";
-import Questao from "@/component/Questao";
+import Questao from "@/component/atomic/Questao";
 import useQuestoes from "@/store/QuestaoStore";
 import { useEffect } from "react";
 import RespostaQuestao from "@/component/overlay/drawer/RespostaQuestao";
 import AlertaQuestao from "@/component/overlay/drawer/AlertaQuestao";
-import { useListing } from "@/hook/request/useListing";
+import { useListing } from "@global/hook/request/useListing";
 import QuestaoStructure from "@/component/structure/Questao";
 
 type Props = {};

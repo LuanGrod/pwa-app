@@ -1,10 +1,10 @@
 "use client";
 
-import { InsertHandler } from "@/form/handler/submit/InsertHandler";
+import { InsertHandler } from "@global/form/handler/submit/InsertHandler";
 import Sugestion from "./Sugestion";
-import { Form } from "@/form/Form";
-import { Hidden } from "@/form/item/prebuilt/Hidden";
-import { Conteudo } from "@/form/item/prebuilt/Conteudo";
+import { Form } from "@global/form/Form";
+import { Hidden } from "@global/form/item/prebuilt/Hidden";
+import { Conteudo } from "@global/form/item/prebuilt/Conteudo";
 
 type Props = {
   open?: boolean;

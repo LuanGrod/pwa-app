@@ -1,6 +1,6 @@
 import { ReactNode, unstable_ViewTransition as ViewTransition } from "react";
-import Header from "@global/header/ReturnLogo";
-import Footer from "@component/footer/Footer";
+import Header from "@global/component/header/ReturnLogo";
+import Footer from "@/component/footer/Footer";
 
 type Props = {
   children: ReactNode;

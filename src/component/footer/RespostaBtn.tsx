@@ -2,7 +2,7 @@
 
 import useFlashcards from "@/store/FlashcardStore";
 import Logo from "../icon/Logo";
-import { useUser } from "@/hook/auth/useUser";
+import { useUser } from "@global/hook/auth/useUser";
 
 type Props = {
   value: string;

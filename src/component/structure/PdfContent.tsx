@@ -1,18 +1,17 @@
 "use client";
 
-import { useEffect, useState, unstable_ViewTransition as ViewTransition } from "react";
-import Footer from "@component/footer/Footer";
-import Header from "@global/header/PdfContent";
-import { useGetRow } from "@/hook/request/useGetRow";
-import { Viewing } from "../viewing/Viewing";
-import Loading2 from "@global/overlay/popup/dialog/Loading2";
-import Cookie from "@/cookie/Cookie";
+import { unstable_ViewTransition as ViewTransition } from "react";
+import Footer from "@/component/footer/Footer";
+import Header from "@global/component/header/PdfContent";
+import { useGetRow } from "@global/hook/request/useGetRow";
+import { Viewing } from "../../../global/component/viewing/Viewing";
+import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import EdicaoSugerida from "../overlay/popup/dialog/EdicaoSugerida";
-import useDialog from "@/hook/overlay/useDialog";
-import useToggleAddRemove from "@/hook/useToggleAddRemove";
-import LazyPdfVisualizer from "../pdf/LazyPdfVisualizer";
-import { useContainer } from "@/hook/useContainer";
-import { useUser } from "@/hook/auth/useUser";
+import useDialog from "@global/hook/overlay/useDialog";
+import useToggleAddRemove from "@global/hook/useToggleAddRemove";
+import LazyPdfVisualizer from "../../../global/component/pdf/LazyPdfVisualizer";
+import { useContainer } from "@global/hook/useContainer";
+import { useUser } from "@global/hook/auth/useUser";
 
 type EdicaoSugeridaProps = {
   conteudoName: string;
