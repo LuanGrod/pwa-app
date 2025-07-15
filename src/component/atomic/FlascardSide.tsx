@@ -3,6 +3,7 @@ import EditBtn from "@global/component/header/item/EditBtn";
 import SaveBtn from "@global/component/header/item/SaveBtn";
 import Logo from "../icon/Logo";
 import EdicaoSugerida from "../overlay/popup/dialog/EdicaoSugerida";
+import useFlashcards from "@/store/FlashcardStore";
 
 type Props = {
   side: "front" | "back";
@@ -31,13 +32,15 @@ export default function FlashcardSide({
   userId,
   imageUrl,
 }: Props) {
+  const { isSaving } = useFlashcards();
+
   return (
     <div className={side}>
       <div className="header">
         <Logo size={30} className="actions" color={logoColor} changeOnTheme={!logoColor} />
         <div className="card-title">MedRQE</div>
         <div className="actions">
-          <SaveBtn handleSave={handleSave} status={status} />
+          <SaveBtn disabled={isSaving} handleSave={handleSave} status={status} />
           <EditBtn handleEdit={toggleDialog} />
         </div>
         {isOpen && (

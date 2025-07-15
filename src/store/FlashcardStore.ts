@@ -12,6 +12,7 @@ type FlashcardStore = {
   flashcardsAnswers: FlashcardAnswerType[] | null;
   index: number;
   isShowingAnswer: boolean;
+  isSaving: boolean;
   setFlashcardsList: (flashcards: FlashcardType[]) => void;
   setAnswer: (value: string) => void;
   getCurrentFlashcard: () => FlashcardType | null;
@@ -21,6 +22,7 @@ type FlashcardStore = {
   toggleIsShowingAnswer: () => void;
   registerAnswer: (userId: string, value: string) => Promise<null | void>;
   nextIndex: () => void;
+  toggleIsSaving: () => void;
 };
 
 const useFlashcards = create<FlashcardStore>((set, get) => ({
@@ -28,6 +30,7 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
   flashcardsAnswers: [],
   index: 0,
   isShowingAnswer: false,
+  isSaving: false,
   setFlashcardsList: (flashcards: FlashcardType[]) => {
     set({
       flashcardsList: flashcards,
@@ -72,7 +75,9 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
     }));
   },
   handleSave: async (userId: string) => {
-    const { getCurrentFlashcard, flashcardsList } = get();
+    const { getCurrentFlashcard, flashcardsList, toggleIsSaving } = get();
+    
+    toggleIsSaving();
 
     if (!flashcardsList || flashcardsList.length === 0) return null;
 
@@ -133,6 +138,8 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
         }));
       }
     }
+
+    toggleIsSaving();
   },
   getCurrentFlashcardSavedStatus: () => {
     const { getCurrentFlashcard } = get();
@@ -196,6 +203,11 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
     });
 
     const response = await insert.build(true);
+  },
+  toggleIsSaving: () => {
+    set((state) => ({
+      isSaving: !state.isSaving,
+    }));
   },
 }));
 

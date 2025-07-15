@@ -14,7 +14,7 @@ import EdicaoSugerida from "@/component/overlay/popup/dialog/EdicaoSugerida";
 type Props = {};
 
 export default function Questao({}: Props) {
-  const { handleSave, getCurrentQuestaoSavedStatus, getCurrentQuestao } = useQuestoes();
+  const { handleSave, getCurrentQuestaoSavedStatus, getCurrentQuestao, isSaving } = useQuestoes();
   const { id: userId } = useUser();
   const { isOpen, toggleDialog } = useDialog();
 
@@ -22,7 +22,7 @@ export default function Questao({}: Props) {
     <div className="flex">
       <IncreaseFontSizeBtn elementsClassNames={["enunciado", "area-tema", "ano", "conteudo", "gabarito", "alternativa", "comentario", "titulo-referencia", "referencia"]} />
       <DecreaseFontSizeBtn elementsClassNames={["enunciado", "area-tema", "ano", "conteudo", "gabarito", "alternativa", "comentario", "titulo-referencia", "referencia"]} />
-      <SaveBtn handleSave={() => handleSave(userId)} status={getCurrentQuestaoSavedStatus()} />
+      <SaveBtn handleSave={() => handleSave(userId)} disabled={isSaving} status={getCurrentQuestaoSavedStatus()} />
       <EditBtn handleEdit={toggleDialog} size={24} />
       <MenuToggle menu={<ConfiguracoesDrawer />} iconSize={26} />
     </div>

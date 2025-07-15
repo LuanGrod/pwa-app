@@ -15,6 +15,7 @@ type QuestoesStore = {
   index: number;
   isShowingAnswer: boolean;
   isShowingAlert: boolean;
+  isSaving: boolean;
   setQuestoesList: (questoes: QuestaoType[]) => void;
   getCurrentQuestao: () => QuestaoType | null;
   nextIndex: () => void;
@@ -27,6 +28,7 @@ type QuestoesStore = {
   toggleIsShowingAnswer: () => void;
   getCurrentQuestaoSavedStatus: () => boolean;
   toggleAlert: () => void;
+  toggleIsSaving: () => void;
 };
 
 const useQuestoes = create<QuestoesStore>((set, get) => ({
@@ -35,6 +37,7 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
   index: 0,
   isShowingAnswer: false,
   isShowingAlert: false,
+  isSaving: false,
   setQuestoesList: (questoes: QuestaoType[]) => {
     set({
       questoesList: questoes,
@@ -123,9 +126,10 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
         ),
       });
       toggleIsShowingAnswer();
-      toggleAlert();
 
       if (!currentAnswer.confirmed) {
+        toggleAlert();
+
         const insert = new Insert({
           entity: "respostas-questoes",
           data: insertData,
@@ -136,7 +140,8 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
     }
   },
   handleSave: async (userId: string) => {
-    const { getCurrentQuestao, questoesList } = get();
+    const { getCurrentQuestao, questoesList, toggleIsSaving } = get();
+    toggleIsSaving();
 
     if (!questoesList || questoesList.length === 0) return null;
 
@@ -197,6 +202,8 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
         }));
       }
     }
+    
+    toggleIsSaving();
   },
   toggleIsShowingAnswer: () => {
     set((state) => ({
@@ -217,6 +224,11 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
     setTimeout(() => {
       set({ isShowingAlert: false });
     }, 1500);
+  },
+  toggleIsSaving: () => {
+    set((state) => ({
+      isSaving: !state.isSaving,
+    }));
   },
 }));
 

@@ -60,7 +60,7 @@ export function Item({
     [`${ToggleAddRemove.insertDataEntityParamName}_id_estudante`]: userId,
   };
 
-  const { toggleAddRemove } = useToggleAddRemove({
+  const { toggleAddRemove, isSaving } = useToggleAddRemove({
     data,
     entity: ToggleAddRemove.entity,
     idParamName: ToggleAddRemove.idParamName,
@@ -78,7 +78,7 @@ export function Item({
           <p className="subtitle">{subtitle}</p>
         </div>
       </LinkView>
-      <button onClick={toggleAddRemove} className={`viewed ${viewed ? "active" : ""}`}></button>
+      <button disabled={isSaving} onClick={toggleAddRemove} className={`viewed ${viewed ? "active" : ""}`}></button>
     </div>
   );
 }

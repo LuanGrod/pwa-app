@@ -1,6 +1,6 @@
 import { Delete } from "@global/request/builder/Delete";
 import { Insert } from "@global/request/builder/Insert";
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 type Props = {
   data: any;
@@ -19,8 +19,14 @@ export default function useToggleAddRemove({
   insertData,
   keyParamName,
 }: Props) {
+  const [isSaving, setIsSaving] = useState(false);
+
   const toggleAddRemove = async () => {
+    setIsSaving(true);
+
     if (data[idParamName]) {
+      let currentId = data[idParamName];
+
       setData((prevData: any) => {
         if (Array.isArray(prevData)) {
           return prevData.map((item: any) => {
@@ -42,7 +48,7 @@ export default function useToggleAddRemove({
 
       const deleting = new Delete({
         entity: entity,
-        id: data[idParamName],
+        id: currentId,
       });
 
       const response = await deleting.build(true);
@@ -94,7 +100,9 @@ export default function useToggleAddRemove({
         return prevData;
       });
     }
+
+    setIsSaving(false);
   };
 
-  return { toggleAddRemove };
+  return { toggleAddRemove, isSaving };
 }
