@@ -52,15 +52,13 @@ export class Login extends ResponseHandler {
       });
     }
 
-    console.log(this.props.get("router"));
-
     startTransition(() => {
       this.props.get("router").push("/");
     });
 
     // window.location.href = "/";
 
-    return result;
+    return this.props.get("router").push("/");
   }
 
   protected handleError(error: Error): any {
