@@ -52,6 +52,8 @@ export class Login extends ResponseHandler {
       });
     }
 
+    console.log(this.props.get("router"));
+
     startTransition(() => {
       this.props.get("router").push("/");
     });
