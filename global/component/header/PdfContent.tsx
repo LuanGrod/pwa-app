@@ -8,12 +8,13 @@ type Props = {
   handleSave?: () => void;
   handleAddSugestion?: () => void;
   status: boolean;
+  isSaving?: boolean;
 };
 
-export default function PdfContent({ title, handleAddSugestion, handleSave, status }: Props) {
+export default function PdfContent({ title, handleAddSugestion, handleSave, status, isSaving }: Props) {
   const RightWrapper = (
     <div className="flex">
-      <SaveBtn handleSave={handleSave} status={status}/>
+      <SaveBtn handleSave={handleSave} status={status} disabled={isSaving} />
       <EditBtn handleEdit={handleAddSugestion} />
     </div>
   );

@@ -58,7 +58,7 @@ export default function PdfContent({
     needsAuthorization: true,
   });
 
-  const { toggleAddRemove } = useToggleAddRemove({
+  const { toggleAddRemove, isSaving } = useToggleAddRemove({
     data,
     entity: ToggleAddRemove.entity,
     idParamName: ToggleAddRemove.idParamName,
@@ -73,6 +73,7 @@ export default function PdfContent({
         handleAddSugestion={toggleDialog}
         handleSave={toggleAddRemove}
         status={data && data[ToggleAddRemove.idParamName]}
+        isSaving={isSaving}
       />
       <main className="content-wrapper header footer pdf">
         {isOpen && (
