@@ -68,34 +68,32 @@ export default function PdfContent({
 
   return (
     <>
-      <ViewTransition default="handle">
-        <Header
-          title={data ? (data as any)[titleParamName] : ""}
-          handleAddSugestion={toggleDialog}
-          handleSave={toggleAddRemove}
-          status={data && data[ToggleAddRemove.idParamName]}
-        />
-        <main className="content-wrapper header footer pdf">
-          {isOpen && (
-            <EdicaoSugerida
-              onClose={toggleDialog}
-              open={isOpen}
-              estudanteId={userId}
-              conteudoId={entityId}
-              conteudoName={edicaoSugerida.conteudoName}
-              formEntity={edicaoSugerida.formEntity}
-              insertEntity={edicaoSugerida.insertEntity}
-            />
-          )}
-          <Viewing
-            data={data}
-            loading={loading}
-            error={error}
-            loadingComponent={<Loading2 loading />}
-            renderItem={(item: any) => <LazyPdfVisualizer fileUrl={`${uploadUrl}/${item[pdfParamName]}`} />}
+      <Header
+        title={data ? (data as any)[titleParamName] : ""}
+        handleAddSugestion={toggleDialog}
+        handleSave={toggleAddRemove}
+        status={data && data[ToggleAddRemove.idParamName]}
+      />
+      <main className="content-wrapper header footer pdf">
+        {isOpen && (
+          <EdicaoSugerida
+            onClose={toggleDialog}
+            open={isOpen}
+            estudanteId={userId}
+            conteudoId={entityId}
+            conteudoName={edicaoSugerida.conteudoName}
+            formEntity={edicaoSugerida.formEntity}
+            insertEntity={edicaoSugerida.insertEntity}
           />
-        </main>
-      </ViewTransition>
+        )}
+        <Viewing
+          data={data}
+          loading={loading}
+          error={error}
+          loadingComponent={<Loading2 loading />}
+          renderItem={(item: any) => <LazyPdfVisualizer fileUrl={`${uploadUrl}/${item[pdfParamName]}`} />}
+        />
+      </main>
       <Footer />
     </>
   );

@@ -10,6 +10,10 @@ interface LinkViewProps extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 export function LinkView({ href, children, ...props }: LinkViewProps) {
   const router = useRouter();
 
+  useEffect(() => {
+    router.prefetch(href);
+  }, [])
+
   const handleClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     e.preventDefault();
     startTransition(() => {
