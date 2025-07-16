@@ -23,6 +23,7 @@ type FlashcardStore = {
   registerAnswer: (userId: string, value: string) => Promise<null | void>;
   nextIndex: () => void;
   toggleIsSaving: () => void;
+  countFlashcards: () => number;
 };
 
 const useFlashcards = create<FlashcardStore>((set, get) => ({
@@ -34,7 +35,7 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
   setFlashcardsList: (flashcards: FlashcardType[]) => {
     set({
       flashcardsList: flashcards,
-      flashcardsAnswers: flashcards.map((flashcard) => ({
+      flashcardsAnswers: flashcards.map(() => ({
         answer: "",
       })),
     });
@@ -66,6 +67,7 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
   },
   nextIndex: () => {
     const { flashcardsList } = get();
+
     if (!flashcardsList || flashcardsList.length === 0) return null;
     set((state) => ({
       index:
@@ -76,7 +78,7 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
   },
   handleSave: async (userId: string) => {
     const { getCurrentFlashcard, flashcardsList, toggleIsSaving } = get();
-    
+
     toggleIsSaving();
 
     if (!flashcardsList || flashcardsList.length === 0) return null;
@@ -88,21 +90,17 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
       let tempId = currentFlashcard.flashcards_salvos_id;
 
       set((state) => ({
-        flashcardsList:
-          state.flashcardsList &&
-          state.flashcardsList.map((flashcards) =>
-            flashcards.flashcards_id === currentFlashcard.flashcards_id
-              ? { ...flashcards, flashcards_salvos_id: "" }
-              : flashcards
-          ),
+        flashcardsList: state.flashcardsList?.map((flashcards) =>
+          flashcards.flashcards_id === currentFlashcard.flashcards_id
+            ? { ...flashcards, flashcards_salvos_id: "" }
+            : flashcards
+        ),
       }));
 
       const deleting = new Delete({
         entity: "flashcards-salvos",
         id: tempId,
       });
-
-      const response = await deleting.build(true);
     } else {
       set((state) => ({
         flashcardsList:
@@ -128,13 +126,11 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
 
       if (response.success) {
         set((state) => ({
-          flashcardsList:
-            state.flashcardsList &&
-            state.flashcardsList.map((flashcard) =>
-              flashcard.flashcards_id === currentFlashcard.flashcards_id
-                ? { ...flashcard, flashcards_salvos_id: response.data.id || "" }
-                : flashcard
-            ),
+          flashcardsList: state.flashcardsList?.map((flashcard) =>
+            flashcard.flashcards_id === currentFlashcard.flashcards_id
+              ? { ...flashcard, flashcards_salvos_id: response.data.id || "" }
+              : flashcard
+          ),
         }));
       }
     }
@@ -161,23 +157,15 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
       getCurrentFlashcard,
       getCurrentAnswer,
       toggleIsShowingAnswer,
-      flashcardsList,
       flashcardsAnswers,
       nextIndex,
       index,
+      countFlashcards,
     } = get();
     const currentFlashcard = getCurrentFlashcard();
     const currentAnswer = getCurrentAnswer();
 
-    if (
-      !flashcardsList ||
-      flashcardsList.length === 0 ||
-      !flashcardsAnswers ||
-      flashcardsAnswers.length === 0 ||
-      !currentFlashcard ||
-      !currentAnswer
-    )
-      return null;
+    if (!currentFlashcard || !currentAnswer) return null;
 
     const insertData = {
       respostas_flashcards_id_estudante: userId,
@@ -185,29 +173,41 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
       respostas_flashcards_resposta2: value,
     };
 
+    const updatedAnswers = flashcardsAnswers?.map((flashcard, i) =>
+      i === index ? { ...flashcard, answer: value === flashcard.answer ? "" : value } : flashcard
+    );
+
+    set({ flashcardsAnswers: updatedAnswers });
+
     nextIndex();
     toggleIsShowingAnswer();
-    set((state) => ({
-      flashcardsAnswers:
-        state.flashcardsAnswers &&
-        state.flashcardsAnswers.map((flashcard, i) =>
-          i === index
-            ? { ...flashcard, answer: value === flashcard.answer ? "" : value }
-            : flashcard
-        ),
-    }));
 
     const insert = new Insert({
       entity: "respostas-flashcards",
       data: insertData,
     });
 
-    const response = await insert.build(true);
+    await insert.build(true);
+
+    if (index + 1 === countFlashcards()) {
+      alert(
+        `FIM DO DECK - redirecionar para a tela de estatisticas\n${JSON.stringify(
+          updatedAnswers,
+          null,
+          2
+        )}`
+      );
+    }
   },
   toggleIsSaving: () => {
     set((state) => ({
       isSaving: !state.isSaving,
     }));
+  },
+  countFlashcards: () => {
+    const { flashcardsList } = get();
+    if (!flashcardsList || flashcardsList.length === 0) return 0;
+    return flashcardsList.length;
   },
 }));
 

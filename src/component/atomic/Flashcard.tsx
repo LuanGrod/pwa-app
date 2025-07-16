@@ -14,15 +14,15 @@ export default function Flashcard({ data }: Props) {
   const { getCurrentFlashcardSavedStatus, handleSave, isShowingAnswer } = useFlashcards();
 
   const logoColor =
-    data.respostas_flashcards_resposta === "Erro"
+    data.respostas_flashcards_ultima_resposta_flashcard === "Erro"
       ? "#ff1ac6"
-      : data.respostas_flashcards_resposta === "Acerto Parcial"
-      ? "#ffa800"
-      : data.respostas_flashcards_resposta === "Acerto com Segurança"
-      ? "#33ff66"
-      : data.respostas_flashcards_resposta === "Acerto Fácil"
-      ? "#0066ff"
-      : undefined;
+      : data.respostas_flashcards_ultima_resposta_flashcard === "Acerto Parcial"
+        ? "#ffa800"
+        : data.respostas_flashcards_ultima_resposta_flashcard === "Acerto com Segurança"
+          ? "#33ff66"
+          : data.respostas_flashcards_ultima_resposta_flashcard === "Acerto Fácil"
+            ? "#0066ff"
+            : undefined;
 
   return (
     <div className={`flashcard ${isShowingAnswer ? "show-answer" : ""}`}>
@@ -30,7 +30,7 @@ export default function Flashcard({ data }: Props) {
         <FlashcardSide
           side={"front"}
           logoColor={logoColor}
-          handleSave={e => handleSave(userId)}
+          handleSave={() => handleSave(userId)}
           toggleDialog={toggleDialog}
           status={getCurrentFlashcardSavedStatus()}
           isOpen={isOpen}
@@ -43,7 +43,7 @@ export default function Flashcard({ data }: Props) {
         <FlashcardSide
           side={"back"}
           logoColor={logoColor}
-          handleSave={e => handleSave(userId)}
+          handleSave={() => handleSave(userId)}
           toggleDialog={toggleDialog}
           status={getCurrentFlashcardSavedStatus()}
           isOpen={isOpen}

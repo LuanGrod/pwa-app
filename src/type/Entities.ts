@@ -38,7 +38,7 @@ export type Flashcard = {
   flashcards_url_imagem?: string;
   temas_nome: string;
   areas_nome: string;
-  respostas_flashcards_resposta: string;
+  respostas_flashcards_ultima_resposta_flashcard: string;
   flashcards_salvos_id: string;
 };
 

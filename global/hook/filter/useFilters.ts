@@ -223,11 +223,7 @@ export function useFilters(definitions: FilterInterface[]) {
       .replace("{or}{and}", "{or}")
       .replace("{and}{and}", "{and}")
       .replace("{or}{or}", "{or}")
-      .replace(/\{[^{}]*\}$/, ""); //tira o ultimo conector {and} ou {or}
-
-    // return JSON.stringify(parts, null, 2);
-    // return format.join("").replace(/\{[^{}]*\}/, '');
-    // return parts.replace(/\{[^{}]*\}$/, "");
+      .replace(/\{[^{}]*\}$/, ""); //tira o ultimo conector
   };
 
   return {
