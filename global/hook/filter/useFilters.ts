@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import FilterInterface, { ConnectionOperator } from "@global/filter/ui/FilterInterface";
 import { format } from "path";
+import FilterStringAssembler, { FilterFragment } from "@global/filter/ui/FilterStringAssembler";
 
 export function useFilters(definitions: FilterInterface[]) {
   const [values, setValues] = useState<any>(() =>
@@ -16,7 +17,7 @@ export function useFilters(definitions: FilterInterface[]) {
         if (def.getParentKey()) {
           setValues((prev: any) => ({ ...prev, [def.getParentKey()]: def.getValue() }));
         }
-      } catch (error) {}
+      } catch (error) { }
     });
   }, []);
 
@@ -143,87 +144,12 @@ export function useFilters(definitions: FilterInterface[]) {
   };
 
   const buildFilterString = (entity: string) => {
-    let parts: { value: string; connector: ConnectionOperator }[] = [];
     entity = entity.replace("-", "_");
+    const fragments = definitions
+      .flatMap((def) => def.getFilterFragment(values))
+      .filter(Boolean) as FilterFragment[];
 
-    definitions.forEach((def, index) => {
-      const type = def.getType();
-      const queryFieldEntity = def.getQueryFieldEntity() ? `${def.getQueryFieldEntity()}_` : "";
-      const queryField = def.getQueryField();
-      const conditionalOperator = def.getConditionalOperator();
-      const connectionOperator = def.getConnectionOperator();
-      const denialOperator = def.getDenialOperator();
-
-      let keyFilteredValues: any = [];
-      let parentKeyFilteredValues: any = [];
-
-      //verificar o tipo de conexao (and/or)
-      //verificar o tipo de condicional (eq, in, etc)
-      //verificar se é "not" !()
-
-      if (type === "multi-select") {
-        const parentKey = def.getParentKey();
-        const parentKeyEntity = def.getParentKeyEntity() ? `${def.getParentKeyEntity()}_` : "";
-        const parentConnectionOperator = def.getParentConnectionOperator();
-        const parentConditionalOperator = def.getParentConditionalOperator();
-        const parentDenialOperator = def.getParentDenialOperator();
-
-        // coleta os valores selecionados
-        if (values[queryField]?.length > 0) {
-          keyFilteredValues = values[queryField].map((item: any) => item);
-        }
-        if (parentKey && values[parentKey]?.length > 0) {
-          parentKeyFilteredValues = values[parentKey].map((item: any) => item);
-        }
-
-        // adiciona os filtros multiple do child na query
-        if (keyFilteredValues.length) {
-          let currentFilter = `${queryFieldEntity}${queryField}_0{${conditionalOperator}}${keyFilteredValues.join(
-            ","
-          )}`;
-          currentFilter = denialOperator ? `!(${currentFilter})` : currentFilter;
-
-          parts.push({ value: currentFilter, connector: connectionOperator });
-        }
-
-        // adiciona os filtros multiple do parent na query
-        if (parentKeyFilteredValues.length) {
-          let currentFilter = `${parentKeyEntity}${parentKey}_0{${parentConditionalOperator}}${parentKeyFilteredValues.join(
-            ","
-          )}`;
-          currentFilter = parentDenialOperator ? `!(${currentFilter})` : currentFilter;
-
-          parts.push({ value: currentFilter, connector: parentConnectionOperator });
-        }
-      } else if (type === "boolean" && values[queryField]) {
-        const activeValue = def.getActiveValue();
-        if (activeValue == values[queryField]) {
-          let currentFilter = `${queryFieldEntity}${queryField}_0{${conditionalOperator}}${activeValue}`;
-          currentFilter = denialOperator ? `!(${currentFilter})` : currentFilter;
-
-          parts.push({ value: currentFilter, connector: connectionOperator });
-        }
-      }
-    });
-
-    const andFilters = parts.filter((item) => item.connector === "and");
-    const orFilters = parts.filter((item) => item.connector === "or");
-    const fullFilters = Array.from(orFilters).concat(andFilters);
-    const format = fullFilters.map((item, index) => {
-      if (index === 0) {
-        return `${item.value}{${item.connector}}`;
-      } else {
-        return `{${item.connector}}${item.value}`;
-      }
-    });
-
-    return format
-      .join("")
-      .replace("{and}{or}", "{or}")
-      .replace("{or}{and}", "{or}")
-      .replace("{and}{and}", "{and}")
-      .replace("{or}{or}", "{or}")
-      .replace(/\{[^{}]*\}$/, ""); //tira o ultimo conector
+    return FilterStringAssembler.assemble(fragments);
   };
 
   return {

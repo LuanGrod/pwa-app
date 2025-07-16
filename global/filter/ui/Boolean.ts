@@ -1,5 +1,6 @@
 import AbstractFilter from "./AbstractFilter";
-import { ConditionalOperator, ConnectionOperator } from "./FilterInterface";
+import FilterInterface, { ConditionalOperator, ConnectionOperator } from "./FilterInterface";
+import { FilterFragment } from "./FilterStringAssembler";
 
 type BooleanProps = {
   queryField: string;
@@ -80,5 +81,19 @@ export default class Boolean extends AbstractFilter {
   }
   getParentDenialOperator(): boolean {
     throw new Error("Method not implemented.");
+  }
+
+  /**
+   * Builds the filter fragment for this boolean filter.
+   * Returns an array (empty or one element).
+   */
+  getFilterFragment(
+    values: Record<string, any>
+  ): FilterFragment[] {
+    if (values[this.queryField] !== this.activeValue) return [];
+    const queryFieldEntity = this.queryFieldEntity ? `${this.queryFieldEntity}_` : "";
+    let currentFilter = `${queryFieldEntity}${this.queryField}_0{${this.conditionalOperator}}${this.activeValue}`;
+    currentFilter = this.denialOperator ? `!(${currentFilter})` : currentFilter;
+    return [{ value: currentFilter, connector: this.connectionOperator }];
   }
 }

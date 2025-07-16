@@ -1,4 +1,5 @@
 import FilterInterface, { ConditionalOperator, ConnectionOperator } from "./FilterInterface";
+import { FilterFragment } from "./FilterStringAssembler";
 
 export default abstract class AbstractFilter implements FilterInterface {
   queryField: string;
@@ -87,4 +88,13 @@ export default abstract class AbstractFilter implements FilterInterface {
   getQueryFieldEntity(): string {
     return this.queryFieldEntity;
   }
+
+  /**
+   * Abstract method to build the filter fragments for this filter.
+   * Must be implemented by subclasses.
+   */
+  abstract getFilterFragment(
+    values: Record<string, any>,
+    allDefinitions?: FilterInterface[]
+  ): FilterFragment[];
 }

@@ -1,6 +1,7 @@
 import AbstractFilter from "./AbstractFilter";
 import { Listing } from "@global/request/builder/Listing";
-import { ConditionalOperator, ConnectionOperator } from "./FilterInterface";
+import FilterInterface, { ConditionalOperator, ConnectionOperator } from "./FilterInterface";
+import { FilterFragment } from "./FilterStringAssembler";
 
 type MultiSelectProps = {
   entity: string;
@@ -167,5 +168,31 @@ export default class MultiSelect extends AbstractFilter {
 
   getActiveValue(): string | null {
     throw new Error("Method not implemented.");
+  }
+
+  /**
+   * Builds the filter fragments for this multi-select filter.
+   * Returns an array of fragments (child and/or parent).
+   */
+  getFilterFragment(
+    values: Record<string, any>
+  ): FilterFragment[] {
+    const fragments: FilterFragment[] = [];
+    const queryFieldEntity = this.queryFieldEntity ? `${this.queryFieldEntity}_` : "";
+    const parentKeyEntity = this.parentKeyEntity ? `${this.parentKeyEntity}_` : "";
+    const keyFilteredValues = values[this.queryField] && values[this.queryField].length > 0 ? values[this.queryField] : [];
+    const parentKeyFilteredValues = this.parentKey && values[this.parentKey] && values[this.parentKey].length > 0 ? values[this.parentKey] : [];
+
+    if (keyFilteredValues.length) {
+      let currentFilter = `${queryFieldEntity}${this.queryField}_0{${this.conditionalOperator}}${keyFilteredValues.join(",")}`;
+      currentFilter = this.denialOperator ? `!(${currentFilter})` : currentFilter;
+      fragments.push({ value: currentFilter, connector: this.connectionOperator });
+    }
+    if (parentKeyFilteredValues.length) {
+      let currentFilter = `${parentKeyEntity}${this.parentKey}_0{${this.parentConditionalOperator}}${parentKeyFilteredValues.join(",")}`;
+      currentFilter = this.parentDenialOperator ? `!(${currentFilter})` : currentFilter;
+      fragments.push({ value: currentFilter, connector: this.parentConnectionOperator });
+    }
+    return fragments;
   }
 }
