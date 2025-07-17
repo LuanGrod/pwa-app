@@ -1126,6 +1126,7 @@ form .link-recuperacao-senha {
 
 .flashcard {
   background-color: transparent;
+  flex-grow: 1;
   width: 100%;
   height: 100%;
 }
@@ -1144,16 +1145,13 @@ form .link-recuperacao-senha {
 .flashcard .back {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   position: absolute;
   width: 100%;
   height: 100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  background-color: var(--background);
-  border-radius: 16px;
-  filter: var(--filter-shadow);
 }
 .flashcard .front .header,
 .flashcard .front .footer,
@@ -1164,7 +1162,9 @@ form .link-recuperacao-senha {
   justify-content: space-between;
   width: 100%;
   height: 60px;
-  padding: 0 32px;
+  padding: 15px 32px;
+  background-color: var(--background);
+  border-radius: 16px 16px 0 0;
 }
 .flashcard .front .header .card-title,
 .flashcard .front .footer .card-title,
@@ -1185,11 +1185,16 @@ form .link-recuperacao-senha {
 }
 .flashcard .front .content,
 .flashcard .back .content {
-  max-width: 300px;
+  flex-grow: 1;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: start;
   align-items: center;
+  background-color: var(--background);
+  border-radius: 0 0 16px 16px;
+  overflow-y: auto;
+  padding-bottom: 16px;
 }
 .flashcard .front .content .title,
 .flashcard .back .content .title {
@@ -1205,11 +1210,17 @@ form .link-recuperacao-senha {
   font-weight: 400;
   font-family: var(--font-text);
   margin-bottom: 40px;
+  width: 300px;
 }
 .flashcard .front .content .image,
 .flashcard .back .content .image {
   width: 284px;
   height: 284px;
+}
+.flashcard .front .footer,
+.flashcard .back .footer {
+  padding: 0;
+  height: 0;
 }
 .flashcard .back {
   transform: rotateX(-180deg);
