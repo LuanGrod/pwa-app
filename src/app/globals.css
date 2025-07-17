@@ -1189,7 +1189,7 @@ form .link-recuperacao-senha {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: start;
+  justify-content: center;
   align-items: center;
   background-color: var(--background);
   border-radius: 0 0 16px 16px;
@@ -1234,6 +1234,12 @@ form .link-recuperacao-senha {
   background-color: #1a1f2b;
 }
 
+@media only screen and (max-height: 900px) {
+  .flashcard .front .content,
+  .flashcard .back .content {
+    justify-content: start;
+  }
+}
 .questao-wrapper {
   display: flex;
   flex-direction: column;
