@@ -12,9 +12,19 @@ interface FiltrosGridProps {
   filterBtnIcon: ReactNode;
 }
 
+// Helper to flatten definitions, extracting children from groups
+function flattenDefinitions(definitions: FilterInterface[]): FilterInterface[] {
+  return definitions.flatMap((def) =>
+    typeof def.isGroup === "function" && def.isGroup()
+      ? flattenDefinitions(def.getChildren())
+      : [def]
+  );
+}
+
 export function Grid({ filters, definitions, onOpenDrawer, onToggleBoolean, big = false, filterBtnIcon }: FiltrosGridProps) {
-  const multiSelectFIlters = definitions.filter((def) => def.getType() === "multi-select");
-  const booleanFilters = definitions.filter((def) => def.getType() === "boolean");
+  const flatDefinitions = flattenDefinitions(definitions);
+  const multiSelectFIlters = flatDefinitions.filter((def) => def.getType() === "multi-select");
+  const booleanFilters = flatDefinitions.filter((def) => def.getType() === "boolean");
 
   return (
     <div>

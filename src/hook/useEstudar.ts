@@ -11,8 +11,8 @@ export function useEstudar({ buildFilterString, entity }: useEstudarProps) {
   const handleEstudar = async () => {
     const filtros = buildFilterString(entity);
 
-    alert(filtros);
-    // router.push(`/${entity}/listagem?filters=${filtros}`);
+    // alerkt(filtros);
+    router.push(`/${entity}/listagem?filters=${filtros}`);
   };
 
   return handleEstudar;

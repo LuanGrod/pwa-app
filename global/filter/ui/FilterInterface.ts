@@ -13,6 +13,8 @@ export type ConditionalOperator =
   | StringsOperations
   | BooleansOperations;
 
+export type FilterTypes = "boolean" | "multi-select" | "group";
+
 export default interface FilterInterface {
   loadOptions(): Promise<any>;
   getQueryField(): string;
@@ -21,7 +23,7 @@ export default interface FilterInterface {
   getOptions(): any;
   getValue(): any;
   getActiveValue(): any;
-  getType(): string;
+  getType(): FilterTypes;
   getIdParamName(): string;
   getLabelParamName(): string;
   getParentKey(): string;
@@ -42,4 +44,8 @@ export default interface FilterInterface {
   getFilterFragment(
     values: Record<string, any>,
   ): FilterFragment[];
+
+  // Required for composite/group filters
+  isGroup(): boolean;
+  getChildren(): FilterInterface[];
 }

@@ -1,17 +1,26 @@
 import { useEffect, useState } from "react";
-import FilterInterface, { ConnectionOperator } from "@global/filter/ui/FilterInterface";
-import { format } from "path";
+import FilterInterface from "@global/filter/ui/FilterInterface";
 import FilterStringAssembler, { FilterFragment } from "@global/filter/ui/FilterStringAssembler";
 
+// Helper to flatten definitions, extracting children from groups
+function flattenDefinitions(definitions: FilterInterface[]): FilterInterface[] {
+  return definitions.flatMap((def) =>
+    def.isGroup() ? flattenDefinitions(def.getChildren()) : [def]
+  );
+}
+
 export function useFilters(definitions: FilterInterface[]) {
+  // Flatten the definitions to get all leaf filters (no groups)
+  const flatDefinitions = flattenDefinitions(definitions);
+
   const [values, setValues] = useState<any>(() =>
-    Object.fromEntries(definitions.map((def) => [def.getQueryField(), def.getValue()]))
+    Object.fromEntries(flatDefinitions.map((def) => [def.getQueryField(), def.getValue()]))
   );
   const [options, setOptions] = useState<Record<string, any[]>>({});
   const [loadingOptions, setLoadingOptions] = useState<Record<string, boolean>>({});
 
   useEffect(() => {
-    definitions.map((def) => {
+    flatDefinitions.map((def) => {
       try {
         setValues((prev: any) => ({ ...prev, [def.getQueryField()]: def.getValue() }));
         if (def.getParentKey()) {
@@ -22,7 +31,7 @@ export function useFilters(definitions: FilterInterface[]) {
   }, []);
 
   const openDrawer = async (key: string) => {
-    const filter = definitions.find((def) => def.getQueryField() === key);
+    const filter = flatDefinitions.find((def) => def.getQueryField() === key);
     if (!(filter?.getType() == "multi-select")) return;
 
     setLoadingOptions((prev) => ({ ...prev, [key]: true }));
@@ -127,7 +136,7 @@ export function useFilters(definitions: FilterInterface[]) {
   const clearFilter = (key: string) => {
     setValues((prev: any) => {
       const newValues = { ...prev };
-      const definition = definitions.find((def) => def.getKey() === key);
+      const definition = flatDefinitions.find((def) => def.getKey() === key);
 
       if (definition) {
         // Limpa o valor principal
@@ -163,6 +172,6 @@ export function useFilters(definitions: FilterInterface[]) {
     toggleBoolean,
     clearFilter,
     buildFilterString,
-    definitions,
+    definitions: flatDefinitions,
   };
 }

@@ -1125,11 +1125,12 @@ form .link-recuperacao-senha {
 }
 
 .flashcard {
-  flex-grow: 1;
-  perspective: 1000px;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
 }
 .flashcard.show-answer .flashcard-inner {
-  transform: rotateX(-180deg);
+  transform: rotateX(180deg);
 }
 .flashcard .flashcard-inner {
   position: relative;

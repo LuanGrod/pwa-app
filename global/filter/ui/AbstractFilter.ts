@@ -1,10 +1,10 @@
-import FilterInterface, { ConditionalOperator, ConnectionOperator } from "./FilterInterface";
+import FilterInterface, { ConditionalOperator, ConnectionOperator, FilterTypes } from "./FilterInterface";
 import { FilterFragment } from "./FilterStringAssembler";
 
 export default abstract class AbstractFilter implements FilterInterface {
   queryField: string;
   label: string;
-  type: string;
+  type: FilterTypes;
   queryFieldEntity: string;
   key: string;
   conditionalOperator: ConditionalOperator;
@@ -14,7 +14,7 @@ export default abstract class AbstractFilter implements FilterInterface {
   constructor(
     queryField: string,
     label: string,
-    type: string,
+    type: FilterTypes,
     key?: string,
     queryFieldEntity?: string,
     conditionalOperator?: ConditionalOperator,
@@ -57,6 +57,13 @@ export default abstract class AbstractFilter implements FilterInterface {
 
   abstract getParentDenialOperator(): boolean;
 
+  isGroup(): boolean {
+    return false;
+  }
+  getChildren(): FilterInterface[] {
+    return [];
+  }
+
   getQueryField(): string {
     return this.queryField;
   }
@@ -69,7 +76,7 @@ export default abstract class AbstractFilter implements FilterInterface {
     return this.label;
   }
 
-  getType(): string {
+  getType(): FilterTypes {
     return this.type;
   }
 
@@ -95,6 +102,5 @@ export default abstract class AbstractFilter implements FilterInterface {
    */
   abstract getFilterFragment(
     values: Record<string, any>,
-    allDefinitions?: FilterInterface[]
   ): FilterFragment[];
 }

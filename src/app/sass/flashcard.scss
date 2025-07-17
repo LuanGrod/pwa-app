@@ -1,10 +1,11 @@
 .flashcard {
-  flex-grow: 1;
-  perspective: 1000px;
+  background-color: transparent;
+  width: 100%;
+  height: 100%;
 
   &.show-answer {
     .flashcard-inner {
-      transform: rotateX(-180deg);
+      transform: rotateX(180deg); 
     }
   }
 
@@ -86,6 +87,7 @@
 
   .back {
     transform: rotateX(-180deg);
+
     .content {
       .text {
         text-align: start;
@@ -95,8 +97,10 @@
 }
 
 .dark-theme {
+
   // @media (prefers-color-scheme: dark) {
   .flashcard {
+
     .front,
     .back {
       background-color: #1a1f2b;
