@@ -94,8 +94,14 @@
 }
 
 .dark-theme {
-// @media (prefers-color-scheme: dark) {
+  // @media (prefers-color-scheme: dark) {
   .flashcard-footer {
     background-color: var(--background-variation);
+
+    .respostas-wrapper {
+      .resposta {
+        background-color: var(--background);
+      }
+    }
   }
 }

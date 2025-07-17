@@ -850,6 +850,9 @@ form .link-recuperacao-senha {
 .dark-theme .flashcard-footer {
   background-color: var(--background-variation);
 }
+.dark-theme .flashcard-footer .respostas-wrapper .resposta {
+  background-color: var(--background);
+}
 
 .header-wrapper {
   flex-grow: 0; /* previne de dar o grow (só o content da grow) */
@@ -1229,8 +1232,9 @@ form .link-recuperacao-senha {
   text-align: start;
 }
 
-.dark-theme .flashcard .front,
-.dark-theme .flashcard .back {
+.dark-theme .flashcard .front .header, .dark-theme .flashcard .front .content,
+.dark-theme .flashcard .back .header,
+.dark-theme .flashcard .back .content {
   background-color: #1a1f2b;
 }
 

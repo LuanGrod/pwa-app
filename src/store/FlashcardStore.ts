@@ -101,6 +101,8 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
         entity: "flashcards-salvos",
         id: tempId,
       });
+
+      await deleting.build(true);
     } else {
       set((state) => ({
         flashcardsList:

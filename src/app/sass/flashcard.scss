@@ -112,7 +112,9 @@
   .flashcard {
     .front,
     .back {
-      background-color: #1a1f2b;
+      .header, .content {
+        background-color: #1a1f2b;
+      }
     }
   }
 }
