@@ -8,7 +8,7 @@ export default function page({}: Props) {
     <GreetingsLogoStructure>
       <div className="page-filter">
         <div>
-          <p className="quantity-selected">{25045} flashcards selecionadas</p>
+          <p className="quantity-selected">{25045} flashcards selecionados</p>
           <h1 className="title">Bem-vindo ao <br/>banco de flashcards!</h1>
           <h2 className="subtitle">Escolha seus filtros</h2>
         </div>

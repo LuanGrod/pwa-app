@@ -68,14 +68,12 @@
   }
 
   .viewed {
-    width: 26px;
-    height: 26px;
-    background-color: var(--background-variation);
-    border-radius: 100%;
-    border: 2px solid var(--foreground-variation);
-
     &.active {
-      background-color: #828889;
+      .status {
+        filter: brightness(0) saturate(100%) invert(53%) sepia(51%) saturate(1435%)
+          hue-rotate(115deg) brightness(97%) contrast(101%);
+        fill: var(--emphasis);
+      }
     }
   }
 

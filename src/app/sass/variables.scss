@@ -1,4 +1,8 @@
 :root {
+  // js variables
+  --app-height: 100vh;
+
+  // colors
   --background: #ffffff;
   --background-variation: #f5f5f5;
   --foreground: #000000;
@@ -7,12 +11,20 @@
   --divider: #00000015;
   --footer-link-active: #00cc77;
   --footer-link-inactive: #828889;
-  --app-height: 100vh;
   --success: #00cc77;
   --danger: #e7432b;
   --warning: #f6a600;
   --info: #2991d6;
+
+  // box-shadow
   --filter-shadow: drop-shadow(0px 0px 2px color-mix(in oklab, var(--foreground) 20%, transparent));
+
+  // typography
+  --font-xs: 12px;
+  --font-sm: 14px;
+  --font-base: 16px;
+  --font-lg: 18px;
+  --font-xl: 20px;
 }
 
 /* esse inline é para usar no tailwind */
@@ -30,6 +42,11 @@
   --font-text: var(--font-text);
   --font-rounded: var(--font-rounded);
   --font-input: var(--font-input);
+  --font-xs: var(--font-xs);
+  --font-sm: var(--font-sm);
+  --font-base: var(--font-base);
+  --font-lg: var(--font-lg);
+  --font-xl: var(--font-xl);
 }
 
 .dark-theme {

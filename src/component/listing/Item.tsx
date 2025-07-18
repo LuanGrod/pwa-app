@@ -5,6 +5,7 @@ import UploadImage from "@global/component/atomic/UploadImage";
 import useToggleAddRemove from "@global/hook/useToggleAddRemove";
 import { useUser } from "@global/hook/auth/useUser";
 import { Dispatch, SetStateAction } from "react";
+import Estrela from "@global/component/icons/Estrela";
 
 type ToggleAddRemoveProps = {
   entity: string;
@@ -78,7 +79,7 @@ export function Item({
           <p className="subtitle">{subtitle}</p>
         </div>
       </LinkView>
-      <button disabled={isSaving} onClick={toggleAddRemove} className={`viewed ${viewed ? "active" : ""}`}></button>
+      <button disabled={isSaving} onClick={toggleAddRemove} className={`viewed ${viewed ? "active" : ""}`}><Estrela size={26} changeOnTheme className="status" /></button>
     </div>
   );
 }

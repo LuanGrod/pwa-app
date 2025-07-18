@@ -1,6 +1,5 @@
 .contentTitle {
-  font-size: 12px;
-  line-height: 14px;
+  font-size: var(--font-sm);
   text-transform: uppercase;
   color: var(--emphasis);
   font-weight: 600;
@@ -16,20 +15,15 @@
 
 .contentParagraph {
   font-family: var(--font-text);
-  font-size: 12px;
-  line-height: 14px;
+  font-size: var(--font-sm);
   margin-bottom: 16px;
   text-align: justify;
   font-weight: 300;
 }
 
-.contentList {
-}
-
 .contentListItem {
   font-family: var(--font-text);
-  font-size: 12px;
-  line-height: 14px;
+  font-size: var(--font-sm);
   font-weight: 300;
   list-style: disc inside;
 }

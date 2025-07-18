@@ -34,7 +34,7 @@ export default function RespostaQuestao({ onClose, open, data }: Props) {
       {
         data && data.questoes_referencia_comentario && (
           <>
-            <p className="titulo-referencia">Referência principal:</p>
+            <p className="titulo-referencia">Dica de prova:</p>
             <p className="referencia">{data.questoes_referencia_comentario}</p>
           </>
         )
