@@ -10,8 +10,13 @@ type InsertProps = {
 export class Insert extends ResponseHandler {
   protected successMessage: string;
 
-  constructor({ successMessage = "Cadastro realizado com sucesso!", errorHandlerCollection = null }: InsertProps) {
-    super({ errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection() });
+  constructor({
+    successMessage = "Cadastro realizado com sucesso!",
+    errorHandlerCollection = null,
+  }: InsertProps) {
+    super({
+      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+    });
     this.successMessage = successMessage;
     this.onSuccessFn = this.handleSuccess.bind(this);
     this.onErrorFn = this.handleError.bind(this);

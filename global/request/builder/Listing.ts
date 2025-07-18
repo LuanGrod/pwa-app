@@ -2,6 +2,7 @@ import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Listing as ResponseHandler } from "@global/request/response/handler/Listing";
 import { DefaultApi } from "../error/handler/collection/DefaultApi";
+import { ResponseHandlerInterface } from "../response/handler/HandlerInterface";
 
 type ListingProps = {
   entity: string;
@@ -9,6 +10,7 @@ type ListingProps = {
   parentId?: number | null;
   params?: Record<string, any>;
   headers?: HeadersInit;
+  responseHandler?: ResponseHandlerInterface | null;
 };
 
 export class Listing extends RequestBuilder {
@@ -18,6 +20,7 @@ export class Listing extends RequestBuilder {
     parentId = null,
     params = {},
     headers = {},
+    responseHandler = null,
   }: ListingProps) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
@@ -27,9 +30,7 @@ export class Listing extends RequestBuilder {
 
     const method: Methods = "GET";
 
-    const responseHandler = new ResponseHandler({
-      errorHandlerCollection: new DefaultApi(),
-    });
+    responseHandler = responseHandler || new ResponseHandler({});
 
     super({ endpoint, method, headers, data: null, responseHandler });
 

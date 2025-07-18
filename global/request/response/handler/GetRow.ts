@@ -2,17 +2,20 @@ import { Default as DefaultErrorHandlerCollection } from "@global/request/error/
 import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
 import { ResponseHandler } from "./Handler";
 
-export class GetRow extends ResponseHandler {
-  protected errorHandlerCollection: ErrorHandlerCollection;
+type GetRowProps = {
+  errorHandlerCollection?: ErrorHandlerCollection | null;
+};
 
-  constructor({ errorHandlerCollection = null }: { errorHandlerCollection?: ErrorHandlerCollection | null }) {
-    super({});
-    this.errorHandlerCollection = errorHandlerCollection || new DefaultErrorHandlerCollection();
+export class GetRow extends ResponseHandler {
+  constructor({ errorHandlerCollection = null }: GetRowProps) {
+    super({
+      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+    });
     this.onSuccessFn = this.handleSuccess.bind(this);
     this.onErrorFn = this.handleError.bind(this);
   }
 
-  private async handleSuccess(data: any): Promise<any> {
+  protected async handleSuccess(data: any): Promise<any> {
     return {
       success: true,
       data: data,

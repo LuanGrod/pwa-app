@@ -10,8 +10,13 @@ type DeleteProps = {
 export class Delete extends ResponseHandler {
   protected successMessage: string;
 
-  constructor({ successMessage = "Exclusão realizada com sucesso!", errorHandlerCollection = null }: DeleteProps) {
-    super({ errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection() });
+  constructor({
+    successMessage = "Exclusão realizada com sucesso!",
+    errorHandlerCollection = null,
+  }: DeleteProps) {
+    super({
+      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+    });
     this.successMessage = successMessage;
     this.onSuccessFn = this.handleSuccess.bind(this);
     this.onErrorFn = this.handleError.bind(this);

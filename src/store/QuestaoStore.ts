@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { Questao as QuestaoType } from "@/type/Entities";
-import { Insert } from "@global/request/builder/Insert";
-import { Delete } from "@global/request/builder/Delete";
+import { Insert } from "@global/request/builder/api/Insert";
+import { Delete } from "@global/request/builder/api/Delete";
 
 type QuestaoAnswerType = {
   answer: string;

@@ -21,7 +21,7 @@ export default function Greetings({ }: Props) {
               height={45}
               className="avatar"
             />) : (
-              <div className="avatar"><Usuario size={35} /></div>
+              <div className="avatar"><Usuario size={35} changeOnTheme /></div>
             )
           }
           <p className="title">Olá {estudante.nomeCompleto}!</p>

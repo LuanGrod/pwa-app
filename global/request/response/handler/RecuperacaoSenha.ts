@@ -15,7 +15,9 @@ export class RecuperacaoSenha extends ResponseHandler {
     successMessage = "Email de recuperação enviado com sucesso!",
     errorHandlerCollection = null,
   }: RecuperacaoSenhaProps) {
-    super({ errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection() });
+    super({
+      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+    });
     this.successMessage = successMessage;
     this.onSuccessFn = this.handleSuccess.bind(this);
     this.onErrorFn = this.handleError.bind(this);

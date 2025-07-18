@@ -1,5 +1,5 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
-import { GetRow } from "@global/request/builder/GetRow";
+import { GetRow } from "@global/request/builder/api/GetRow";
 
 type UseGetRowProps = {
   entity: string;

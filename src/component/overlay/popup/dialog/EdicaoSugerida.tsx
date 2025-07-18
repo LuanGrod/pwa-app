@@ -1,10 +1,11 @@
 "use client";
 
-import { InsertHandler } from "@global/form/handler/submit/InsertHandler";
+import { InsertHandler } from "@global/form/handler/submit/api/InsertHandler";
 import Sugestion from "./Sugestion";
 import { Form } from "@global/form/Form";
 import { Hidden } from "@global/form/item/prebuilt/Hidden";
 import { Conteudo } from "@global/form/item/prebuilt/Conteudo";
+import { Insert as ResponseHandler } from "@global/request/response/handler/api/Insert";
 
 type Props = {
   open?: boolean;
@@ -27,7 +28,10 @@ export default function EdicaoSugerida({
   estudanteName = "id_estudante",
   estudanteId,
 }: Props) {
-  const insertHandler = new InsertHandler({ entity: insertEntity, needsAuthorization: true });
+  const insertHandler = new InsertHandler({
+    entity: insertEntity, needsAuthorization: true,
+    responseHandler: new ResponseHandler({ successMessage: "Sugestão enviada com sucesso!" })
+  });
 
   const formItems = [
     new Conteudo({ entity: formEntity }),

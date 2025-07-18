@@ -19,7 +19,9 @@ export class GeracaoNovaSenha extends ResponseHandler {
     successMessage = "Senha alterada com sucesso!",
     errorHandlerCollection = null,
   }: GeracaoNovaSenhaProps) {
-    super({ errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection() });
+    super({
+      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+    });
     this.successMessage = successMessage;
     this.onSuccessFn = this.handleSuccess.bind(this);
     this.onErrorFn = this.handleError.bind(this);

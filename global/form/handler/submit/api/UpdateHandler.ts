@@ -1,7 +1,7 @@
 import { ResponseHandlerInterface } from "@global/request/response/handler/HandlerInterface";
-import SubmitHandlerInterface from "./SubmitHandlerInterface";
-import { Update } from "@global/request/builder/Update";
-import { Update as ResponseHandler } from "@global/request/response/handler/Update";
+import { Update } from "@global/request/builder/api/Update";
+import { Update as ResponseHandler } from "@global/request/response/handler/api/Update";
+import { UpdateHandler as FormHandler } from "../UpdateHandler";
 
 type UpdateHandlerProps = {
   entity: string;
@@ -9,15 +9,10 @@ type UpdateHandlerProps = {
   responseHandler?: ResponseHandlerInterface | null;
 };
 
-export class UpdateHandler implements SubmitHandlerInterface {
-  protected entity: string;
-  protected needsAuthorization: boolean;
-  protected responseHandler: ResponseHandlerInterface;
-
+export class UpdateHandler extends FormHandler {
   constructor({ entity, needsAuthorization, responseHandler = null }: UpdateHandlerProps) {
-    this.entity = entity;
-    this.needsAuthorization = needsAuthorization || false;
-    this.responseHandler = responseHandler || new ResponseHandler({});
+    responseHandler = responseHandler || new ResponseHandler({});
+    super({ entity, needsAuthorization, responseHandler });
   }
 
   async onSubmit(values: any, id: string): Promise<any> {

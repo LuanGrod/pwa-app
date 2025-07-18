@@ -1,5 +1,5 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
-import { Listing } from "@global/request/builder/Listing";
+import { Listing } from "@global/request/builder/api/Listing";
 
 type UseListingProps = {
   entity: string;

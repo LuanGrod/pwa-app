@@ -1,5 +1,5 @@
 import AbstractFilter from "./AbstractFilter";
-import { Listing } from "@global/request/builder/Listing";
+import { Listing } from "@global/request/builder/api/Listing";
 import FilterInterface, { ConditionalOperator, ConnectionOperator } from "./FilterInterface";
 import { FilterFragment } from "./FilterStringAssembler";
 

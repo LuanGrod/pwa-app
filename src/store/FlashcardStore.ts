@@ -1,5 +1,5 @@
-import { Delete } from "@global/request/builder/Delete";
-import { Insert } from "@global/request/builder/Insert";
+import { Delete } from "@global/request/builder/api/Delete";
+import { Insert } from "@global/request/builder/api/Insert";
 import { Flashcard as FlashcardType } from "@/type/Entities";
 import { create } from "zustand";
 

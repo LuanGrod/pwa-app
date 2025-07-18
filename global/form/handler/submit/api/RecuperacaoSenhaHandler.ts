@@ -1,7 +1,7 @@
 import { ResponseHandlerInterface } from "@global/request/response/handler/HandlerInterface";
-import SubmitHandlerInterface from "./SubmitHandlerInterface";
-import { RecuperacaoSenha } from "@global/request/builder/RecuperacaoSenha";
-import { RecuperacaoSenha as ResponseHandler } from "@global/request/response/handler/RecuperacaoSenha";
+import { RecuperacaoSenha } from "@global/request/builder/api/RecuperacaoSenha";
+import { RecuperacaoSenha as ResponseHandler } from "@global/request/response/handler/api/RecuperacaoSenha";
+import { RecuperacaoSenhaHandler as FormHandler } from "../RecuperacaoSenhaHandler";
 
 type RecuperacaoSenhaHandlerProps = {
   entity: string;
@@ -9,19 +9,14 @@ type RecuperacaoSenhaHandlerProps = {
   responseHandler?: ResponseHandlerInterface | null;
 };
 
-export class RecuperacaoSenhaHandler implements SubmitHandlerInterface {
-  protected entity?: string | null;
-  protected needsAuthorization: boolean;
-  protected responseHandler: ResponseHandlerInterface;
-
+export class RecuperacaoSenhaHandler extends FormHandler {
   constructor({
     entity,
     needsAuthorization,
     responseHandler = null,
   }: RecuperacaoSenhaHandlerProps) {
-    this.entity = entity;
-    this.needsAuthorization = needsAuthorization || false;
-    this.responseHandler = responseHandler || new ResponseHandler({});
+    responseHandler = responseHandler || new ResponseHandler({});
+    super({ entity, needsAuthorization, responseHandler });
   }
 
   async onSubmit(values: any, id?: string): Promise<any> {

@@ -1,6 +1,6 @@
 "use client";
 
-import { RecuperacaoSenhaHandler } from "@global/form/handler/submit/RecuperacaoSenhaHandler";
+import { RecuperacaoSenhaHandler } from "@global/form/handler/submit/api/RecuperacaoSenhaHandler";
 import Form from "@global/component/form/Form";
 import RecuperacaoSenhaForm from "@global/form/RecuperacaoSenha";
 

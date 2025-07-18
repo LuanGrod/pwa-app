@@ -1,7 +1,7 @@
-import SubmitHandlerInterface from "./SubmitHandlerInterface";
-import { Login } from "@global/request/builder/Login";
-import { Login as ResponseHandler } from "@global/request/response/handler/Login";
+import { Login } from "@global/request/builder/api/Login";
+import { Login as ResponseHandler } from "@global/request/response/handler/api/Login";
 import { ResponseHandlerInterface } from "@global/request/response/handler/HandlerInterface";
+import { LoginHandler as FormHandler } from "../LoginHandler";
 
 type LoginHandlerProps = {
   entity?: string | null;
@@ -10,17 +10,10 @@ type LoginHandlerProps = {
   responseHandler?: ResponseHandlerInterface | null;
 };
 
-export class LoginHandler implements SubmitHandlerInterface {
-  protected entity?: string | null;
-  protected props?: Map<string, any>;
-  protected needsAuthorization: boolean;
-  protected responseHandler: ResponseHandlerInterface;
-
+export class LoginHandler extends FormHandler {
   constructor({ entity, props, needsAuthorization, responseHandler = null }: LoginHandlerProps) {
-    this.entity = entity;
-    this.props = props;
-    this.needsAuthorization = needsAuthorization || false;
-    this.responseHandler = responseHandler || new ResponseHandler({});
+    responseHandler = responseHandler || new ResponseHandler({ props });
+    super({ entity, props, needsAuthorization, responseHandler });
   }
 
   async onSubmit(values: any, id?: string): Promise<any> {

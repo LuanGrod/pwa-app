@@ -1,7 +1,7 @@
 import { RequestBuilder } from "./Builder";
 import { Insert as ResponseHandler } from "../response/handler/Insert";
 import { Methods } from "@global/type/Methods";
-import { DefaultApi } from "../error/handler/collection/DefaultApi";
+import { ResponseHandlerInterface } from "../response/handler/HandlerInterface";
 
 type InsertProps = {
   entity: string;
@@ -9,10 +9,18 @@ type InsertProps = {
   parentEntity?: string | null;
   parentId?: number | null;
   headers?: HeadersInit;
+  responseHandler?: ResponseHandlerInterface | null;
 };
 
 export class Insert extends RequestBuilder {
-  constructor({ entity, data, parentEntity = null, parentId = null, headers = {} }: InsertProps) {
+  constructor({
+    entity,
+    data,
+    parentEntity = null,
+    parentId = null,
+    headers = {},
+    responseHandler = null,
+  }: InsertProps) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const endpoint = parentEntity
@@ -21,9 +29,7 @@ export class Insert extends RequestBuilder {
 
     const method: Methods = "POST";
 
-    const responseHandler = new ResponseHandler({
-      errorHandlerCollection: new DefaultApi(),
-    });
+    responseHandler = responseHandler || new ResponseHandler({});
 
     super({ endpoint, method, data, responseHandler, headers });
   }

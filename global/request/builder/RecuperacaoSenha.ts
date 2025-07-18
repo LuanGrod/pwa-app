@@ -1,16 +1,17 @@
 import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { RecuperacaoSenha as ResponseHandler } from "@global/request/response/handler/RecuperacaoSenha";
-import { DefaultApi } from "../error/handler/collection/DefaultApi";
+import { ResponseHandlerInterface } from "../response/handler/HandlerInterface";
 
 type RecuperacaoSenhaProps = {
   entity?: string | null;
   data: any;
   headers?: HeadersInit;
+  responseHandler?: ResponseHandlerInterface | null;
 };
 
 export class RecuperacaoSenha extends RequestBuilder {
-  constructor({ entity, data, headers = {} }: RecuperacaoSenhaProps) {
+  constructor({ entity, data, headers = {}, responseHandler = null }: RecuperacaoSenhaProps) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const endpoint = entity
@@ -19,9 +20,7 @@ export class RecuperacaoSenha extends RequestBuilder {
 
     const method: Methods = "POST";
 
-    const responseHandler = new ResponseHandler({
-      errorHandlerCollection: new DefaultApi(),
-    });
+    responseHandler = responseHandler || new ResponseHandler({});
 
     super({ endpoint, method, data, responseHandler, headers });
   }

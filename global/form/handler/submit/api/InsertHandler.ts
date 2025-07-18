@@ -1,7 +1,7 @@
 import { ResponseHandlerInterface } from "@global/request/response/handler/HandlerInterface";
-import SubmitHandlerInterface from "./SubmitHandlerInterface";
-import { Insert } from "@global/request/builder/Insert";
-import { Insert as ResponseHandler } from "@global/request/response/handler/Insert";
+import { Insert } from "@global/request/builder/api/Insert";
+import { Insert as ResponseHandler } from "@global/request/response/handler/api/Insert";
+import { InsertHandler as FormHandler } from "../InsertHandler";
 
 type InsertHandlerProps = {
   entity: string;
@@ -9,15 +9,10 @@ type InsertHandlerProps = {
   responseHandler?: ResponseHandlerInterface | null;
 };
 
-export class InsertHandler implements SubmitHandlerInterface {
-  protected entity: string;
-  protected needsAuthorization: boolean;
-  protected responseHandler: ResponseHandlerInterface;
-
+export class InsertHandler extends FormHandler {
   constructor({ entity, needsAuthorization, responseHandler = null }: InsertHandlerProps) {
-    this.entity = entity;
-    this.needsAuthorization = needsAuthorization || false;
-    this.responseHandler = responseHandler || new ResponseHandler({});
+    responseHandler = responseHandler || new ResponseHandler({});
+    super({ entity, needsAuthorization, responseHandler });
   }
 
   async onSubmit(values: any, id?: string): Promise<any> {

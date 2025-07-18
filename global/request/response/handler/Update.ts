@@ -10,8 +10,13 @@ type UpdateProps = {
 export class Update extends ResponseHandler {
   protected successMessage: string;
 
-  constructor({ successMessage = "Edição realizada com sucesso!", errorHandlerCollection = null }: UpdateProps) {
-    super({ errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection() });
+  constructor({
+    successMessage = "Edição realizada com sucesso!",
+    errorHandlerCollection = null,
+  }: UpdateProps) {
+    super({
+      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+    });
     this.successMessage = successMessage;
     this.onSuccessFn = this.handleSuccess.bind(this);
     this.onErrorFn = this.handleError.bind(this);

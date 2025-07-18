@@ -1,6 +1,6 @@
 "use client";
 
-import { LoginHandler } from "@global/form/handler/submit/LoginHandler";
+import { LoginHandler } from "@global/form/handler/submit/api/LoginHandler";
 import { useEstudante } from "@/store/EstudanteStore";
 import Form from "@global/component/form/Form";
 import LoginForm from "@global/form/Login";
