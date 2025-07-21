@@ -5,14 +5,18 @@ import Footer from "../footer/Flashcard";
 type Props = {
   children: ReactNode;
   title: string;
+  isFlipped: boolean;
+  setIsFlipped: (value: boolean) => void;
+  isSlidding: boolean;
+  setIsSlidding: (value: boolean) => void;
 };
 
-export default function Flashcard({ children, title }: Props) {
+export default function Flashcard({ children, title, isFlipped, setIsFlipped, isSlidding, setIsSlidding }: Props) {
   return (
     <>
       <Header title={title} />
       <main className="content-wrapper flashcards">{children}</main>
-      <Footer />
+      <Footer isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={isSlidding} setIsSlidding={setIsSlidding} />
     </>
   );
 }

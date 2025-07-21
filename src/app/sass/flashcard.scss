@@ -106,13 +106,34 @@
     }
   }
 }
+/* New animation for the next card */
+@keyframes slideInFromRight {
+  from {
+    transform: translateX(100vw) scale(0.9);
+    opacity: 0.8;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.card-enter {
+  position: absolute;
+  top: 85px;
+  left: 8px;
+  height: calc(100% - 222px);
+  width: calc(100% - 16px);
+  animation: slideInFromRight 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+}
 
 .dark-theme {
   // @media (prefers-color-scheme: dark) {
   .flashcard {
     .front,
     .back {
-      .header, .content {
+      .header,
+      .content {
         background-color: #1a1f2b;
       }
     }

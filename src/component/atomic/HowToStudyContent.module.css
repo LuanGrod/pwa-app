@@ -9,14 +9,14 @@
 .contentWrapper {
   background-color: var(--background-variation);
   border-radius: 9px;
-  padding: 20px 24px;
+  padding: 20px 24px; 
   margin-bottom: 20px;
-}
+} 
 
 .contentParagraph {
   font-family: var(--font-text);
   font-size: var(--font-sm);
-  margin-bottom: 16px;
+  margin-bottom: 16px; 
   text-align: justify;
   font-weight: 300;
 }

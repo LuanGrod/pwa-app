@@ -2,24 +2,46 @@
 
 import useFlashcards from "@/store/FlashcardStore";
 import RespostaBtn from "./RespostaBtn";
+import { useUser } from "@global/hook/auth/useUser";
 
-type Props = {};
+type Props = {
+  isFlipped: boolean;
+  setIsFlipped: (value: boolean) => void;
+  isSlidding: boolean;
+  setIsSlidding: (value: boolean) => void;
+};
 
-export default function Flashcard({}: Props) {
+export default function Flashcard({ isFlipped, setIsFlipped, isSlidding, setIsSlidding }: Props) {
+  const { id: userId } = useUser();
 
-  const { isShowingAnswer, toggleIsShowingAnswer } = useFlashcards();
+  const { registerAnswer } = useFlashcards();
+
+  const handleRegisterAnswer = (value: string) => {
+    if (isSlidding) return;
+
+    setIsSlidding(true);
+
+    setTimeout(() => {
+      setIsFlipped(false);
+    }, 600)
+
+    setTimeout(() => {
+      registerAnswer(userId, value);
+      setIsSlidding(false);
+    }, 1200)
+  }
 
   return (
     <footer className="flashcard-footer">
-      {isShowingAnswer ? (
+      {isFlipped ? (
         <div className="respostas-wrapper">
-          <RespostaBtn color="#FF1AC6" title="Erro" value="Erro" />
-          <RespostaBtn color="#FFA800" title="Acerto parcial" value="Acerto Parcial" />
-          <RespostaBtn color="#33FF66" title="Acerto seguro" value="Acerto com Segurança" />
-          <RespostaBtn color="#0066FF" title="Fácil" value="Acerto Fácil" />
+          <RespostaBtn onClick={() => handleRegisterAnswer("Erro")} color="#FF1AC6" title="Erro" value="Erro" />
+          <RespostaBtn onClick={() => handleRegisterAnswer("Acerto Parcial")} color="#FFA800" title="Acerto parcial" value="Acerto Parcial" />
+          <RespostaBtn onClick={() => handleRegisterAnswer("Acerto com Segurança")} color="#33FF66" title="Acerto seguro" value="Acerto com Segurança" />
+          <RespostaBtn onClick={() => handleRegisterAnswer("Acerto Fácil")} color="#0066FF" title="Fácil" value="Acerto Fácil" />
         </div>
       ) : (
-        <button onClick={toggleIsShowingAnswer} className="btn">
+        <button onClick={() => setIsFlipped(true)} disabled={isSlidding} className="btn">
           VER RESPOSTA
         </button>
       )}

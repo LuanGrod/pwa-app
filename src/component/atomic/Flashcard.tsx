@@ -6,33 +6,25 @@ import useFlashcards from "@/store/FlashcardStore";
 
 type Props = {
   data: FlashcardType;
+  isFlipped: boolean;
+  onFlip: () => void;
+  customClass?: string;
 };
 
-export default function Flashcard({ data }: Props) {
+export default function Flashcard({ data, isFlipped, onFlip, customClass = "" }: Props) {
   const { isOpen, toggleDialog } = useDialog();
   const { id: userId } = useUser();
-  const { getCurrentFlashcardSavedStatus, handleSave, isShowingAnswer } = useFlashcards();
-
-  const logoColor =
-    data.respostas_flashcards_ultima_resposta_flashcard === "Erro"
-      ? "#ff1ac6"
-      : data.respostas_flashcards_ultima_resposta_flashcard === "Acerto Parcial"
-        ? "#ffa800"
-        : data.respostas_flashcards_ultima_resposta_flashcard === "Acerto com Segurança"
-          ? "#33ff66"
-          : data.respostas_flashcards_ultima_resposta_flashcard === "Acerto Fácil"
-            ? "#0066ff"
-            : undefined;
+  const { getSavedStatus, handleSave, getLogoColor } = useFlashcards();
 
   return (
-    <div className={`flashcard ${isShowingAnswer ? "show-answer" : ""}`}>
+    <div className={`flashcard ${isFlipped ? "show-answer" : ""} ${customClass}`} onClick={onFlip}>
       <div className="flashcard-inner">
         <FlashcardSide
           side={"front"}
-          logoColor={logoColor}
+          logoColor={getLogoColor(data)}
           handleSave={() => handleSave(userId)}
           toggleDialog={toggleDialog}
-          status={getCurrentFlashcardSavedStatus()}
+          status={getSavedStatus()}
           isOpen={isOpen}
           userId={userId}
           conteudoId={data.flashcards_id}
@@ -42,18 +34,16 @@ export default function Flashcard({ data }: Props) {
         />
         <FlashcardSide
           side={"back"}
-          logoColor={logoColor}
+          logoColor={getLogoColor(data)}
           handleSave={() => handleSave(userId)}
           toggleDialog={toggleDialog}
-          status={getCurrentFlashcardSavedStatus()}
+          status={getSavedStatus()}
           isOpen={isOpen}
           userId={userId}
           conteudoId={data.flashcards_id}
           title={data.flashcards_resposta_titulo}
           text={data.flashcards_resposta}
           imageUrl={data.flashcards_url_imagem}
-        />
-      </div>
-    </div>
+        /></div></div>
   );
 }
