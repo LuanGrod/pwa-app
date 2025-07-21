@@ -2,7 +2,7 @@
 
 import useFlashcards from "@/store/FlashcardStore";
 import { useGetRow } from "@global/hook/request/useGetRow";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Flashcard as FlashcardType } from "@/type/Entities";
 import FlashcardStructure from "@/component/structure/Flashcard";
 import Flashcard from "@/component/atomic/Flashcard";
@@ -15,7 +15,9 @@ type Props = {
 
 export default function FlashcardItem({ id }: Props) {
 
-  const { setFlashcardsList, getCurrentFlashcard } = useFlashcards();
+  const { setDeck, getCurrent } = useFlashcards();
+
+  const [isFlipped, setIsFlipped] = useState(false);
 
   const { data, loading, error } = useGetRow<FlashcardType>({
     entity: "flashcards",
@@ -23,22 +25,27 @@ export default function FlashcardItem({ id }: Props) {
     needsAuthorization: true,
   });
 
-  const currentTitle = getCurrentFlashcard() ? `${getCurrentFlashcard()?.areas_nome}: ${getCurrentFlashcard()?.temas_nome}` : "";
+  const currentTitle = getCurrent() ? `${getCurrent()?.areas_nome}: ${getCurrent()?.temas_nome}` : "";
 
   useEffect(() => {
     if (data) {
-      setFlashcardsList([data]);
+      setDeck([data]);
     }
   }, [data])
 
   return (
-    <FlashcardStructure title={currentTitle}>
+    <FlashcardStructure title={currentTitle} isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={false} setIsSlidding={() => { }}>
       <Viewing
-        data={getCurrentFlashcard()}
+        data={getCurrent()}
         loading={loading}
         error={error}
         loadingComponent={<Loading2 loading />}
-        renderItem={(item: FlashcardType) => <Flashcard data={item} />}
+        renderItem={(item: FlashcardType) =>
+          <Flashcard
+            data={item}
+            isFlipped={isFlipped}
+            onFlip={() => setIsFlipped(!isFlipped)}
+          />}
       />
     </FlashcardStructure>
   )

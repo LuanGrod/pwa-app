@@ -121,12 +121,7 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
   },
   // Register answer: append to answers and remove the first flashcard
   registerAnswer: async (userId: string, value: string) => {
-    const {
-      getCurrent,
-      shift,
-      answers,
-      deck,
-    } = get();
+    const { getCurrent, shift, answers, deck, count } = get();
     const currentFlashcard = getCurrent();
     if (!currentFlashcard) return null;
     // Append answer to answers
@@ -134,7 +129,9 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
       answers: [...state.answers, { flashcardId: currentFlashcard.flashcards_id, answer: value }],
     }));
     // Remove the first flashcard
-    shift();
+    if (count() > 1) {
+      shift();
+    }
     // Save answer to backend
     const insertData = {
       respostas_flashcards_id_estudante: userId,
