@@ -17,6 +17,7 @@ type Props = {
   title: string;
   text: string;
   imageUrl?: string;
+  header: string;
 };
 
 export default function FlashcardSide({
@@ -31,6 +32,7 @@ export default function FlashcardSide({
   toggleDialog,
   userId,
   imageUrl,
+  header,
 }: Props) {
   const { isSaving } = useFlashcards();
 
@@ -39,6 +41,7 @@ export default function FlashcardSide({
       <div className="header">
         <Logo size={30} className="actions" color={logoColor} changeOnTheme={!logoColor} />
         <div className="card-title">MedRQE</div>
+        {/* <div className="card-title">{header}</div> */}
         <div className="actions">
           <SaveBtn disabled={isSaving} handleSave={handleSave} status={status} />
           <EditBtn handleEdit={toggleDialog} />

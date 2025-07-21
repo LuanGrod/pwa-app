@@ -9,17 +9,22 @@ type Props = {
   setIsFlipped: (value: boolean) => void;
   isSlidding: boolean;
   setIsSlidding: (value: boolean) => void;
+  setTitle: (value: string) => void;
+  title: string;
 };
 
-export default function Flashcard({ isFlipped, setIsFlipped, isSlidding, setIsSlidding }: Props) {
+export default function Flashcard({ isFlipped, setIsFlipped, isSlidding, setIsSlidding, setTitle, title }: Props) {
   const { id: userId } = useUser();
 
-  const { registerAnswer } = useFlashcards();
+  const { registerAnswer, getNext } = useFlashcards();
 
   const handleRegisterAnswer = (value: string) => {
     if (isSlidding) return;
 
+
     setIsSlidding(true);
+
+    setTitle(getNext() ? `${getNext()?.areas_nome}: ${getNext()?.temas_nome}` : title);
 
     setTimeout(() => {
       setIsFlipped(false);

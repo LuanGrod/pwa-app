@@ -46,6 +46,14 @@
         font-size: 12px;
         font-weight: 700;
         font-family: var(--font-rounded);
+        width: 50%;
+        text-align: center;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+        overflow: hidden;
+        word-break: break-all;
       }
 
       .actions {

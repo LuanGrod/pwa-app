@@ -19,6 +19,7 @@ export default function page({ }: Props) {
 
   const [isFlipped, setIsFlipped] = useState(false);
   const [isSlidding, setIsSlidding] = useState(false);
+  const [title, setTitle] = useState("");
 
   const { setDeck, getCurrent, getNext } = useFlashcards();
 
@@ -31,6 +32,7 @@ export default function page({ }: Props) {
   useEffect(() => {
     if (data.rows && data.rows.length > 0) {
       setDeck(data.rows);
+      setTitle(`${data.rows[0].areas_nome}: ${data.rows[0].temas_nome}`);
     }
   }, [data])
 
@@ -45,7 +47,7 @@ export default function page({ }: Props) {
     <>
       {
         currentFlashcard && (
-          <FlashcardStructure title={`${currentFlashcard.areas_nome}: ${currentFlashcard.temas_nome}`} isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={isSlidding} setIsSlidding={setIsSlidding}>
+          <FlashcardStructure title={title} setTitle={setTitle} isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={isSlidding} setIsSlidding={setIsSlidding}>
             <Flashcard
               data={currentFlashcard}
               isFlipped={isFlipped}
