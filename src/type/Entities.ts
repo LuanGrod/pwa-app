@@ -83,3 +83,14 @@ export type MapasMentaisSalvos = {
   temas_nome: string;
   areas_nome: string;
 };
+
+// ESTUDANTE
+
+export type Estudante = {
+  estudantes_email: string;
+  estudantes_whatsapp: string;
+  estudantes_instituicoes_interesse: string;
+  estudantes_especialidade: string;
+  estudantes_data_nascimento: string;
+  estudantes_url_imagem?: string;
+};

@@ -3,7 +3,7 @@ import { GetRow } from "@global/request/builder/api/GetRow";
 
 type UseGetRowProps = {
   entity: string;
-  id: string;
+  id?: string;
   parentEntity?: string;
   parentId?: number;
   params?: Record<string, any>;
@@ -40,7 +40,7 @@ export function useGetRow<T = any>({
     try {
       const getRow = new GetRow({
         entity: entity,
-        id: id,
+        id: id || "",
         parentEntity: parentEntity || "",
         parentId: parentId || 0,
         headers: headers || {},
