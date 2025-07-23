@@ -3,21 +3,31 @@
 import ReturnTitleStructure from "@/component/structure/ReturnTitle";
 import { useGetRow } from "@global/hook/request/useGetRow";
 import { Estudante as EstudanteType } from "@/type/Entities";
+import { useUser } from "@global/hook/auth/useUser";
+import { Viewing } from "@global/component/viewing/Viewing";
+import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
+import Perfil from "@/component/atomic/Perfil";
 
 type Props = {};
 
-export default function page({}: Props) {
+export default function page({ }: Props) {
+  const { id: userId } = useUser()
 
-  const { data, loading, error } = useGetRow<EstudanteType>({
-    entity: "estudantes",
+  const { data, loading } = useGetRow<EstudanteType>({
+    entity: "estudantes2",
+    id: userId,
     needsAuthorization: true,
   });
 
+  if (loading) return <Loading2 loading />
 
   return (
-    <ReturnTitleStructure title="Perfil">
-      <h1>Perfil</h1>
-      {JSON.stringify(data)}
-    </ReturnTitleStructure>
+    <>
+      {data && (
+        <ReturnTitleStructure title="Perfil">
+          <Perfil data={data} />
+        </ReturnTitleStructure>
+      )}
+    </>
   );
 }

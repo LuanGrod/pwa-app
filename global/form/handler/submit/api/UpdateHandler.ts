@@ -23,6 +23,6 @@ export class UpdateHandler extends FormHandler {
       responseHandler: this.responseHandler,
     });
 
-    return await updateRequestBuilder.build();
+    return await updateRequestBuilder.build(this.needsAuthorization);
   }
 }

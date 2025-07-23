@@ -1,0 +1,67 @@
+import { Estudante as EstudanteType } from "@/type/Entities";
+import UploadImage from "@global/component/atomic/UploadImage";
+import Camera from "@global/component/icons/Camera";
+import PerfilItem from "./PerfilItem";
+import Editar from "@global/component/icons/Editar";
+import Image from "next/image";
+import { DateBRFormatter } from "@global/formatter/DateBRFormatter";
+import { PhoneBRFormatter } from "@global/formatter/PhoneBRFormatter";
+import Logo from "../icon/Logo";
+import useDialog from "@global/hook/overlay/useDialog";
+import PerfilEdicao from "../overlay/drawer/PerfilEdicao";
+import PerfilEdicaoSenha from "../overlay/drawer/PerfilEdicaoSenha";
+
+type Props = {
+  data: EstudanteType;
+}
+
+export default function Perfil({ data }: Props) {
+  const { isOpen: edicaoIsOpen, toggleDialog: edicaoToggleDialog } = useDialog()
+  const { isOpen: edicaoSenhaIsOpen, toggleDialog: edicaoSenhaToggleDialog } = useDialog()
+  const dateFormatter = new DateBRFormatter();
+  const phoneFormatter = new PhoneBRFormatter();
+
+  return (
+    <>
+      <div className="pfp-wrapper">
+        <div className="pfp">
+          {
+            data.estudantes_url_imagem ? (
+              <UploadImage src={data.estudantes_url_imagem} alt="profile" className="image" width={200} height={200} priority />
+            ) : (
+              <Image src="/project/assets/avatar-mock.png" alt="profile" className="image" width={200} height={200} priority />
+            )
+          }
+          <button className="btn-edit" onClick={e => console.log("Update image")}>
+            <Camera size={20} className="camera-icon" />
+          </button>
+        </div>
+        <div className="title-wrapper">
+          <h1 className="title">
+            {data.estudantes_nome_completo}
+          </h1>
+          <button onClick={edicaoToggleDialog}>
+            <Editar size={20} changeOnTheme />
+          </button>
+        </div>
+      </div>
+      <div className="perfil-info">
+        <PerfilItem label="Email:" value={data.estudantes_email} />
+        <PerfilItem label="Senha:" value={"********"} customClass="edit">
+          <button onClick={edicaoSenhaToggleDialog}>
+            <Editar size={18} changeOnTheme />
+          </button>
+        </PerfilItem>
+        <PerfilItem label="Data de nascimento:" value={dateFormatter.format(data.estudantes_data_nascimento)} />
+        <PerfilItem label="Whatsapp:" value={phoneFormatter.format(data.estudantes_whatsapp)} />
+        <PerfilItem label="Instituições de interesse:" value={data.estudantes_instituicoes_interesse} />
+        <PerfilItem label="Especialidade-alvo:" value={data.estudantes_especialidade} />
+      </div>
+      <div className="logo-wrapper">
+        <Logo size={32} className="logo" />
+      </div>
+      <PerfilEdicao data={data} open={edicaoIsOpen} onClose={edicaoToggleDialog} />
+      <PerfilEdicaoSenha open={edicaoSenhaIsOpen} onClose={edicaoSenhaToggleDialog} />
+    </>
+  )
+}

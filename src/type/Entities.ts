@@ -87,6 +87,7 @@ export type MapasMentaisSalvos = {
 // ESTUDANTE
 
 export type Estudante = {
+  estudantes_nome_completo: string;
   estudantes_email: string;
   estudantes_whatsapp: string;
   estudantes_instituicoes_interesse: string;

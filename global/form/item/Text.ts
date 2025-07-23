@@ -1,13 +1,16 @@
 import { ItemDef } from "@global/type/form/ItemDef";
 import { AbstractItem } from "./AbstractItem";
 import { Form } from "../Form";
+import Item from "@global/component/form/item/item/Item";
+import InputWidget from "@global/component/form/item/widgets/Input";
 
 export class Text extends AbstractItem {
   constructor({
-    widgetType,
-    itemType,
+    widgetType = InputWidget,
+    itemType = Item,
     name = null,
     fieldName,
+    type = "text",
     entity = null,
     validators = [],
     textNameGender = true,
@@ -18,16 +21,17 @@ export class Text extends AbstractItem {
     msgPlacement = null,
     tags = [],
     defaultValue = null,
-    data,
+    data = new Map<string, any>(),
     itemClassName = null,
     widgetClassName = null,
   }: ItemDef) {
+    name = name ?? `${entity}_${fieldName}`;
     super({
       widgetType,
       itemType,
       name,
       fieldName,
-      type: "text",
+      type,
       entity,
       validators,
       textNameGender,

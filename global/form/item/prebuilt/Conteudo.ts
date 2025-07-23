@@ -1,14 +1,14 @@
 import { ItemDef } from "@global/type/form/ItemDef";
 import { RequiredValidatorFactory } from "@global/validator/required/RequiredValidatorFactory";
 import TextareaWidget from "@global/component/form/item/widgets/Textarea";
-import TextAreaItem from "@global/component/form/item/item/Textarea";
+import Item2 from "@global/component/form/item/item/Item2";
 import { Textarea } from "../Textarea";
 import { MaxLengthValidatorFactory } from "@global/validator/string/maxLength/MaxLengthValidatorFactory";
 
 export class Conteudo extends Textarea {
   constructor({
     widgetType = TextareaWidget,
-    itemType = TextAreaItem,
+    itemType = Item2,
     name = null,
     fieldName = "conteudo",
     type = "textarea",

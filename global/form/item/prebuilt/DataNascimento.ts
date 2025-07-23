@@ -14,8 +14,8 @@ export class DataNascimento extends Text {
     entity = null,
     validators = [RequiredValidatorFactory.create()],
     textNameGender = false,
-    formName = null,
-    textName = null,
+    formName = "Data de nascimento",
+    textName = "data de nascimento",
     filters = [],
     mask = null,
     msgPlacement = null,
@@ -26,7 +26,6 @@ export class DataNascimento extends Text {
     widgetClassName = null,
   }: Partial<ItemDef>) {
     name = name ?? `${entity}_${fieldName}`;
-
     super({
       widgetType,
       itemType,

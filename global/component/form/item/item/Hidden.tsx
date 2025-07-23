@@ -5,6 +5,13 @@ import Wrapper3 from "../wrapper/Wrapper3";
 
 type Props = {};
 
+/**
+ * widget
+ * @param item: ItemInterface
+ * @param itemHook: any
+ * @param form: Form
+ * @returns 
+ */
 export default function HiddenItem({ item, form, itemHook }: { item: ItemInterface; form: Form; itemHook: any }) {
   const widget = React.createElement(item.getWidgetType(), item.getWidgetProps(form, itemHook));
 

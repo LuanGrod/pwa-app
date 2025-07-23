@@ -28,6 +28,6 @@ export class UpdateHandler implements SubmitHandlerInterface {
       responseHandler: this.responseHandler,
     });
 
-    return await updateRequestBuilder.build();
+    return await updateRequestBuilder.build(this.needsAuthorization);
   }
 }

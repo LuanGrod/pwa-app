@@ -2,7 +2,7 @@ import { Default as DefaultErrorHandlerCollection } from "@global/request/error/
 import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
 import { ResponseHandler } from "./Handler";
 
-type UpdateProps = {
+export type UpdateProps = {
   successMessage?: string;
   errorHandlerCollection?: ErrorHandlerCollection | null;
 };

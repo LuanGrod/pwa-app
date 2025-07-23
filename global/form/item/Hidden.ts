@@ -1,11 +1,13 @@
 import { ItemDef } from "@global/type/form/ItemDef";
 import { AbstractItem } from "./AbstractItem";
 import { Form } from "../Form";
+import HiddenItem from "@global/component/form/item/item/Hidden";
+import HiddenWidget from "@global/component/form/item/widgets/Hidden";
 
 export class Hidden extends AbstractItem {
   constructor({
-    widgetType,
-    itemType,
+    widgetType = HiddenWidget,
+    itemType = HiddenItem,
     name = null,
     fieldName,
     entity = null,
@@ -18,10 +20,11 @@ export class Hidden extends AbstractItem {
     msgPlacement = null,
     tags = [],
     defaultValue = null,
-    data,
+    data = new Map<string, any>(),
     itemClassName = null,
     widgetClassName = null,
   }: ItemDef) {
+    name = name ?? `${entity}_${fieldName}`;
     super({
       widgetType,
       itemType,

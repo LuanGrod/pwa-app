@@ -3,7 +3,7 @@
 import { InsertHandler } from "@global/form/handler/submit/api/InsertHandler";
 import Sugestion from "./Sugestion";
 import { Form } from "@global/form/Form";
-import { Hidden } from "@global/form/item/prebuilt/Hidden";
+import { Hidden } from "@global/form/item/Hidden";
 import { Conteudo } from "@global/form/item/prebuilt/Conteudo";
 import { Insert as ResponseHandler } from "@global/request/response/handler/api/Insert";
 
@@ -34,9 +34,9 @@ export default function EdicaoSugerida({
   });
 
   const formItems = [
-    new Conteudo({ entity: formEntity }),
-    new Hidden({ entity: formEntity, name: `${formEntity}_${conteudoName}`, defaultValue: conteudoId }),
-    new Hidden({ entity: formEntity, name: `${formEntity}_${estudanteName}`, defaultValue: estudanteId }),
+    new Conteudo({ entity: formEntity, fieldName: "conteudo" }),
+    new Hidden({ entity: formEntity, name: `${formEntity}_${conteudoName}`, defaultValue: conteudoId, fieldName: conteudoName }),
+    new Hidden({ entity: formEntity, name: `${formEntity}_${estudanteName}`, defaultValue: estudanteId, fieldName: estudanteName }),
   ];
   const form = new Form(formItems, "below");
 

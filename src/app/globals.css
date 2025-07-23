@@ -19,7 +19,7 @@
   --font-sm: 14px;
   --font-base: 16px;
   --font-lg: 18px;
-  --font-xl: 20px;
+  --font-xl: 24px;
 }
 
 /* esse inline é para usar no tailwind */
@@ -405,6 +405,10 @@ form .link-recuperacao-senha {
   flex: 1;
   overflow-y: auto;
   margin-top: 30px;
+}
+.drawer-wrapper .drawer-bottom form {
+  max-height: 70vh;
+  overflow-y: auto;
 }
 .drawer-wrapper .drawer-under-header {
   width: 100%;
@@ -1496,6 +1500,90 @@ form .link-recuperacao-senha {
 }
 .questoes-alerta.incorreto {
   background-color: #ff1ac6;
+}
+
+.pfp-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.pfp-wrapper .pfp {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  margin-bottom: 25px;
+}
+.pfp-wrapper .pfp .image {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+.pfp-wrapper .pfp .btn-edit {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10px;
+  right: 5px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  border: 1px solid #c4c4c4;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.pfp-wrapper .pfp .camera-icon {
+  filter: brightness(0) saturate(100%) invert(41%) sepia(0%) saturate(0%) hue-rotate(136deg) brightness(96%) contrast(89%);
+}
+.pfp-wrapper .title-wrapper {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 25px;
+}
+.pfp-wrapper .title-wrapper .title {
+  font-size: var(--font-xl);
+  line-height: 1;
+  font-weight: 400;
+}
+
+.perfil-info {
+  background-color: var(--background-variation);
+  padding: 20px 27px;
+  border-radius: 9px;
+  margin-bottom: 20px;
+}
+.perfil-info .perfil-item:not(:last-of-type) {
+  margin-bottom: 20px;
+}
+.perfil-info .perfil-item.edit {
+  display: flex;
+  gap: 20px;
+  align-items: end;
+}
+.perfil-info .perfil-item .label {
+  font-size: var(--font-sm);
+  line-height: 1;
+  color: #c4c4c4;
+  margin-bottom: 10px;
+}
+.perfil-info .perfil-item .value {
+  font-size: var(--font-base);
+  line-height: 1;
+  color: var(--foreground);
+}
+
+.logo-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.dark-theme .pfp-wrapper .pfp .camera-icon {
+  filter: brightness(0) saturate(100%);
 }
 
 body {

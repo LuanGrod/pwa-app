@@ -15,9 +15,13 @@ export class Update extends RequestBuilder {
   constructor({ entity, data, id, headers = {}, responseHandler = null }: UpdateProps) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
-    const endpoint = `${apiUrl}/${entity}/${id}`;
+    let endpoint = `${apiUrl}/edicao/${entity}`;
 
-    const method: Methods = "PUT";
+    if (id) {
+      endpoint += `/${id}`;
+    }
+
+    const method: Methods = "POST";
 
     responseHandler = responseHandler || new ResponseHandler({});
 

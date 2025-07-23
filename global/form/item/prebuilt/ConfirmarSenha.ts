@@ -27,13 +27,19 @@ export class ConfirmarSenha extends Password {
     itemClassName = null,
     widgetClassName = null,
   }: Partial<ItemDef>) {
+    data = data.size > 0 ? data : new Map<string, any>([["match", `${entity}_senha`]]);
     (validators =
       validators.length > 0
         ? validators
         : [
             RequiredValidatorFactory.create(),
-            PasswordValidatorFactory.create({ minLength: 8, minLowercase: 1, minUppercase: 1, minNumber: 1 }),
-            MatchPasswordValidatorFactory.create(`${entity}_senha`),
+            PasswordValidatorFactory.create({
+              minLength: 8,
+              minLowercase: 1,
+              minUppercase: 1,
+              minNumber: 1,
+            }),
+            MatchPasswordValidatorFactory.create(data.get("match")),
           ]),
       (name = name ?? `${entity}_${fieldName}`);
     super({

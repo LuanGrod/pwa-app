@@ -65,7 +65,7 @@ export abstract class AbstractItem implements ItemInterface {
     this.defaultValue = defaultValue;
     this.widgetClassName = widgetClassName;
     this.itemClassName = itemClassName;
-    this.data = data;
+    this.data = data || new Map<string, any>();
   }
 
   getName(): string | null {

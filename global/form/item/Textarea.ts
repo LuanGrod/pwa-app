@@ -1,11 +1,13 @@
 import { ItemDef } from "@global/type/form/ItemDef";
 import { AbstractItem } from "./AbstractItem";
 import { Form } from "../Form";
+import TextareaWidget from "@global/component/form/item/widgets/Textarea";
+import Item from "@global/component/form/item/item/Item";
 
 export class Textarea extends AbstractItem {
   constructor({
-    widgetType,
-    itemType,
+    widgetType = TextareaWidget,
+    itemType = Item,
     name = null,
     fieldName,
     entity = null,
@@ -18,10 +20,11 @@ export class Textarea extends AbstractItem {
     msgPlacement = null,
     tags = [],
     defaultValue = null,
-    data,
+    data = new Map<string, any>(),
     itemClassName = null,
     widgetClassName = null,
   }: ItemDef) {
+    name = name ?? `${entity}_${fieldName}`;
     super({
       widgetType,
       itemType,

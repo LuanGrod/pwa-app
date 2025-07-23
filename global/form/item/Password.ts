@@ -1,11 +1,13 @@
 import { ItemDef } from "@global/type/form/ItemDef";
 import { AbstractItem } from "./AbstractItem";
 import { Form } from "../Form";
+import PasswordItem from "@global/component/form/item/item/Password";
+import PasswordWidget from "@global/component/form/item/widgets/Password";
 
 export class Password extends AbstractItem {
   constructor({
-    widgetType,
-    itemType,
+    widgetType = PasswordWidget,
+    itemType = PasswordItem,
     name = null,
     fieldName,
     entity = null,
@@ -18,10 +20,11 @@ export class Password extends AbstractItem {
     msgPlacement = null,
     tags = [],
     defaultValue = null,
-    data,
+    data = new Map<string, any>(),
     itemClassName = null,
     widgetClassName = null,
   }: ItemDef) {
+    name = name ?? `${entity}_${fieldName}`;
     super({
       widgetType,
       itemType,
