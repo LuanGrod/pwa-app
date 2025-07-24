@@ -57,7 +57,7 @@ export abstract class AbstractItem implements ItemInterface {
     this.formName = formName || fieldName.charAt(0).toUpperCase() + fieldName.slice(1);
     this.textName = textName || fieldName;
     this.textNameGender = textNameGender;
-    this.filters = filters.length > 0 ? filters : [new TrimFilter(), new StripTagsFilter()];
+    this.filters = filters.length > 0 ? filters : [new StripTagsFilter()];
     this.validators = validators;
     this.mask = mask;
     this.msgPlacement = msgPlacement;

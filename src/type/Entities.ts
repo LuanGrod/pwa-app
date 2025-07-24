@@ -95,3 +95,17 @@ export type Estudante = {
   estudantes_data_nascimento: string;
   estudantes_url_imagem?: string;
 };
+
+// FATURA
+
+export type Fatura = {
+  faturas_id: string;
+  faturas_valor: string;
+  faturas_data_hora_cadastro: string;
+  estudantes_inicio_vigencia_plano: string;
+  periodos_planos_periodo: Periodos;
+  faturas_vencimento_plano: string;
+  faturas_status: string;
+};
+
+export type Periodos = "Semestral" | "Anual" | "Bienal";

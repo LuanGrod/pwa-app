@@ -42,20 +42,28 @@ export class Login extends ResponseHandler {
       this.cookie.setCookie("token", token, this.expirationDate);
       this.cookie.setCookie("id", id.toString(), this.expirationDate);
 
-      const setEstudante = this.props?.get("setEstudante");
+      const setUser = this.props?.get("setUser");
+      const entity = this.props?.get("entity");
+      const params = this.props?.get("params");
 
-      const getRow = new GetRow({
-        entity: "estudantes",
-        id: id,
-      });
+      if (entity && params && setUser) {
+        const getRow = new GetRow({
+          entity: entity,
+          id: id,
+        });
 
-      const response = await getRow.build(true);
+        const response = await getRow.build(true);
 
-      setEstudante({
-        nomeCompleto: response.data.estudantes_nome_completo,
-        urlImagem: response.data.estudantes_url_imagem,
-        periodosPlanosId: response.data.periodos_planos_id,
-      });
+        const usuario = params.reduce(
+          (acc: Record<string, any>, [finalKey, responseKey]: [string, string]) => {
+            acc[finalKey] = response.data[responseKey];
+            return acc;
+          },
+          {}
+        );
+
+        setUser(usuario);
+      }
     }
 
     startTransition(() => {

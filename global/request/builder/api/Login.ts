@@ -12,7 +12,6 @@ type LoginProps = {
 
 export class Login extends LoginRequestBuilder {
   constructor({ entity, data, headers = {}, props, responseHandler = null }: LoginProps) {
-    console.log(props);
     responseHandler = responseHandler || new ResponseHandler({ props });
 
     super({ entity, data, headers, props, responseHandler });

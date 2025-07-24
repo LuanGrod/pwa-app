@@ -4,7 +4,6 @@ import ReturnTitleStructure from "@/component/structure/ReturnTitle";
 import { useGetRow } from "@global/hook/request/useGetRow";
 import { Estudante as EstudanteType } from "@/type/Entities";
 import { useUser } from "@global/hook/auth/useUser";
-import { Viewing } from "@global/component/viewing/Viewing";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import Perfil from "@/component/atomic/Perfil";
 
@@ -24,7 +23,7 @@ export default function page({ }: Props) {
   return (
     <>
       {data && (
-        <ReturnTitleStructure title="Perfil">
+        <ReturnTitleStructure title="Perfil" customClass="perfil">
           <Perfil data={data} />
         </ReturnTitleStructure>
       )}

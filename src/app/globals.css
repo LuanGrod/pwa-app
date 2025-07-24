@@ -774,6 +774,9 @@ form .link-recuperacao-senha {
 .content-wrapper.questoes {
   padding: 0 20px 20px;
 }
+.content-wrapper.faturas, .content-wrapper.perfil {
+  padding: 0 30px 30px;
+}
 
 .dark-theme .content-wrapper.flashcards {
   background-color: var(--background);
@@ -1585,6 +1588,127 @@ form .link-recuperacao-senha {
 
 .dark-theme .pfp-wrapper .pfp .camera-icon {
   filter: brightness(0) saturate(100%);
+}
+
+.fatura-wrapper .title {
+  font-size: var(--font-xl);
+  line-height: 1;
+  font-weight: 400;
+  margin-bottom: 25px;
+  text-align: center;
+}
+.fatura-wrapper .plano-wrapper {
+  background-color: var(--background-variation);
+  border-radius: 9px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.fatura-wrapper .plano-wrapper .periodo {
+  width: 33%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.fatura-wrapper .plano-wrapper .periodo .number {
+  font-size: 64px;
+  line-height: 1;
+  font-weight: 400;
+}
+.fatura-wrapper .plano-wrapper .periodo .label {
+  font-size: var(--font-sm);
+  line-height: 1;
+  font-weight: 400;
+  color: #c4c4c4;
+}
+.fatura-wrapper .plano-wrapper .divider {
+  width: 1px;
+  height: 90px;
+  background-color: color-mix(in oklab, var(--foreground) 20%, transparent);
+}
+.fatura-wrapper .plano-wrapper .info-wrapper {
+  width: 66%;
+  display: flex;
+  flex-direction: column;
+  padding: 23px;
+}
+.fatura-wrapper .plano-wrapper .info-wrapper .info {
+  height: fit-content;
+}
+.fatura-wrapper .plano-wrapper .info-wrapper .info:not(:last-of-type) {
+  margin-bottom: 10px;
+}
+.fatura-wrapper .plano-wrapper .info-wrapper .info .label {
+  font-size: var(--font-sm);
+  line-height: 1;
+  font-weight: 700;
+  color: #c4c4c4;
+}
+.fatura-wrapper .plano-wrapper .info-wrapper .info .value {
+  font-size: var(--font-sm);
+  line-height: 1;
+}
+.fatura-wrapper .fatura-list {
+  display: flex;
+  flex-direction: column;
+}
+.fatura-wrapper .fatura-list .fatura-item {
+  display: flex;
+  align-items: center;
+  position: relative;
+  padding: 10px 0;
+}
+.fatura-wrapper .fatura-list .fatura-item:first-child {
+  padding-top: 0;
+}
+.fatura-wrapper .fatura-list .fatura-item:last-child {
+  padding-bottom: 0;
+}
+.fatura-wrapper .fatura-list .fatura-item:not(:last-child) {
+  border-bottom: 1px solid var(--background-variation);
+}
+.fatura-wrapper .fatura-list .fatura-item .fatura-date {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--background-variation);
+  border-radius: 2px;
+  width: 55px;
+  height: 55px;
+  margin-right: 14px;
+}
+.fatura-wrapper .fatura-list .fatura-item .fatura-date .month {
+  font-size: var(--font-sm);
+  color: var(--emphasis);
+  font-weight: 400;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.fatura-wrapper .fatura-list .fatura-item .fatura-date .year {
+  font-size: var(--font-xs);
+  color: #c4c4c4;
+  font-weight: 400;
+  line-height: 1;
+}
+.fatura-wrapper .fatura-list .fatura-item .fatura-value {
+  font-size: var(--font-sm);
+  font-weight: 700;
+  flex: 1;
+}
+.fatura-wrapper .fatura-list .fatura-item .fatura-action {
+  background: none;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  margin-left: 12px;
+  color: var(--foreground);
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 body {

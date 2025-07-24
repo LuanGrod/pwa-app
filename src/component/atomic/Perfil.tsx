@@ -4,8 +4,8 @@ import Camera from "@global/component/icons/Camera";
 import PerfilItem from "./PerfilItem";
 import Editar from "@global/component/icons/Editar";
 import Image from "next/image";
-import { DateBRFormatter } from "@global/formatter/DateBRFormatter";
-import { PhoneBRFormatter } from "@global/formatter/PhoneBRFormatter";
+import { BrazilianDateFormatter } from "@global/formatter/date/Brazilian";
+import { BrazilianPhoneFormatter } from "@global/formatter/phone/Brazilian";
 import Logo from "../icon/Logo";
 import useDialog from "@global/hook/overlay/useDialog";
 import PerfilEdicao from "../overlay/drawer/PerfilEdicao";
@@ -18,8 +18,8 @@ type Props = {
 export default function Perfil({ data }: Props) {
   const { isOpen: edicaoIsOpen, toggleDialog: edicaoToggleDialog } = useDialog()
   const { isOpen: edicaoSenhaIsOpen, toggleDialog: edicaoSenhaToggleDialog } = useDialog()
-  const dateFormatter = new DateBRFormatter();
-  const phoneFormatter = new PhoneBRFormatter();
+  const dateFormatter = new BrazilianDateFormatter();
+  const phoneFormatter = new BrazilianPhoneFormatter();
 
   return (
     <>

@@ -1,6 +1,6 @@
-import { FormatterInterface } from "./FormatterInterface";
+import { FormatterInterface } from "../FormatterInterface";
 
-export class PhoneBRFormatter implements FormatterInterface<string> {
+export class BrazilianPhoneFormatter implements FormatterInterface<string> {
   format(value: string): string {
     if (!value) return "";
     // Remove all non-digit characters

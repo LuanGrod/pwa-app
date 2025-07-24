@@ -10,11 +10,21 @@ import { useEffect } from "react";
 export default function Login({ }) {
   const router = useRouter();
   const { setEstudante } = useEstudante();
-  const submitHandler = new LoginHandler({ props: new Map([["setEstudante", setEstudante]]) });
+  let userSettings = new Map();
 
   useEffect(() => {
     router.prefetch("/");
+    userSettings.set("setUser", setEstudante);
+    userSettings.set("entity", "estudantes");
+    userSettings.set("params", [
+      ["nomeCompleto", "estudantes_nome_completo"],
+      ["urlImagem", "estudantes_url_imagem"],
+      ["periodosPlanosId", "periodos_planos_id"],
+    ])
   }, []);
+
+  const submitHandler = new LoginHandler({ props: userSettings });
+
 
   return <Form formConfig={LoginForm} submitHandler={submitHandler} />;
 }
