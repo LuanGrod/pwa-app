@@ -32,8 +32,11 @@ export default function Perfil({ data }: Props) {
               <Image src="/project/assets/avatar-mock.png" alt="profile" className="image" width={200} height={200} priority />
             )
           }
-          <button className="btn-edit" onClick={e => console.log("Update image")}>
-            <Camera size={20} className="camera-icon" />
+          <button className="btn-edit">
+            <input type="file" name="teste" id="teste" style={{ display: "none" }} />
+            <label htmlFor="teste">
+              <Camera size={20} className="camera-icon" />
+            </label>
           </button>
         </div>
         <div className="title-wrapper">

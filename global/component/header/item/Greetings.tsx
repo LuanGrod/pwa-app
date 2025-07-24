@@ -1,6 +1,7 @@
 "use client";
 
 import { useEstudante } from "@/store/EstudanteStore";
+import UploadImage from "@global/component/atomic/UploadImage";
 import Usuario from "@global/component/icons/Usuario";
 import Image from "next/image";
 
@@ -14,7 +15,7 @@ export default function Greetings({ }: Props) {
       {_hasHydrated ? (
         <>
           {
-            estudante.urlImagem ? (<Image
+            estudante.urlImagem ? (<UploadImage
               src={`${estudante.urlImagem}`}
               alt="Foto do usuário"
               width={45}
