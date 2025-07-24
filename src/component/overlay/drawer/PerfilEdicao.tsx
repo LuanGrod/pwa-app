@@ -5,7 +5,7 @@ import Form from "@global/component/form/Form";
 import { Email } from "@global/form/item/prebuilt/Email";
 import { Form as FormConfig } from "@global/form/Form";
 import { Whatsapp } from "@global/form/item/prebuilt/Whatsapp";
-import { PhoneBRFormatter } from "@global/formatter/PhoneBRFormatter";
+import { BrazilianPhoneFormatter } from "@global/formatter/phone/Brazilian";
 import { Textarea } from "@global/form/item/Textarea";
 import { Text } from "@global/form/item/Text";
 import { MaxLengthValidatorFactory } from "@global/validator/string/maxLength/MaxLengthValidatorFactory";
@@ -25,7 +25,7 @@ export default function PerfilEdicao({ open, onClose, data }: Props) {
     responseHandler: new RefreshOnSuccessUpdate(),
   });
 
-  const phoneFormatter = new PhoneBRFormatter();
+  const phoneFormatter = new BrazilianPhoneFormatter();
 
   const formItems = [
     new Email({
