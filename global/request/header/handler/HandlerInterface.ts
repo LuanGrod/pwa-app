@@ -1,12 +1,8 @@
 export interface HeaderHandlerInterface {
-  // Properties
-  
-
   // Methods
   /**
-   * 
-   * @param headers Cabeçalho da requisição
-   * @param tokenName - Nome do cookie do token (quando se tem mais de um perfil de usuário)
+   * Handles and returns updated headers. The second parameter is optional and can be used for handler-specific options (e.g., token name, content type value).
+   * @param headers Request headers
    */
-  handle(headers: HeadersInit, tokenName?: string): HeadersInit;
+  handle(headers: HeadersInit): HeadersInit;
 }

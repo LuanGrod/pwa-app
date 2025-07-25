@@ -23,7 +23,7 @@ export class UpdateHandler implements SubmitHandlerInterface {
   async onSubmit(values: any, id: string): Promise<any> {
     const updateRequestBuilder = new Update({
       entity: this.entity,
-      data: values,
+      body: values,
       id: id,
       responseHandler: this.responseHandler,
     });

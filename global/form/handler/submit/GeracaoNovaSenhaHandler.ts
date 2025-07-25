@@ -27,7 +27,7 @@ export class GeracaoNovaSenhaHandler implements SubmitHandlerInterface {
   async onSubmit(values: any, id?: string): Promise<any> {
     const geracaoNovaSenhaRequestBuilder = new GeracaoNovaSenha({
       entity: this.entity,
-      data: values,
+      body: values,
       responseHandler: this.responseHandler,
     });
     return await geracaoNovaSenhaRequestBuilder.build();

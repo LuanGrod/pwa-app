@@ -23,7 +23,7 @@ export class InsertHandler implements SubmitHandlerInterface {
   async onSubmit(values: any, id?: string): Promise<any> {
     const insertRequestBuilder = new Insert({
       entity: this.entity,
-      data: values,
+      body: values,
       responseHandler: this.responseHandler,
     });
 

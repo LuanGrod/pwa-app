@@ -23,7 +23,7 @@ export default function Login({ }) {
     ])
   }, []);
 
-  const submitHandler = new LoginHandler({ props: userSettings });
+  const submitHandler = new LoginHandler({ data: userSettings });
 
 
   return <Form formConfig={LoginForm} submitHandler={submitHandler} />;

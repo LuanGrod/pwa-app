@@ -17,7 +17,7 @@ export default function Fatura({ item }: Props) {
         <span className="year">{dateFormatter.shortFormatYear(item.faturas_data_hora_cadastro)}</span>
       </div>
       <div className="fatura-value">R$ {item.faturas_valor}</div>
-      <button className="fatura-action" aria-label="Baixar fatura" onClick={() => console.log("Not implemented yet")}>
+      <button className="fatura-action" aria-label="Baixar fatura" onClick={() => alert("Not implemented yet")}>
         <Download size={35} changeOnTheme />
       </button>
     </div>

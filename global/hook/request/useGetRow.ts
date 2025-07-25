@@ -1,5 +1,6 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { GetRow } from "@global/request/builder/api/GetRow";
+import { CollectionInterface as HeaderHandlerCollection } from "@global/request/header/handler/collection/CollectionInterface";
 
 type UseGetRowProps = {
   entity: string;
@@ -7,7 +8,7 @@ type UseGetRowProps = {
   parentEntity?: string;
   parentId?: number;
   params?: Record<string, any>;
-  headers?: HeadersInit;
+  headers?: HeaderHandlerCollection | null;
   autoFetch?: boolean;
   needsAuthorization?: boolean;
 };
@@ -48,7 +49,7 @@ export function useGetRow<T = any>({
         id: id,
         parentEntity: parentEntity || "",
         parentId: parentId || 0,
-        headers: headers || {},
+        headers: headers || null,
         params: params || {},
       });
       const result = await getRow.build(needsAuthorization);

@@ -3,7 +3,6 @@
 import { useEstudante } from "@/store/EstudanteStore";
 import UploadImage from "@global/component/atomic/UploadImage";
 import Usuario from "@global/component/icons/Usuario";
-import Image from "next/image";
 
 type Props = {};
 
@@ -21,6 +20,7 @@ export default function Greetings({ }: Props) {
               width={45}
               height={45}
               className="avatar"
+              priority
             />) : (
               <div className="avatar"><Usuario size={35} changeOnTheme /></div>
             )

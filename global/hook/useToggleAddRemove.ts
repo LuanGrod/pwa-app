@@ -75,7 +75,7 @@ export default function useToggleAddRemove({
 
       const insert = new Insert({
         entity: entity,
-        data: insertData,
+        body: insertData,
       });
 
       const response = await insert.build(true);

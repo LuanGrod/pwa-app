@@ -11,6 +11,7 @@ type EstudanteStore = {
   estudante: Estudante;
   setEstudante: (estudante: Estudante) => void;
   clearEstudante: () => void;
+  updateUrlImagem: (urlImagem: string) => void;
   _hasHydrated: boolean;
   setHasHydrated: (state: any) => void;
 };
@@ -40,6 +41,10 @@ export const useEstudante = create<EstudanteStore>()(
         set({
           _hasHydrated: state,
         });
+      },
+      updateUrlImagem: (urlImagem: string) => {
+        const { estudante } = get();
+        set({ estudante: { ...estudante, urlImagem } });
       },
     }),
     {

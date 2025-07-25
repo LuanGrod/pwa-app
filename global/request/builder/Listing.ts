@@ -1,15 +1,15 @@
 import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Listing as ResponseHandler } from "@global/request/response/handler/Listing";
-import { DefaultApi } from "../error/handler/collection/DefaultApi";
 import { ResponseHandlerInterface } from "../response/handler/HandlerInterface";
+import { CollectionInterface as HeaderHandlerCollection } from "@global/request/header/handler/collection/CollectionInterface";
 
 type ListingProps = {
   entity: string;
   parentEntity?: string | null;
   parentId?: number | null;
   params?: Record<string, any>;
-  headers?: HeadersInit;
+  headers?: HeaderHandlerCollection | null;
   responseHandler?: ResponseHandlerInterface | null;
 };
 
@@ -19,7 +19,7 @@ export class Listing extends RequestBuilder {
     parentEntity = null,
     parentId = null,
     params = {},
-    headers = {},
+    headers = null,
     responseHandler = null,
   }: ListingProps) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
@@ -32,7 +32,7 @@ export class Listing extends RequestBuilder {
 
     responseHandler = responseHandler || new ResponseHandler({});
 
-    super({ endpoint, method, headers, data: null, responseHandler });
+    super({ endpoint, method, headers, body: null, responseHandler });
 
     const query = this.buildQuery(params);
     if (query) {

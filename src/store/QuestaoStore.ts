@@ -132,7 +132,7 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
 
         const insert = new Insert({
           entity: "respostas-questoes",
-          data: insertData,
+          body: insertData,
         });
 
         const response = await insert.build(true);
@@ -185,7 +185,7 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
 
       const insert = new Insert({
         entity: "questoes-salvos",
-        data: insertData,
+        body: insertData,
       });
 
       const response = await insert.build(true);

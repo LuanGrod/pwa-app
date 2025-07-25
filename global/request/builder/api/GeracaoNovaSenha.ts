@@ -1,18 +1,19 @@
 import { GeracaoNovaSenha as ResponseHandler } from "@global/request/response/handler/api/GeracaoNovaSenha";
 import { GeracaoNovaSenha as GeracaoNovaSenhaRequestBuilder } from "../GeracaoNovaSenha";
 import { ResponseHandlerInterface } from "@global/request/response/handler/HandlerInterface";
+import { CollectionInterface as HeaderHandlerCollection } from "@global/request/header/handler/collection/CollectionInterface";
 
 type GeracaoNovaSenhaProps = {
   entity?: string | null;
-  data: any;
-  headers?: HeadersInit;
+  body: any;
+  headers?: HeaderHandlerCollection | null;
   responseHandler?: ResponseHandlerInterface | null;
 };
 
 export class GeracaoNovaSenha extends GeracaoNovaSenhaRequestBuilder {
-  constructor({ entity, data, headers = {}, responseHandler = null }: GeracaoNovaSenhaProps) {
+  constructor({ entity, body, headers = null, responseHandler = null }: GeracaoNovaSenhaProps) {
     responseHandler = responseHandler || new ResponseHandler({});
 
-    super({ entity, data, responseHandler, headers });
+    super({ entity, body, headers, responseHandler });
   }
 }

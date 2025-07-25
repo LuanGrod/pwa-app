@@ -11,18 +11,20 @@ import { Text } from "@global/form/item/Text";
 import { MaxLengthValidatorFactory } from "@global/validator/string/maxLength/MaxLengthValidatorFactory";
 import { DataNascimento } from "@global/form/item/prebuilt/DataNascimento";
 import { RefreshOnSuccessUpdate } from "@global/request/response/handler/api/RefreshOnSuccessUpdate";
+import { Hidden } from "@global/form/item/Hidden";
 
 type Props = {
   open: boolean;
   onClose: () => void;
   data: EstudanteType;
+  setData: (data: EstudanteType) => void;
 }
 
-export default function PerfilEdicao({ open, onClose, data }: Props) {
+export default function PerfilEdicao({ open, onClose, data, setData }: Props) {
   const submitHandler = new UpdateHandler({
     entity: "estudantes",
     needsAuthorization: true,
-    responseHandler: new RefreshOnSuccessUpdate(),
+    responseHandler: new RefreshOnSuccessUpdate({}),
   });
 
   const phoneFormatter = new BrazilianPhoneFormatter();
@@ -55,6 +57,11 @@ export default function PerfilEdicao({ open, onClose, data }: Props) {
     new DataNascimento({
       entity: "estudantes",
       defaultValue: data.estudantes_data_nascimento,
+    }),
+    new Hidden({
+      entity: "estudantes",
+      fieldName: "url_imagem",
+      defaultValue: data.estudantes_url_imagem
     })
   ];
 

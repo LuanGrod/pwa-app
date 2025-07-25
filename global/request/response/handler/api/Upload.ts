@@ -1,23 +1,20 @@
-import { DefaultApi2 as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi2";
+import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
 import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
-import { Login as LoginResponseHandler } from "../Login";
+import { Upload as UploadResponseHandler } from "../Upload";
 
-type LoginProps = {
+type UploadProps = {
   successMessage?: string;
   errorHandlerCollection?: ErrorHandlerCollection | null;
-  data?: Map<string, any>;
 };
 
-export class Login extends LoginResponseHandler {
+export class Upload extends UploadResponseHandler {
   constructor({
-    successMessage = "Login realizado com sucesso!",
+    successMessage = "Upload realizado com sucesso!",
     errorHandlerCollection = null,
-    data,
-  }: LoginProps) {
+  }: UploadProps) {
     super({
       successMessage,
       errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
-      data,
     });
   }
 }

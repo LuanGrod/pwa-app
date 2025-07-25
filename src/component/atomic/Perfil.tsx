@@ -1,3 +1,5 @@
+"use client";
+
 import { Estudante as EstudanteType } from "@/type/Entities";
 import UploadImage from "@global/component/atomic/UploadImage";
 import Camera from "@global/component/icons/Camera";
@@ -10,16 +12,49 @@ import Logo from "../icon/Logo";
 import useDialog from "@global/hook/overlay/useDialog";
 import PerfilEdicao from "../overlay/drawer/PerfilEdicao";
 import PerfilEdicaoSenha from "../overlay/drawer/PerfilEdicaoSenha";
+import { Upload } from "@global/request/builder/api/Upload";
+import { Update } from "@global/request/builder/Update";
+import { useEstudante } from "@/store/EstudanteStore";
+import { useUpload } from "@global/hook/request/useUpload";
+import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 
 type Props = {
   data: EstudanteType;
+  setData: (data: EstudanteType) => void;
 }
 
-export default function Perfil({ data }: Props) {
+export default function Perfil({ data, setData }: Props) {
   const { isOpen: edicaoIsOpen, toggleDialog: edicaoToggleDialog } = useDialog()
   const { isOpen: edicaoSenhaIsOpen, toggleDialog: edicaoSenhaToggleDialog } = useDialog()
   const dateFormatter = new BrazilianDateFormatter();
   const phoneFormatter = new BrazilianPhoneFormatter();
+  const { updateUrlImagem } = useEstudante()
+  const { uploadFile, loading } = useUpload({
+    entity: "estudantes",
+    needsAuthorization: true,
+  })
+
+  const handleUpdate = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+
+    const fileName = await uploadFile(file);
+
+    if (fileName) {
+      const requestBody = { estudantes_url_imagem: fileName };
+
+      const update = new Update({
+        entity: "estudantes3",
+        body: requestBody,
+      })
+
+      await update.build(true);
+
+      setData({ ...data, estudantes_url_imagem: fileName });
+      updateUrlImagem(fileName);
+    }
+  }
+
+  if (loading) return <Loading2 loading />
 
   return (
     <>
@@ -33,7 +68,7 @@ export default function Perfil({ data }: Props) {
             )
           }
           <button className="btn-edit">
-            <input type="file" name="teste" id="teste" style={{ display: "none" }} />
+            <input type="file" name="teste" id="teste" style={{ display: "none" }} onChange={handleUpdate} />
             <label htmlFor="teste">
               <Camera size={20} className="camera-icon" />
             </label>
@@ -63,7 +98,7 @@ export default function Perfil({ data }: Props) {
       <div className="logo-wrapper">
         <Logo size={32} className="logo" />
       </div>
-      <PerfilEdicao data={data} open={edicaoIsOpen} onClose={edicaoToggleDialog} />
+      <PerfilEdicao data={data} open={edicaoIsOpen} onClose={edicaoToggleDialog} setData={setData} />
       <PerfilEdicaoSenha open={edicaoSenhaIsOpen} onClose={edicaoSenhaToggleDialog} />
     </>
   )

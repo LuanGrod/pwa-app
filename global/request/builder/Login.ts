@@ -2,17 +2,18 @@ import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Login as ResponseHandler } from "@global/request/response/handler/Login";
 import { ResponseHandlerInterface } from "../response/handler/HandlerInterface";
+import { CollectionInterface as HeaderHandlerCollection } from "@global/request/header/handler/collection/CollectionInterface";
 
 type LoginProps = {
   entity?: string | null;
-  data: any;
-  headers?: HeadersInit;
-  props?: Map<string, any>;
+  body: any;
+  headers?: HeaderHandlerCollection | null;
+  data?: Map<string, any>;
   responseHandler?: ResponseHandlerInterface | null;
 };
 
 export class Login extends RequestBuilder {
-  constructor({ entity, data, headers = {}, props, responseHandler = null }: LoginProps) {
+  constructor({ entity, body, headers = null, data, responseHandler = null }: LoginProps) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const endpoint = entity ? `${apiUrl}/login/${entity}` : `${apiUrl}/login`;
@@ -21,6 +22,6 @@ export class Login extends RequestBuilder {
 
     responseHandler = responseHandler || new ResponseHandler({});
 
-    super({ endpoint, method, headers, data, responseHandler });
+    super({ endpoint, method, headers, body, responseHandler });
   }
 }

@@ -90,7 +90,7 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
       };
       const insert = new Insert({
         entity: "flashcards-salvos",
-        data: insertData,
+        body: insertData,
       });
       const response = await insert.build(true);
       if (response.success) {
@@ -140,7 +140,7 @@ const useFlashcards = create<FlashcardStore>((set, get) => ({
     };
     const insert = new Insert({
       entity: "respostas-flashcards",
-      data: insertData,
+      body: insertData,
     });
     await insert.build(true);
     // If no more flashcards, show alert (for now)

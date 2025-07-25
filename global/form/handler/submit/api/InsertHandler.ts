@@ -18,7 +18,7 @@ export class InsertHandler extends FormHandler {
   async onSubmit(values: any, id?: string): Promise<any> {
     const insertRequestBuilder = new Insert({
       entity: this.entity,
-      data: values,
+      body: values,
       responseHandler: this.responseHandler,
     });
 

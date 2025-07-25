@@ -1,27 +1,29 @@
 import { Methods } from "@global/type/Methods";
 import { ResponseHandlerInterface } from "@global/request/response/handler/HandlerInterface";
 import Authorization from "../header/handler/Authorization";
+import { Default as DefaultHeaderCollection } from "../header/handler/collection/Default";
+import { CollectionInterface as HeaderHandlerCollection } from "@global/request/header/handler/collection/CollectionInterface";
 
 type BuilderProps = {
   endpoint: string;
   method: Methods;
-  headers: HeadersInit;
-  data: any;
+  headers?: HeaderHandlerCollection | null;
+  body: any;
   responseHandler: ResponseHandlerInterface;
 };
 
 export class RequestBuilder {
   protected endpoint: string;
   protected method: Methods;
-  protected headers: HeadersInit;
-  protected data: any;
+  protected headers: HeaderHandlerCollection;
+  protected body: any;
   protected responseHandler: ResponseHandlerInterface;
 
-  constructor({ endpoint, method = "GET", headers = {}, data = {}, responseHandler }: BuilderProps) {
+  constructor({ endpoint, method = "GET", headers, body = {}, responseHandler }: BuilderProps) {
     this.endpoint = endpoint;
     this.method = method;
-    this.headers = { "Content-Type": "application/json", ...headers };
-    this.data = data;
+    this.headers = headers || new DefaultHeaderCollection();
+    this.body = body;
     this.responseHandler = responseHandler;
   }
 
@@ -33,29 +35,58 @@ export class RequestBuilder {
     this.method = method;
   }
 
-  setHeaders(header: Record<string, string>): void {
-    this.headers = header;
+  /**
+   * Sets the header handler collection to be used for this request.
+   * @param headerCollection Header handler collection implementing CollectionInterface
+   */
+  setHeaders(headerCollection: HeaderHandlerCollection): void {
+    this.headers = headerCollection;
   }
 
-  setData(data: any): void {
-    this.data = data;
+  setBody(body: any): void {
+    this.body = body;
   }
 
   setResponseHandler(responseHandler: ResponseHandlerInterface): void {
     this.responseHandler = responseHandler;
   }
 
+  /**
+   * Builds and sends the request, applying all header handlers in the collection.
+   * If needsAuthorization is true, applies the Authorization handler as well.
+   */
   async build(needsAuthorization?: boolean): Promise<any> {
     try {
+      let finalHeaders: HeadersInit = {};
+      // Apply all header handlers in the collection
+
+      const handlers = this.headers.get();
+
+      for (const handler of handlers) {
+        finalHeaders = handler.handle(finalHeaders);
+      }
+      // Optionally apply Authorization
       if (needsAuthorization) {
         const authorization = new Authorization();
-        this.headers = authorization.handle(this.headers);
+        finalHeaders = authorization.handle(finalHeaders);
       }
+
+      const contentType =
+        finalHeaders instanceof Headers
+          ? finalHeaders.get("Content-Type")
+          : typeof finalHeaders === "object" && finalHeaders !== null
+          ? // @ts-ignore
+            finalHeaders["Content-Type"]
+          : undefined;
 
       const response = await fetch(this.endpoint, {
         method: this.method,
-        headers: this.headers,
-        body: this.data ? JSON.stringify(this.data) : null,
+        headers: finalHeaders,
+        body: this.body
+          ? contentType === "application/json"
+            ? JSON.stringify(this.body)
+            : this.body
+          : null,
       });
 
       let data;

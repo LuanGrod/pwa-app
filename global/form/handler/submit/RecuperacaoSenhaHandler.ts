@@ -27,7 +27,7 @@ export class RecuperacaoSenhaHandler implements SubmitHandlerInterface {
   async onSubmit(values: any, id?: string): Promise<any> {
     const RecuperacaoSenhaRequestBuilder = new RecuperacaoSenha({
       entity: this.entity,
-      data: values,
+      body: values,
       responseHandler: this.responseHandler,
     });
     return await RecuperacaoSenhaRequestBuilder.build();

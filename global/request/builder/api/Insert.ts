@@ -1,26 +1,27 @@
 import { Insert as InsertRequestBuilder } from "../Insert";
 import { Insert as ResponseHandler } from "@global/request/response/handler/api/Insert";
 import { ResponseHandlerInterface } from "@global/request/response/handler/HandlerInterface";
+import { CollectionInterface as HeaderHandlerCollection } from "@global/request/header/handler/collection/CollectionInterface";
 
 type InsertProps = {
   entity: string;
-  data: any;
+  body: any;
   parentEntity?: string | null;
   parentId?: number | null;
-  headers?: HeadersInit;
+  headers?: HeaderHandlerCollection | null;
   responseHandler?: ResponseHandlerInterface | null;
 };
 export class Insert extends InsertRequestBuilder {
   constructor({
     entity,
-    data,
+    body,
     parentEntity = null,
     parentId = null,
-    headers = {},
+    headers = null,
     responseHandler = null,
   }: InsertProps) {
     responseHandler = responseHandler || new ResponseHandler({});
 
-    super({ entity, data, parentEntity, parentId, headers, responseHandler });
+    super({ entity, body, parentEntity, parentId, headers, responseHandler });
   }
 }

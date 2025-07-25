@@ -10,19 +10,19 @@ import { GetRow } from "@global/request/builder/GetRow";
 type LoginProps = {
   successMessage?: string;
   errorHandlerCollection?: ErrorHandlerCollection | null;
-  props?: Map<string, any>;
+  data?: Map<string, any>;
 };
 
 export class Login extends ResponseHandler {
   protected successMessage: string;
   protected cookie: CookieInterface;
   protected expirationDate: Date;
-  protected props?: Map<string, any>;
+  protected data?: Map<string, any>;
 
   constructor({
     successMessage = "Login realizado com sucesso!",
     errorHandlerCollection = null,
-    props,
+    data,
   }: LoginProps) {
     super({
       errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
@@ -32,7 +32,7 @@ export class Login extends ResponseHandler {
     this.onErrorFn = this.handleError.bind(this);
     this.cookie = new Cookie();
     this.expirationDate = new Date();
-    this.props = props;
+    this.data = data;
   }
 
   protected async handleSuccess(result: LoginResponse): Promise<any> {
@@ -42,9 +42,9 @@ export class Login extends ResponseHandler {
       this.cookie.setCookie("token", token, this.expirationDate);
       this.cookie.setCookie("id", id.toString(), this.expirationDate);
 
-      const setUser = this.props?.get("setUser");
-      const entity = this.props?.get("entity");
-      const params = this.props?.get("params");
+      const setUser = this.data?.get("setUser");
+      const entity = this.data?.get("entity");
+      const params = this.data?.get("params");
 
       if (entity && params && setUser) {
         const getRow = new GetRow({

@@ -5,20 +5,20 @@ import { ResponseHandlerInterface } from "@global/request/response/handler/Handl
 
 type LoginHandlerProps = {
   entity?: string | null;
-  props?: Map<string, any>;
+  data?: Map<string, any>;
   needsAuthorization?: boolean;
   responseHandler?: ResponseHandlerInterface | null;
 };
 
 export class LoginHandler implements SubmitHandlerInterface {
   protected entity?: string | null;
-  protected props?: Map<string, any>;
+  protected data?: Map<string, any>;
   protected needsAuthorization: boolean;
   protected responseHandler: ResponseHandlerInterface;
 
-  constructor({ entity, props, needsAuthorization, responseHandler = null }: LoginHandlerProps) {
+  constructor({ entity, data, needsAuthorization, responseHandler = null }: LoginHandlerProps) {
     this.entity = entity;
-    this.props = props;
+    this.data = data;
     this.needsAuthorization = needsAuthorization || false;
     this.responseHandler = responseHandler || new ResponseHandler({});
   }
@@ -26,8 +26,8 @@ export class LoginHandler implements SubmitHandlerInterface {
   async onSubmit(values: any, id?: string): Promise<any> {
     const loginRequestBuilder = new Login({
       entity: this.entity,
-      data: values,
-      props: this.props,
+      body: values,
+      data: this.data,
       responseHandler: this.responseHandler,
     });
     return await loginRequestBuilder.build();
