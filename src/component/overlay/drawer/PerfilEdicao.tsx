@@ -10,8 +10,8 @@ import { Textarea } from "@global/form/item/Textarea";
 import { Text } from "@global/form/item/Text";
 import { MaxLengthValidatorFactory } from "@global/validator/string/maxLength/MaxLengthValidatorFactory";
 import { DataNascimento } from "@global/form/item/prebuilt/DataNascimento";
-import { RefreshOnSuccessUpdate } from "@global/request/response/handler/api/RefreshOnSuccessUpdate";
 import { Hidden } from "@global/form/item/Hidden";
+import { Update } from "@global/request/response/handler/api/Update";
 
 type Props = {
   open: boolean;
@@ -24,7 +24,16 @@ export default function PerfilEdicao({ open, onClose, data, setData }: Props) {
   const submitHandler = new UpdateHandler({
     entity: "estudantes",
     needsAuthorization: true,
-    responseHandler: new RefreshOnSuccessUpdate({}),
+    responseHandler: new Update<EstudanteType>({
+      onSuccessCallback: (result) => {
+        setData({
+          ...data,
+          ...result.row
+        })
+
+        onClose();
+      }
+    }),
   });
 
   const phoneFormatter = new BrazilianPhoneFormatter();

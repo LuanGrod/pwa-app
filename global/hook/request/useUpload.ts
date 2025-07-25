@@ -1,5 +1,6 @@
 import { Upload } from "@global/request/builder/Upload";
-import { useState, Dispatch, SetStateAction } from "react";
+import { useState } from "react";
+import { Upload as UploadResponseHandler } from "@global/request/response/handler/api/Upload";
 
 type UseUploadProps = {
   entity: string;
@@ -40,6 +41,11 @@ export function useUpload<T = any>({
       entity: entity,
       body: formData,
       data: new Map([["field", field]]),
+      responseHandler: new UploadResponseHandler({
+        onSuccessCallback: (result) => {
+          console.log(result);
+        }
+      })
     });
 
     const response = await update.build(needsAuthorization);

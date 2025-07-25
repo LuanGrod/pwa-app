@@ -6,7 +6,7 @@ import { CollectionInterface as HeaderHandlerCollection } from "@global/request/
 type UpdateProps = {
   entity: string;
   body: any;
-  id: string;
+  id?: string | null;
   headers?: HeaderHandlerCollection | null;
   responseHandler?: ResponseHandlerInterface | null;
 };

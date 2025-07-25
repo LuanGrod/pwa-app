@@ -13,10 +13,10 @@ import useDialog from "@global/hook/overlay/useDialog";
 import PerfilEdicao from "../overlay/drawer/PerfilEdicao";
 import PerfilEdicaoSenha from "../overlay/drawer/PerfilEdicaoSenha";
 import { Upload } from "@global/request/builder/api/Upload";
-import { Update } from "@global/request/builder/Update";
+import { Update } from "@global/request/builder/api/Update";
 import { useEstudante } from "@/store/EstudanteStore";
-import { useUpload } from "@global/hook/request/useUpload";
-import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
+import { Upload as UploadResponseHandler } from "@global/request/response/handler/api/Upload";
+import UpdateOnUploadFile from "@global/request/response/handler/action/UpdateOnUploadFile";
 
 type Props = {
   data: EstudanteType;
@@ -29,32 +29,28 @@ export default function Perfil({ data, setData }: Props) {
   const dateFormatter = new BrazilianDateFormatter();
   const phoneFormatter = new BrazilianPhoneFormatter();
   const { updateUrlImagem } = useEstudante()
-  const { uploadFile, loading } = useUpload({
-    entity: "estudantes",
-    needsAuthorization: true,
-  })
 
   const handleUpdate = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
-    const fileName = await uploadFile(file);
+    if (file) {
+      let formData = new FormData();
 
-    if (fileName) {
-      const requestBody = { estudantes_url_imagem: fileName };
+      formData.append("estudantes_url_imagem", file);
+      formData.append("profile", "image");
 
-      const update = new Update({
-        entity: "estudantes3",
-        body: requestBody,
-      })
+      const update = new Upload({
+        entity: "estudantes",
+        body: formData,
+        data: new Map([["field", "url-imagem"]]),
+        responseHandler: new UploadResponseHandler({
+          onSuccessActions: [new UpdateOnUploadFile("estudantes3", "estudantes_url_imagem", data, setData, updateUrlImagem)]
+        })
+      });
 
       await update.build(true);
-
-      setData({ ...data, estudantes_url_imagem: fileName });
-      updateUrlImagem(fileName);
     }
   }
-
-  if (loading) return <Loading2 loading />
 
   return (
     <>
