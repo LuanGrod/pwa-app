@@ -41,12 +41,22 @@
     justify-content: space-between;
 
     .multi-select-wrapper {
-      display: flex;
-      flex-wrap: wrap;
+      display: grid;
       gap: 8px;
-      justify-content: center;
-      align-items: center;
       margin-bottom: 34px;
+
+      &.grid-2 {
+        grid-template-columns: repeat(2, 1fr);
+
+        .btn-filter {
+          height: 136px;
+          gap: 28px;
+        }
+      }
+
+      &.grid-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
     }
 
     .boolean-wrapper {

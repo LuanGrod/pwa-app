@@ -8,7 +8,7 @@ interface FiltrosGridProps {
   definitions: FilterInterface[];
   onOpenDrawer: (key: string) => void;
   onToggleBoolean: (key: string, value: any) => void;
-  big?: boolean;
+  gridColumns?: 2 | 3;
   filterBtnIcon: ReactNode;
 }
 
@@ -21,16 +21,16 @@ function flattenDefinitions(definitions: FilterInterface[]): FilterInterface[] {
   );
 }
 
-export function Grid({ filters, definitions, onOpenDrawer, onToggleBoolean, big = false, filterBtnIcon }: FiltrosGridProps) {
+export function Grid({ filters, definitions, onOpenDrawer, onToggleBoolean, gridColumns = 3, filterBtnIcon }: FiltrosGridProps) {
   const flatDefinitions = flattenDefinitions(definitions);
   const multiSelectFIlters = flatDefinitions.filter((def) => def.getType() === "multi-select");
   const booleanFilters = flatDefinitions.filter((def) => def.getType() === "boolean");
 
   return (
     <div>
-      <div className="multi-select-wrapper">
+      <div className={`multi-select-wrapper grid-${gridColumns}`}>
         {multiSelectFIlters.map((def) => (
-          <FilterBtn icon={filterBtnIcon} big={big} key={def.getKey()} onClick={() => onOpenDrawer(def.getKey())} label={def.getLabel()} />
+          <FilterBtn icon={filterBtnIcon} key={def.getKey()} onClick={() => onOpenDrawer(def.getKey())} label={def.getLabel()} />
         ))}
       </div>
       <div className="boolean-wrapper">

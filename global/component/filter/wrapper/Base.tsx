@@ -12,11 +12,11 @@ import { ReactNode } from "react";
 type Props = {
   filterDefinitions: FilterInterface[];
   entity: string;
-  bigButton?: boolean;
+  gridColumns?: 2 | 3;
   filterBtnIcon: ReactNode;
 };
 
-export default function FilterWrapperBase({ filterDefinitions, entity, bigButton, filterBtnIcon }: Props) {
+export default function FilterWrapperBase({ filterDefinitions, entity, gridColumns = 3, filterBtnIcon }: Props) {
   const {
     values,
     options,
@@ -43,7 +43,7 @@ export default function FilterWrapperBase({ filterDefinitions, entity, bigButton
         definitions={definitions}
         onOpenDrawer={handleOpenDrawer}
         onToggleBoolean={toggleBoolean}
-        big={bigButton}
+        gridColumns={gridColumns}
         filterBtnIcon={filterBtnIcon}
       />
       <ShadowBtn className="filter" onClick={handleEstudar}>

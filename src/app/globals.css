@@ -369,7 +369,7 @@ form .link-recuperacao-senha {
   justify-content: space-between;
   margin-bottom: 1.25rem;
 }
-.drawer-wrapper .drawer-bottom .title {
+.drawer-wrapper .drawer-bottom .header .title {
   font-size: 1.5rem;
   line-height: 1.3333333333;
   letter-spacing: 0.5px;
@@ -410,6 +410,19 @@ form .link-recuperacao-senha {
 .drawer-wrapper .drawer-bottom form {
   max-height: 70vh;
   overflow-y: auto;
+}
+.drawer-wrapper .drawer-bottom .subtitle {
+  color: var(--emphasis);
+  font-size: var(--font-sm);
+  line-height: 1;
+  font-weight: 700;
+  text-align: center;
+}
+.drawer-wrapper .drawer-bottom .footer p {
+  font-size: var(--font-xs);
+  line-height: 1.25;
+  color: #828889;
+  margin-bottom: 5px;
 }
 .drawer-wrapper .drawer-under-header {
   width: 100%;
@@ -605,7 +618,7 @@ form .link-recuperacao-senha {
 }
 
 .btn-filter {
-  width: 30%;
+  width: 100%;
   height: 64px;
   display: flex;
   flex-direction: column;
@@ -614,11 +627,6 @@ form .link-recuperacao-senha {
   background-color: var(--background-variation);
   border-radius: 8px;
   gap: 5px;
-}
-.btn-filter.big {
-  width: 45%;
-  height: 136px;
-  gap: 28px;
 }
 .btn-filter .label {
   font-family: var(--font-title);
@@ -667,12 +675,19 @@ form .link-recuperacao-senha {
   justify-content: space-between;
 }
 .page-filter .filter-wrapper .multi-select-wrapper {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   gap: 8px;
-  justify-content: center;
-  align-items: center;
   margin-bottom: 34px;
+}
+.page-filter .filter-wrapper .multi-select-wrapper.grid-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+.page-filter .filter-wrapper .multi-select-wrapper.grid-2 .btn-filter {
+  height: 136px;
+  gap: 28px;
+}
+.page-filter .filter-wrapper .multi-select-wrapper.grid-3 {
+  grid-template-columns: repeat(3, 1fr);
 }
 .page-filter .filter-wrapper .boolean-wrapper {
   display: flex;
@@ -948,6 +963,14 @@ form .link-recuperacao-senha {
   font-size: 1.5rem;
   font-weight: bold;
   line-height: 1.4;
+  width: 100%;
+  text-align: center;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+  line-clamp: 1;
+  overflow: hidden;
+  word-break: break-all;
 }
 .header-wrapper .flashcard-header.title {
   font-family: var(--font-rounded);
@@ -1709,6 +1732,18 @@ form .link-recuperacao-senha {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.extensivo-week .title {
+  font-size: var(--font-base);
+  line-height: 1.25;
+  font-weight: 700;
+}
+.extensivo-week .day {
+  font-size: var(--font-xs);
+  line-height: 1.25;
+  font-weight: 400;
+  color: var(--emphasis);
 }
 
 body {

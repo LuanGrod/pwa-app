@@ -35,5 +35,5 @@ export function MapasMentais() {
     }),
   ];
 
-  return <FilterWrapperBase filterBtnIcon={<Logo size={26} className="logo" />} filterDefinitions={filterDefinitions} entity="mapas-mentais" bigButton />;
+  return <FilterWrapperBase filterBtnIcon={<Logo size={26} className="logo" />} filterDefinitions={filterDefinitions} entity="mapas-mentais" gridColumns={2} />;
 }

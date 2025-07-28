@@ -109,3 +109,21 @@ export type Fatura = {
 };
 
 export type Periodos = "Semestral" | "Anual" | "Bienal";
+
+
+// EXTENSIVO
+
+export type diaExtensivo = {
+  extensivos_id: string;
+  extensivos_nome: string;
+  extensivos_dia_semana: diaSemana;
+  extensivos_estudantes_id: string;
+};
+
+type diaSemana =
+  "Segunda-feira" |
+  "Terça-feira" |
+  "Quarta-feira" |
+  "Quinta-feira" |
+  "Sexta-feira" |
+  "Sábado"

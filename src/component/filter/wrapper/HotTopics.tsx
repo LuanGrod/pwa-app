@@ -35,5 +35,5 @@ export function HotTopics() {
     }),
   ];
 
-  return <FilterWrapperBase filterBtnIcon={<Logo size={26} className="logo" />} filterDefinitions={filterDefinitions} entity="hot-topics" bigButton />;
+  return <FilterWrapperBase filterBtnIcon={<Logo size={26} className="logo" />} filterDefinitions={filterDefinitions} entity="hot-topics" gridColumns={2} />;
 }

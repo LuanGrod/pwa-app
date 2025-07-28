@@ -48,5 +48,5 @@ export function Flashcards() {
     }),
   ];
 
-  return <FilterWrapperBase filterBtnIcon={<Logo size={26} className="logo" />} filterDefinitions={filterDefinitions} entity="flashcards" bigButton />;
+  return <FilterWrapperBase filterBtnIcon={<Logo size={26} className="logo" />} filterDefinitions={filterDefinitions} entity="flashcards" gridColumns={2} />;
 }

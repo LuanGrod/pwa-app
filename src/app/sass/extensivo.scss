@@ -1,0 +1,14 @@
+.extensivo-week {
+  .title {
+    font-size: var(--font-base);
+    line-height: 1.25;
+    font-weight: 700;
+  }
+
+  .day {
+    font-size: var(--font-xs);
+    line-height: 1.25;
+    font-weight: 400;
+    color: var(--emphasis);
+  }
+}

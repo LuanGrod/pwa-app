@@ -105,5 +105,5 @@ export function Questoes() {
     }),
   ];
 
-  return <FilterWrapperBase filterBtnIcon={<Logo size={14} className="logo" />} filterDefinitions={filterDefinitions} entity="questoes" />;
+  return <FilterWrapperBase filterBtnIcon={<Logo size={14} className="logo" />} filterDefinitions={filterDefinitions} entity="questoes" gridColumns={3} />;
 }
