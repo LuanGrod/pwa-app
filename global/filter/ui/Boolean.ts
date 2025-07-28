@@ -1,5 +1,9 @@
 import AbstractFilter from "./AbstractFilter";
-import FilterInterface, { ConditionalOperator, ConnectionOperator } from "./FilterInterface";
+import FilterInterface, {
+  ConditionalOperator,
+  ConnectionOperator,
+  SelectionMode,
+} from "./FilterInterface";
 import { FilterFragment } from "./FilterStringAssembler";
 
 type BooleanProps = {
@@ -43,57 +47,56 @@ export default class Boolean extends AbstractFilter {
     return false;
   }
 
-  loadOptions(): Promise<any> {
-    return Promise.resolve(null);
-  }
-
-  getOptions(): any {
-    return null;
-  }
-
   getActiveValue(): string | null {
     return this.activeValue || null;
-  }
-
-  getIdParamName(): string {
-    throw new Error("Method not implemented.");
-  }
-  getLabelParamName(): string {
-    throw new Error("Method not implemented.");
-  }
-  getParentKey(): string {
-    throw new Error("Method not implemented.");
-  }
-  getParentIdParamName(): string {
-    throw new Error("Method not implemented.");
-  }
-  getParentLabelParamName(): string {
-    throw new Error("Method not implemented.");
-  }
-  getParentKeyEntity(): string {
-    throw new Error("Method not implemented.");
-  }
-  getParentConditionalOperator(): ConditionalOperator {
-    throw new Error("Method not implemented.");
-  }
-  getParentConnectionOperator(): ConnectionOperator {
-    throw new Error("Method not implemented.");
-  }
-  getParentDenialOperator(): boolean {
-    throw new Error("Method not implemented.");
   }
 
   /**
    * Builds the filter fragment for this boolean filter.
    * Returns an array (empty or one element).
    */
-  getFilterFragment(
-    values: Record<string, any>
-  ): FilterFragment[] {
+  getFilterFragment(values: Record<string, any>): FilterFragment[] {
     if (values[this.queryField] !== this.activeValue) return [];
     const queryFieldEntity = this.queryFieldEntity ? `${this.queryFieldEntity}_` : "";
     let currentFilter = `${queryFieldEntity}${this.queryField}_0{${this.conditionalOperator}}${this.activeValue}`;
     currentFilter = this.denialOperator ? `!(${currentFilter})` : currentFilter;
     return [{ value: currentFilter, connector: this.connectionOperator }];
+  }
+
+  loadOptions(): Promise<any> {
+    throw new Error("Method not implemented for boolean.");
+  }
+  getOptions(): any {
+    throw new Error("Method not implemented for boolean.");
+  }
+  getSelectionMode(): SelectionMode {
+    throw new Error("Method not implemented for boolean.");
+  }
+  getIdParamName(): string {
+    throw new Error("Method not implemented for boolean.");
+  }
+  getLabelParamName(): string {
+    throw new Error("Method not implemented for boolean.");
+  }
+  getParentKey(): string {
+    throw new Error("Method not implemented for boolean.");
+  }
+  getParentIdParamName(): string {
+    throw new Error("Method not implemented for boolean.");
+  }
+  getParentLabelParamName(): string {
+    throw new Error("Method not implemented for boolean.");
+  }
+  getParentKeyEntity(): string {
+    throw new Error("Method not implemented for boolean.");
+  }
+  getParentConditionalOperator(): ConditionalOperator {
+    throw new Error("Method not implemented for boolean.");
+  }
+  getParentConnectionOperator(): ConnectionOperator {
+    throw new Error("Method not implemented for boolean.");
+  }
+  getParentDenialOperator(): boolean {
+    throw new Error("Method not implemented for boolean.");
   }
 }

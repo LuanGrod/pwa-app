@@ -23,13 +23,13 @@ function flattenDefinitions(definitions: FilterInterface[]): FilterInterface[] {
 
 export function Grid({ filters, definitions, onOpenDrawer, onToggleBoolean, gridColumns = 3, filterBtnIcon }: FiltrosGridProps) {
   const flatDefinitions = flattenDefinitions(definitions);
-  const multiSelectFIlters = flatDefinitions.filter((def) => def.getType() === "multi-select");
+  const selectFIlters = flatDefinitions.filter((def) => def.getType() === "select");
   const booleanFilters = flatDefinitions.filter((def) => def.getType() === "boolean");
 
   return (
     <div>
-      <div className={`multi-select-wrapper grid-${gridColumns}`}>
-        {multiSelectFIlters.map((def) => (
+      <div className={`select-wrapper grid-${gridColumns}`}>
+        {selectFIlters.map((def) => (
           <FilterBtn icon={filterBtnIcon} key={def.getKey()} onClick={() => onOpenDrawer(def.getKey())} label={def.getLabel()} />
         ))}
       </div>

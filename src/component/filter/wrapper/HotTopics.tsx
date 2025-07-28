@@ -1,13 +1,13 @@
 "use client";
 
-import MultiSelectFilter from "@global/filter/ui/MultiSelect";
+import SelectFilter from "@global/filter/ui/Select";
 import BooleanFilter from "@global/filter/ui/Boolean";
 import FilterWrapperBase from "@global/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
 
 export function HotTopics() {
   const filterDefinitions = [
-    new MultiSelectFilter({
+    new SelectFilter({
       entity: "temas",
       label: "Área / Tema",
       queryField: "id_tema",
@@ -18,8 +18,9 @@ export function HotTopics() {
       parentLabelParamName: "areas_nome",
       queryFieldEntity: "hot_topics",
       parentKeyEntity: "temas",
+      selectionMode: "single",
     }),
-    new MultiSelectFilter({
+    new SelectFilter({
       entity: "hot-topics-salvos",
       label: "Salvos",
       queryField: "id_hot_topic",
@@ -27,6 +28,7 @@ export function HotTopics() {
       labelParamName: "hot_topics_nome",
       queryFieldEntity: "hot_topics_salvos",
       connectionOperator: "or",
+      selectionMode: "single",
     }),
     new BooleanFilter({
       queryField: "nao_visto",

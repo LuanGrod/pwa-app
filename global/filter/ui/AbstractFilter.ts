@@ -1,4 +1,9 @@
-import FilterInterface, { ConditionalOperator, ConnectionOperator, FilterTypes } from "./FilterInterface";
+import FilterInterface, {
+  ConditionalOperator,
+  ConnectionOperator,
+  FilterTypes,
+  SelectionMode,
+} from "./FilterInterface";
 import { FilterFragment } from "./FilterStringAssembler";
 
 export default abstract class AbstractFilter implements FilterInterface {
@@ -57,9 +62,18 @@ export default abstract class AbstractFilter implements FilterInterface {
 
   abstract getParentDenialOperator(): boolean;
 
+  abstract getSelectionMode(): SelectionMode;
+
+  /**
+   * Abstract method to build the filter fragments for this filter.
+   * Must be implemented by subclasses.
+   */
+  abstract getFilterFragment(values: Record<string, any>): FilterFragment[];
+
   isGroup(): boolean {
     return false;
   }
+
   getChildren(): FilterInterface[] {
     return [];
   }
@@ -95,12 +109,4 @@ export default abstract class AbstractFilter implements FilterInterface {
   getQueryFieldEntity(): string {
     return this.queryFieldEntity;
   }
-
-  /**
-   * Abstract method to build the filter fragments for this filter.
-   * Must be implemented by subclasses.
-   */
-  abstract getFilterFragment(
-    values: Record<string, any>,
-  ): FilterFragment[];
 }

@@ -1,9 +1,13 @@
 import AbstractFilter from "./AbstractFilter";
 import { Listing } from "@global/request/builder/api/Listing";
-import FilterInterface, { ConditionalOperator, ConnectionOperator } from "./FilterInterface";
+import FilterInterface, {
+  ConditionalOperator,
+  ConnectionOperator,
+  SelectionMode,
+} from "./FilterInterface";
 import { FilterFragment } from "./FilterStringAssembler";
 
-type MultiSelectProps = {
+type SelectProps = {
   entity: string;
   label: string;
   queryField: string;
@@ -21,9 +25,10 @@ type MultiSelectProps = {
   parentConditionalOperator?: ConditionalOperator;
   parentConnectionOperator?: ConnectionOperator;
   parentDenialOperator?: boolean;
+  selectionMode?: SelectionMode;
 };
 
-export default class MultiSelect extends AbstractFilter {
+export default class Select extends AbstractFilter {
   options: string[];
   entity: string;
   idParamName: string;
@@ -35,6 +40,7 @@ export default class MultiSelect extends AbstractFilter {
   parentConditionalOperator: ConditionalOperator;
   parentConnectionOperator: ConnectionOperator;
   parentDenialOperator: boolean;
+  selectionMode: SelectionMode;
 
   constructor({
     entity,
@@ -54,11 +60,12 @@ export default class MultiSelect extends AbstractFilter {
     parentConditionalOperator,
     parentConnectionOperator,
     parentDenialOperator,
-  }: MultiSelectProps) {
+    selectionMode = "multi",
+  }: SelectProps) {
     super(
       queryField,
       label,
-      "multi-select",
+      "select",
       key,
       queryFieldEntity,
       conditionalOperator,
@@ -76,6 +83,7 @@ export default class MultiSelect extends AbstractFilter {
     this.parentConditionalOperator = parentConditionalOperator || "in";
     this.parentConnectionOperator = parentConnectionOperator || "and";
     this.parentDenialOperator = parentDenialOperator || false;
+    this.selectionMode = selectionMode;
   }
 
   async loadOptions() {
@@ -127,7 +135,11 @@ export default class MultiSelect extends AbstractFilter {
   }
 
   getValue(): string[] {
-    return [];
+    return this.selectionMode === "single" ? [] : [];
+  }
+
+  getSelectionMode(): SelectionMode {
+    return this.selectionMode;
   }
 
   getIdParamName(): string {
@@ -166,33 +178,39 @@ export default class MultiSelect extends AbstractFilter {
     return this.parentDenialOperator;
   }
 
-  getActiveValue(): string | null {
-    throw new Error("Method not implemented.");
-  }
-
   /**
-   * Builds the filter fragments for this multi-select filter.
+   * Builds the filter fragments for this select filter.
    * Returns an array of fragments (child and/or parent).
    */
-  getFilterFragment(
-    values: Record<string, any>
-  ): FilterFragment[] {
+  getFilterFragment(values: Record<string, any>): FilterFragment[] {
     const fragments: FilterFragment[] = [];
     const queryFieldEntity = this.queryFieldEntity ? `${this.queryFieldEntity}_` : "";
     const parentKeyEntity = this.parentKeyEntity ? `${this.parentKeyEntity}_` : "";
-    const keyFilteredValues = values[this.queryField] && values[this.queryField].length > 0 ? values[this.queryField] : [];
-    const parentKeyFilteredValues = this.parentKey && values[this.parentKey] && values[this.parentKey].length > 0 ? values[this.parentKey] : [];
+    const keyFilteredValues =
+      values[this.queryField] && values[this.queryField].length > 0 ? values[this.queryField] : [];
+    const parentKeyFilteredValues =
+      this.parentKey && values[this.parentKey] && values[this.parentKey].length > 0
+        ? values[this.parentKey]
+        : [];
 
     if (keyFilteredValues.length) {
-      let currentFilter = `${queryFieldEntity}${this.queryField}_0{${this.conditionalOperator}}${keyFilteredValues.join(",")}`;
+      let currentFilter = `${queryFieldEntity}${this.queryField}_0{${
+        this.conditionalOperator
+      }}${keyFilteredValues.join(",")}`;
       currentFilter = this.denialOperator ? `!(${currentFilter})` : currentFilter;
       fragments.push({ value: currentFilter, connector: this.connectionOperator });
     }
     if (parentKeyFilteredValues.length) {
-      let currentFilter = `${parentKeyEntity}${this.parentKey}_0{${this.parentConditionalOperator}}${parentKeyFilteredValues.join(",")}`;
+      let currentFilter = `${parentKeyEntity}${this.parentKey}_0{${
+        this.parentConditionalOperator
+      }}${parentKeyFilteredValues.join(",")}`;
       currentFilter = this.parentDenialOperator ? `!(${currentFilter})` : currentFilter;
       fragments.push({ value: currentFilter, connector: this.parentConnectionOperator });
     }
     return fragments;
+  }
+
+  getActiveValue(): string | null {
+    throw new Error("Method not implemented for select.");
   }
 }

@@ -1,5 +1,5 @@
 import AbstractFilter from "./AbstractFilter";
-import FilterInterface, { ConnectionOperator, ConditionalOperator } from "./FilterInterface";
+import FilterInterface, { ConnectionOperator, ConditionalOperator, SelectionMode } from "./FilterInterface";
 import { FilterFragment } from "./FilterStringAssembler";
 
 type FilterGroupProps = {
@@ -58,56 +58,46 @@ export default class FilterGroup extends AbstractFilter {
     return this.children;
   }
 
-  // Abstract method implementations (not used for groups)
   getValue(): any {
-    return [];
+    throw new Error("Method not implemented for groups.");
   }
-
   loadOptions(): Promise<any> {
-    return Promise.resolve(null);
+    throw new Error("Method not implemented for groups.");
   }
-
   getOptions(): any {
-    return null;
+    throw new Error("Method not implemented for groups.");
   }
-
   getActiveValue(): string | null {
-    return null;
+    throw new Error("Method not implemented for groups.");
   }
-
+  getSelectionMode(): SelectionMode {
+    throw new Error("Method not implemented for groups.");
+  }
   getIdParamName(): string {
     throw new Error("Method not implemented for groups.");
   }
-
   getLabelParamName(): string {
     throw new Error("Method not implemented for groups.");
   }
-
   getParentKey(): string {
-    return "";
+    throw new Error("Method not implemented for groups.");
   }
-
   getParentIdParamName(): string {
-    return "";
+    throw new Error("Method not implemented for groups.");
   }
-
   getParentLabelParamName(): string {
-    return "";
+    throw new Error("Method not implemented for groups.");
   }
-
   getParentKeyEntity(): string {
-    return "";
+    throw new Error("Method not implemented for groups.");
   }
-
   getParentConditionalOperator(): ConditionalOperator {
     throw new Error("Method not implemented for groups.");
   }
-
   getParentConnectionOperator(): ConnectionOperator {
     throw new Error("Method not implemented for groups.");
   }
-
   getParentDenialOperator(): boolean {
-    return false;
+    throw new Error("Method not implemented for groups.");
   }
 } 

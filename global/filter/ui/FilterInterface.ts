@@ -13,7 +13,8 @@ export type ConditionalOperator =
   | StringsOperations
   | BooleansOperations;
 
-export type FilterTypes = "boolean" | "multi-select" | "group";
+export type FilterTypes = "boolean" | "select" | "group";
+export type SelectionMode = "multi" | "single";
 
 export default interface FilterInterface {
   loadOptions(): Promise<any>;
@@ -24,6 +25,7 @@ export default interface FilterInterface {
   getValue(): any;
   getActiveValue(): any;
   getType(): FilterTypes;
+  getSelectionMode(): SelectionMode;
   getIdParamName(): string;
   getLabelParamName(): string;
   getParentKey(): string;

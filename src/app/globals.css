@@ -1,5 +1,6 @@
 @charset "UTF-8";
 @import "tailwindcss";
+@import "tailwindcss";
 :root {
   --app-height: 100vh;
   --background: #ffffff;
@@ -674,19 +675,19 @@ form .link-recuperacao-senha {
   flex-direction: column;
   justify-content: space-between;
 }
-.page-filter .filter-wrapper .multi-select-wrapper {
+.page-filter .filter-wrapper .select-wrapper {
   display: grid;
   gap: 8px;
   margin-bottom: 34px;
 }
-.page-filter .filter-wrapper .multi-select-wrapper.grid-2 {
+.page-filter .filter-wrapper .select-wrapper.grid-2 {
   grid-template-columns: repeat(2, 1fr);
 }
-.page-filter .filter-wrapper .multi-select-wrapper.grid-2 .btn-filter {
+.page-filter .filter-wrapper .select-wrapper.grid-2 .btn-filter {
   height: 136px;
   gap: 28px;
 }
-.page-filter .filter-wrapper .multi-select-wrapper.grid-3 {
+.page-filter .filter-wrapper .select-wrapper.grid-3 {
   grid-template-columns: repeat(3, 1fr);
 }
 .page-filter .filter-wrapper .boolean-wrapper {
@@ -707,7 +708,7 @@ form .link-recuperacao-senha {
   font-weight: 800;
   margin-bottom: 20px;
 }
-.custom-checkbox input[type=checkbox] {
+.custom-checkbox input[type=checkbox], .custom-checkbox input[type=radio] {
   display: none;
 }
 .custom-checkbox .checkmark {

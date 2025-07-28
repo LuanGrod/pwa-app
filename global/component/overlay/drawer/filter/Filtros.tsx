@@ -25,6 +25,7 @@ interface Props {
   onToggleChild: (filterKey: any, childId: any, parentKey?: any, parentId?: any, allChildrenIds?: any[]) => any;
   onClearFilter?: (filterKey: any) => void;
   hasSearch?: boolean;
+  selectionMode?: "multi" | "single";
 }
 
 export default function Filtros({
@@ -35,6 +36,7 @@ export default function Filtros({
   onClose,
   onClearFilter,
   hasSearch,
+  selectionMode = "multi",
   ...props
 }: Props) {
   const [parentOpen, setParentOpen] = useState("");
@@ -81,7 +83,7 @@ export default function Filtros({
                 />
               );
             } else {
-              return <SimpleFilterItem key={idx} opt={opt} selected={selected} {...props} />;
+              return <SimpleFilterItem key={idx} opt={opt} selected={selected} selectionMode={selectionMode} {...props} />;
             }
           })}
         </div>

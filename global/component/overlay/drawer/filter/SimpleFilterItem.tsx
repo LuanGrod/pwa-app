@@ -7,6 +7,7 @@ type SimpleFilterItemProps = {
   optionId?: string;
   optionLabel?: string;
   onToggleChild: (filterKey: any, childId: any) => any;
+  selectionMode?: "multi" | "single";
 };
 
 export default function SimpleFilterItem({
@@ -16,21 +17,25 @@ export default function SimpleFilterItem({
   optionId,
   optionLabel,
   onToggleChild,
+  selectionMode = "multi",
 }: SimpleFilterItemProps) {
 
   if(!filterKey || !optionId || !optionLabel) {
     return null;
   }
 
+  const isSelected = selected[filterKey].includes(opt[optionId]);
+
   return (
     <div className="custom-checkbox">
       <label>
         <input
-          type="checkbox"
-          checked={selected[filterKey].includes(opt[optionId])}
+          type={selectionMode === "single" ? "radio" : "checkbox"}
+          name={selectionMode === "single" ? filterKey : undefined}
+          checked={isSelected}
           onChange={() => onToggleChild(filterKey, opt[optionId])}
         />
-        <span className={clsx("checkmark", selected[filterKey].includes(opt[optionId]) && "checked")}></span>
+        <span className={clsx("checkmark", isSelected && "checked")}></span>
       </label>
       <span className="label">{opt[optionLabel]}</span>
     </div>

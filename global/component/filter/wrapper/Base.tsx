@@ -66,6 +66,7 @@ export default function FilterWrapperBase({ filterDefinitions, entity, gridColum
         parentKey={currentDefinition?.getParentKey()}
         onClearFilter={clearFilter}
         hasSearch
+        selectionMode={currentDefinition?.getSelectionMode()}
       />
     </div>
   );

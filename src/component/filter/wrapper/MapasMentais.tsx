@@ -1,13 +1,13 @@
 "use client";
 
-import MultiSelectFilter from "@global/filter/ui/MultiSelect";
+import SelectFilter from "@global/filter/ui/Select";
 import BooleanFilter from "@global/filter/ui/Boolean";
 import FilterWrapperBase from "@global/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
 
 export function MapasMentais() {
   const filterDefinitions = [
-    new MultiSelectFilter({
+    new SelectFilter({
       entity: "temas",
       label: "Área / Tema",
       queryField: "id_tema",
@@ -19,7 +19,7 @@ export function MapasMentais() {
       queryFieldEntity: "mapas_mentais",
       parentKeyEntity: "temas",
     }),
-    new MultiSelectFilter({
+    new SelectFilter({
       entity: "mapas-mentais-salvos",
       label: "Salvos",
       queryField: "id_mapa_mental",

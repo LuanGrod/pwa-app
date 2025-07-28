@@ -1,6 +1,6 @@
 "use client";
 
-import MultiSelectFilter from "@global/filter/ui/MultiSelect";
+import SelectFilter from "@global/filter/ui/Select";
 import BooleanFilter from "@global/filter/ui/Boolean";
 import FilterGroup from "@global/filter/ui/FilterGroup";
 import FilterWrapperBase from "@global/component/filter/wrapper/Base";
@@ -10,7 +10,7 @@ export function Flashcards() {
   const filterDefinitions = [
     new FilterGroup({
       children: [
-        new MultiSelectFilter({
+        new SelectFilter({
           entity: "temas",
           label: "Área / Tema",
           queryField: "id_tema",
@@ -26,7 +26,7 @@ export function Flashcards() {
       ],
       connectionOperator: "or",
     }),
-    new MultiSelectFilter({
+    new SelectFilter({
       entity: "flashcards-salvos",
       label: "Salvos",
       queryField: "id_flashcard",

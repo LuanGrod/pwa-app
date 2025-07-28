@@ -41,7 +41,7 @@ export default function page({ }: Props) {
           <h2 className="subtitle">Programe e acompanhe seu estudo</h2>
         </div>
         <div className="filter-wrapper">
-          <div className="multi-select-wrapper grid-3">
+          <div className="select-wrapper grid-3">
             {
               Array.from({ length: 52 }).map((_, index) => (
                 <Filter key={index} icon={<Logo size={14} className="logo" />} label={`Semana ${index + 1}`} onClick={() => handleOpenDrawer((index + 1).toString())} />

@@ -1,13 +1,13 @@
 "use client";
 
-import MultiSelectFilter from "@global/filter/ui/MultiSelect";
+import SelectFilter from "@global/filter/ui/Select";
 import BooleanFilter from "@global/filter/ui/Boolean";
 import FilterWrapperBase from "@global/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
 
 export function Questoes() {
   const filterDefinitions = [
-    new MultiSelectFilter({
+    new SelectFilter({
       entity: "temas",
       label: "Área / Tema",
       queryField: "id_tema",
@@ -19,7 +19,7 @@ export function Questoes() {
       queryFieldEntity: "questoes",
       parentKeyEntity: "temas",
     }),
-    new MultiSelectFilter({
+    new SelectFilter({
       entity: "instituicoes",
       label: "Instituição",
       queryField: "id_instituicao",
@@ -27,7 +27,7 @@ export function Questoes() {
       labelParamName: "instituicoes_nome",
       queryFieldEntity: "provas",
     }),
-    new MultiSelectFilter({
+    new SelectFilter({
       entity: "provas2",
       label: "Ano da prova",
       queryField: "ano",
@@ -35,14 +35,14 @@ export function Questoes() {
       labelParamName: "provas_ano",
       queryFieldEntity: "provas",
     }),
-    new MultiSelectFilter({
+    new SelectFilter({
       entity: "questoes",
       label: "Tipo de questão",
       queryField: "tipo_questao",
       idParamName: "questoes_id",
       labelParamName: "questoes_enunciado",
     }),
-    new MultiSelectFilter({
+    new SelectFilter({
       entity: "instituicoes2",
       label: "Cidade / Estado",
       queryField: "id_cidade",
@@ -54,7 +54,7 @@ export function Questoes() {
       queryFieldEntity: "instituicoes",
       parentKeyEntity: "cidades",
     }),
-    new MultiSelectFilter({
+    new SelectFilter({
       entity: "questoes-salvos",
       label: "Salvos",
       queryField: "id_questao",

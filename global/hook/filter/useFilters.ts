@@ -32,7 +32,7 @@ export function useFilters(definitions: FilterInterface[]) {
 
   const openDrawer = async (key: string) => {
     const filter = flatDefinitions.find((def) => def.getQueryField() === key);
-    if (!(filter?.getType() == "multi-select")) return;
+    if (!(filter?.getType() == "select")) return;
 
     setLoadingOptions((prev) => ({ ...prev, [key]: true }));
     await filter.loadOptions();
@@ -72,6 +72,10 @@ export function useFilters(definitions: FilterInterface[]) {
     parentId?: string,
     allChildrenIds?: string[]
   ) => {
+    // Get the filter definition to check its selection mode
+    const filterDefinition = flatDefinitions.find((def) => def.getQueryField() === filterKey);
+    const selectionMode = filterDefinition?.getSelectionMode();
+
     if (parentKey && parentId && allChildrenIds) {
       setValues((prev: any) => {
         const newValues = { ...prev };
@@ -91,20 +95,25 @@ export function useFilters(definitions: FilterInterface[]) {
         }
         // 2. Seleção normal de filho
         else {
-          // Alternar filho
-          const newChildArray = currentChildrenIds.includes(childId)
-            ? currentChildrenIds.filter((id: any) => id !== childId)
-            : [...currentChildrenIds, childId];
+          if (selectionMode === "single") {
+            // Single select: replace the current selection
+            newValues[filterKey] = [childId];
+          } else {
+            // Multi select: toggle the selection
+            const newChildArray = currentChildrenIds.includes(childId)
+              ? currentChildrenIds.filter((id: any) => id !== childId)
+              : [...currentChildrenIds, childId];
 
-          newValues[filterKey] = newChildArray;
+            newValues[filterKey] = newChildArray;
 
-          // 3. Verificar conversão para seleção de pai
-          const allChildrenSelected = allChildrenIds.every((id) => newChildArray.includes(id));
+            // 3. Verificar conversão para seleção de pai
+            const allChildrenSelected = allChildrenIds.every((id) => newChildArray.includes(id));
 
-          if (allChildrenSelected) {
-            // Converter para seleção de pai
-            newValues[parentKey] = [...prev[parentKey], parentId];
-            newValues[filterKey] = newChildArray.filter((id: any) => !allChildrenIds.includes(id));
+            if (allChildrenSelected) {
+              // Converter para seleção de pai
+              newValues[parentKey] = [...prev[parentKey], parentId];
+              newValues[filterKey] = newChildArray.filter((id: any) => !allChildrenIds.includes(id));
+            }
           }
         }
 
@@ -115,11 +124,16 @@ export function useFilters(definitions: FilterInterface[]) {
         const newValues = { ...prev };
         const currentChildrenIds = prev[filterKey] || [];
 
-        // Alternar filho
-        if (currentChildrenIds.includes(childId)) {
-          newValues[filterKey] = currentChildrenIds.filter((id: any) => id !== childId);
+        if (selectionMode === "single") {
+          // Single select: replace the current selection
+          newValues[filterKey] = [childId];
         } else {
-          newValues[filterKey] = [...currentChildrenIds, childId];
+          // Multi select: toggle the selection
+          if (currentChildrenIds.includes(childId)) {
+            newValues[filterKey] = currentChildrenIds.filter((id: any) => id !== childId);
+          } else {
+            newValues[filterKey] = [...currentChildrenIds, childId];
+          }
         }
 
         return newValues;
