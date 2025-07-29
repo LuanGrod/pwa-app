@@ -156,4 +156,19 @@
       display: none;
     }
   }
+
+  .prova-label {
+    .institution {
+      font-size: var(--font-base);
+      line-height: 1.25;
+      font-weight: 700;
+    }
+
+    .year {
+      font-size: var(--font-xs);
+      line-height: 1.25;
+      font-weight: 600;
+      color: var(--emphasis);
+    }
+  }
 }

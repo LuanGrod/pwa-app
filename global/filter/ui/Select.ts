@@ -12,7 +12,7 @@ type SelectProps = {
   label: string;
   queryField: string;
   idParamName: string;
-  labelParamName: string;
+  labelParamName?: string;
   parentKey?: string;
   parentIdParamName?: string;
   parentLabelParamName?: string;
@@ -26,6 +26,8 @@ type SelectProps = {
   parentConnectionOperator?: ConnectionOperator;
   parentDenialOperator?: boolean;
   selectionMode?: SelectionMode;
+  labelFields?: string[];
+  customComponent?: string;
 };
 
 export default class Select extends AbstractFilter {
@@ -41,6 +43,8 @@ export default class Select extends AbstractFilter {
   parentConnectionOperator: ConnectionOperator;
   parentDenialOperator: boolean;
   selectionMode: SelectionMode;
+  labelFields: string[];
+  customComponent: string;
 
   constructor({
     entity,
@@ -61,6 +65,8 @@ export default class Select extends AbstractFilter {
     parentConnectionOperator,
     parentDenialOperator,
     selectionMode = "multi",
+    labelFields,
+    customComponent,
   }: SelectProps) {
     super(
       queryField,
@@ -75,7 +81,7 @@ export default class Select extends AbstractFilter {
     this.options = [];
     this.entity = entity;
     this.idParamName = idParamName;
-    this.labelParamName = labelParamName;
+    this.labelParamName = labelParamName || "";
     this.parentKey = parentKey || "";
     this.parentIdParamName = parentIdParamName || "";
     this.parentLabelParamName = parentLabelParamName || "";
@@ -84,6 +90,8 @@ export default class Select extends AbstractFilter {
     this.parentConnectionOperator = parentConnectionOperator || "and";
     this.parentDenialOperator = parentDenialOperator || false;
     this.selectionMode = selectionMode;
+    this.labelFields = labelFields || [];
+    this.customComponent = customComponent || "";
   }
 
   async loadOptions() {
@@ -109,11 +117,20 @@ export default class Select extends AbstractFilter {
           }
 
           // Adiciona o filho ao pai correspondente
-          acc[parentId].children.push({
-            [this.idParamName]: item[this.idParamName],
-            [this.labelParamName]: item[this.labelParamName],
-            isParent: false,
-          });
+          if (this.customComponent) {
+            // Se tem componente customizado, preserva todos os campos
+            acc[parentId].children.push({
+              ...item, // Preserva todos os campos da API
+              isParent: false,
+            });
+          } else {
+            // Comportamento padrão: apenas campos específicos
+            acc[parentId].children.push({
+              [this.idParamName]: item[this.idParamName],
+              [this.labelParamName]: item[this.labelParamName],
+              isParent: false,
+            });
+          }
 
           return acc;
         }, {})
@@ -122,11 +139,20 @@ export default class Select extends AbstractFilter {
       this.options = agrupado;
     } else {
       // Estrutura simples, uma entidade apenas
-      this.options = data.map((item: any) => ({
-        [this.idParamName]: item[this.idParamName],
-        [this.labelParamName]: item[this.labelParamName],
-        isParent: false,
-      }));
+      if (this.customComponent) {
+        // Se tem componente customizado, preserva todos os campos
+        this.options = data.map((item: any) => ({
+          ...item, // Preserva todos os campos da API
+          isParent: false,
+        }));
+      } else {
+        // Comportamento padrão: apenas campos específicos
+        this.options = data.map((item: any) => ({
+          [this.idParamName]: item[this.idParamName],
+          [this.labelParamName]: item[this.labelParamName],
+          isParent: false,
+        }));
+      }
     }
   }
 
@@ -176,6 +202,14 @@ export default class Select extends AbstractFilter {
 
   getParentDenialOperator(): boolean {
     return this.parentDenialOperator;
+  }
+
+  getLabelFields(): string[] {
+    return this.labelFields;
+  }
+
+  getCustomComponent(): string {
+    return this.customComponent;
   }
 
   /**

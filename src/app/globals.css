@@ -1,6 +1,5 @@
 @charset "UTF-8";
 @import "tailwindcss";
-@import "tailwindcss";
 :root {
   --app-height: 100vh;
   --background: #ffffff;
@@ -768,6 +767,17 @@ form .link-recuperacao-senha {
 }
 .custom-checkbox + .children.closed {
   display: none;
+}
+.custom-checkbox .prova-label .institution {
+  font-size: var(--font-base);
+  line-height: 1.25;
+  font-weight: 700;
+}
+.custom-checkbox .prova-label .year {
+  font-size: var(--font-xs);
+  line-height: 1.25;
+  font-weight: 600;
+  color: var(--emphasis);
 }
 
 .content-wrapper {

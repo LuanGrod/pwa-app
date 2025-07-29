@@ -50,4 +50,8 @@ export default interface FilterInterface {
   // Required for composite/group filters
   isGroup(): boolean;
   getChildren(): FilterInterface[];
+  
+  // Custom component support
+  getLabelFields(): string[];
+  getCustomComponent(): string;
 }

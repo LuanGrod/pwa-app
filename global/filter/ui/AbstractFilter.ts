@@ -70,6 +70,9 @@ export default abstract class AbstractFilter implements FilterInterface {
    */
   abstract getFilterFragment(values: Record<string, any>): FilterFragment[];
 
+  abstract getLabelFields(): string[];
+  abstract getCustomComponent(): string;
+
   isGroup(): boolean {
     return false;
   }

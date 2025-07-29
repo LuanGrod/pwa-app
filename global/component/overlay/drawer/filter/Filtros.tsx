@@ -7,6 +7,7 @@ import ParentFilterItem from "./ParentFilterItem";
 import SearchBar from "@global/component/atomic/SearchBar";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import useSearch from "@global/hook/useSearch";
+import { getFilterComponent } from "../../../../../src/component/overlay/drawer/filter/CustomFilterComponents";
 
 interface Props {
   open: boolean;
@@ -26,6 +27,7 @@ interface Props {
   onClearFilter?: (filterKey: any) => void;
   hasSearch?: boolean;
   selectionMode?: "multi" | "single";
+  customComponent?: string;
 }
 
 export default function Filtros({
@@ -37,6 +39,7 @@ export default function Filtros({
   onClearFilter,
   hasSearch,
   selectionMode = "multi",
+  customComponent,
   ...props
 }: Props) {
   const [parentOpen, setParentOpen] = useState("");
@@ -53,6 +56,9 @@ export default function Filtros({
   useEffect(() => {
     setSearchTerm("");
   }, [open])
+
+  // Obtém o componente correto para renderizar
+  const FilterItemComponent = getFilterComponent(customComponent);
 
   return (
     <BottomDrawer customClass="semi-full" open={open} title={title} onClose={onClose}>
@@ -83,7 +89,15 @@ export default function Filtros({
                 />
               );
             } else {
-              return <SimpleFilterItem key={idx} opt={opt} selected={selected} selectionMode={selectionMode} {...props} />;
+              return (
+                <FilterItemComponent 
+                  key={idx} 
+                  opt={opt} 
+                  selected={selected} 
+                  selectionMode={selectionMode} 
+                  {...props} 
+                />
+              );
             }
           })}
         </div>

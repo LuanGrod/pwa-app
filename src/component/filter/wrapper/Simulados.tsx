@@ -12,7 +12,8 @@ export function Simulados() {
       label: "Prova na Íntegra",
       queryField: "questoes_id_prova",
       idParamName: "provas_id",
-      labelParamName: "instituicoes_nome",
+      labelFields: ["estados_nome", "instituicoes_nome", "provas_ano"],
+      customComponent: "ProvaFilterItem",
       selectionMode: "single",
       conditionalOperator: "eq"
     }),

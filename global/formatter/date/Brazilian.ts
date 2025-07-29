@@ -15,12 +15,21 @@ export class BrazilianDateFormatter implements FormatterInterface<string> {
     if (!value) return "";
     const date = new Date(value);
     const monthAbbr = [
-      "JAN", "FEV", "MAR", "ABR", "MAI", "JUN",
-      "JUL", "AGO", "SET", "OUT", "NOV", "DEZ"
+      "JAN",
+      "FEV",
+      "MAR",
+      "ABR",
+      "MAI",
+      "JUN",
+      "JUL",
+      "AGO",
+      "SET",
+      "OUT",
+      "NOV",
+      "DEZ",
     ];
     return monthAbbr[date.getMonth()];
   }
-
 
   shortFormatYear(value: string): string {
     if (!value) return "";
