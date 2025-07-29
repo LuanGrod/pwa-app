@@ -18,7 +18,6 @@ export function HotTopics() {
       parentLabelParamName: "areas_nome",
       queryFieldEntity: "hot_topics",
       parentKeyEntity: "temas",
-      selectionMode: "single",
     }),
     new SelectFilter({
       entity: "hot-topics-salvos",
@@ -28,7 +27,6 @@ export function HotTopics() {
       labelParamName: "hot_topics_nome",
       queryFieldEntity: "hot_topics_salvos",
       connectionOperator: "or",
-      selectionMode: "single",
     }),
     new BooleanFilter({
       queryField: "nao_visto",

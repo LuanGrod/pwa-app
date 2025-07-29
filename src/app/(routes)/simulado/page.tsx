@@ -1,4 +1,5 @@
 import GreetingsLogoStructure from "@/component/structure/GreetingsLogo"
+import { Simulados as SimuladosFiltersWrapper } from "@/component/filter/wrapper/Simulados";
 
 type Props = {}
 
@@ -11,6 +12,7 @@ export default function page({ }: Props) {
           <h1 className="title">Bem-vindo ao <br />modo simulado!</h1>
           <h2 className="subtitle">Escolha sua prova na íntegra e o tempo desejado</h2>
         </div>
+        <SimuladosFiltersWrapper />
       </div>
     </GreetingsLogoStructure>
   )

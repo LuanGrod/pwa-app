@@ -60,7 +60,7 @@ export default function Perfil({ data, setData }: Props) {
             data.estudantes_url_imagem ? (
               <UploadImage src={data.estudantes_url_imagem} alt="profile" className="image" width={200} height={200} priority />
             ) : (
-              <Image src="/project/assets/avatar-mock.png" alt="profile" className="image" width={200} height={200} priority />
+              <Image src="/project/assets/avatar-mock.webp" alt="profile" className="image" width={200} height={200} priority />
             )
           }
           <button className="btn-edit">

@@ -2,7 +2,7 @@
 
 import { useEstudante } from "@/store/EstudanteStore";
 import UploadImage from "@global/component/atomic/UploadImage";
-import Usuario from "@global/component/icons/Usuario";
+import Image from "next/image";
 
 type Props = {};
 
@@ -22,7 +22,14 @@ export default function Greetings({ }: Props) {
               className="avatar"
               priority
             />) : (
-              <div className="avatar"><Usuario size={35} changeOnTheme /></div>
+              <Image
+              src="/project/assets/avatar-mock.webp"
+              alt="Foto do usuário"
+              width={45}
+              height={45}
+              className="avatar"
+              priority
+            />
             )
           }
           <p className="title">Olá {estudante.nomeCompleto}!</p>
