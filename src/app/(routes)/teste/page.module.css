@@ -1,0 +1,6 @@
+.div { width: 20vw; float: left; }
+
+.div:nth-child(1) { height: 100svh; background-color: red; }
+.div:nth-child(2) { height: 100lvh; background-color: blue; }
+.div:nth-child(3) { height: 100dvh; background-color: green; }
+.div:nth-child(4) { height: 100vh; background-color: pink; }
