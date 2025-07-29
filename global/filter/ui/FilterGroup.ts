@@ -100,4 +100,10 @@ export default class FilterGroup extends AbstractFilter {
   getParentDenialOperator(): boolean {
     throw new Error("Method not implemented for groups.");
   }
+  getLabelFields(): string[] {
+    throw new Error("Method not implemented for groups.");
+  }
+  getCustomComponent(): string {
+    throw new Error("Method not implemented for groups.");
+  }
 } 

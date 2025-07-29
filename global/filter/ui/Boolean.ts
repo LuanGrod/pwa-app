@@ -99,4 +99,10 @@ export default class Boolean extends AbstractFilter {
   getParentDenialOperator(): boolean {
     throw new Error("Method not implemented for boolean.");
   }
+  getLabelFields(): string[] {
+    throw new Error("Method not implemented for boolean.");
+  }
+  getCustomComponent(): string {
+    throw new Error("Method not implemented for boolean.");
+  }
 }
