@@ -1,6 +1,6 @@
 import { FilterInterface } from "./FilterInterface";
 
-export class TrimFilter implements FilterInterface {
+export class Trim implements FilterInterface {
   apply(value: string): string {
     return value.trim();
   }

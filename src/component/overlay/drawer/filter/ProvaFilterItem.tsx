@@ -25,7 +25,6 @@ export default function ProvaFilterItem({
 
   const isSelected = selected[filterKey].includes(opt[optionId]);
 
-  const stateFormatter = new BrazilianStateFormatter();
 
   return (
     <div className="custom-checkbox">
@@ -41,7 +40,7 @@ export default function ProvaFilterItem({
 
       <div className="prova-label">
         <p className="institution">
-          {stateFormatter.longToShort(opt.estados_nome)}: {opt.instituicoes_nome}
+          {opt.estados_uf}: {opt.instituicoes_nome}
         </p>
         <p className="year">
           Prova de {opt.provas_ano}

@@ -1,10 +1,11 @@
 import AbstractFilter from "./AbstractFilter";
-import FilterInterface, {
+import {
   ConditionalOperator,
   ConnectionOperator,
-  SelectionMode,
+  DEFAULT_VALUES,
+  FilterType,
 } from "./FilterInterface";
-import { FilterFragment } from "./FilterStringAssembler";
+import { FilterFragment } from "../StringAssembler";
 
 type BooleanProps = {
   queryField: string;
@@ -33,76 +34,29 @@ export default class Boolean extends AbstractFilter {
     super(
       queryField,
       label,
-      "boolean",
+      FilterType.BOOLEAN,
+      conditionalOperator || DEFAULT_VALUES.BOOLEAN_CONDITIONAL_PERATOR,
+      connectionOperator || DEFAULT_VALUES.CONNECTION_OPERATOR,
+      denialOperator || DEFAULT_VALUES.DENIAL_OPERATOR,
       key,
       queryFieldEntity,
-      conditionalOperator,
-      connectionOperator,
-      denialOperator
     );
-    this.activeValue = activeValue || "1";
+    this.activeValue = activeValue || DEFAULT_VALUES.BOOLEAN_ACTIVE;
   }
 
-  getValue(): boolean {
-    return false;
+  getActiveValue(): string {
+    return this.activeValue;
+  }
+  
+  getInitialValue(): any {
+    return "";
   }
 
-  getActiveValue(): string | null {
-    return this.activeValue || null;
-  }
-
-  /**
-   * Builds the filter fragment for this boolean filter.
-   * Returns an array (empty or one element).
-   */
   getFilterFragment(values: Record<string, any>): FilterFragment[] {
     if (values[this.queryField] !== this.activeValue) return [];
     const queryFieldEntity = this.queryFieldEntity ? `${this.queryFieldEntity}_` : "";
     let currentFilter = `${queryFieldEntity}${this.queryField}_0{${this.conditionalOperator}}${this.activeValue}`;
     currentFilter = this.denialOperator ? `!(${currentFilter})` : currentFilter;
     return [{ value: currentFilter, connector: this.connectionOperator }];
-  }
-
-  loadOptions(): Promise<any> {
-    throw new Error("Method not implemented for boolean.");
-  }
-  getOptions(): any {
-    throw new Error("Method not implemented for boolean.");
-  }
-  getSelectionMode(): SelectionMode {
-    throw new Error("Method not implemented for boolean.");
-  }
-  getIdParamName(): string {
-    throw new Error("Method not implemented for boolean.");
-  }
-  getLabelParamName(): string {
-    throw new Error("Method not implemented for boolean.");
-  }
-  getParentKey(): string {
-    throw new Error("Method not implemented for boolean.");
-  }
-  getParentIdParamName(): string {
-    throw new Error("Method not implemented for boolean.");
-  }
-  getParentLabelParamName(): string {
-    throw new Error("Method not implemented for boolean.");
-  }
-  getParentKeyEntity(): string {
-    throw new Error("Method not implemented for boolean.");
-  }
-  getParentConditionalOperator(): ConditionalOperator {
-    throw new Error("Method not implemented for boolean.");
-  }
-  getParentConnectionOperator(): ConnectionOperator {
-    throw new Error("Method not implemented for boolean.");
-  }
-  getParentDenialOperator(): boolean {
-    throw new Error("Method not implemented for boolean.");
-  }
-  getLabelFields(): string[] {
-    throw new Error("Method not implemented for boolean.");
-  }
-  getCustomComponent(): string {
-    throw new Error("Method not implemented for boolean.");
   }
 }

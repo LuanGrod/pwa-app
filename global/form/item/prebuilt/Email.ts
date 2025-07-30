@@ -4,8 +4,8 @@ import { EmailValidatorFactory } from "@global/validator/string/email/EmailValid
 import { Text } from "../Text";
 import Item from "@global/component/form/item/item/Item";
 import InputWidget from "@global/component/form/item/widgets/Input";
-import { StripTagsFilter } from "@global/filter/StripTagsFilter";
-import { TrimFilter } from "@global/filter/TrimFilter";
+import { StripTags } from "@global/filter/StripTags";
+import { Trim } from "@global/filter/Trim";
 
 export class Email extends Text {
   constructor({
@@ -19,7 +19,7 @@ export class Email extends Text {
     textNameGender = true,
     formName = "E-mail",
     textName = "e-mail",
-    filters = [new TrimFilter(), new StripTagsFilter()],
+    filters = [new Trim(), new StripTags()],
     mask = null,
     msgPlacement = null,
     tags = [],

@@ -2,12 +2,11 @@
 
 import { BottomDrawer } from "@global/component/overlay/drawer/Bottom";
 import { useEffect, useState } from "react";
-import SimpleFilterItem from "./SimpleFilterItem";
 import ParentFilterItem from "./ParentFilterItem";
 import SearchBar from "@global/component/atomic/SearchBar";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import useSearch from "@global/hook/useSearch";
-import { getFilterComponent } from "../../../../../src/component/overlay/drawer/filter/CustomFilterComponents";
+import { getFilterComponent } from "@/component/overlay/drawer/filter/CustomFilterComponents";
 
 interface Props {
   open: boolean;
@@ -25,9 +24,11 @@ interface Props {
   onToggleParent: (filterKey: any, parentKey: any, parentId: any, childrenIds: any[]) => any;
   onToggleChild: (filterKey: any, childId: any, parentKey?: any, parentId?: any, allChildrenIds?: any[]) => any;
   onClearFilter?: (filterKey: any) => void;
+  hasClearFilter?: boolean;
   hasSearch?: boolean;
   selectionMode?: "multi" | "single";
-  customComponent?: string;
+  customLabelFields?: string[];
+  customOptionComponent?: string;
 }
 
 export default function Filtros({
@@ -37,9 +38,11 @@ export default function Filtros({
   selected,
   onClose,
   onClearFilter,
+  hasClearFilter,
   hasSearch,
   selectionMode = "multi",
-  customComponent,
+  customLabelFields,
+  customOptionComponent,
   ...props
 }: Props) {
   const [parentOpen, setParentOpen] = useState("");
@@ -50,7 +53,7 @@ export default function Filtros({
     setSearchTerm,
   } = useSearch({
     options: options,
-    keyParams: [props.optionLabel ? props.optionLabel : "", props.parentOptionLabel ? props.parentOptionLabel : ""],
+    keyParams: [props.optionLabel || "", props.parentOptionLabel || "", ...(customLabelFields || [])],
   });
 
   useEffect(() => {
@@ -58,11 +61,11 @@ export default function Filtros({
   }, [open])
 
   // Obtém o componente correto para renderizar
-  const FilterItemComponent = getFilterComponent(customComponent);
+  const FilterItemComponent = getFilterComponent(customOptionComponent);
 
   return (
     <BottomDrawer customClass="semi-full" open={open} title={title} onClose={onClose}>
-      {onClearFilter && (
+      {onClearFilter && hasClearFilter && (
         <button className="clear" onClick={() => onClearFilter(props.filterKey)}>
           Limpar filtro
         </button>
@@ -90,12 +93,12 @@ export default function Filtros({
               );
             } else {
               return (
-                <FilterItemComponent 
-                  key={idx} 
-                  opt={opt} 
-                  selected={selected} 
-                  selectionMode={selectionMode} 
-                  {...props} 
+                <FilterItemComponent
+                  key={idx}
+                  opt={opt}
+                  selected={selected}
+                  selectionMode={selectionMode}
+                  {...props}
                 />
               );
             }

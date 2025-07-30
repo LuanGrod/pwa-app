@@ -1,4 +1,4 @@
-import { ConnectionOperator } from "./FilterInterface";
+import { ConnectionOperator } from "./ui/FilterInterface";
 
 /**
  * FilterFragment represents a single filter condition and its connector.
@@ -12,7 +12,7 @@ export type FilterFragment = {
  * FilterStringAssembler is responsible for combining filter fragments into a single filter string.
  * It handles connector placement, deduplication, and trailing connector removal.
  */
-export default class FilterStringAssembler {
+export default class StringAssembler {
   static assemble(fragments: FilterFragment[]): string {
     if (fragments.length === 0) return "";
 

@@ -65,9 +65,11 @@ export default function FilterWrapperBase({ filterDefinitions, entity, gridColum
         filterKey={currentDefinition?.getKey()}
         parentKey={currentDefinition?.getParentKey()}
         onClearFilter={clearFilter}
-        hasSearch
+        hasClearFilter={currentDefinition?.getHasClearFilter()}
+        hasSearch={currentDefinition?.getHasSearch()}
         selectionMode={currentDefinition?.getSelectionMode()}
-        customComponent={currentDefinition?.getCustomComponent()}
+        customLabelFields={currentDefinition?.getLabelFields()}
+        customOptionComponent={currentDefinition?.getCustomOptionComponent()}
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import FilterInterface from "@global/filter/ui/FilterInterface";
-import FilterStringAssembler, { FilterFragment } from "@global/filter/ui/FilterStringAssembler";
+import FilterStringAssembler, { FilterFragment } from "@global/filter/StringAssembler";
 
 // Helper to flatten definitions, extracting children from groups
 function flattenDefinitions(definitions: FilterInterface[]): FilterInterface[] {
@@ -14,7 +14,7 @@ export function useFilters(definitions: FilterInterface[]) {
   const flatDefinitions = flattenDefinitions(definitions);
 
   const [values, setValues] = useState<any>(() =>
-    Object.fromEntries(flatDefinitions.map((def) => [def.getQueryField(), def.getValue()]))
+    Object.fromEntries(flatDefinitions.map((def) => [def.getQueryField(), def.getInitialValue()]))
   );
   const [options, setOptions] = useState<Record<string, any[]>>({});
   const [loadingOptions, setLoadingOptions] = useState<Record<string, boolean>>({});
@@ -22,9 +22,9 @@ export function useFilters(definitions: FilterInterface[]) {
   useEffect(() => {
     flatDefinitions.map((def) => {
       try {
-        setValues((prev: any) => ({ ...prev, [def.getQueryField()]: def.getValue() }));
+        setValues((prev: any) => ({ ...prev, [def.getQueryField()]: def.getInitialValue() }));
         if (def.getParentKey()) {
-          setValues((prev: any) => ({ ...prev, [def.getParentKey()]: def.getValue() }));
+          setValues((prev: any) => ({ ...prev, [def.getParentKey()]: def.getInitialValue() }));
         }
       } catch (error) { }
     });
@@ -154,11 +154,11 @@ export function useFilters(definitions: FilterInterface[]) {
 
       if (definition) {
         // Limpa o valor principal
-        newValues[definition.getQueryField()] = definition.getValue();
+        newValues[definition.getQueryField()] = definition.getInitialValue();
 
         // Se houver parentKey, limpa também
         if (definition.getParentKey()) {
-          newValues[definition.getParentKey()] = definition.getValue();
+          newValues[definition.getParentKey()] = definition.getInitialValue();
         }
       }
 

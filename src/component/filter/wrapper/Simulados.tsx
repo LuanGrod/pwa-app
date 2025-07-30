@@ -1,9 +1,9 @@
 "use client";
 
 import SelectFilter from "@global/filter/ui/Select";
-import BooleanFilter from "@global/filter/ui/Boolean";
 import FilterWrapperBase from "@global/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
+import { SelectionMode } from "@global/filter/ui/FilterInterface";
 
 export function Simulados() {
   const filterDefinitions = [
@@ -12,10 +12,11 @@ export function Simulados() {
       label: "Prova na Íntegra",
       queryField: "questoes_id_prova",
       idParamName: "provas_id",
-      labelFields: ["estados_nome", "instituicoes_nome", "provas_ano"],
-      customComponent: "ProvaFilterItem",
-      selectionMode: "single",
-      conditionalOperator: "eq"
+      labelFields: ["estados_uf", "instituicoes_nome", "provas_ano"],
+      customOptionComponent: "ProvaFilterItem",
+      selectionMode: "single" as SelectionMode,
+      conditionalOperator: "eq",
+      hasClearFilter: false
     }),
   ];
 

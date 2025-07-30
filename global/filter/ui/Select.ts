@@ -4,8 +4,10 @@ import FilterInterface, {
   ConditionalOperator,
   ConnectionOperator,
   SelectionMode,
+  FilterType,
+  DEFAULT_VALUES,
 } from "./FilterInterface";
-import { FilterFragment } from "./FilterStringAssembler";
+import { FilterFragment } from "../StringAssembler";
 
 type SelectProps = {
   entity: string;
@@ -27,7 +29,9 @@ type SelectProps = {
   parentDenialOperator?: boolean;
   selectionMode?: SelectionMode;
   labelFields?: string[];
-  customComponent?: string;
+  customOptionComponent?: string;
+  hasClearFilter?: boolean;
+  hasSearch?: boolean;
 };
 
 export default class Select extends AbstractFilter {
@@ -44,7 +48,9 @@ export default class Select extends AbstractFilter {
   parentDenialOperator: boolean;
   selectionMode: SelectionMode;
   labelFields: string[];
-  customComponent: string;
+  customOptionComponent: string;
+  hasClearFilter: boolean;
+  hasSearch: boolean;
 
   constructor({
     entity,
@@ -58,25 +64,27 @@ export default class Select extends AbstractFilter {
     queryFieldEntity,
     parentKeyEntity,
     key,
-    conditionalOperator = "in",
+    conditionalOperator,
     connectionOperator,
     denialOperator,
     parentConditionalOperator,
     parentConnectionOperator,
     parentDenialOperator,
-    selectionMode = "multi",
+    selectionMode = SelectionMode.MULTI,
     labelFields,
-    customComponent,
+    customOptionComponent,
+    hasClearFilter = true,
+    hasSearch = true,
   }: SelectProps) {
     super(
       queryField,
       label,
-      "select",
+      FilterType.SELECT,
+      conditionalOperator || DEFAULT_VALUES.SELECT_CONDITIONAL_OPERATOR,
+      connectionOperator || DEFAULT_VALUES.CONNECTION_OPERATOR,
+      denialOperator || DEFAULT_VALUES.DENIAL_OPERATOR,
       key,
-      queryFieldEntity,
-      conditionalOperator,
-      connectionOperator,
-      denialOperator
+      queryFieldEntity || ""
     );
     this.options = [];
     this.entity = entity;
@@ -86,12 +94,14 @@ export default class Select extends AbstractFilter {
     this.parentIdParamName = parentIdParamName || "";
     this.parentLabelParamName = parentLabelParamName || "";
     this.parentKeyEntity = parentKeyEntity || "";
-    this.parentConditionalOperator = parentConditionalOperator || "in";
-    this.parentConnectionOperator = parentConnectionOperator || "and";
-    this.parentDenialOperator = parentDenialOperator || false;
+    this.parentConditionalOperator = parentConditionalOperator || DEFAULT_VALUES.SELECT_CONDITIONAL_OPERATOR;
+    this.parentConnectionOperator = parentConnectionOperator || DEFAULT_VALUES.CONNECTION_OPERATOR;
+    this.parentDenialOperator = parentDenialOperator || DEFAULT_VALUES.DENIAL_OPERATOR;
     this.selectionMode = selectionMode;
     this.labelFields = labelFields || [];
-    this.customComponent = customComponent || "";
+    this.customOptionComponent = customOptionComponent || "";
+    this.hasClearFilter = hasClearFilter;
+    this.hasSearch = hasSearch;
   }
 
   async loadOptions() {
@@ -117,7 +127,7 @@ export default class Select extends AbstractFilter {
           }
 
           // Adiciona o filho ao pai correspondente
-          if (this.customComponent) {
+          if (this.customOptionComponent) {
             // Se tem componente customizado, preserva todos os campos
             acc[parentId].children.push({
               ...item, // Preserva todos os campos da API
@@ -139,7 +149,7 @@ export default class Select extends AbstractFilter {
       this.options = agrupado;
     } else {
       // Estrutura simples, uma entidade apenas
-      if (this.customComponent) {
+      if (this.customOptionComponent) {
         // Se tem componente customizado, preserva todos os campos
         this.options = data.map((item: any) => ({
           ...item, // Preserva todos os campos da API
@@ -160,8 +170,8 @@ export default class Select extends AbstractFilter {
     return this.options;
   }
 
-  getValue(): string[] {
-    return this.selectionMode === "single" ? [] : [];
+  getInitialValue(): any {
+    return [];
   }
 
   getSelectionMode(): SelectionMode {
@@ -208,14 +218,18 @@ export default class Select extends AbstractFilter {
     return this.labelFields;
   }
 
-  getCustomComponent(): string {
-    return this.customComponent;
+  getCustomOptionComponent(): string {
+    return this.customOptionComponent;
   }
 
-  /**
-   * Builds the filter fragments for this select filter.
-   * Returns an array of fragments (child and/or parent).
-   */
+  getHasClearFilter(): boolean {
+    return this.hasClearFilter;
+  }
+
+  getHasSearch(): boolean {
+    return this.hasSearch;
+  }
+
   getFilterFragment(values: Record<string, any>): FilterFragment[] {
     const fragments: FilterFragment[] = [];
     const queryFieldEntity = this.queryFieldEntity ? `${this.queryFieldEntity}_` : "";
@@ -242,9 +256,5 @@ export default class Select extends AbstractFilter {
       fragments.push({ value: currentFilter, connector: this.parentConnectionOperator });
     }
     return fragments;
-  }
-
-  getActiveValue(): string | null {
-    throw new Error("Method not implemented for select.");
   }
 }

@@ -1,7 +1,6 @@
-import { StripTagsFilter } from "@global/filter/StripTagsFilter";
+import { StripTags } from "@global/filter/StripTags";
 import { ItemDef } from "@global/type/form/ItemDef";
 import { FilterInterface } from "@global/filter/FilterInterface";
-import { TrimFilter } from "@global/filter/TrimFilter";
 import { MaskInterface } from "@global/mask/MaskInterface";
 import { ValidatorInterface } from "@global/validator/ValidatorInterface";
 import { HTMLInputTypeAttribute } from "react";
@@ -57,7 +56,7 @@ export abstract class AbstractItem implements ItemInterface {
     this.formName = formName || fieldName.charAt(0).toUpperCase() + fieldName.slice(1);
     this.textName = textName || fieldName;
     this.textNameGender = textNameGender;
-    this.filters = filters.length > 0 ? filters : [new StripTagsFilter()];
+    this.filters = filters.length > 0 ? filters : [new StripTags()];
     this.validators = validators;
     this.mask = mask;
     this.msgPlacement = msgPlacement;

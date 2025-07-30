@@ -1,15 +1,16 @@
 import FilterInterface, {
   ConditionalOperator,
   ConnectionOperator,
-  FilterTypes,
+  DEFAULT_VALUES,
+  FilterType,
   SelectionMode,
 } from "./FilterInterface";
-import { FilterFragment } from "./FilterStringAssembler";
+import { FilterFragment } from "../StringAssembler";
 
 export default abstract class AbstractFilter implements FilterInterface {
   queryField: string;
   label: string;
-  type: FilterTypes;
+  type: FilterType;
   queryFieldEntity: string;
   key: string;
   conditionalOperator: ConditionalOperator;
@@ -19,59 +20,88 @@ export default abstract class AbstractFilter implements FilterInterface {
   constructor(
     queryField: string,
     label: string,
-    type: FilterTypes,
+    type: FilterType,
+    conditionalOperator: ConditionalOperator,
+    connectionOperator: ConnectionOperator,
+    denialOperator: boolean,
     key?: string,
     queryFieldEntity?: string,
-    conditionalOperator?: ConditionalOperator,
-    connectionOperator?: ConnectionOperator,
-    denialOperator?: boolean
   ) {
     this.queryField = queryField;
     this.label = label;
     this.type = type;
-    this.queryFieldEntity = queryFieldEntity || "";
-    this.conditionalOperator = conditionalOperator || "eq";
-    this.connectionOperator = connectionOperator || "and";
-    this.denialOperator = denialOperator || false;
+    this.conditionalOperator = conditionalOperator;
+    this.connectionOperator = connectionOperator;
+    this.denialOperator = denialOperator;
     this.key = key || queryField;
+    this.queryFieldEntity = queryFieldEntity || "";
   }
 
-  abstract getValue(): any;
-
-  abstract loadOptions(): Promise<any>;
-
-  abstract getOptions(): any;
-
-  abstract getIdParamName(): string;
-
-  abstract getLabelParamName(): string;
-
-  abstract getParentKey(): string;
-
-  abstract getParentIdParamName(): string;
-
-  abstract getParentLabelParamName(): string;
-
-  abstract getParentKeyEntity(): string;
-
-  abstract getActiveValue(): string | null;
-
-  abstract getParentConditionalOperator(): ConditionalOperator;
-
-  abstract getParentConnectionOperator(): ConnectionOperator;
-
-  abstract getParentDenialOperator(): boolean;
-
-  abstract getSelectionMode(): SelectionMode;
-
-  /**
-   * Abstract method to build the filter fragments for this filter.
-   * Must be implemented by subclasses.
-   */
   abstract getFilterFragment(values: Record<string, any>): FilterFragment[];
 
-  abstract getLabelFields(): string[];
-  abstract getCustomComponent(): string;
+  async loadOptions(): Promise<any> {
+    return Promise.resolve(null);
+  }
+
+  getOptions(): any[] {
+    return [];
+  }
+
+  getInitialValue(): any {
+    return "";
+  }
+
+  getIdParamName(): string {
+    return "";
+  }
+
+  getLabelParamName(): string {
+    return "";
+  }
+
+  getParentKey(): string {
+    return "";
+  }
+
+  getParentIdParamName(): string {
+    return "";
+  }
+
+  getParentLabelParamName(): string {
+    return "";
+  }
+
+  getParentKeyEntity(): string {
+    return "";
+  }
+
+  getActiveValue(): string {
+    return DEFAULT_VALUES.BOOLEAN_ACTIVE;
+  }
+
+  getParentConditionalOperator(): ConditionalOperator {
+    return DEFAULT_VALUES.SELECT_CONDITIONAL_OPERATOR;
+  }
+
+  getParentConnectionOperator(): ConnectionOperator {
+    return DEFAULT_VALUES.CONNECTION_OPERATOR;
+  }
+
+  getParentDenialOperator(): boolean {
+    return DEFAULT_VALUES.DENIAL_OPERATOR;
+  }
+
+  getSelectionMode(): SelectionMode {
+    return DEFAULT_VALUES.SELECTION_MODE as SelectionMode;
+  }
+
+  getLabelFields(): string[] {
+    return [];
+  }
+
+  getCustomOptionComponent(): string {
+    return "";
+  }
 
   isGroup(): boolean {
     return false;
@@ -93,7 +123,7 @@ export default abstract class AbstractFilter implements FilterInterface {
     return this.label;
   }
 
-  getType(): FilterTypes {
+  getType(): FilterType {
     return this.type;
   }
 
@@ -111,5 +141,13 @@ export default abstract class AbstractFilter implements FilterInterface {
 
   getQueryFieldEntity(): string {
     return this.queryFieldEntity;
+  }
+
+  getHasClearFilter(): boolean {
+    return true;
+  }
+
+  getHasSearch(): boolean {
+    return true;
   }
 }

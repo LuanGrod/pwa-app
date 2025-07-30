@@ -2,13 +2,13 @@
 
 import SelectFilter from "@global/filter/ui/Select";
 import BooleanFilter from "@global/filter/ui/Boolean";
-import FilterGroup from "@global/filter/ui/FilterGroup";
+import GroupFilter from "@global/filter/ui/Group";
 import FilterWrapperBase from "@global/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
 
 export function Flashcards() {
   const filterDefinitions = [
-    new FilterGroup({
+    new GroupFilter({
       children: [
         new SelectFilter({
           entity: "temas",
