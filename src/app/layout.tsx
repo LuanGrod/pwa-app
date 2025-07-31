@@ -24,7 +24,7 @@ export default async function RootLayout({
       lang="pt-BR"
       className={`${comfortaa.variable} ${sfProDisplay.variable} ${sfProText.variable} ${inter.variable} ${theme === "dark" ? "dark-theme" : ""}`}
     >
-      <body className="">
+      <body className="screen">
         <AppHeightWrapper />
         {!splashShown ? <SplashScreen /> : children}
         <div id="drawer-root"></div>

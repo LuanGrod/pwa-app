@@ -1,8 +1,10 @@
 import SimpleFilterItem from "@global/component/overlay/drawer/filter/SimpleFilterItem";
 import ProvaFilterItem from "./ProvaFilterItem";
+import HistoricoFilterItem from "./HistoricoFilterItem";
 
 // Registry de componentes customizados de filtro
 export const customFilterComponents = {
+  "HistoricoFilterItem": HistoricoFilterItem,
   "ProvaFilterItem": ProvaFilterItem,
   "DefaultFilterItem": SimpleFilterItem,
 };

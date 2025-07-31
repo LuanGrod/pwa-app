@@ -14,9 +14,10 @@ type Props = {
   entity: string;
   gridColumns?: 2 | 3;
   filterBtnIcon: ReactNode;
+  customBtn?: ReactNode;
 };
 
-export default function FilterWrapperBase({ filterDefinitions, entity, gridColumns = 3, filterBtnIcon }: Props) {
+export default function FilterWrapperBase({ filterDefinitions, entity, gridColumns = 3, filterBtnIcon, customBtn }: Props) {
   const {
     values,
     options,
@@ -45,6 +46,7 @@ export default function FilterWrapperBase({ filterDefinitions, entity, gridColum
         onToggleBoolean={toggleBoolean}
         gridColumns={gridColumns}
         filterBtnIcon={filterBtnIcon}
+        customBtn={customBtn}
       />
       <ShadowBtn className="filter" onClick={handleEstudar}>
         ESTUDAR

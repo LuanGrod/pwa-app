@@ -10,28 +10,108 @@ import FilterInterface, {
 import { FilterFragment } from "../StringAssembler";
 
 type SelectProps = {
+  /**
+   * Entity used in the request
+   */
   entity: string;
+  /**
+   * Label used in the button
+   */
   label: string;
+  /**
+   * Field used in the filter query
+   * @example "?filters=questoes_id_tema_0{eq}2" => "id_tema"
+   */
   queryField: string;
+  /**
+   * Name of the parameter from the API response with the id of the option
+   */
   idParamName: string;
+  /**
+   * Name of the parameter from the API response with the label of the option (this won't be used if labelFields is provided)
+   */
   labelParamName?: string;
+  /**
+   * Parent field used in the filter query
+   * @example "?filters=temas_id_area_0{eq}2" => "id_area"
+   */
   parentKey?: string;
+  /**
+   * Name of the parameter from the API response with the id of the parent option
+   */
   parentIdParamName?: string;
+  /**
+   * Name of the parameter from the API response with the label of the parent option
+   */
   parentLabelParamName?: string;
-  queryFieldEntity?: string;
+  /**
+   * Parent entity used in the filter query
+   * @example "?filters=temas_id_area_0{eq}2" => "temas"
+   */
   parentKeyEntity?: string;
+  /**
+   * Entity used in the filter query
+   * @example "?filters=questoes_id_tema_0{eq}2" => "questoes"
+   */
+  queryFieldEntity?: string;
+  /**
+   * Key of the filter
+   * @default queryField
+   */
   key?: string;
+  /**
+   * Conditional operator used in the filter query
+   * @default "in"
+   */
   conditionalOperator?: ConditionalOperator;
+  /**
+   * Connection operator used in the filter query
+   * @default "and"
+   */
   connectionOperator?: ConnectionOperator;
+  /**
+   * Denial operator used in the filter query
+   * @default false
+   */
   denialOperator?: boolean;
+  /**
+   * Conditional operator used in the filter query for the parent option
+   * @default "in"
+   */
   parentConditionalOperator?: ConditionalOperator;
+  /**
+   * Connection operator used in the filter query for the parent option
+   * @default "and"
+   */
   parentConnectionOperator?: ConnectionOperator;
+  /**
+   * Denial operator used in the filter query for the parent option
+   * @default false
+   */
   parentDenialOperator?: boolean;
-  selectionMode?: SelectionMode;
+  /**
+   * Array of names of the parameters from the API response to be used in the custom option component (when you use this, the component won't use the value from labelParamName)
+   */
   labelFields?: string[];
+  /**
+   * Name of the custom option component (when you need more than just the default label)
+   */
   customOptionComponent?: string;
+  /**
+   * Whether the filter has a clear filter button
+   * @default true
+   */
   hasClearFilter?: boolean;
+  /**
+   * Whether the filter has a search input
+   * @default true
+   */
   hasSearch?: boolean;
+  /**
+   * Selection mode used in the filter
+   * @default "multi"
+   */
+  selectionMode?: SelectionMode;
 };
 
 export default class Select extends AbstractFilter {
@@ -94,7 +174,8 @@ export default class Select extends AbstractFilter {
     this.parentIdParamName = parentIdParamName || "";
     this.parentLabelParamName = parentLabelParamName || "";
     this.parentKeyEntity = parentKeyEntity || "";
-    this.parentConditionalOperator = parentConditionalOperator || DEFAULT_VALUES.SELECT_CONDITIONAL_OPERATOR;
+    this.parentConditionalOperator =
+      parentConditionalOperator || DEFAULT_VALUES.SELECT_CONDITIONAL_OPERATOR;
     this.parentConnectionOperator = parentConnectionOperator || DEFAULT_VALUES.CONNECTION_OPERATOR;
     this.parentDenialOperator = parentDenialOperator || DEFAULT_VALUES.DENIAL_OPERATOR;
     this.selectionMode = selectionMode;

@@ -10,6 +10,7 @@ interface FiltrosGridProps {
   onToggleBoolean: (key: string, value: any) => void;
   gridColumns?: 2 | 3;
   filterBtnIcon: ReactNode;
+  customBtn?: ReactNode;
 }
 
 // Helper to flatten definitions, extracting children from groups
@@ -21,7 +22,7 @@ function flattenDefinitions(definitions: FilterInterface[]): FilterInterface[] {
   );
 }
 
-export function Grid({ filters, definitions, onOpenDrawer, onToggleBoolean, gridColumns = 3, filterBtnIcon }: FiltrosGridProps) {
+export function Grid({ filters, definitions, onOpenDrawer, onToggleBoolean, gridColumns = 3, filterBtnIcon, customBtn }: FiltrosGridProps) {
   const flatDefinitions = flattenDefinitions(definitions);
   const selectFIlters = flatDefinitions.filter((def) => def.getType() === "select");
   const booleanFilters = flatDefinitions.filter((def) => def.getType() === "boolean");
@@ -48,6 +49,7 @@ export function Grid({ filters, definitions, onOpenDrawer, onToggleBoolean, grid
             {def.getLabel()}
           </SwitchBtn>
         ))}
+        {customBtn}
       </div>
     </div>
   );

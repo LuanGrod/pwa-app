@@ -16,6 +16,7 @@ type QuestoesStore = {
   isShowingAnswer: boolean;
   isShowingAlert: boolean;
   isSaving: boolean;
+  examTimer: number;
   setQuestoesList: (questoes: QuestaoType[]) => void;
   getCurrentQuestao: () => QuestaoType | null;
   nextIndex: () => void;
@@ -29,6 +30,10 @@ type QuestoesStore = {
   getCurrentQuestaoSavedStatus: () => boolean;
   toggleAlert: () => void;
   toggleIsSaving: () => void;
+  incrementTimer: () => void;
+  decrementTimer: () => void;
+  setTimer: (minutes: number) => void;
+  getFormattedTimer: () => string;
 };
 
 const useQuestoes = create<QuestoesStore>((set, get) => ({
@@ -38,6 +43,7 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
   isShowingAnswer: false,
   isShowingAlert: false,
   isSaving: false,
+  examTimer: 60, // Initial value: 1 hour (60 minutes)
   setQuestoesList: (questoes: QuestaoType[]) => {
     set({
       questoesList: questoes,
@@ -117,6 +123,7 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
       respostas_questoes_id_estudante: userId,
       respostas_questoes_id_questao: currentQuestao.questoes_id,
       respostas_questoes_alternativa2: currentAnswer.answer,
+      respostas_questoes_id_simulado: "1",
     };
 
     if (currentAnswer.answer) {
@@ -229,6 +236,33 @@ const useQuestoes = create<QuestoesStore>((set, get) => ({
     set((state) => ({
       isSaving: !state.isSaving,
     }));
+  },
+  incrementTimer: () => {
+    set((state) => ({
+      examTimer: state.examTimer < 360 ? state.examTimer + 30 : state.examTimer, // Max 6 hours (360 min)
+    }));
+  },
+  decrementTimer: () => {
+    set((state) => ({
+      examTimer: state.examTimer > 60 ? state.examTimer - 30 : state.examTimer, // Min 1 hour (60 min)
+    }));
+  },
+  setTimer: (minutes: number) => {
+    // Ensure the value is within bounds and is a valid step (30-minute increments)
+    const clampedMinutes = Math.max(60, Math.min(360, minutes));
+    const steppedMinutes = Math.round(clampedMinutes / 30) * 30;
+    set({ examTimer: steppedMinutes });
+  },
+  getFormattedTimer: () => {
+    const { examTimer } = get();
+    const hours = Math.floor(examTimer / 60);
+    const minutes = examTimer % 60;
+    
+    if (minutes === 0) {
+      return `${hours}h`;
+    } else {
+      return `${hours}h${minutes}`;
+    }
   },
 }));
 
