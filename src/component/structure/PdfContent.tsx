@@ -76,17 +76,15 @@ export default function PdfContent({
         isSaving={isSaving}
       />
       <main className="content-wrapper header footer pdf">
-        {isOpen && (
-          <EdicaoSugerida
-            onClose={toggleDialog}
-            open={isOpen}
-            estudanteId={userId}
-            conteudoId={entityId}
-            conteudoName={edicaoSugerida.conteudoName}
-            formEntity={edicaoSugerida.formEntity}
-            insertEntity={edicaoSugerida.insertEntity}
-          />
-        )}
+        <EdicaoSugerida
+          onClose={toggleDialog}
+          open={isOpen}
+          estudanteId={userId}
+          conteudoId={entityId}
+          conteudoName={edicaoSugerida.conteudoName}
+          formEntity={edicaoSugerida.formEntity}
+          insertEntity={edicaoSugerida.insertEntity}
+        />
         <Viewing
           data={data}
           loading={loading}

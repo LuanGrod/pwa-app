@@ -18,10 +18,10 @@ type Props = {
 export default function QuestaoItem({ id }: Props) {
 
   const {
-    getCurrentQuestao,
+    getCurrent,
     isShowingAnswer,
     toggleIsShowingAnswer,
-    setQuestoesList,
+    setPack,
     isShowingAlert,
   } = useQuestoes();
 
@@ -33,23 +33,23 @@ export default function QuestaoItem({ id }: Props) {
 
   useEffect(() => {
     if (data) {
-      setQuestoesList([data]);
+      setPack([data]);
     } else {
-      setQuestoesList([]);
+      setPack([]);
     }
   }, [data])
 
   return (
     <QuestaoStructure >
       <Viewing
-        data={getCurrentQuestao()}
+        data={getCurrent()}
         loading={loading}
         error={error}
         loadingComponent={<Loading2 loading />}
         renderItem={(item: QuestaoType) => <Questao data={item} />}
       />
       <AlertaQuestao open={isShowingAlert} />
-      <RespostaQuestao data={getCurrentQuestao()} open={isShowingAnswer} onClose={toggleIsShowingAnswer} />
+      <RespostaQuestao data={getCurrent()} open={isShowingAnswer} onClose={toggleIsShowingAnswer} />
     </QuestaoStructure>
   )
 }

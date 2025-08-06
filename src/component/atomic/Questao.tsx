@@ -23,7 +23,7 @@ export default function Questao({ data }: Props) {
 
   return (
     <div className="questao-wrapper">
-      <p className="area-tema">{`${data.areas_nome}:${data.temas_nome}`}</p>
+      <p className="area-tema">{`${data.areas_nome}:${` `}${data.temas_nome}`}</p>
       <p className="ano">{`Prova de ${data.provas_ano}`}</p>
       <p className="enunciado">{data.questoes_enunciado}</p>
       {data.questoes_url_imagem && (

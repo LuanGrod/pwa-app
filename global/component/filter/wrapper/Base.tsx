@@ -14,10 +14,12 @@ type Props = {
   entity: string;
   gridColumns?: 2 | 3;
   filterBtnIcon: ReactNode;
-  customBtn?: ReactNode;
+  beforeComponent?: ReactNode;
+  afterComponent?: ReactNode;
+  mustHaveFilters?: boolean;
 };
 
-export default function FilterWrapperBase({ filterDefinitions, entity, gridColumns = 3, filterBtnIcon, customBtn }: Props) {
+export default function FilterWrapperBase({ filterDefinitions, entity, gridColumns = 3, filterBtnIcon, afterComponent, beforeComponent, mustHaveFilters = false }: Props) {
   const {
     values,
     options,
@@ -33,9 +35,11 @@ export default function FilterWrapperBase({ filterDefinitions, entity, gridColum
 
   const { drawerKey, setDrawerKey, handleOpenDrawer } = useKeyDrawer({ openDrawer });
 
-  const handleEstudar = useEstudar({ buildFilterString: buildFilterString, entity: entity });
+  const handleEstudar = useEstudar({ buildFilterString, entity });
 
   const currentDefinition = drawerKey ? definitions.find((d) => d.getKey() === drawerKey) : null;
+
+  const filterIsEmpty = values && Object.values(values).some((item) => Array.isArray(item) && item.length > 0);
 
   return (
     <div className="filter-wrapper">
@@ -46,9 +50,10 @@ export default function FilterWrapperBase({ filterDefinitions, entity, gridColum
         onToggleBoolean={toggleBoolean}
         gridColumns={gridColumns}
         filterBtnIcon={filterBtnIcon}
-        customBtn={customBtn}
+        beforeComponent={beforeComponent}
+        afterComponent={afterComponent}
       />
-      <ShadowBtn className="filter" onClick={handleEstudar}>
+      <ShadowBtn disabled={!filterIsEmpty && mustHaveFilters} className="filter" onClick={handleEstudar}>
         ESTUDAR
       </ShadowBtn>
       <Filtros

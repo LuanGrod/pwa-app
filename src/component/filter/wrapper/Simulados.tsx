@@ -5,8 +5,9 @@ import FilterWrapperBase from "@global/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
 import { SelectionMode } from "@global/filter/ui/FilterInterface";
 import useQuestoes from "@/store/QuestaoStore";
-import Menos from "@global/component/icons/Menos";
-import Mais from "@global/component/icons/Mais";
+import RangeSelector from "@global/component/button/RangeSelector";
+import { useEffect } from "react";
+import { useUser } from "@global/hook/auth/useUser";
 
 export function Simulados() {
   const filterDefinitions = [
@@ -24,8 +25,8 @@ export function Simulados() {
     new SelectFilter({
       entity: "simulados",
       label: "Histórico",
-      queryField: "not_used",
-      idParamName: "not_used",
+      queryField: "",
+      idParamName: "",
       labelFields: ["instituicoes_nome", "provas_ano", "simulados_data_hora_cadastro", "simulados_id_simulado3"],
       customOptionComponent: "HistoricoFilterItem",
       selectionMode: "single" as SelectionMode,
@@ -35,52 +36,36 @@ export function Simulados() {
     })
   ];
 
-  const timerBtn = () => {
-    const { examTimer, incrementTimer, decrementTimer, setTimer, getFormattedTimer } = useQuestoes();
+  const { examDuration, setExamDuration, getFormattedRemainingTime, setUser, setIndex, clearAnswers, setTestFinished } = useQuestoes();
+  const { id: userId } = useUser();
 
-    const canDecrement = examTimer > 60; // Min 1 hour
-    const canIncrement = examTimer < 360; // Max 6 hours
+  useEffect(() => {
+    setExamDuration(60); // Padrão: 1 hora
+    setUser(userId);
+    setIndex(0);
+    clearAnswers();
+    setTestFinished(false);
+  }, [userId])
 
-    const handleSliderChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-      const value = parseInt(e.target.value);
-      setTimer(value);
-    };
-
-    return (
-      <div className="time-range">
-        <button
-          onClick={decrementTimer}
-          disabled={!canDecrement}
-          className={`action-btn ${canDecrement ? "" : "disabled"}`}
-        >
-          <Menos size={20} changeOnTheme className="inverted" />
-        </button>
-
-        <div className="input-wrapper">
-          <label htmlFor="exam-timer" className="label">Tempo total da prova</label>
-          <div className="value">{getFormattedTimer()}</div>
-          <input
-            type="range"
-            min="60"
-            max="360"
-            step="30"
-            id="exam-timer"
-            value={examTimer}
-            onChange={handleSliderChange}
-            className=""
-          />
-        </div>
-
-        <button
-          onClick={incrementTimer}
-          disabled={!canIncrement}
-          className={`action-btn ${canIncrement ? "" : "disabled"}`}
-        >
-          <Mais size={20} changeOnTheme className="inverted" />
-        </button>
-      </div>
-    );
-  }
-
-  return <FilterWrapperBase filterBtnIcon={<Logo size={26} className="logo" />} filterDefinitions={filterDefinitions} entity="questoes" gridColumns={2} customBtn={timerBtn()} />;
+  return (
+    <FilterWrapperBase
+      filterBtnIcon={<Logo size={26} className="logo" />}
+      filterDefinitions={filterDefinitions}
+      entity="simulado"
+      gridColumns={2}
+      mustHaveFilters={true}
+      afterComponent={
+        <RangeSelector
+          label="Tempo total da prova"
+          value={examDuration}
+          onIncrement={() => setExamDuration(examDuration + 30)}
+          onDecrement={() => setExamDuration(examDuration - 30)}
+          minValue={60}
+          maxValue={360}
+          step={30}
+          renderedValue={getFormattedRemainingTime()}
+        />
+      }
+    />
+  );
 }

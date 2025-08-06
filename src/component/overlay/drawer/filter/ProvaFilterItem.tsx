@@ -1,3 +1,4 @@
+import useQuestoes from "@/store/QuestaoStore";
 import { BrazilianStateFormatter } from "@global/formatter/states/Brazilian";
 import clsx from "clsx/lite";
 
@@ -23,8 +24,15 @@ export default function ProvaFilterItem({
     return null;
   }
 
+  const { setTest } = useQuestoes();
+
   const isSelected = selected[filterKey].includes(opt[optionId]);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.stopPropagation();
+    onToggleChild(filterKey, opt[optionId]);
+    setTest(opt);
+  }
 
   return (
     <div className="custom-checkbox">
@@ -33,7 +41,7 @@ export default function ProvaFilterItem({
           type={selectionMode === "single" ? "radio" : "checkbox"}
           name={selectionMode === "single" ? filterKey : undefined}
           checked={isSelected}
-          onChange={() => onToggleChild(filterKey, opt[optionId])}
+          onChange={e => handleChange(e)}
         />
         <span className={clsx("checkmark", isSelected && "checked")}></span>
       </label>

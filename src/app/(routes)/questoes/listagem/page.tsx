@@ -18,10 +18,10 @@ export default function page({ }: Props) {
   const filters = useSearchParams().get("filters") || "";
 
   const {
-    getCurrentQuestao,
+    getCurrent,
     isShowingAnswer,
     toggleIsShowingAnswer,
-    setQuestoesList,
+    setPack,
     isShowingAlert,
   } = useQuestoes();
 
@@ -33,21 +33,21 @@ export default function page({ }: Props) {
 
   useEffect(() => {
     if (data.rows && data.rows.length > 0) {
-      setQuestoesList(data.rows);
+      setPack(data.rows);
     }
   }, [data])
 
   return (
     <QuestaoStructure>
       <Viewing
-        data={getCurrentQuestao()}
+        data={getCurrent()}
         loading={loading}
         error={error}
         loadingComponent={<Loading2 loading />}
         renderItem={(item: QuestaoType) => <Questao data={item} />}
       />
       <AlertaQuestao open={isShowingAlert} />
-      <RespostaQuestao data={getCurrentQuestao()} open={isShowingAnswer} onClose={toggleIsShowingAnswer} />
+      <RespostaQuestao data={getCurrent()} open={isShowingAnswer} onClose={toggleIsShowingAnswer} />
     </QuestaoStructure>
   );
 }

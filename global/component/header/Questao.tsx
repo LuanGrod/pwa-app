@@ -13,8 +13,8 @@ import EdicaoSugerida from "@/component/overlay/popup/dialog/EdicaoSugerida";
 
 type Props = {};
 
-export default function Questao({}: Props) {
-  const { handleSave, getCurrentQuestaoSavedStatus, getCurrentQuestao, isSaving } = useQuestoes();
+export default function Questao({ }: Props) {
+  const { handleSave, getCurrentSavedStatus, getCurrent, isSaving } = useQuestoes();
   const { id: userId } = useUser();
   const { isOpen, toggleDialog } = useDialog();
 
@@ -22,7 +22,7 @@ export default function Questao({}: Props) {
     <div className="flex">
       <IncreaseFontSizeBtn elementsClassNames={["enunciado", "area-tema", "ano", "conteudo", "gabarito", "alternativa", "comentario", "titulo-referencia", "referencia"]} />
       <DecreaseFontSizeBtn elementsClassNames={["enunciado", "area-tema", "ano", "conteudo", "gabarito", "alternativa", "comentario", "titulo-referencia", "referencia"]} />
-      <SaveBtn handleSave={() => handleSave(userId)} disabled={isSaving} status={getCurrentQuestaoSavedStatus()} />
+      <SaveBtn handleSave={() => handleSave()} disabled={isSaving} status={getCurrentSavedStatus()} />
       <EditBtn handleEdit={toggleDialog} size={24} />
       <MenuToggle menu={<ConfiguracoesDrawer />} iconSize={26} />
     </div>
@@ -30,16 +30,14 @@ export default function Questao({}: Props) {
 
   return <>
     <BaseHeader left={<ReturnRoute />} right={RightWrapper} className="questoes-header" />
-    {isOpen && (
-      <EdicaoSugerida
-        onClose={toggleDialog}
-        open={isOpen}
-        estudanteId={userId}
-        conteudoId={getCurrentQuestao()?.questoes_id || ""}
-        conteudoName="id_questao"
-        formEntity="edicoes_sugeridas_questoes"
-        insertEntity="edicoes-sugeridas-questoes"
-      />
-    )}
+    <EdicaoSugerida
+      onClose={toggleDialog}
+      open={isOpen}
+      estudanteId={userId}
+      conteudoId={getCurrent()?.questoes_id || ""}
+      conteudoName="id_questao"
+      formEntity="edicoes_sugeridas_questoes"
+      insertEntity="edicoes-sugeridas-questoes"
+    />
   </>;
 }

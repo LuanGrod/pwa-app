@@ -1,29 +1,37 @@
 "use client";
 
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import { Viewing } from "@global/component/viewing/Viewing";
 import { Questao as QuestaoType } from "@/type/Entities";
 import Questao from "@/component/atomic/Questao";
 import useQuestoes from "@/store/QuestaoStore";
-import { useEffect } from "react";
-import RespostaQuestao from "@/component/overlay/drawer/RespostaQuestao";
-import AlertaQuestao from "@/component/overlay/drawer/AlertaQuestao";
+import { startTransition, useEffect } from "react";
 import { useListing } from "@global/hook/request/useListing";
-import QuestaoStructure from "@/component/structure/Questao";
+import Structure from "@/component/structure/Simulado";
+import { FilterParser } from "@global/filter/FilterParser";
 
 type Props = {};
 
 export default function page({ }: Props) {
   const filters = useSearchParams().get("filters") || "";
+  const router = useRouter();
+  const provaId = FilterParser.extractFilterValue(filters, "id_prova", "questoes");
 
   const {
-    getCurrentQuestao,
-    isShowingAnswer,
-    toggleIsShowingAnswer,
-    setQuestoesList,
-    isShowingAlert,
+    getCurrent,
+    setPack,
+    _hasHydrated,
+    testFinished
   } = useQuestoes();
+
+  useEffect(() => {
+    if (testFinished) {
+      startTransition(() => {
+        router.push("/simulado");
+      });
+    }
+  }, [])
 
   const { data, loading, error } = useListing<QuestaoType>({
     entity: "questoes",
@@ -33,21 +41,21 @@ export default function page({ }: Props) {
 
   useEffect(() => {
     if (data.rows && data.rows.length > 0) {
-      setQuestoesList(data.rows);
+      setPack(data.rows);
+    } else {
+      setPack([]);
     }
-  }, [data])
+  }, [data, filters, provaId])
 
   return (
-    <QuestaoStructure>
+    <Structure>
       <Viewing
-        data={getCurrentQuestao()}
-        loading={loading}
+        data={getCurrent()}
+        loading={loading && !_hasHydrated}
         error={error}
         loadingComponent={<Loading2 loading />}
         renderItem={(item: QuestaoType) => <Questao data={item} />}
       />
-      <AlertaQuestao open={isShowingAlert} />
-      <RespostaQuestao data={getCurrentQuestao()} open={isShowingAnswer} onClose={toggleIsShowingAnswer} />
-    </QuestaoStructure>
+    </Structure>
   );
 }
