@@ -1,7 +1,7 @@
 "use client";
 
 import Fatura from "@/component/atomic/Fatura";
-import ReturnTitleStructure from "@/component/structure/ReturnTitle";
+import Structure from "@/component/structure/ReturnTitle";
 import { Fatura as FaturaType } from "@/type/Entities";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import { Viewing } from "@global/component/viewing/Viewing";
@@ -23,7 +23,7 @@ export default function page({ }: Props) {
   const dateFormatter = new BrazilianDateFormatter();
 
   return (
-    <ReturnTitleStructure title="Faturas" customClass="faturas">
+    <Structure title="Faturas" customClass="faturas">
       <Viewing
         data={data.rows}
         loading={loading}
@@ -62,6 +62,6 @@ export default function page({ }: Props) {
           </div>
         )}
       />
-    </ReturnTitleStructure>
+    </Structure>
   );
 }

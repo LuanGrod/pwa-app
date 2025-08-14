@@ -322,7 +322,7 @@ form .link-recuperacao-senha {
   background-color: color-mix(in srgb, var(--emphasis) 20%, transparent);
 }
 
-.dark-theme .search-container {
+.dark-theme .search-container.variation {
   background-color: var(--background);
 }
 
@@ -517,6 +517,9 @@ form .link-recuperacao-senha {
   transform: translateY(-50%);
   opacity: 0;
 }
+.drawer-wrapper .drawer-under-header .search-container {
+  margin-bottom: 0;
+}
 
 .popup-wrapper {
   position: fixed;
@@ -675,6 +678,11 @@ form .link-recuperacao-senha {
 }
 .dark-theme .popup-wrapper .spinner {
   stroke: #fff;
+}
+.dark-theme .drawer-under-header {
+  box-shadow: none;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
 }
 
 .btn-shadow {

@@ -1,4 +1,4 @@
-import ReturnTitleStructure from "@/component/structure/ReturnTitle";
+import Structure from "@/component/structure/ReturnTitle";
 import styles from "./page.module.css";
 import IconFrameContainer from "@/component/atomic/IconFrameContainer";
 import { use } from "react";
@@ -13,7 +13,7 @@ export default function page({
   const { id, name } = use(params);
 
   return (
-    <ReturnTitleStructure title={decodeURIComponent(name)}>
+    <Structure title={decodeURIComponent(name)}>
       <div className={styles.container}>
         <IconFrameContainer
           links={[
@@ -24,6 +24,6 @@ export default function page({
           ]}
         />
       </div>
-    </ReturnTitleStructure>
+    </Structure>
   );
 }

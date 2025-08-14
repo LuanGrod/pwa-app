@@ -1,10 +1,10 @@
-import PdfContentStructure from "@/component/structure/PdfContent";
+import Structure from "@/component/structure/PdfContent";
 
 export default async function page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
   return (
-    <PdfContentStructure
+    <Structure
       entity="mapas-mentais"
       entityId={id}
       titleParamName="mapas_mentais_nome"

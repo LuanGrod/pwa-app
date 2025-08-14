@@ -11,7 +11,7 @@ export default function ReturnLogo({ children }: Props) {
     <>
       <ViewTransition default="handle">
         <Header />
-        <main className="content-wrapper header footer">{children}</main>
+        <main className="content-wrapper">{children}</main>
       </ViewTransition>
       <Footer />
     </>

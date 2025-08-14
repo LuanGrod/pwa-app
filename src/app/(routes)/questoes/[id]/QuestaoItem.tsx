@@ -9,7 +9,7 @@ import useQuestoes from "@/store/QuestaoStore";
 import Questao from "@/component/atomic/Questao";
 import AlertaQuestao from "@/component/overlay/drawer/AlertaQuestao";
 import RespostaQuestao from "@/component/overlay/drawer/RespostaQuestao";
-import QuestaoStructure from "@/component/structure/Questao";
+import Structure from "@/component/structure/Questao";
 
 type Props = {
   id: string;
@@ -40,7 +40,7 @@ export default function QuestaoItem({ id }: Props) {
   }, [data])
 
   return (
-    <QuestaoStructure >
+    <Structure >
       <Viewing
         data={getCurrent()}
         loading={loading}
@@ -50,6 +50,6 @@ export default function QuestaoItem({ id }: Props) {
       />
       <AlertaQuestao open={isShowingAlert} />
       <RespostaQuestao data={getCurrent()} open={isShowingAnswer} onClose={toggleIsShowingAnswer} />
-    </QuestaoStructure>
+    </Structure>
   )
 }

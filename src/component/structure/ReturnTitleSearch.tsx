@@ -13,7 +13,7 @@ export default function ReturnTitleSearchStructure({ children, title, handleSear
     <>
       <ViewTransition default="handle">
         <Header title={title} handleSearch={handleSearch} />
-        <main className="content-wrapper header footer">{children}</main>
+        <main className="content-wrapper">{children}</main>
       </ViewTransition>
       <Footer />
     </>

@@ -12,7 +12,7 @@ export default function HomeStructure({ children }: Props) {
     <>
       <ViewTransition default="handle">
         <Header title="Como deseja estudar?" menu={<ConfiguracoesDrawer />} />
-        <main className="content-wrapper header footer">{children}</main>
+        <main className="content-wrapper">{children}</main>
       </ViewTransition>
       <Footer />
     </>

@@ -1,7 +1,7 @@
 "use client";
 
 import { Listing } from "@global/component/listing/Listing";
-import ReturnTitleSearchStructure from "@/component/structure/ReturnTitleSearch";
+import Structure from "@/component/structure/ReturnTitleSearch";
 import { useListing } from "@global/hook/request/useListing";
 import { Item as ListItem } from "@/component/listing/Item";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
@@ -30,7 +30,7 @@ export default function page({ }: Props) {
   });
 
   return (
-    <ReturnTitleSearchStructure title="Hot Topics" handleSearch={toggleSearch}>
+    <Structure title="Hot Topics" handleSearch={toggleSearch}>
       <UnderHeader open={searchActive} onClose={toggleSearch}>
         <SearchBar
           value={searchTerm || ""}
@@ -65,7 +65,7 @@ export default function page({ }: Props) {
           />
         )}
       />
-    </ReturnTitleSearchStructure>
+    </Structure>
 
   );
 }

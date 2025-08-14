@@ -1,4 +1,4 @@
-import GreetingsLogoStructure from "@/component/structure/GreetingsLogo";
+import Structure from "@/component/structure/GreetingsLogo";
 import styles from "./page.module.css";
 import IconFrameContainer from "@/component/atomic/IconFrameContainer";
 
@@ -6,7 +6,7 @@ type Props = {};
 
 export default function page({}: Props) {
   return (
-    <GreetingsLogoStructure>
+    <Structure>
       <div className={styles.container}>
         <h1 className={styles.title}>Salvos</h1>
         <IconFrameContainer
@@ -19,6 +19,6 @@ export default function page({}: Props) {
         />
         <div></div>
       </div>
-    </GreetingsLogoStructure>
+    </Structure>
   );
 }

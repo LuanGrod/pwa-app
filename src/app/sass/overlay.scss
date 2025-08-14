@@ -217,6 +217,10 @@
       transform: translateY(-50%);
       opacity: 0;
     }
+
+    .search-container {
+      margin-bottom: 0;
+    }
   }
 }
 
@@ -410,5 +414,11 @@
     .spinner {
       stroke: #fff;
     }
+  }
+
+  .drawer-under-header {
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
   }
 }

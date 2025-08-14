@@ -1,11 +1,11 @@
 import { Flashcards as FlashcardsFiltersWrapper } from "@/component/filter/wrapper/Flashcards";
-import GreetingsLogoStructure from "@/component/structure/GreetingsLogo";
+import Structure from "@/component/structure/GreetingsLogo";
 
 type Props = {};
 
 export default function page({}: Props) {
   return (
-    <GreetingsLogoStructure>
+    <Structure>
       <div className="page-filter">
         <div>
           <p className="quantity-selected">{25045} flashcards selecionados</p>
@@ -14,6 +14,6 @@ export default function page({}: Props) {
         </div>
         <FlashcardsFiltersWrapper />
       </div>
-    </GreetingsLogoStructure>
+    </Structure>
   );
 }

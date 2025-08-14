@@ -72,7 +72,7 @@ export default function Filtros({
       )}
       {hasSearch && (
         <div className="search-wrapper">
-          <SearchBar value={searchTerm || ""} onChange={(e) => setSearchTerm(e)} />
+          <SearchBar value={searchTerm || ""} onChange={(e) => setSearchTerm(e)} customClass="variation" />
         </div>
       )}
       {props.loading ? (

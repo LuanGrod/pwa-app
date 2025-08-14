@@ -154,7 +154,7 @@
 
 .dark-theme {
   // @media (prefers-color-scheme: dark) {
-  .search-container {
+  .search-container.variation {
     background-color: var(--background);
   }
 }

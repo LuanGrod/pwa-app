@@ -1,15 +1,26 @@
 import Lupa from "@global/component/icons/Lupa";
 
-// SearchBar.tsx
 interface SearchBarProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
+  customClass?: string;
 }
 
-export default function SearchBar({ value, onChange, placeholder = "Buscar" }: SearchBarProps) {
+
+/**
+ * 
+ * @param value - The current value of the search input.
+ * @param onChange - Function to call when the input value changes.
+ * @param placeholder - Placeholder text for the input field.
+ * @param customClass - Additional CSS classes to apply to the search container. 
+ * @example
+ * customClass ["variation"] = var(--background) in dark theme
+ * @returns 
+ */
+export default function SearchBar({ value, onChange, placeholder = "Buscar", customClass = "" }: SearchBarProps) {
   return (
-    <div className="search-container">
+    <div className={`search-container ${customClass}`}>
       <span className="search-icon">
         <Lupa size={17} color="#B0B0B0" />
       </span>

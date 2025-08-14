@@ -1,11 +1,11 @@
 import { Questoes as QuestoesFiltersWrapper } from "@/component/filter/wrapper/Questoes";
-import GreetingsLogoStructure from "@/component/structure/GreetingsLogo";
+import Structure from "@/component/structure/GreetingsLogo";
 
 type Props = {};
 
 export default function page({}: Props) {
   return (
-    <GreetingsLogoStructure>
+    <Structure>
       <div className="page-filter">
         <div>
           <p className="quantity-selected">{25045} questões selecionadas</p>
@@ -14,6 +14,6 @@ export default function page({}: Props) {
         </div>
         <QuestoesFiltersWrapper />
       </div>
-    </GreetingsLogoStructure>
+    </Structure>
   );
 }

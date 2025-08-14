@@ -1,11 +1,11 @@
-import GreetingsLogoStructure from "@/component/structure/GreetingsLogo";
+import Structure from "@/component/structure/GreetingsLogo";
 import { MapasMentais as MapasMentaisFiltersWrapper } from "@/component/filter/wrapper/MapasMentais";
 
 type Props = {};
 
 export default function page({}: Props) {
   return (
-    <GreetingsLogoStructure>
+    <Structure>
        <div className="page-filter">
         <div>
           <p className="quantity-selected">{300} mapas mentais selecionados</p>
@@ -14,6 +14,6 @@ export default function page({}: Props) {
         </div>
         <MapasMentaisFiltersWrapper />
       </div>
-    </GreetingsLogoStructure>
+    </Structure>
   );
 }

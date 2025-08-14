@@ -6,7 +6,7 @@ import Flashcard from "@/component/atomic/Flashcard";
 import { Flashcard as FlashcardType } from "@/type/Entities";
 import { useEffect, useState } from "react";
 import useFlashcards from "@/store/FlashcardStore";
-import FlashcardStructure from "@/component/structure/Flashcard";
+import Structure from "@/component/structure/Flashcard";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import { ErrorMessage } from "@global/component/listing/message/error";
 import { EmptyMessage } from "@global/component/listing/message/empty";
@@ -47,7 +47,7 @@ export default function page({ }: Props) {
     <>
       {
         currentFlashcard && (
-          <FlashcardStructure title={title} setTitle={setTitle} isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={isSlidding} setIsSlidding={setIsSlidding}>
+          <Structure title={title} setTitle={setTitle} isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={isSlidding} setIsSlidding={setIsSlidding}>
             <Flashcard
               data={currentFlashcard}
               isFlipped={isFlipped}
@@ -63,7 +63,7 @@ export default function page({ }: Props) {
                 />
               )
             }
-          </FlashcardStructure>
+          </Structure>
         )
       }
     </>

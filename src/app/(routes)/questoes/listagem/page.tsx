@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import RespostaQuestao from "@/component/overlay/drawer/RespostaQuestao";
 import AlertaQuestao from "@/component/overlay/drawer/AlertaQuestao";
 import { useListing } from "@global/hook/request/useListing";
-import QuestaoStructure from "@/component/structure/Questao";
+import Structure from "@/component/structure/Questao";
 
 type Props = {};
 
@@ -38,7 +38,7 @@ export default function page({ }: Props) {
   }, [data])
 
   return (
-    <QuestaoStructure>
+    <Structure>
       <Viewing
         data={getCurrent()}
         loading={loading}
@@ -48,6 +48,6 @@ export default function page({ }: Props) {
       />
       <AlertaQuestao open={isShowingAlert} />
       <RespostaQuestao data={getCurrent()} open={isShowingAnswer} onClose={toggleIsShowingAnswer} />
-    </QuestaoStructure>
+    </Structure>
   );
 }

@@ -2,7 +2,7 @@
 
 import Logo from "@/component/icon/Logo"
 import Extensivo from "@/component/overlay/drawer/Extensivo";
-import GreetingsLogoStructure from "@/component/structure/GreetingsLogo"
+import Structure from "@/component/structure/GreetingsLogo"
 import { diaExtensivo } from "@/type/Entities";
 import { Filter } from "@global/component/button/Filter"
 import { useKeyDrawer } from "@global/hook/overlay/useKeyDrawer";
@@ -34,7 +34,7 @@ export default function page({ }: Props) {
 
 
   return (
-    <GreetingsLogoStructure>
+    <Structure>
       <div className="page-filter">
         <div>
           <h1 className="title">Bem-vindo ao <br />modo extensivo!</h1>
@@ -58,6 +58,6 @@ export default function page({ }: Props) {
         data={drawerKey ? currentWeek : []}
         setData={setCurrentWeek}
       />
-    </GreetingsLogoStructure>
+    </Structure>
   )
 }

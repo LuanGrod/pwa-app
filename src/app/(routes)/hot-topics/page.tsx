@@ -1,11 +1,11 @@
-import GreetingsLogoStructure from "@/component/structure/GreetingsLogo";
+import Structure from "@/component/structure/GreetingsLogo";
 import { HotTopics as HotTopicsFiltersWrapper } from "@/component/filter/wrapper/HotTopics";
 
 type Props = {};
 
 export default function page({}: Props) {
   return (
-    <GreetingsLogoStructure>
+    <Structure>
        <div className="page-filter">
         <div>
           <p className="quantity-selected">{300} hot topics selecionados</p>
@@ -14,6 +14,6 @@ export default function page({}: Props) {
         </div>
         <HotTopicsFiltersWrapper />
       </div>
-    </GreetingsLogoStructure>
+    </Structure>
   );
 }

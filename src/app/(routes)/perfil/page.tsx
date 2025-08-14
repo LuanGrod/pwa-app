@@ -1,6 +1,6 @@
 "use client";
 
-import ReturnTitleStructure from "@/component/structure/ReturnTitle";
+import Structure from "@/component/structure/ReturnTitle";
 import { useGetRow } from "@global/hook/request/useGetRow";
 import { Estudante as EstudanteType } from "@/type/Entities";
 import { useUser } from "@global/hook/auth/useUser";
@@ -20,7 +20,7 @@ export default function page({ }: Props) {
   });
 
   return (
-    <ReturnTitleStructure title="Perfil" customClass="perfil">
+    <Structure title="Perfil" customClass="perfil">
       <Viewing
         data={data}
         loading={loading}
@@ -29,6 +29,6 @@ export default function page({ }: Props) {
         loadingComponent={<Loading2 loading />}
         renderItem={(item) => <Perfil data={item} setData={setData} />}
       />
-    </ReturnTitleStructure>
+    </Structure>
   );
 }

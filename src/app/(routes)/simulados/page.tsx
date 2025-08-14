@@ -1,11 +1,11 @@
-import GreetingsLogoStructure from "@/component/structure/GreetingsLogo"
+import Structure from "@/component/structure/GreetingsLogo"
 import { Simulados as SimuladosFiltersWrapper } from "@/component/filter/wrapper/Simulados";
 
 type Props = {}
 
 export default function page({ }: Props) {
   return (
-    <GreetingsLogoStructure>
+    <Structure>
       <div className="page-filter">
         <div>
           <p className="quantity-selected">{1} prova na integra feita</p>
@@ -14,6 +14,6 @@ export default function page({ }: Props) {
         </div>
         <SimuladosFiltersWrapper />
       </div>
-    </GreetingsLogoStructure>
+    </Structure>
   )
 }

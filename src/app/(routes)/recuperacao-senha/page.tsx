@@ -1,4 +1,4 @@
-import ReturnStructure from "@/component/structure/Return";
+import Structure from "@/component/structure/Return";
 import styles from "./page.module.css";
 import RecuperacaoSenha from "@global/component/form/RecuperacaoSenha";
 
@@ -6,7 +6,7 @@ type Props = {};
 
 export default function page({}: Props) {
   return (
-    <ReturnStructure>
+    <Structure>
       <div className={styles.container}>
         <div className={styles.descriptionContainer}>
           <h1 className={styles.title}>Esqueci a senha</h1>
@@ -16,6 +16,6 @@ export default function page({}: Props) {
         </div>
         <RecuperacaoSenha/>
       </div>
-    </ReturnStructure>
+    </Structure>
   );
 }

@@ -4,7 +4,7 @@ import useFlashcards from "@/store/FlashcardStore";
 import { useGetRow } from "@global/hook/request/useGetRow";
 import { useEffect, useState } from "react";
 import { Flashcard as FlashcardType } from "@/type/Entities";
-import FlashcardStructure from "@/component/structure/Flashcard";
+import Structure from "@/component/structure/Flashcard";
 import Flashcard from "@/component/atomic/Flashcard";
 import { Viewing } from "@global/component/viewing/Viewing";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
@@ -33,7 +33,7 @@ export default function FlashcardItem({ id }: Props) {
   }, [data])
 
   return (
-    <FlashcardStructure title={title} setTitle={setTitle} isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={false} setIsSlidding={() => { }}>
+    <Structure title={title} setTitle={setTitle} isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={false} setIsSlidding={() => { }}>
       <Viewing
         data={getCurrent()}
         loading={loading}
@@ -46,6 +46,6 @@ export default function FlashcardItem({ id }: Props) {
             onFlip={() => setIsFlipped(!isFlipped)}
           />}
       />
-    </FlashcardStructure>
+    </Structure>
   )
 }

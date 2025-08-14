@@ -1,10 +1,10 @@
 import IconFrameContainer from "@/component/atomic/IconFrameContainer";
-import HomeStructure from "@/component/structure/Home";
+import Structure from "@/component/structure/Home";
 import styles from "./page.module.css";
 
 export default function Home() {
   return (
-    <HomeStructure>
+    <Structure>
       <div className={styles.container}>
         <h1 className={styles.title}>MedRQE</h1>
         <IconFrameContainer
@@ -20,6 +20,6 @@ export default function Home() {
         />
         <div></div>
       </div>
-    </HomeStructure>
+    </Structure>
   );
 }

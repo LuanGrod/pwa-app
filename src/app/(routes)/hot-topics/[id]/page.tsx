@@ -1,10 +1,10 @@
-import PdfContentStructure from "@/component/structure/PdfContent";
+import Structure from "@/component/structure/PdfContent";
 
 export default async function page({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
 
   return (
-    <PdfContentStructure
+    <Structure
       entity="hot-topics"
       entityId={id}
       titleParamName="hot_topics_nome"

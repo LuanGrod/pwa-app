@@ -10,7 +10,7 @@ export default function ReturnStructure({ children }: Props) {
     <>
       <ViewTransition default="handle">
         <Header />
-        <main className="content-wrapper header">{children}</main>
+        <main className="content-wrapper">{children}</main>
       </ViewTransition>
     </>
   );
