@@ -4,30 +4,28 @@ import { CollectionInterface as HeaderHandlerCollection } from "@global/request/
 
 type UseListingProps = {
   entity: string;
+  id?: string;
   parentEntity?: string;
   parentId?: number;
   params?: Record<string, any>;
   headers?: HeaderHandlerCollection | null;
-  autoFetch?: boolean;
   needsAuthorization?: boolean;
 };
 
 type UseListingReturn<T> = {
-  // deleteItem: (id: number) => Promise<void>;
   data: Listagem<T>;
   setData: Dispatch<SetStateAction<Listagem<T>>>;
   loading: boolean;
-  deleting: boolean;
   error: string | null;
 };
 
 export function useListing<T = any>({
   entity,
+  id,
   parentEntity,
   parentId,
   headers,
   params,
-  autoFetch = true,
   needsAuthorization = false,
 }: UseListingProps): UseListingReturn<T> {
   const [data, setData] = useState<Listagem<T>>({
@@ -37,30 +35,22 @@ export function useListing<T = any>({
     rows: [],
   });
   const [loading, setLoading] = useState(true);
-  const [deleting, setDeleting] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
-  // const deleteItem = async (id: number) => {
-  //   setDeleting(true);
-  //   setError(null);
-
-  //   try {
-  //     const deleteItem = new Delete({ entity: entity, id: id });
-  //     await deleteItem.build();
-  //     setData((prevData) => prevData.rows.filter((item: any) => item.id !== id));
-  //   } finally {
-  //     setDeleting(false);
-  //   }
-  // };
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
-      setError(null);
+      
+      if(!entity) {
+        setError("Entity is required.");
+        setLoading(false);
+        return;
+      }
 
       try {
         const listing = new Listing({
           entity: entity,
+          id: id || "",
           parentEntity: parentEntity || "",
           parentId: parentId || 0,
           headers: headers || null,
@@ -89,11 +79,9 @@ export function useListing<T = any>({
   }, []);
 
   return {
-    // deleteItem,
     data,
     setData,
     loading,
     error,
-    deleting,
   };
 }

@@ -6,6 +6,7 @@ import { CollectionInterface as HeaderHandlerCollection } from "@global/request/
 
 type ListingProps = {
   entity: string;
+  id?: string | null;
   parentEntity?: string | null;
   parentId?: number | null;
   params?: Record<string, any>;
@@ -16,6 +17,7 @@ type ListingProps = {
 export class Listing extends RequestBuilder {
   constructor({
     entity,
+    id = null,
     parentEntity = null,
     parentId = null,
     params = {},
@@ -25,8 +27,8 @@ export class Listing extends RequestBuilder {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 
     const endpoint = parentEntity
-      ? `${apiUrl}/${parentEntity}/${parentId}/${entity}`
-      : `${apiUrl}/${entity}`;
+      ? `${apiUrl}/${parentEntity}/${parentId}/${entity}${id ? `/${id}` : ""}`
+      : `${apiUrl}/${entity}${id ? `/${id}` : ""}`;
 
     const method: Methods = "GET";
 

@@ -75,7 +75,7 @@ export default function PdfContent({
         status={data && data[ToggleAddRemove.idParamName]}
         isSaving={isSaving}
       />
-      <main className="content-wrapper header footer pdf">
+      <main className="content-wrapper pdf">
         <EdicaoSugerida
           onClose={toggleDialog}
           open={isOpen}

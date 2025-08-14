@@ -4,6 +4,9 @@ import SelectFilter from "@global/filter/ui/Select";
 import BooleanFilter from "@global/filter/ui/Boolean";
 import FilterWrapperBase from "@global/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
+import useQuestoes from "@/store/QuestaoStore";
+import { useUser } from "@global/hook/auth/useUser";
+import { useEffect } from "react";
 
 export function Questoes() {
   const filterDefinitions = [
@@ -104,6 +107,16 @@ export function Questoes() {
       key: "sem_imagem",
     }),
   ];
+
+  const { setUser, setIndex, clearAnswers } = useQuestoes();
+  const { id: userId } = useUser();
+
+  useEffect(() => {
+    setUser(userId);
+    setIndex(0);
+    clearAnswers();
+  }, [userId])
+
 
   return <FilterWrapperBase filterBtnIcon={<Logo size={14} className="logo" />} filterDefinitions={filterDefinitions} entity="questoes" gridColumns={3} />;
 }

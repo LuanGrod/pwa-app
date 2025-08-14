@@ -1467,7 +1467,8 @@ form .link-recuperacao-senha {
   background-color: var(--background-variation);
   padding: 6px 26px;
   width: 165px;
-  height: 32px;
+  height: fit-content;
+  min-height: 32px;
 }
 
 .questao-wrapper {

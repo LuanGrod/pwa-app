@@ -5,6 +5,7 @@ import { CollectionInterface as HeaderHandlerCollection } from "@global/request/
 
 type ListingProps = {
   entity: string;
+  id?: string | null;
   parentEntity?: string | null;
   parentId?: number | null;
   params?: Record<string, any>;
@@ -15,6 +16,7 @@ type ListingProps = {
 export class Listing extends ListingRequestBuilder {
   constructor({
     entity,
+    id = null,
     parentEntity = null,
     parentId = null,
     params = {},
@@ -23,6 +25,6 @@ export class Listing extends ListingRequestBuilder {
   }: ListingProps) {
     responseHandler = responseHandler || new ResponseHandler({});
 
-    super({ entity, parentEntity, parentId, params, headers, responseHandler });
+    super({ entity, id, parentEntity, parentId, params, headers, responseHandler });
   }
 }

@@ -72,7 +72,7 @@ export default function Extensivo({ open, onClose, title, data, setData, loading
   }
 
   return (
-    <BottomDrawer customClass="semi-full" open={open} title={title} onClose={onClose} >
+    <BottomDrawer open={open} title={title} onClose={onClose} >
       <h2 className="subtitle">Recomendação semanal de estudo</h2>
       <div className="filter-items extensivo-week">
         <Viewing
@@ -90,7 +90,7 @@ export default function Extensivo({ open, onClose, title, data, setData, loading
                 renderItem={(item) => (
                   <div className="custom-checkbox" key={item.extensivos_id}>
                     <button disabled={isSaving} onClick={e => handleToggleAddRemove(item)} className={`checkmark ${item.extensivos_estudantes_id ? "checked" : ""}`}></button>
-                    <LinkView href={`/extensivo/${item.extensivos_id}/${item.extensivos_nome}`}>
+                    <LinkView href={`/extensivos/${item.extensivos_id}`}>
                       <h3 className="title">{item.extensivos_nome}</h3>
                       <p className="day">{item.extensivos_dia_semana}</p>
                     </LinkView>

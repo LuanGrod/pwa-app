@@ -2,6 +2,7 @@
 
 import QuestoesErradas from "@/component/overlay/drawer/QuestoesErradas";
 import CardSimulado from "@/component/stat/CardSimulado";
+import { RespostasQuestoes } from "@/type/Entities";
 import { LinkView } from "@global/component/atomic/LinkView";
 import { Shadow as ShadowBtn } from "@global/component/button/Shadow";
 import { Switch as SwitchBtn } from "@global/component/button/Switch";
@@ -11,27 +12,14 @@ import SimpleLine from "@global/component/stat/SimpleLine";
 import { Viewing } from "@global/component/viewing/Viewing";
 import { BrazilianDateFormatter } from "@global/formatter/date/Brazilian";
 import useDialog from "@global/hook/overlay/useDialog";
-import { useGetRow } from "@global/hook/request/useGetRow";
+import { useListing } from "@global/hook/request/useListing";
 
 type Props = { id: string };
-
-type RespostasQuestoes = {
-  respostas_questoes_id_simulado: string;
-  respostas_questoes_id_questao: string;
-  respostas_questoes_alternativa: string;
-  questoes_gabarito: string;
-  questoes_ordem: string;
-  instituicoes_nome: string;
-  provas_ano: string;
-  areas_nome: string;
-  estados_uf: string;
-  simulados_duracao: string;
-}
 
 export default function SimuladoStats({ id }: Props) {
   const { isOpen, toggleDialog } = useDialog();
 
-  const { data, loading, error } = useGetRow<Listagem<RespostasQuestoes>>({
+  const { data, loading, error } = useListing<RespostasQuestoes>({
     entity: "respostas-questoes",
     needsAuthorization: true,
     id: id
@@ -47,10 +35,10 @@ export default function SimuladoStats({ id }: Props) {
       loadingComponent={<Loading2 loading={loading} />}
       renderItem={(item) => {
         const totalQuestions = item.rows.length;
-        const answeredQuestions = item.rows.filter(row => row.respostas_questoes_alternativa !== null).length;
+        const answeredQuestions = item.rows.filter(row => row.respostas_questoes_alternativa ).length;
         const correctAnswers = item.rows.filter(row => row.respostas_questoes_alternativa === row.questoes_gabarito).length;
-        const incorrectAnswers = answeredQuestions - correctAnswers;
-        const unansweredQuestions = totalQuestions - answeredQuestions;
+        const incorrectAnswers = item.rows.filter(row => row.respostas_questoes_alternativa && row.respostas_questoes_alternativa !== row.questoes_gabarito).length;
+        const unansweredQuestions = item.rows.filter(row => !row.respostas_questoes_alternativa).length;
         const correctPercentageOverRespondedQuestions = answeredQuestions > 0 ? Math.round((correctAnswers / answeredQuestions) * 100) : 0;
         const estado = item.rows[0]?.estados_uf;
         const instituicao = item.rows[0]?.instituicoes_nome;

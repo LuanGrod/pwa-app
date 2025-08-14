@@ -25,8 +25,8 @@ export default function Simulado({ }: Props) {
 
   const RightWrapper = (
     <div className="flex">
-      <IncreaseFontSizeBtn elementsClassNames={["enunciado", "area-tema", "ano", "conteudo", "gabarito", "alternativa", "comentario", "titulo-referencia", "referencia", "empty", "enviar"]} />
-      <DecreaseFontSizeBtn elementsClassNames={["enunciado", "area-tema", "ano", "conteudo", "gabarito", "alternativa", "comentario", "titulo-referencia", "referencia", "empty", "enviar"]} />
+      <IncreaseFontSizeBtn elementsClassNames={["enunciado", "area-tema", "ano", "conteudo", "gabarito", "alternativa", "comentario", "titulo-referencia", "referencia", "empty", "enviar", "questao-timer"]} />
+      <DecreaseFontSizeBtn elementsClassNames={["enunciado", "area-tema", "ano", "conteudo", "gabarito", "alternativa", "comentario", "titulo-referencia", "referencia", "empty", "enviar", "questao-timer"]} />
       <SaveBtn handleSave={() => handleSave()} disabled={isSaving} status={getCurrentSavedStatus()} />
       <EditBtn handleEdit={toggleDialog} size={24} />
     </div>

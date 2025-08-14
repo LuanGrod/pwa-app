@@ -437,7 +437,7 @@ const useQuestoes = create<QuestoesStore>()(
         };
 
         // Adiciona cada resposta preenchida com numeração sequencial
-        answeredQuestions.forEach((answer, index) => {
+        answers.forEach((answer, index) => {
           examData[`respostas_questoes_id_estudante_${index}`] = user;
           examData[`respostas_questoes_id_questao_${index}`] = answer.id;
           examData[`respostas_questoes_id_simulado_${index}`] = "";

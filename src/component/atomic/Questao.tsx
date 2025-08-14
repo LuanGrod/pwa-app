@@ -36,7 +36,6 @@ export default function Questao({ data }: Props) {
           priority
         />
       )}
-
       <div className="alternativas-wrapper">
         <QuestaoAlternativa tipo={alternativaClassname} alternativa="A" conteudo={data.questoes_alternativa_a} />
         <QuestaoAlternativa tipo={alternativaClassname} alternativa="B" conteudo={data.questoes_alternativa_b} />

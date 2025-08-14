@@ -111,7 +111,6 @@ export type Fatura = {
 
 export type Periodos = "Semestral" | "Anual" | "Bienal";
 
-
 // EXTENSIVO
 
 export type diaExtensivo = {
@@ -122,9 +121,24 @@ export type diaExtensivo = {
 };
 
 type diaSemana =
-  "Segunda-feira" |
-  "Terça-feira" |
-  "Quarta-feira" |
-  "Quinta-feira" |
-  "Sexta-feira" |
-  "Sábado"
+  | "Segunda-feira"
+  | "Terça-feira"
+  | "Quarta-feira"
+  | "Quinta-feira"
+  | "Sexta-feira"
+  | "Sábado";
+
+// SIMULADOS
+
+export type RespostasQuestoes = {
+  respostas_questoes_id_simulado: string;
+  respostas_questoes_id_questao: string;
+  respostas_questoes_alternativa: string;
+  questoes_gabarito: string;
+  questoes_ordem: string;
+  instituicoes_nome: string;
+  provas_ano: string;
+  areas_nome: string;
+  estados_uf: string;
+  simulados_duracao: string;
+};
