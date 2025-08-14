@@ -22,13 +22,13 @@ export default function page({ }: Props) {
     getCurrent,
     setPack,
     _hasHydrated,
-    testFinished
+    examEndTime
   } = useQuestoes();
 
   useEffect(() => {
-    if (testFinished) {
+    if (!!examEndTime) {
       startTransition(() => {
-        router.push("/simulado");
+        router.push("/simulados");
       });
     }
   }, [])

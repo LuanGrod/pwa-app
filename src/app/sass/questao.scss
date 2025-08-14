@@ -162,7 +162,6 @@
         background-color: var(--emphasis);
         color: var(--background);
         border-radius: 6px;
-        cursor: pointer;
 
         &:disabled {
           background-color: color-mix(in srgb, var(--emphasis) 20%, transparent);

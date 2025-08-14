@@ -1,0 +1,1 @@
+export type formattedTypes = "simplified" | "detailed";

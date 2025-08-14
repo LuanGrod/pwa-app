@@ -14,7 +14,7 @@ export function useFilters(definitions: FilterInterface[]) {
   const flatDefinitions = flattenDefinitions(definitions);
 
   const [values, setValues] = useState<any>(() =>
-    Object.fromEntries(flatDefinitions.map((def) => [def.getQueryField(), def.getInitialValue()]))
+    Object.fromEntries(flatDefinitions.map((def) => [def.getKey(), def.getInitialValue()]))
   );
   const [options, setOptions] = useState<Record<string, any[]>>({});
   const [loadingOptions, setLoadingOptions] = useState<Record<string, boolean>>({});
@@ -22,7 +22,7 @@ export function useFilters(definitions: FilterInterface[]) {
   useEffect(() => {
     flatDefinitions.map((def) => {
       try {
-        setValues((prev: any) => ({ ...prev, [def.getQueryField()]: def.getInitialValue() }));
+        setValues((prev: any) => ({ ...prev, [def.getKey()]: def.getInitialValue() }));
         if (def.getParentKey()) {
           setValues((prev: any) => ({ ...prev, [def.getParentKey()]: def.getInitialValue() }));
         }
@@ -31,7 +31,7 @@ export function useFilters(definitions: FilterInterface[]) {
   }, []);
 
   const openDrawer = async (key: string) => {
-    const filter = flatDefinitions.find((def) => def.getQueryField() === key);
+    const filter = flatDefinitions.find((def) => def.getKey() === key);
     if (!(filter?.getType() == "select")) return;
 
     setLoadingOptions((prev) => ({ ...prev, [key]: true }));
@@ -73,7 +73,7 @@ export function useFilters(definitions: FilterInterface[]) {
     allChildrenIds?: string[]
   ) => {
     // Get the filter definition to check its selection mode
-    const filterDefinition = flatDefinitions.find((def) => def.getQueryField() === filterKey);
+    const filterDefinition = flatDefinitions.find((def) => def.getKey() === filterKey);
     const selectionMode = filterDefinition?.getSelectionMode();
 
     if (parentKey && parentId && allChildrenIds) {
@@ -154,7 +154,7 @@ export function useFilters(definitions: FilterInterface[]) {
 
       if (definition) {
         // Limpa o valor principal
-        newValues[definition.getQueryField()] = definition.getInitialValue();
+        newValues[definition.getKey()] = definition.getInitialValue();
 
         // Se houver parentKey, limpa também
         if (definition.getParentKey()) {

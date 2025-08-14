@@ -9,7 +9,6 @@ type Props = {};
 
 export default function Questao({ }: Props) {
   const { previousIndex, index, registerAnswer, nextIndex, count } = useQuestoes();
-  const { id: userId } = useUser();
   
   return (
     <footer className="questoes-footer">

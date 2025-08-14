@@ -28,8 +28,7 @@ export default function ProvaFilterItem({
 
   const isSelected = selected[filterKey].includes(opt[optionId]);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.stopPropagation();
+  const handleChange = () => {
     onToggleChild(filterKey, opt[optionId]);
     setTest(opt);
   }
@@ -41,7 +40,8 @@ export default function ProvaFilterItem({
           type={selectionMode === "single" ? "radio" : "checkbox"}
           name={selectionMode === "single" ? filterKey : undefined}
           checked={isSelected}
-          onChange={e => handleChange(e)}
+          onClick={handleChange}
+          readOnly
         />
         <span className={clsx("checkmark", isSelected && "checked")}></span>
       </label>

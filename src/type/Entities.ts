@@ -17,6 +17,7 @@ export type Questao = {
   temas_nome: string;
   areas_nome: string;
   questoes_salvos_id: string;
+  questoes_ordem: string;
 };
 
 export type QuestoesSalvos = {

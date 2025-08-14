@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 type Props = {};
 
 export default function Simulado({ }: Props) {
-  const { previousIndex, index, finishExam, nextIndex, count, answers, testFinished } = useQuestoes();
+  const { previousIndex, index, finishExam, nextIndex, count, answers, examEndTime } = useQuestoes();
   const { isOpen, toggleDialog } = useDialog();
   const router = useRouter();
 
@@ -21,7 +21,7 @@ export default function Simulado({ }: Props) {
           <SetaEsquerda size={23} changeOnTheme className="inverted" />
         </button>
         <div className="enviar-wrapper">
-          <button className="enviar" onClick={() => toggleDialog()} disabled={count() === 0 || testFinished}>
+          <button className="enviar" onClick={() => toggleDialog()} disabled={count() === 0 || !!examEndTime}>
             FINALIZAR PROVA
           </button>
         </div>

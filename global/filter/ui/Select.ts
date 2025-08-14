@@ -174,8 +174,7 @@ export default class Select extends AbstractFilter {
     this.parentIdParamName = parentIdParamName || "";
     this.parentLabelParamName = parentLabelParamName || "";
     this.parentKeyEntity = parentKeyEntity || "";
-    this.parentConditionalOperator =
-      parentConditionalOperator || DEFAULT_VALUES.SELECT_CONDITIONAL_OPERATOR;
+    this.parentConditionalOperator = parentConditionalOperator || DEFAULT_VALUES.SELECT_CONDITIONAL_OPERATOR;
     this.parentConnectionOperator = parentConnectionOperator || DEFAULT_VALUES.CONNECTION_OPERATOR;
     this.parentDenialOperator = parentDenialOperator || DEFAULT_VALUES.DENIAL_OPERATOR;
     this.selectionMode = selectionMode;

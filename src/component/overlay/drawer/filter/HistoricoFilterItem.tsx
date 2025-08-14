@@ -27,7 +27,7 @@ export default function HistoricoFilterItem({
 
   return (
     <div className="custom-checkbox">
-      <LinkView href={`/simulado/${opt.simulados_id_simulado3}`} className="prova-label">
+      <LinkView href={`/simulados/${opt.simulados_id_simulado3}`} className="prova-label">
         <p className="institution">
           {opt.instituicoes_nome} <span className="text-xs text-gray-500">({dateFormatter.format(opt.simulados_data_hora_cadastro)})</span>
         </p>

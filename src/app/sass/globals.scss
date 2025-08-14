@@ -17,6 +17,9 @@
 @use "perfil";
 @use "fatura";
 @use "extensivo";
+@use "gabarito";
+@use "chart";
+@use "stat";
 
 body {
   background: var(--background);

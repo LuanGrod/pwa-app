@@ -5,12 +5,15 @@ import { Insert } from "@global/request/builder/api/Insert";
 import { Delete } from "@global/request/builder/api/Delete";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { startTransition } from "react";
+import { formattedTypes } from "@global/type/ElapsedFormat";
 
-type QuestaoAnswerType = {
+export type QuestaoAnswerType = {
   id: string;
   answer: string;
   correct: string;
   confirmed: boolean;
+  area: string;
+  ordem: string;
 };
 
 type testType = {
@@ -20,8 +23,6 @@ type testType = {
   estados_uf: string;
   isParent: boolean;
 };
-
-type formattedTypes = "simplified" | "detailed";
 
 type QuestoesStore = {
   _hasHydrated: boolean;
@@ -34,7 +35,6 @@ type QuestoesStore = {
   examDuration: number;
   user: string | null;
   test?: testType | null;
-  testFinished: boolean;
   examStartTime: number | null;
   examEndTime: number | null;
   setPack: (questoes: QuestaoType[]) => void;
@@ -58,13 +58,25 @@ type QuestoesStore = {
   getFormattedRemainingTime: (type?: formattedTypes) => string;
   checkExamTimeout: (router: AppRouterInstance) => boolean;
   finishExam: (router: AppRouterInstance) => Promise<null | void>;
+  saveExam: (router: AppRouterInstance) => Promise<null | void>;
   setHasHydrated: (state: any) => void;
   setUser: (userId: string | null) => void;
   setTest: (test: testType | null) => void;
-  setTestFinished: (finished: boolean) => void;
   updateExpiration: (hours: number) => void;
   getElapsedTime: () => number;
   getFormattedElapsedTime: (type?: formattedTypes) => string;
+  getGeneralStatistics: () => {
+    totalQuestions: number;
+    correctAnswers: number;
+    incorrectAnswers: number;
+    unansweredQuestions: number;
+    answeredQuestions: number;
+    correctPercentageOverRespondedQuestions: number;
+  };
+  getAccuracyByArea: () => Array<{
+    area: string;
+    accuracy: number; // Porcentagem de acerto (0-100)
+  }>;
 };
 
 // Storage customizado para LocalStorage com expiração automática
@@ -74,15 +86,15 @@ const createExamStorage = (expirationHours: number = 24): StateStorage => {
       try {
         const item = localStorage.getItem(name);
         if (!item) return null;
-        
+
         const { data, expiresAt } = JSON.parse(item);
-        
+
         // Se expirou, remove automaticamente e retorna null
         if (Date.now() > expiresAt) {
           localStorage.removeItem(name);
           return null;
         }
-        
+
         return data;
       } catch (error) {
         // Se houve erro no parse, remove o item corrompido
@@ -92,10 +104,10 @@ const createExamStorage = (expirationHours: number = 24): StateStorage => {
     },
     setItem: (name: string, value: string): void => {
       try {
-        const expiresAt = Date.now() + (expirationHours * 60 * 60 * 1000);
+        const expiresAt = Date.now() + expirationHours * 60 * 60 * 1000;
         const item = {
           data: value,
-          expiresAt
+          expiresAt,
         };
         localStorage.setItem(name, JSON.stringify(item));
       } catch (error) {
@@ -121,22 +133,23 @@ const useQuestoes = create<QuestoesStore>()(
       isShowingAnswer: false,
       isShowingAlert: false,
       isSaving: false,
-      examDuration: 60, // Padrão: 1 hora (60 minutos)
+      examDuration: 60,
       user: null,
       test: null,
-      testFinished: false,
       examStartTime: null,
       examEndTime: null,
       setPack: (questoes: QuestaoType[]) => {
         const { answers: currentAnswers } = get();
 
-        // Se não há respostas, cria tudo do zero
+        // Se não tem respostas, inicializa com valores vazios
         if (!currentAnswers || currentAnswers.length === 0) {
-          const newAnswers = questoes.map((questao) => ({
+          const newAnswers: QuestaoAnswerType[] = questoes.map((questao) => ({
             id: questao.questoes_id,
             answer: "",
             correct: questao.questoes_gabarito,
             confirmed: false,
+            area: questao.areas_nome,
+            ordem: questao.questoes_ordem,
           }));
 
           set({
@@ -144,8 +157,8 @@ const useQuestoes = create<QuestoesStore>()(
             answers: newAnswers,
             index: 0,
             isShowingAnswer: false,
-            examStartTime: Date.now(), // Inicia o cronômetro da prova
-            examEndTime: null, // Reseta o fim se houver
+            examStartTime: Date.now(),
+            examEndTime: null,
           });
           return;
         }
@@ -160,6 +173,7 @@ const useQuestoes = create<QuestoesStore>()(
           answers: [],
           examStartTime: null,
           examEndTime: null,
+          test: null,
         });
       },
       setAnswer: (value: string) => {
@@ -359,14 +373,14 @@ const useQuestoes = create<QuestoesStore>()(
       },
       getRemainingTime: () => {
         const { examStartTime, examDuration, examEndTime } = get();
-        
+
         if (!examStartTime) return examDuration; // Se não começou, retorna duração total
         if (examEndTime) return 0; // Se terminou, retorna 0
-        
+
         const elapsedMs = Date.now() - examStartTime;
         const elapsedMinutes = Math.floor(elapsedMs / 60000);
         const remainingMinutes = examDuration - elapsedMinutes;
-        
+
         return Math.max(0, remainingMinutes); // Não pode ser negativo
       },
       getFormattedRemainingTime: (type: formattedTypes = "simplified") => {
@@ -388,24 +402,28 @@ const useQuestoes = create<QuestoesStore>()(
       },
       checkExamTimeout: (router: AppRouterInstance) => {
         const remainingTime = get().getRemainingTime();
-        
+
         // Se o tempo acabou, finaliza automaticamente
         if (remainingTime <= 0) {
           get().finishExam(router);
           return true; // Indica que o exame foi finalizado
         }
-        
+
         return false; // Exame ainda está em andamento
       },
       finishExam: async (router: AppRouterInstance) => {
-        const { user, test, answers, setTestFinished } = get();
+        set({ examEndTime: Date.now(), isSaving: false });
 
-        // Marca o fim da prova ANTES de finalizar
-        set({ examEndTime: Date.now() });
-        setTestFinished(true);
+        startTransition(() => {
+          router.push("/simulados/gabarito");
+        });
+      },
+      saveExam: async (router: AppRouterInstance) => {
+        const { user, test, answers, toggleIsSaving, clearAnswers, getElapsedTime } = get();
+        toggleIsSaving();
 
         if (!answers || !user || !test) {
-          alert("Dados incompletos para finalizar o exame");
+          console.log("Dados incompletos para finalizar o exame");
           return Promise.resolve(null);
         }
 
@@ -415,6 +433,7 @@ const useQuestoes = create<QuestoesStore>()(
         // Monta o objeto no formato solicitado
         const examData: Record<string, string> = {
           simulados_id_prova: test.provas_id,
+          simulados_duracao: getElapsedTime().toString(),
         };
 
         // Adiciona cada resposta preenchida com numeração sequencial
@@ -433,19 +452,11 @@ const useQuestoes = create<QuestoesStore>()(
         const response = await insert.build(true);
 
         if (response.success) {
-          set((state) => ({
-            answers: state.answers
-              ? state.answers.map((answer) => ({ ...answer, confirmed: true }))
-              : [],
-          }));
-
           startTransition(() => {
-            router.push("/simulado/gabarito");
+            router.push("/");
           });
+          clearAnswers();
         }
-      },
-      setTestFinished: (finished: boolean) => {
-        set({ testFinished: finished });
       },
       setHasHydrated: (state) => {
         set({
@@ -479,13 +490,13 @@ const useQuestoes = create<QuestoesStore>()(
       },
       getElapsedTime: () => {
         const { examStartTime, examEndTime } = get();
-        
+
         if (!examStartTime) return 0;
-        
+
         const endTime = examEndTime || Date.now(); // Se não finalizou, usa tempo atual
         const elapsedMs = endTime - examStartTime;
         const elapsedMinutes = Math.floor(elapsedMs / 60000); // Converte para minutos
-        
+
         return Math.max(0, elapsedMinutes); // Garante que não seja negativo
       },
       getFormattedElapsedTime: (type: formattedTypes = "simplified") => {
@@ -502,6 +513,10 @@ const useQuestoes = create<QuestoesStore>()(
             return `${hours}hr${minutes}`;
           }
         } else {
+          if (hours === 0 && minutes === 0) {
+            return "0 min";
+          }
+
           return `${hours ? `${hours} ${hours > 1 ? "horas" : "hora"}` : ""} ${
             hours && minutes ? "e" : ""
           } ${minutes ? `${minutes} min` : ""}`;
@@ -512,13 +527,80 @@ const useQuestoes = create<QuestoesStore>()(
         examStorage = createExamStorage(hours);
         // Re-salva os dados com nova expiração
         const currentData = get();
-        set({ 
+        set({
           answers: currentData.answers,
           examDuration: currentData.examDuration,
           user: currentData.user,
           test: currentData.test,
-          testFinished: currentData.testFinished
         });
+      },
+      getGeneralStatistics: () => {
+        const { answers } = get();
+
+        if (!answers || answers.length === 0) {
+          return {
+            totalQuestions: 0,
+            correctAnswers: 0,
+            incorrectAnswers: 0,
+            unansweredQuestions: 0,
+            answeredQuestions: 0,
+            correctPercentageOverRespondedQuestions: 0,
+          };
+        }
+
+        const totalQuestions = answers.length;
+        const correctAnswers = answers.filter((answer) => answer.answer === answer.correct).length;
+        const incorrectAnswers = answers.filter(
+          (answer) => answer.answer && answer.answer !== answer.correct
+        ).length;
+        const answeredQuestions = answers.filter((answer) => answer.answer).length;
+        const unansweredQuestions = totalQuestions - answeredQuestions;
+        const correctPercentageOverRespondedQuestions =
+          answeredQuestions > 0 ? Math.round((correctAnswers / answeredQuestions) * 100) : 0;
+
+        return {
+          totalQuestions,
+          correctAnswers,
+          incorrectAnswers,
+          unansweredQuestions,
+          answeredQuestions,
+          correctPercentageOverRespondedQuestions,
+        };
+      },
+      getAccuracyByArea: () => {
+        const { answers } = get();
+
+        if (!answers || answers.length === 0) {
+          return [];
+        }
+
+        // Agrupa as questões por área para calcular apenas a porcentagem
+        const areaGroups = answers.reduce((groups, answer) => {
+          const { area } = answer;
+          if (!groups[area]) {
+            groups[area] = {
+              total: 0,
+              correct: 0,
+            };
+          }
+          groups[area].total++;
+          if (answer.answer === answer.correct) {
+            groups[area].correct++;
+          }
+          return groups;
+        }, {} as Record<string, { total: number; correct: number }>);
+
+        // Calcula apenas a porcentagem de acerto por área
+        return Object.entries(areaGroups)
+          .map(([area, stats]) => {
+            const accuracy = stats.total > 0 ? Math.round((stats.correct / stats.total) * 100) : 0;
+
+            return {
+              area,
+              accuracy,
+            };
+          })
+          .sort((a, b) => a.area.localeCompare(b.area)); // Ordena alfabeticamente
       },
     }),
     {
@@ -530,7 +612,6 @@ const useQuestoes = create<QuestoesStore>()(
         examDuration: state.examDuration,
         user: state.user,
         test: state.test,
-        testFinished: state.testFinished,
         examStartTime: state.examStartTime,
         examEndTime: state.examEndTime,
       }),

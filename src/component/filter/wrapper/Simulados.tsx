@@ -25,33 +25,30 @@ export function Simulados() {
     new SelectFilter({
       entity: "simulados",
       label: "Histórico",
-      queryField: "",
-      idParamName: "",
+      queryField: "nao_usa",
+      idParamName: "nao_usa",
       labelFields: ["instituicoes_nome", "provas_ano", "simulados_data_hora_cadastro", "simulados_id_simulado3"],
       customOptionComponent: "HistoricoFilterItem",
-      selectionMode: "single" as SelectionMode,
-      conditionalOperator: "eq",
       hasClearFilter: false,
       hasSearch: false
     })
   ];
 
-  const { examDuration, setExamDuration, getFormattedRemainingTime, setUser, setIndex, clearAnswers, setTestFinished } = useQuestoes();
+  const { examDuration, setExamDuration, getFormattedRemainingTime, setUser, setIndex, clearAnswers } = useQuestoes();
   const { id: userId } = useUser();
 
   useEffect(() => {
-    setExamDuration(60); // Padrão: 1 hora
+    setExamDuration(60);
     setUser(userId);
     setIndex(0);
     clearAnswers();
-    setTestFinished(false);
   }, [userId])
 
   return (
     <FilterWrapperBase
       filterBtnIcon={<Logo size={26} className="logo" />}
       filterDefinitions={filterDefinitions}
-      entity="simulado"
+      entity="simulados"
       gridColumns={2}
       mustHaveFilters={true}
       afterComponent={

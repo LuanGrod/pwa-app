@@ -1,0 +1,130 @@
+.statistics-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+
+  .section {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
+    .title {
+      font-size: var(--font-base);
+      line-height: 1.25;
+      font-weight: bold;
+      text-align: center;
+      margin-bottom: 34px;
+    }
+
+    .exam {
+      font-size: var(--font-xs);
+      line-height: 1.25;
+      font-weight: bold;
+      text-align: center;
+      color: var(--emphasis);
+    }
+
+    .year {
+      font-size: var(--font-xs);
+      line-height: 1.25;
+      font-weight: thin;
+      text-align: center;
+      margin-bottom: 14px;
+    }
+
+    .btn-shadow.view-wrong {
+      width: 258px;
+      font-family: var(--font-title);
+      font-size: var(--font-xs);
+      font-weight: 700;
+      margin-bottom: 47px;
+      align-self: center;
+    }
+
+    .btn-switch.save-exit {
+      width: 103px;
+      font-family: var(--font-title);
+      color: var(--foreground);
+      align-self: center;
+    }
+  }
+}
+
+.simulado-drawer {
+  .btn-switch.save-pdf {
+    position: absolute;
+    top: 20px;
+    right: 54px;
+    width: 103px;
+    font-size: var(--font-xs);
+    background-color: var(--background);
+    color: var(--foreground);
+  }
+
+  .wrong-wrapper {
+    height: 350px;
+    overflow-y: auto;
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+
+    .column {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      .item {
+        font-size: var(--font-base);
+        line-height: 1.25;
+        font-weight: 600;
+        text-align: center;
+      }
+    }
+
+    .wrong-separator {
+      width: 1px;
+      background-color: var(--foreground);
+      height: 350px;
+      position: fixed;
+      right: 50%;
+    }
+  }
+}
+
+.stat-card {
+  &.general {
+    position: relative;
+    min-height: 286px;
+    margin-bottom: 15px;
+
+    .card-item-name {
+      &.right {
+        color: var(--emphasis);
+      }
+
+      &.wrong {
+        color: #ff1ac6;
+      }
+    }
+  }
+
+  &.accuracy {
+    .card-item-name {
+      .card-item-value {
+        color: var(--foreground);
+      }
+    }
+  }
+}
+
+.dark-theme {
+  .simulado-drawer {
+    .btn-switch.save-pdf {
+      background-color: var(--background-variation);
+    }
+  }
+}
