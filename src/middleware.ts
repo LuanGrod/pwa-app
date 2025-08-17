@@ -8,7 +8,7 @@ export default function middleware(request: NextRequest) {
 
   const isLogged = request.cookies.has("token");
   const isPublicRoute = publicRoutes.includes(pathname);
-
+ 
   // se não estiver logado e não for uma rota pública, redireciona para a página de login
   if (!isLogged && !isPublicRoute) {
     return NextResponse.redirect(new URL("/login", request.url));
