@@ -263,7 +263,7 @@ const useQuestoes = create<QuestoesStore>()(
             toggleAlert();
 
             const insert = new Insert({
-              entity: "respostas-questoes",
+              entity: "respostas-questoes2",
               body: insertData,
             });
 
