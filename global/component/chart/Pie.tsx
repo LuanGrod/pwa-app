@@ -18,7 +18,7 @@ type Props = {
  * @param {string} [customClass] - Optional custom CSS class for styling. 
  * @returns 
  */
-export default function Pie({ data, title, subtitle, }: Props) {
+export default function Pie({ data, title, subtitle }: Props) {
   return (
     <div className="graph-wrapper">
       <PieChart

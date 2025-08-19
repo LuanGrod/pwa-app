@@ -64,7 +64,7 @@ type QuestoesStore = {
   setTest: (test: testType | null) => void;
   updateExpiration: (hours: number) => void;
   getElapsedTime: () => number;
-  getFormattedElapsedTime: (type?: formattedTypes) => string;
+  getFormattedTime: (type?: formattedTypes) => string;
   getGeneralStatistics: () => {
     totalQuestions: number;
     correctAnswers: number;
@@ -499,7 +499,7 @@ const useQuestoes = create<QuestoesStore>()(
 
         return Math.max(0, elapsedMinutes); // Garante que não seja negativo
       },
-      getFormattedElapsedTime: (type: formattedTypes = "simplified") => {
+      getFormattedTime: (type: formattedTypes = "simplified") => {
         const elapsedMinutes = get().getElapsedTime();
         const hours = Math.floor(elapsedMinutes / 60);
         const minutes = elapsedMinutes % 60;

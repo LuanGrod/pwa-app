@@ -18,7 +18,7 @@ export default function page({ }: Props) {
   const {
     _hasHydrated,
     test,
-    getFormattedElapsedTime,
+    getFormattedTime,
     getGeneralStatistics,
     getAccuracyByArea,
     answers,
@@ -39,7 +39,7 @@ export default function page({ }: Props) {
 
   const accuracyByArea = getAccuracyByArea();
 
-  const elapsedTime = getFormattedElapsedTime("detailed");
+  const elapsedTime = getFormattedTime("detailed");
 
   useEffect(() => {
     router.prefetch("/simulados");

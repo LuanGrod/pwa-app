@@ -58,17 +58,17 @@ export class BrazilianDateFormatter implements FormatterInterface<string> {
 
   /**
    * Formata o tempo decorrido em uma string legível.
-   * @param ElapsedTime A quantidade de tempo decorrido em minutos.
+   * @param time A quantidade de tempo decorrido em minutos.
    * @param type O tipo de formatação (simplificada ou detalhada).
    * @example
-   * getFormattedElapsedTime("90", "simplified") // "1hr30min"
-   * getFormattedElapsedTime("90", "detailed") // "1 hora e 30 min"
+   * getFormattedTime("90", "simplified") // "1hr30min"
+   * getFormattedTime("90", "detailed") // "1 hora e 30 min"
    * @returns A string formatada representando o tempo decorrido.
    */
-  getFormattedElapsedTime(ElapsedTime: string | null, type: formattedTypes = "simplified"): string {
-        if (ElapsedTime == null) return "0 min";
+  getFormattedTime(time: string | null, type: formattedTypes = "simplified"): string {
+        if (!time) return "0 min";
 
-        const elapsedMinutes = parseInt(ElapsedTime);
+        const elapsedMinutes = parseInt(time);
         const hours = Math.floor(elapsedMinutes / 60);
         const minutes = elapsedMinutes % 60;
 

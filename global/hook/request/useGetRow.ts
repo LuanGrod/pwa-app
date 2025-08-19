@@ -1,14 +1,8 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { GetRow } from "@global/request/builder/api/GetRow";
-import { CollectionInterface as HeaderHandlerCollection } from "@global/request/header/handler/collection/CollectionInterface";
+import { GetRowProps } from "@global/request/builder/GetRow";
 
-type UseGetRowProps = {
-  entity: string;
-  id: string;
-  parentEntity?: string;
-  parentId?: number;
-  params?: Record<string, any>;
-  headers?: HeaderHandlerCollection | null;
+type UseGetRowProps = Omit<GetRowProps, "responseHandler"> & {
   autoFetch?: boolean;
   needsAuthorization?: boolean;
 };
@@ -38,7 +32,7 @@ export function useGetRow<T = any>({
     setLoading(true);
     setError(null);
 
-    if (!id || !entity) {
+    if (!entity) {
       setLoading(false);
       return;
     }

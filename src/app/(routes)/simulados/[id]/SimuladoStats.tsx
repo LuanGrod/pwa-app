@@ -43,7 +43,7 @@ export default function SimuladoStats({ id }: Props) {
         const estado = item.rows[0]?.estados_uf;
         const instituicao = item.rows[0]?.instituicoes_nome;
         const anoProva = item.rows[0]?.provas_ano;
-        const duracao = brazilianDateFormatter.getFormattedElapsedTime(item.rows[0]?.simulados_duracao, "detailed");
+        const duracao = brazilianDateFormatter.getFormattedTime(item.rows[0]?.simulados_duracao, "detailed");
 
         // Calcula a porcentagem de acertos por área baseado nos dados da API
         const accuracyByArea = item.rows.reduce((areaGroups, row) => {

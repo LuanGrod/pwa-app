@@ -120,13 +120,7 @@ export type diaExtensivo = {
   extensivos_estudantes_id: string;
 };
 
-type diaSemana =
-  | "Segunda-feira"
-  | "Terça-feira"
-  | "Quarta-feira"
-  | "Quinta-feira"
-  | "Sexta-feira"
-  | "Sábado";
+type diaSemana = "Segunda-feira" | "Terça-feira" | "Quarta-feira" | "Quinta-feira" | "Sexta-feira" | "Sábado";
 
 // SIMULADOS
 
@@ -142,3 +136,41 @@ export type RespostasQuestoes = {
   estados_uf: string;
   simulados_duracao: string;
 };
+
+// ESTATISTICAS
+
+export type Estatisticas = {
+  general: {
+    flashcards: {
+      total: number;
+      correct: number;
+      percentage: number;
+    };
+    questions: {
+      total: number;
+      correct: number;
+      percentage: number;
+    };
+    general: {
+      percentage: number;
+    };
+  };
+  accuracyByArea: accuracyByArea;
+  today: {
+    studyTime: number;
+    flashcards: number;
+    questions: number;
+    accuracy: number;
+  };
+  consistency: {
+    totalStudyTime: number;
+    currentStreak: number;
+    longestStreak: number;
+    totalStudyDays: number;
+  };
+};
+
+type accuracyByArea = {
+  name: string;
+  percentage: number;
+}[];

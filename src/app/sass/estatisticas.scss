@@ -1,0 +1,98 @@
+.estatisticas-wrapper {
+  .title {
+    font-size: var(--font-lg);
+    line-height: 1.25;
+    font-family: var(--font-rounded);
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 40px;
+  }
+
+  .card {
+    width: 100%;
+    height: 286px;
+    background-color: var(--background-variation);
+    border-radius: 14px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px;
+    margin-bottom: 15px;
+
+    .side {
+      width: 49%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .item {
+        font-size: var(--font-sm);
+        line-height: 1.25;
+        font-weight: 700;
+        margin-bottom: 16px;
+        align-self: flex-start;
+
+        &.variation {
+          color: var(--emphasis);
+        }
+      }
+
+      .graph-wrapper {
+        .graph {
+        }
+
+        .front {
+        }
+      }
+    }
+
+    .divider {
+      width: 2px;
+      height: 100%;
+      background-color: var(--foreground);
+      margin: 0 11px;
+    }
+
+    &.today {
+      flex-direction: column;
+
+      .title {
+        width: 100%;
+        font-size: var(--font-sm);
+        line-height: 1.25;
+        font-weight: bold;
+        text-align: center;
+        font-family: var(--font-title);
+        margin-bottom: 16px;
+      }
+
+      .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .item {
+          font-size: var(--font-sm);
+          line-height: 1.25;
+          font-weight: 700;
+          margin-bottom: 16px;
+
+          span {
+            color: var(--emphasis);
+          }
+        }
+      }
+    }
+  }
+
+  .stat-card.accuracy {
+    height: fit-content;
+    overflow-y: clip;
+    margin-bottom: 20px;
+
+    .card-item-value {
+      color: var(--emphasis);
+    }
+  }
+}

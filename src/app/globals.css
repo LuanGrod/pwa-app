@@ -299,7 +299,7 @@ form .link-recuperacao-senha {
   border-radius: 20px;
   box-sizing: border-box;
   position: relative;
-  z-index: 2;
+  z-index: -1;
   overflow: hidden;
   border: 2px solid var(--emphasis);
 }
@@ -2011,12 +2011,14 @@ form .link-recuperacao-senha {
   background-color: var(--background-variation);
 }
 
+.graph-wrapper {
+  width: fit-content;
+  height: fit-content;
+  position: relative;
+}
 .graph-wrapper .graph {
   width: 152px;
   height: 152px;
-  position: absolute;
-  right: 32px;
-  bottom: 23px;
   filter: drop-shadow(0 0 5px rgb(0, 0, 0));
 }
 .graph-wrapper .front {
@@ -2029,8 +2031,8 @@ form .link-recuperacao-senha {
   justify-content: center;
   align-items: center;
   position: absolute;
-  right: 32px;
-  bottom: 23px;
+  top: 0;
+  left: 0;
   margin: 13px;
   padding: 15px;
   filter: drop-shadow(0 0 5px rgb(0, 0, 0));
@@ -2088,6 +2090,83 @@ form .link-recuperacao-senha {
   margin-bottom: 15px;
 }
 .stat-simple-line .value {
+  color: var(--emphasis);
+}
+
+.estatisticas-wrapper .title {
+  font-size: var(--font-lg);
+  line-height: 1.25;
+  font-family: var(--font-rounded);
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 40px;
+}
+.estatisticas-wrapper .card {
+  width: 100%;
+  height: 286px;
+  background-color: var(--background-variation);
+  border-radius: 14px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 20px;
+  margin-bottom: 15px;
+}
+.estatisticas-wrapper .card .side {
+  width: 49%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.estatisticas-wrapper .card .side .item {
+  font-size: var(--font-sm);
+  line-height: 1.25;
+  font-weight: 700;
+  margin-bottom: 16px;
+  align-self: flex-start;
+}
+.estatisticas-wrapper .card .side .item.variation {
+  color: var(--emphasis);
+}
+.estatisticas-wrapper .card .divider {
+  width: 2px;
+  height: 100%;
+  background-color: var(--foreground);
+  margin: 0 11px;
+}
+.estatisticas-wrapper .card.today {
+  flex-direction: column;
+}
+.estatisticas-wrapper .card.today .title {
+  width: 100%;
+  font-size: var(--font-sm);
+  line-height: 1.25;
+  font-weight: bold;
+  text-align: center;
+  font-family: var(--font-title);
+  margin-bottom: 16px;
+}
+.estatisticas-wrapper .card.today .container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.estatisticas-wrapper .card.today .container .item {
+  font-size: var(--font-sm);
+  line-height: 1.25;
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.estatisticas-wrapper .card.today .container .item span {
+  color: var(--emphasis);
+}
+.estatisticas-wrapper .stat-card.accuracy {
+  height: fit-content;
+  overflow-y: clip;
+  margin-bottom: 20px;
+}
+.estatisticas-wrapper .stat-card.accuracy .card-item-value {
   color: var(--emphasis);
 }
 
