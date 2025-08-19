@@ -283,7 +283,6 @@ form .link-recuperacao-senha {
   text-align: center;
   position: absolute;
   bottom: 8px;
-  z-index: 3;
 }
 .range-selector-wrapper .input-wrapper {
   width: 100%;
@@ -590,7 +589,7 @@ form .link-recuperacao-senha {
   width: 100%;
 }
 .popup-wrapper .popup.confirmation .action-wrapper .confirm {
-  background-color: var(--background-variation);
+  background-color: var(--background);
   border: 1px solid var(--emphasis);
   color: var(--foreground);
   width: 78px;
@@ -673,7 +672,6 @@ form .link-recuperacao-senha {
   background-color: var(--background-variation);
 }
 .dark-theme .popup-wrapper .popup.confirmation {
-  background-color: var(--background);
   box-shadow: none;
 }
 .dark-theme .popup-wrapper .spinner {
@@ -2002,6 +2000,11 @@ form .link-recuperacao-senha {
 }
 .stat-card.general .card-item-name.wrong {
   color: #ff1ac6;
+}
+.stat-card.general .card-chart {
+  position: absolute;
+  bottom: 23px;
+  right: 32px;
 }
 .stat-card.accuracy .card-item-name .card-item-value {
   color: var(--foreground);

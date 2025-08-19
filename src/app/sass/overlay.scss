@@ -299,7 +299,7 @@
         width: 100%;
 
         .confirm {
-          background-color: var(--background-variation);
+          background-color: var(--background);
           border: 1px solid var(--emphasis);
           color: var(--foreground);
           width: 78px;
@@ -406,7 +406,6 @@
       background-color: var(--background-variation);
 
       &.confirmation {
-        background-color: var(--background);
         box-shadow: none;
       }
     }

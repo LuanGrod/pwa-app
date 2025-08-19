@@ -24,15 +24,17 @@ export default function CardSimulado({
       <div className="card-item-name right">Número de acertos: {correctAnswers}</div>
       <div className="card-item-name wrong">Número de erros: {incorrectAnswers}</div>
 
-      <Pie
-        data={[
-          { title: 'Acertos', value: correctAnswers, color: '#33FF66' },
-          { title: 'Erros', value: incorrectAnswers, color: '#FF1AC6' },
-          { title: 'Não Respondidas', value: unansweredQuestions, color: '#FFFFFF' },
-        ]}
-        title={`${correctPercentageOverRespondedQuestions}% de acerto`}
-        subtitle="sobre as questões respondidas"
-      />
+      <div className="card-chart">
+        <Pie
+          data={[
+            { title: 'Acertos', value: correctAnswers, color: '#33FF66' },
+            { title: 'Erros', value: incorrectAnswers, color: '#FF1AC6' },
+            { title: 'Não Respondidas', value: unansweredQuestions, color: '#FFFFFF' },
+          ]}
+          title={`${correctPercentageOverRespondedQuestions}% de acerto`}
+          subtitle="sobre as questões respondidas"
+        />
+      </div>
     </div>
   )
 }

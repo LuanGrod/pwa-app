@@ -89,7 +89,7 @@ export default function page({ }: Props) {
       <div className="section">
         <ShadowBtn className="view-wrong" onClick={toggleDialog}>Ver questões erradas</ShadowBtn>
         <SwitchBtn className="save-exit" onClick={() => saveExam(router)}>Sair e salvar</SwitchBtn>
-        <QuestoesErradas open={isOpen} onClose={toggleDialog} answers={answers?.filter(answer => answer.answer !== answer.correct).map(answer => ({ id: answer.id, ordem: answer.ordem }))} />
+        <QuestoesErradas open={isOpen} onClose={toggleDialog} answers={answers?.filter(answer => answer.answer && answer.answer !== answer.correct).map(answer => ({ id: answer.id, ordem: answer.ordem }))} />
       </div>
     </main>
   )
