@@ -77,44 +77,46 @@ export function Questoes() {
       denialOperator: true,
     }),
     new BooleanFilter({
+      queryFieldEntity: "questoes",
       queryField: "com_comentario",
       label: "Excluir questões sem comentários",
     }),
     new BooleanFilter({
-      queryField: "questoes_nao_resolvido",
+      queryField: "nao_resolvido",
       label: "Excluir já resolvidas",
-      queryFieldEntity: "respostas_questoes",
     }),
     new BooleanFilter({
       queryField: "gabarito",
       label: "Excluir questões que acertei",
       denialOperator: true,
+      key: "errei_ou_nao_respondi",
     }),
     new BooleanFilter({
-      queryField: "gabarito2",
+      queryField: "gabarito_ou_sem_resposta",
       label: "Excluir questões que errei",
-      denialOperator: true,
+      key: "acertei_ou_nao_respondi",
     }),
     new BooleanFilter({
       queryField: "questoes_com_imagem",
       label: "Excluir questões sem imagem",
+      key: "imagem"
     }),
     new BooleanFilter({
-      queryField: "questoes_com_imagem",
+      queryField: "questoes_sem_imagem",
       label: "Excluir questões com imagem",
-      denialOperator: true,
-      activeValue: "0",
-      key: "sem_imagem",
+      key: "imagem",
+      activeValue: "0"
     }),
   ];
 
-  const { setUser, setIndex, clearAnswers } = useQuestoes();
+  const { setUser, setIndex, clearAnswers, setPack } = useQuestoes();
   const { id: userId } = useUser();
 
   useEffect(() => {
     setUser(userId);
     setIndex(0);
     clearAnswers();
+    setPack([]);
   }, [userId])
 
 

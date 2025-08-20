@@ -4,9 +4,10 @@ import Structure from "@/component/structure/ReturnTitle";
 import styles from "./page.module.css";
 import IconFrameContainer from "@/component/atomic/IconFrameContainer";
 import { use } from "react";
-import { useGetRow } from "@global/hook/request/useGetRow";
-import { Viewing } from "@global/component/viewing/Viewing";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
+import {conteudosExtensivos as conteudosExtensivosType } from "@/type/Entities";
+import { useListing } from "@global/hook/request/useListing";
+import { Listing } from "@global/component/listing/Listing";
 
 export default function page({
   params,
@@ -15,37 +16,27 @@ export default function page({
 }) {
   const { id } = use(params);
 
-  //tecnicamente essa listagem é para trazer os ids dos conteudos desse extensivo (os 4 tipos), dai teria que tratar para redirecionar para os conteudos certos
-  const { data, loading, error } = useGetRow({
+  const { data, loading, error } = useListing<conteudosExtensivosType>({
     entity: "extensivos2",
-    id: id,
+    id,
     needsAuthorization: true,
   });
 
-  //pegar o nome extensivo
-  const nome = "mock"
-
-  //limpar os ids para redirecionar (passar do json para o array de ids)
-  const hotTopics = [1, 2, 3];
-  const mapasMentais = [1, 3];
-  const flashcards = [9, 10, 11];
-  const questoes = [1, 2, 3, 4, 5];
-
   return (
-    <Viewing
-      data={data}
+    <Listing
+      data={data.rows}
       loading={loading}
       error={error}
       loadingComponent={<Loading2 loading />}
-      renderItem={(item: any) =>
-        <Structure title={item.nome || nome}>
+      renderItem={(item) =>
+        <Structure title={item.extensivos_nome}>
           <div className={styles.container}>
             <IconFrameContainer
               links={[
-                { href: `/hot-topics/listagem?filters=hot_topics_id_0{in}${hotTopics.join(",")}`, image: "/project/assets/HotTopics.svg", label: "Hot topics" },
-                { href: `/mapas-mentais/listagem?filters=mapas_mentais_id_0{in}${mapasMentais.join(",")}`, image: "/project/assets/MapasMentais.svg", label: "Mapas Mentais" },
-                { href: `/flashcards/listagem?filters=flashcards_id_0{in}${flashcards.join(",")}`, image: "/project/assets/Flashcards.svg", label: "Flashcards" },
-                { href: `/questoes/listagem?filters=questoes_id_0{in}${questoes.join(",")}`, image: "/project/assets/Questoes.svg", label: "Questões" },
+                { href: `/hot-topics/listagem?filters=hot_topics_id_0{in}${item.hot_topics_extensivos_ids || ""}`, image: "/project/assets/HotTopics.svg", label: "Hot topics" },
+                { href: `/mapas-mentais/listagem?filters=mapas_mentais_id_0{in}${item.mapas_mentais_extensivos_ids || ""}`, image: "/project/assets/MapasMentais.svg", label: "Mapas Mentais" },
+                { href: `/flashcards/listagem?filters=flashcards_id_0{in}${item.flashcards_extensivos_ids || ""}`, image: "/project/assets/Flashcards.svg", label: "Flashcards" },
+                { href: `/questoes/listagem?filters=questoes_id_0{in}${item.questoes_extensivos_ids || ""}`, image: "/project/assets/Questoes.svg", label: "Questões" },
               ]}
             />
           </div>

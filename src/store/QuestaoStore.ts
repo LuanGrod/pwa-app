@@ -248,7 +248,6 @@ const useQuestoes = create<QuestoesStore>()(
           respostas_questoes_id_estudante: user,
           respostas_questoes_id_questao: currentQuestao.questoes_id,
           respostas_questoes_alternativa: currentAnswer.answer,
-          respostas_questoes_id_simulado: "1",
         };
 
         if (currentAnswer.answer) {

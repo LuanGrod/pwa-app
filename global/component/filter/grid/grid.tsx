@@ -49,12 +49,12 @@ export function Grid({ filters, definitions, onOpenDrawer, onToggleBoolean, grid
           <div className="boolean-wrapper">
             {booleanFilters.map((def) => (
               <SwitchBtn
-                key={def.getKey()}
-                active={filters[def.getQueryField()] === def.getActiveValue()}
+                key={def.getKey() + def.getActiveValue()}
+                active={filters[def.getKey()] === def.getActiveValue()}
                 onClick={() =>
                   onToggleBoolean(
-                    def.getQueryField(),
-                    filters[def.getQueryField()] === def.getActiveValue() ? "" : def.getActiveValue()
+                    def.getKey(),
+                    filters[def.getKey()] === def.getActiveValue() ? "" : def.getActiveValue()
                   )
                 }
               >

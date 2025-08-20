@@ -53,7 +53,7 @@ export default class Boolean extends AbstractFilter {
   }
 
   getFilterFragment(values: Record<string, any>): FilterFragment[] {
-    if (values[this.queryField] !== this.activeValue) return [];
+    if (values[this.key] !== this.activeValue) return [];
     const queryFieldEntity = this.queryFieldEntity ? `${this.queryFieldEntity}_` : "";
     let currentFilter = `${queryFieldEntity}${this.queryField}_0{${this.conditionalOperator}}${this.activeValue}`;
     currentFilter = this.denialOperator ? `!(${currentFilter})` : currentFilter;

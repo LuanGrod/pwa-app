@@ -36,15 +36,14 @@ export function Flashcards() {
       connectionOperator: "or",
     }),
     new BooleanFilter({
-      denialOperator: true,
-      queryField: "resolvido",
+      queryField: "nao_resolvido",
       label: "Excluir já resolvidos",
+      key: "resolvido",
+      activeValue: "0"
     }),
     new BooleanFilter({
       queryField: "resolvido",
       label: "Excluir não resolvidos",
-      activeValue: "0",
-      key: "nao_resolvido",
     }),
   ];
 

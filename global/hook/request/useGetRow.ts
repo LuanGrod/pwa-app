@@ -32,7 +32,7 @@ export function useGetRow<T = any>({
     setLoading(true);
     setError(null);
 
-    if (!entity) {
+    if (!entity || id === "" ) {
       setLoading(false);
       return;
     }

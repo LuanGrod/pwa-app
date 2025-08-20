@@ -120,7 +120,13 @@ export type diaExtensivo = {
   extensivos_estudantes_id: string;
 };
 
-type diaSemana = "Segunda-feira" | "Terça-feira" | "Quarta-feira" | "Quinta-feira" | "Sexta-feira" | "Sábado";
+type diaSemana =
+  | "Segunda-feira"
+  | "Terça-feira"
+  | "Quarta-feira"
+  | "Quinta-feira"
+  | "Sexta-feira"
+  | "Sábado";
 
 // SIMULADOS
 
@@ -174,3 +180,14 @@ type accuracyByArea = {
   name: string;
   percentage: number;
 }[];
+
+// EXTENSIVOS
+
+export type conteudosExtensivos = {
+  extensivos_id: string;
+  extensivos_nome: string;
+  flashcards_extensivos_ids: string;
+  questoes_extensivos_ids: string;
+  hot_topics_extensivos_ids: string;
+  mapas_mentais_extensivos_ids: string;
+};
