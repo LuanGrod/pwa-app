@@ -6,10 +6,8 @@ import { UpdateResponse } from "@global/type/request/Update";
 type UpdateProps<T> = {
   successMessage?: string;
   errorHandlerCollection?: ErrorHandlerCollection | null;
-  /**
-   * Optional callback to be executed on success, before returning the result.
-   */
   onSuccessCallback?: (result: UpdateResponse<T>) => Promise<void> | void;
+  onSuccessActions?: ActionInterface[];
 };
 
 export class Update<T = any> extends UpdateResponseHandler {
@@ -17,11 +15,13 @@ export class Update<T = any> extends UpdateResponseHandler {
     successMessage = "Edição realizada com sucesso!",
     errorHandlerCollection = null,
     onSuccessCallback,
+    onSuccessActions
   }: UpdateProps<T>) {
     super({
       successMessage,
       errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
       onSuccessCallback,
+      onSuccessActions
     });
   }
 }

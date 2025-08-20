@@ -6,10 +6,8 @@ import { RecuperacaoSenhaResponse } from "@global/type/request/RecuperacaoSenha"
 type RecuperacaoSenhaProps = {
   successMessage?: string;
   errorHandlerCollection?: ErrorHandlerCollection | null;
-  /**
-   * Optional callback to be executed on success, before returning the result.
-   */
   onSuccessCallback?: (result: RecuperacaoSenhaResponse) => Promise<void> | void;
+  onSuccessActions?: ActionInterface[];
 };
 
 export class RecuperacaoSenha extends RecuperacaoSenhaResponseHandler {
@@ -17,11 +15,13 @@ export class RecuperacaoSenha extends RecuperacaoSenhaResponseHandler {
     successMessage = "Email de recuperação enviado com sucesso!",
     errorHandlerCollection = null,
     onSuccessCallback,
+    onSuccessActions,
   }: RecuperacaoSenhaProps) {
     super({
       successMessage,
       errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
       onSuccessCallback,
+      onSuccessActions,
     });
   }
 }

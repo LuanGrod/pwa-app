@@ -6,10 +6,8 @@ import { GeracaoNovaSenhaResponse } from "@global/type/request/GeracaoNovaSenha"
 type GeracaoNovaSenhaProps = {
   successMessage?: string;
   errorHandlerCollection?: ErrorHandlerCollection | null;
-  /**
-   * Optional callback to be executed on success, before returning the result.
-   */
   onSuccessCallback?: (result: GeracaoNovaSenhaResponse) => Promise<void> | void;
+  onSuccessActions?: ActionInterface[];
 };
 
 export class GeracaoNovaSenha extends GeracaoNovaSenhaResponseHandler {
@@ -17,11 +15,13 @@ export class GeracaoNovaSenha extends GeracaoNovaSenhaResponseHandler {
     successMessage = "Senha alterada com sucesso!",
     errorHandlerCollection = null,
     onSuccessCallback,
+    onSuccessActions,
   }: GeracaoNovaSenhaProps) {
     super({
       successMessage,
       errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
       onSuccessCallback,
+      onSuccessActions,
     });
   }
 }

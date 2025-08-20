@@ -2150,18 +2150,18 @@ form .link-recuperacao-senha {
   font-family: var(--font-title);
   margin-bottom: 16px;
 }
-.estatisticas-wrapper .card.today .container {
+.estatisticas-wrapper .card.today .estatisticas-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.estatisticas-wrapper .card.today .container .item {
+.estatisticas-wrapper .card.today .estatisticas-container .item {
   font-size: var(--font-sm);
   line-height: 1.25;
   font-weight: 700;
   margin-bottom: 16px;
 }
-.estatisticas-wrapper .card.today .container .item span {
+.estatisticas-wrapper .card.today .estatisticas-container .item span {
   color: var(--emphasis);
 }
 .estatisticas-wrapper .stat-card.accuracy {

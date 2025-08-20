@@ -4,17 +4,20 @@ import { GetRow as GetRowResponseHandler } from "../GetRow";
 
 type GetRowProps<T> = {
   errorHandlerCollection?: ErrorHandlerCollection | null;
-  /**
-   * Optional callback to be executed on success, before returning the result.
-   */
   onSuccessCallback?: (result: T) => Promise<void> | void;
+  onSuccessActions?: ActionInterface[];
 };
 
 export class GetRow<T = any> extends GetRowResponseHandler {
-  constructor({ errorHandlerCollection = null, onSuccessCallback }: GetRowProps<T>) {
+  constructor({
+    errorHandlerCollection = null,
+    onSuccessCallback,
+    onSuccessActions,
+  }: GetRowProps<T>) {
     super({
       errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
       onSuccessCallback,
+      onSuccessActions,
     });
   }
 }

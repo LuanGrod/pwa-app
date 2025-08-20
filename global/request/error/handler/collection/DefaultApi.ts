@@ -1,3 +1,4 @@
+import { Error200 } from "../Error200b";
 import { Error400 } from "../Error400";
 import { Error401b } from "../Error401b";
 import { Error403 } from "../Error403";
@@ -16,6 +17,7 @@ export class DefaultApi extends Collection {
     constructor() {
       super({
         elements: [
+          new Error200(),
           new Error400(),
           new Error401b(),
           new Error403(),

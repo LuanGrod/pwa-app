@@ -6,10 +6,8 @@ import { InsertResponse } from "@global/type/request/Insert";
 type InsertProps = {
   successMessage?: string;
   errorHandlerCollection?: ErrorHandlerCollection | null;
-  /**
-   * Optional callback to be executed on success, before returning the result.
-   */
   onSuccessCallback?: (result: InsertResponse) => Promise<void> | void;
+  onSuccessActions?: ActionInterface[];
 };
 
 export class Insert extends InsertResponseHandler {
@@ -17,11 +15,13 @@ export class Insert extends InsertResponseHandler {
     successMessage = "Cadastro realizado com sucesso!",
     errorHandlerCollection = null,
     onSuccessCallback,
+    onSuccessActions,
   }: InsertProps) {
     super({
       successMessage,
       errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
       onSuccessCallback,
+      onSuccessActions,
     });
   }
 }

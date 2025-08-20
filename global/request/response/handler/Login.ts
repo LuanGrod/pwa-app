@@ -11,10 +11,8 @@ type LoginProps = {
   successMessage?: string;
   errorHandlerCollection?: ErrorHandlerCollection | null;
   data?: Map<string, any>;
-  /**
-   * Optional callback to be executed on success, before returning the result.
-   */
   onSuccessCallback?: (result: any) => Promise<void> | void;
+  onSuccessActions?: ActionInterface[];
 };
 
 export class Login extends ResponseHandler {
@@ -22,20 +20,20 @@ export class Login extends ResponseHandler {
   protected cookie: CookieInterface;
   protected expirationDate: Date;
   protected data?: Map<string, any>;
-  protected onSuccessCallback?: (result: LoginResponse) => Promise<void> | void;
 
   constructor({
     successMessage = "Login realizado com sucesso!",
     errorHandlerCollection = null,
     data,
     onSuccessCallback,
+    onSuccessActions,
   }: LoginProps) {
     super({
       errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
       onSuccessCallback,
+      onSuccessActions,
     });
     this.successMessage = successMessage;
-    this.onSuccessCallback = onSuccessCallback;
     this.onSuccessFn = this.handleSuccess.bind(this);
     this.onErrorFn = this.handleError.bind(this);
     this.cookie = new Cookie();
@@ -43,9 +41,6 @@ export class Login extends ResponseHandler {
     this.data = data;
   }
 
-  /**
-   * Handles a successful response. Executes the optional callback if provided.
-   */
   protected async handleSuccess(result: LoginResponse): Promise<any> {
     this.successSetup(result);
 

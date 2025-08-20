@@ -6,9 +6,6 @@ import { UploadResponse } from "@global/type/request/Upload";
 type UploadProps = {
   successMessage?: string;
   errorHandlerCollection?: ErrorHandlerCollection | null;
-  /**
-   * Optional callback to be executed on success, before returning the result.
-   */
   onSuccessCallback?: (result: UploadResponse) => Promise<void> | void;
   onSuccessActions?: ActionInterface[];
 };

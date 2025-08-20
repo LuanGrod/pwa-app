@@ -53,7 +53,7 @@ export class RequestBuilder {
 
   /**
    * Builds and sends the request, applying all header handlers in the collection.
-   * If needsAuthorization is true, applies the Authorization handler as well.
+   * @param needsAuthorization Whether to apply the Authorization header handler.
    */
   async build(needsAuthorization?: boolean): Promise<any> {
     try {
@@ -96,7 +96,10 @@ export class RequestBuilder {
         data = [];
       }
 
-      if (!response.ok) {
+      console.log(response)
+      console.log(data)
+
+      if (!response.ok || (data && data.success === false)) {
         throw new Error(`HTTP error ${response.status}`, { cause: data });
       }
 

@@ -6,38 +6,32 @@ import { DeleteResponse } from "@global/type/request/Delete";
 type DeleteProps = {
   successMessage?: string;
   errorHandlerCollection?: ErrorHandlerCollection | null;
-  /**
-   * Optional callback to be executed on success, before returning the result.
-   */
   onSuccessCallback?: (result: DeleteResponse) => Promise<void> | void;
+  onSuccessActions?: ActionInterface[];
 };
 
 export class Delete extends ResponseHandler {
   protected successMessage: string;
-  protected onSuccessCallback?: (result: DeleteResponse) => Promise<void> | void;
 
   constructor({
     successMessage = "Exclusão realizada com sucesso!",
     errorHandlerCollection = null,
     onSuccessCallback,
+    onSuccessActions,
   }: DeleteProps) {
     super({
       errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
       onSuccessCallback,
+      onSuccessActions,
     });
     this.successMessage = successMessage;
-    this.onSuccessCallback = onSuccessCallback;
     this.onSuccessFn = this.handleSuccess.bind(this);
     this.onErrorFn = this.handleError.bind(this);
   }
 
-  /**
-   * Handles a successful response. Executes the optional callback if provided.
-   */
   protected async handleSuccess(result: DeleteResponse): Promise<any> {
-    
     this.successSetup(result);
-    
+
     return {
       success: true,
       data: result,

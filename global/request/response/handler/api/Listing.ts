@@ -4,17 +4,20 @@ import { Listing as ListingResponseHandler } from "../Listing";
 
 type ListingProps<T> = {
   errorHandlerCollection?: ErrorHandlerCollection | null;
-  /**
-   * Optional callback to be executed on success, before returning the result.
-   */
   onSuccessCallback?: (result: Listagem<T>) => Promise<void> | void;
+  onSuccessActions?: ActionInterface[];
 };
 
 export class Listing<T = any> extends ListingResponseHandler {
-  constructor({ errorHandlerCollection = null, onSuccessCallback }: ListingProps<T>) {
+  constructor({
+    errorHandlerCollection = null,
+    onSuccessCallback,
+    onSuccessActions,
+  }: ListingProps<T>) {
     super({
       errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
       onSuccessCallback,
+      onSuccessActions,
     });
   }
 }

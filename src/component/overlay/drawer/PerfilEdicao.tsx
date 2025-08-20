@@ -30,7 +30,6 @@ export default function PerfilEdicao({ open, onClose, data, setData }: Props) {
           ...data,
           ...result.row
         })
-
         onClose();
       }
     }),

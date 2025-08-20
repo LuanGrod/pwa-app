@@ -4,21 +4,21 @@ import { ResponseHandler } from "./Handler";
 
 type ListingProps<T> = {
   errorHandlerCollection?: ErrorHandlerCollection | null;
-  /**
-   * Optional callback to be executed on success, before returning the result.
-   */
   onSuccessCallback?: (result: Listagem<T>) => Promise<void> | void;
+  onSuccessActions?: ActionInterface[];
 };
 
 export class Listing<T = any> extends ResponseHandler {
-  protected onSuccessCallback?: (result: any) => Promise<void> | void;
-
-  constructor({ errorHandlerCollection = null, onSuccessCallback }: ListingProps<T>) {
+  constructor({
+    errorHandlerCollection = null,
+    onSuccessCallback,
+    onSuccessActions,
+  }: ListingProps<T>) {
     super({
       errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
       onSuccessCallback,
+      onSuccessActions,
     });
-    this.onSuccessCallback = onSuccessCallback;
     this.onSuccessFn = this.handleSuccess.bind(this);
     this.onErrorFn = this.handleError.bind(this);
   }

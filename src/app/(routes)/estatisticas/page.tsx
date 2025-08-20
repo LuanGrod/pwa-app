@@ -75,7 +75,7 @@ export default function page({ }: Props) {
 
             <div className="card today">
               <p className="title">Seu estudo hoje:</p>
-              <div className="container">
+              <div className="estatisticas-container">
                 <div className="side">
                   <p className="item">
                     Tempo total estudado: <span>{brazilianDateFormatter.getFormattedTime(item.today.studyTime.toString(), "detailed")}</span>

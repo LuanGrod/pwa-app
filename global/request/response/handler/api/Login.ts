@@ -7,10 +7,8 @@ type LoginProps = {
   successMessage?: string;
   errorHandlerCollection?: ErrorHandlerCollection | null;
   data?: Map<string, any>;
-  /**
-   * Optional callback to be executed on success, before returning the result.
-   */
   onSuccessCallback?: (result: LoginResponse) => Promise<void> | void;
+  onSuccessActions?: ActionInterface[];
 };
 
 export class Login extends LoginResponseHandler {
@@ -19,12 +17,14 @@ export class Login extends LoginResponseHandler {
     errorHandlerCollection = null,
     data,
     onSuccessCallback,
+    onSuccessActions,
   }: LoginProps) {
     super({
       successMessage,
       errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
       data,
       onSuccessCallback,
+      onSuccessActions,
     });
   }
 }

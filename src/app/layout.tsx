@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import { comfortaa, inter, sfProDisplay, sfProText } from "./fonts";
 import AppHeightWrapper from "@global/provider/AppHeightWrapper";
+import SessionTracker from "@/component/atomic/SessionTracker";
 
 export const metadata: Metadata = {
   title: "MedRQE",
@@ -26,6 +27,7 @@ export default async function RootLayout({
     >
       <body className="screen">
         <AppHeightWrapper />
+        <SessionTracker/>
         {!splashShown ? <SplashScreen /> : children}
         <div id="drawer-root"></div>
         <div id="dialog-root"></div>

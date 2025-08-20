@@ -6,10 +6,8 @@ import { DeleteResponse } from "@global/type/request/Delete";
 type DeleteProps = {
   successMessage?: string;
   errorHandlerCollection?: ErrorHandlerCollection | null;
-  /**
-   * Optional callback to be executed on success, before returning the result.
-   */
   onSuccessCallback?: (result: DeleteResponse) => Promise<void> | void;
+  onSuccessActions?: ActionInterface[];
 };
 
 export class Delete extends DeleteResponseHandler {
@@ -17,11 +15,13 @@ export class Delete extends DeleteResponseHandler {
     successMessage = "Exclusão realizada com sucesso!",
     errorHandlerCollection = null,
     onSuccessCallback,
+    onSuccessActions,
   }: DeleteProps) {
     super({
       successMessage,
       errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
       onSuccessCallback,
+      onSuccessActions,
     });
   }
 }
