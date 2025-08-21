@@ -96,9 +96,6 @@ export class RequestBuilder {
         data = [];
       }
 
-      console.log(response)
-      console.log(data)
-
       if (!response.ok || (data && data.success === false)) {
         throw new Error(`HTTP error ${response.status}`, { cause: data });
       }

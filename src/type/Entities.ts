@@ -176,7 +176,7 @@ export type Estatisticas = {
   };
 };
 
-type accuracyByArea = {
+export type accuracyByArea = {
   name: string;
   percentage: number;
 }[];

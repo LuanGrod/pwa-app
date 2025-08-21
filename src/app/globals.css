@@ -18,7 +18,7 @@
   --font-xs: 12px;
   --font-sm: 14px;
   --font-base: 16px;
-  --font-lg: 18px;
+  --font-lg: 20px;
   --font-xl: 24px;
 }
 
@@ -1905,41 +1905,41 @@ form .link-recuperacao-senha {
   color: var(--emphasis);
 }
 
-.statistics-wrapper {
+.simulado-statistics-wrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
 }
-.statistics-wrapper .section {
+.simulado-statistics-wrapper .section {
   width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
 }
-.statistics-wrapper .section .title {
+.simulado-statistics-wrapper .section .title {
   font-size: var(--font-base);
   line-height: 1.25;
   font-weight: bold;
   text-align: center;
   margin-bottom: 34px;
 }
-.statistics-wrapper .section .exam {
+.simulado-statistics-wrapper .section .exam {
   font-size: var(--font-xs);
   line-height: 1.25;
   font-weight: bold;
   text-align: center;
   color: var(--emphasis);
 }
-.statistics-wrapper .section .year {
+.simulado-statistics-wrapper .section .year {
   font-size: var(--font-xs);
   line-height: 1.25;
   font-weight: thin;
   text-align: center;
   margin-bottom: 14px;
 }
-.statistics-wrapper .section .btn-shadow.view-wrong {
+.simulado-statistics-wrapper .section .btn-shadow.view-wrong {
   width: 258px;
   font-family: var(--font-title);
   font-size: var(--font-xs);
@@ -1947,7 +1947,7 @@ form .link-recuperacao-senha {
   margin-bottom: 47px;
   align-self: center;
 }
-.statistics-wrapper .section .btn-switch.save-exit {
+.simulado-statistics-wrapper .section .btn-switch.save-exit {
   width: 103px;
   font-family: var(--font-title);
   color: var(--foreground);
@@ -2076,6 +2076,8 @@ form .link-recuperacao-senha {
   line-height: 1.25;
   font-weight: bold;
   font-family: var(--font-text);
+  text-align: start;
+  width: 100%;
 }
 .stat-card .card-item-name:not(:last-child) {
   margin-bottom: 16px;
@@ -2096,7 +2098,7 @@ form .link-recuperacao-senha {
   color: var(--emphasis);
 }
 
-.estatisticas-wrapper .title {
+.estudante-statistics-wrapper .title {
   font-size: var(--font-lg);
   line-height: 1.25;
   font-family: var(--font-rounded);
@@ -2104,7 +2106,7 @@ form .link-recuperacao-senha {
   text-align: center;
   margin-bottom: 40px;
 }
-.estatisticas-wrapper .card {
+.estudante-statistics-wrapper .card {
   width: 100%;
   height: 286px;
   background-color: var(--background-variation);
@@ -2115,33 +2117,33 @@ form .link-recuperacao-senha {
   padding: 20px;
   margin-bottom: 15px;
 }
-.estatisticas-wrapper .card .side {
+.estudante-statistics-wrapper .card .side {
   width: 49%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-.estatisticas-wrapper .card .side .item {
+.estudante-statistics-wrapper .card .side .item {
   font-size: var(--font-sm);
   line-height: 1.25;
   font-weight: 700;
   margin-bottom: 16px;
   align-self: flex-start;
 }
-.estatisticas-wrapper .card .side .item.variation {
+.estudante-statistics-wrapper .card .side .item.variation {
   color: var(--emphasis);
 }
-.estatisticas-wrapper .card .divider {
+.estudante-statistics-wrapper .card .divider {
   width: 2px;
   height: 100%;
   background-color: var(--foreground);
   margin: 0 11px;
 }
-.estatisticas-wrapper .card.today {
+.estudante-statistics-wrapper .card.today {
   flex-direction: column;
 }
-.estatisticas-wrapper .card.today .title {
+.estudante-statistics-wrapper .card.today .title {
   width: 100%;
   font-size: var(--font-sm);
   line-height: 1.25;
@@ -2150,27 +2152,81 @@ form .link-recuperacao-senha {
   font-family: var(--font-title);
   margin-bottom: 16px;
 }
-.estatisticas-wrapper .card.today .estatisticas-container {
+.estudante-statistics-wrapper .card.today .estatisticas-container {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
-.estatisticas-wrapper .card.today .estatisticas-container .item {
+.estudante-statistics-wrapper .card.today .estatisticas-container .item {
   font-size: var(--font-sm);
   line-height: 1.25;
   font-weight: 700;
   margin-bottom: 16px;
 }
-.estatisticas-wrapper .card.today .estatisticas-container .item span {
+.estudante-statistics-wrapper .card.today .estatisticas-container .item span {
   color: var(--emphasis);
 }
-.estatisticas-wrapper .stat-card.accuracy {
+.estudante-statistics-wrapper .stat-card.accuracy {
   height: fit-content;
   overflow-y: clip;
   margin-bottom: 20px;
 }
-.estatisticas-wrapper .stat-card.accuracy .card-item-value {
+.estudante-statistics-wrapper .stat-card.accuracy .card-item-value {
   color: var(--emphasis);
+}
+
+.session-statistics-wrapper .title {
+  font-size: var(--font-base);
+  line-height: 1.25;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 19px;
+}
+.session-statistics-wrapper .subtitle {
+  font-family: var(--font-rounded);
+  font-size: var(--font-lg);
+  line-height: 1.25;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 19px;
+}
+.session-statistics-wrapper .stat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: fit-content;
+  overflow-y: clip;
+  margin-bottom: 19px;
+}
+.session-statistics-wrapper .stat-card .title span {
+  color: var(--emphasis);
+}
+.session-statistics-wrapper .stat-card .graph-wrapper {
+  margin-bottom: 17px;
+}
+.session-statistics-wrapper .stat-card .graph-wrapper .graph {
+  width: 266px;
+  height: 266px;
+}
+.session-statistics-wrapper .stat-card .graph-wrapper .front {
+  width: 221px;
+  height: 221px;
+  margin: 22px;
+}
+.session-statistics-wrapper .stat-card .graph-wrapper .front .title {
+  font-size: var(--font-xl);
+  margin-bottom: 0;
+}
+.session-statistics-wrapper .stat-card .graph-wrapper .front .subtitle {
+  font-size: var(--font-base);
+  margin-bottom: 0;
+}
+.session-statistics-wrapper .btn-switch.save-exit {
+  width: 103px;
+  font-family: var(--font-title);
+  color: var(--foreground);
+  align-self: center;
 }
 
 body {

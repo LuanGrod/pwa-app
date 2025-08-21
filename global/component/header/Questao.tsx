@@ -29,7 +29,7 @@ export default function Questao({ }: Props) {
   );
 
   return <>
-    <BaseHeader left={<ReturnRoute />} right={RightWrapper} className="questoes-header" />
+    <BaseHeader left={<ReturnRoute href="/questoes/estatisticas" />} right={RightWrapper} className="questoes-header" />
     <EdicaoSugerida
       onClose={toggleDialog}
       open={isOpen}

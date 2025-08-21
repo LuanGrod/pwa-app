@@ -75,7 +75,7 @@ export default function SimuladoStats({ id }: Props) {
             ordem: row.questoes_ordem,
           }));
 
-        return (<main className="content-wrapper statistics-wrapper">
+        return (<main className="content-wrapper simulado-statistics-wrapper">
           <div className="section">
             <h1 className="title">Gabarito da prova</h1>
             <p className="exam">{estado}: {instituicao}</p>

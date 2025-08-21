@@ -1,6 +1,7 @@
 import { create } from "zustand";
 import { persist, StateStorage, createJSONStorage } from "zustand/middleware";
 import Cookie from "../../global/cookie/Cookie";
+import { createCookieStorage } from "./cookieStorage";
 
 type Estudante = {
   urlImagem?: string;
@@ -18,26 +19,7 @@ type EstudanteStore = {
   updateExpiration: (expiresInDays: number) => void;
 };
 
-// Storage customizado para usar cookies com expiração nativa
-const createCookieStorage = (expiresInDays: number = 30): StateStorage => {
-  const cookie = new Cookie();
-  
-  return {
-    getItem: (name: string): string | null => {
-      return cookie.getCookie(name);
-    },
-    setItem: (name: string, value: string): void => {
-      const expirationDate = new Date();
-      expirationDate.setDate(expirationDate.getDate() + expiresInDays);
-      cookie.setCookie(name, value, expirationDate);
-    },
-    removeItem: (name: string): void => {
-      cookie.removeCookie(name);
-    },
-  };
-};
 
-// Instância global do storage de cookies (pode ser reconfigurada)
 let cookieStorage = createCookieStorage(30); // Padrão de 30 dias
 
 export const useEstudante = create<EstudanteStore>()(

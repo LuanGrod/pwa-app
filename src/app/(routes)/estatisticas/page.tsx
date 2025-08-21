@@ -2,7 +2,6 @@
 
 import Structure from "@/component/structure/GreetingsLogo";
 import { Estatisticas as EstatisticasType } from "@/type/Entities";
-import Divider from "@global/component/atomic/Divider";
 import Pie from "@global/component/chart/Pie";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import CardList from "@global/component/stat/CardList";
@@ -22,7 +21,7 @@ export default function page({ }: Props) {
   const brazilianDateFormatter = new BrazilianDateFormatter();
 
   return (
-    <Structure customClass="estatisticas-wrapper">
+    <Structure customClass="estudante-statistics-wrapper">
       <Viewing
         data={data}
         loading={loading}

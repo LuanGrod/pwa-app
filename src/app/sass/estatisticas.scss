@@ -1,4 +1,4 @@
-.estatisticas-wrapper {
+.estudante-statistics-wrapper {
   .title {
     font-size: var(--font-lg);
     line-height: 1.25;
@@ -94,5 +94,72 @@
     .card-item-value {
       color: var(--emphasis);
     }
+  }
+}
+
+.session-statistics-wrapper {
+  .title {
+    font-size: var(--font-base);
+    line-height: 1.25;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 19px;
+  }
+
+  .subtitle {
+    font-family: var(--font-rounded);
+    font-size: var(--font-lg);
+    line-height: 1.25;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 19px;
+  }
+
+  .stat-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: fit-content;
+    overflow-y: clip;
+    margin-bottom: 19px;
+
+    .title {
+      span {
+        color: var(--emphasis);
+      }
+    }
+
+    .graph-wrapper {
+      margin-bottom: 17px;
+
+      .graph {
+        width: 266px;
+        height: 266px;
+      }
+
+      .front {
+        width: 221px;
+        height: 221px;
+        margin: 22px;
+
+        .title {
+          font-size: var(--font-xl);
+          margin-bottom: 0;
+        }
+
+        .subtitle {
+          font-size: var(--font-base);
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+
+  .btn-switch.save-exit {
+    width: 103px;
+    font-family: var(--font-title);
+    color: var(--foreground);
+    align-self: center;
   }
 }

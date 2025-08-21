@@ -10,7 +10,7 @@ type Props = {
 export default function Flashcards({ title }: Props) {
   return (
     <BaseHeader
-      left={<ReturnRoute />}
+      left={<ReturnRoute href="/flashcards/estatisticas" />}
       center={<p className="flashcard-header title">{title}</p>}
       right={<MenuToggle menu={<ConfiguracoesDrawer />} iconSize={24} />}
       className="flashcards-header"

@@ -3,6 +3,7 @@
 import useFlashcards from "@/store/FlashcardStore";
 import RespostaBtn from "./RespostaBtn";
 import { useUser } from "@global/hook/auth/useUser";
+import { useRouter } from "next/navigation";
 
 type Props = {
   isFlipped: boolean;
@@ -18,20 +19,19 @@ export default function Flashcard({ isFlipped, setIsFlipped, isSlidding, setIsSl
 
   const { registerAnswer, getNext } = useFlashcards();
 
+  const router = useRouter();
+
   const handleRegisterAnswer = (value: string) => {
     if (isSlidding) return;
-
 
     setIsSlidding(true);
 
     setTitle(getNext() ? `${getNext()?.areas_nome}: ${getNext()?.temas_nome}` : title);
 
-    setTimeout(() => {
-      setIsFlipped(false);
-    }, 600)
+    if(getNext()) setIsFlipped(false);
 
     setTimeout(() => {
-      registerAnswer(userId, value);
+      registerAnswer(userId, value, router);
       setIsSlidding(false);
     }, 1200)
   }

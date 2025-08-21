@@ -20,6 +20,8 @@
     line-height: 1.25;
     font-weight: bold;
     font-family: var(--font-text);
+    text-align: start;
+    width: 100%;
 
     &:not(:last-child) {
       margin-bottom: 16px;
@@ -28,7 +30,6 @@
     .card-item-value {
       color: var(--emphasis);
     }
-
   }
 }
 

@@ -1,11 +1,12 @@
-import { create } from "zustand";
-import { persist, StateStorage, createJSONStorage } from "zustand/middleware";
 import { Questao as QuestaoType } from "@/type/Entities";
-import { Insert } from "@global/request/builder/api/Insert";
 import { Delete } from "@global/request/builder/api/Delete";
+import { Insert } from "@global/request/builder/api/Insert";
+import { formattedTypes } from "@global/type/ElapsedFormat";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { startTransition } from "react";
-import { formattedTypes } from "@global/type/ElapsedFormat";
+import { create } from "zustand";
+import { createJSONStorage, persist } from "zustand/middleware";
+import { createLocalStorageStore } from "./localStorageStore";
 
 export type QuestaoAnswerType = {
   id: string;
@@ -79,49 +80,7 @@ type QuestoesStore = {
   }>;
 };
 
-// Storage customizado para LocalStorage com expiração automática
-const createExamStorage = (expirationHours: number = 24): StateStorage => {
-  return {
-    getItem: (name: string): string | null => {
-      try {
-        const item = localStorage.getItem(name);
-        if (!item) return null;
-
-        const { data, expiresAt } = JSON.parse(item);
-
-        // Se expirou, remove automaticamente e retorna null
-        if (Date.now() > expiresAt) {
-          localStorage.removeItem(name);
-          return null;
-        }
-
-        return data;
-      } catch (error) {
-        // Se houve erro no parse, remove o item corrompido
-        localStorage.removeItem(name);
-        return null;
-      }
-    },
-    setItem: (name: string, value: string): void => {
-      try {
-        const expiresAt = Date.now() + expirationHours * 60 * 60 * 1000;
-        const item = {
-          data: value,
-          expiresAt,
-        };
-        localStorage.setItem(name, JSON.stringify(item));
-      } catch (error) {
-        console.error("Erro ao salvar dados do exame:", error);
-      }
-    },
-    removeItem: (name: string): void => {
-      localStorage.removeItem(name);
-    },
-  };
-};
-
-// Instância global do storage de exame (pode ser reconfigurada)
-let examStorage = createExamStorage(10); // 10 horas - margem para prova de 6h máx
+let examStorage = createLocalStorageStore(10);
 
 const useQuestoes = create<QuestoesStore>()(
   persist(
@@ -422,7 +381,6 @@ const useQuestoes = create<QuestoesStore>()(
         toggleIsSaving();
 
         if (!answers || !user || !test) {
-          console.log("Dados incompletos para finalizar o exame");
           return Promise.resolve(null);
         }
 
@@ -523,7 +481,7 @@ const useQuestoes = create<QuestoesStore>()(
       },
       updateExpiration: (hours: number) => {
         // Recria o storage com nova expiração
-        examStorage = createExamStorage(hours);
+        examStorage = createLocalStorageStore(hours);
         // Re-salva os dados com nova expiração
         const currentData = get();
         set({
