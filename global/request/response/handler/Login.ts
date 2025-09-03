@@ -44,6 +44,8 @@ export class Login extends ResponseHandler {
   protected async handleSuccess(result: LoginResponse): Promise<any> {
     this.successSetup(result);
 
+    const router = this.data?.get("router");
+
     if (!result.userNotFound) {
       const { token, id } = result;
       this.expirationDate.setMonth(this.expirationDate.getMonth() + 1);
@@ -75,7 +77,7 @@ export class Login extends ResponseHandler {
     }
 
     startTransition(() => {
-      window.location.href = "/";
+      router.push("/");
     });
   }
 }

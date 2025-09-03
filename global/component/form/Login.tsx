@@ -16,6 +16,7 @@ export default function Login({ }) {
     router.prefetch("/");
     userSettings.set("setUser", setEstudante);
     userSettings.set("entity", "estudantes");
+    userSettings.set("router", router);
     userSettings.set("params", [
       ["nomeCompleto", "estudantes_nome_completo"],
       ["urlImagem", "estudantes_url_imagem"],

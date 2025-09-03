@@ -13,7 +13,6 @@ import useDialog from "@global/hook/overlay/useDialog";
 import PerfilEdicao from "../overlay/drawer/PerfilEdicao";
 import PerfilEdicaoSenha from "../overlay/drawer/PerfilEdicaoSenha";
 import { Upload } from "@global/request/builder/api/Upload";
-import { Update } from "@global/request/builder/api/Update";
 import { useEstudante } from "@/store/EstudanteStore";
 import { Upload as UploadResponseHandler } from "@global/request/response/handler/api/Upload";
 import UpdateOnUploadFile from "@global/request/response/handler/action/UpdateOnUploadFile";
