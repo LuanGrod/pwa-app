@@ -65,11 +65,9 @@ export default function SessionTracker() {
   };
 
   useEffect(() => {
-
-    console.log(publicRoutes)
-    console.log(pathName)
-    console.log(publicRoutes.includes(pathName) ? "true" : "false")
-
+    // console.log(publicRoutes)
+    // console.log(pathName)
+    // console.log(publicRoutes.includes(pathName) ? "true" : "false")
     if (!userId && publicRoutes.includes(pathName)) return;
     const savedSession = sessionStorage.getItem(SESSION_STORAGE_KEY);
     if (savedSession) {

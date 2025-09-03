@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { NextRequest } from "next/server";
 
-export const publicRoutes = ["/login", "/recuperacao-senha", "/geracao-nova-senha"];
+export const publicRoutes = ["/sair", "/login", "/recuperacao-senha", "/geracao-nova-senha"];
 
 export default function middleware(request: NextRequest) {
 
