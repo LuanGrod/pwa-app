@@ -76,6 +76,8 @@ export class Login extends ResponseHandler {
       }
     }
 
+    console.log(router)
+
     if (router && typeof router.push === 'function') {
       startTransition(() => {
         router.push("/");
