@@ -5,6 +5,8 @@ import BooleanFilter from "@global/filter/ui/Boolean";
 import GroupFilter from "@global/filter/ui/Group";
 import FilterWrapperBase from "@global/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
+import { useEffect } from "react";
+import useFlashcards from "@/store/FlashcardStore";
 
 export function Flashcards() {
   const filterDefinitions = [
@@ -46,6 +48,12 @@ export function Flashcards() {
       label: "Excluir não resolvidos",
     }),
   ];
+
+  const { clearSession } = useFlashcards();
+
+  useEffect(() => {
+    clearSession();
+  }, [])
 
   return <FilterWrapperBase filterBtnIcon={<Logo size={26} className="logo" />} filterDefinitions={filterDefinitions} entity="flashcards" gridColumns={2} />;
 }

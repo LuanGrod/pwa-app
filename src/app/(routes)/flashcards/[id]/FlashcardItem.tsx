@@ -17,7 +17,7 @@ export default function FlashcardItem({ id }: Props) {
   const [isFlipped, setIsFlipped] = useState(false);
   const [title, setTitle] = useState("");
 
-  const { setDeck, getCurrent } = useFlashcards();
+  const { setCurrent, current } = useFlashcards();
 
   const { data, loading, error } = useGetRow<FlashcardType>({
     entity: "flashcards",
@@ -27,15 +27,15 @@ export default function FlashcardItem({ id }: Props) {
 
   useEffect(() => {
     if (data) {
-      setDeck([data]);
+      setCurrent(data);
       setTitle(`${data.areas_nome}: ${data.temas_nome}`);
     }
   }, [data])
 
   return (
-    <Structure title={title} setTitle={setTitle} isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={false} setIsSlidding={() => { }}>
+    <Structure title={title} isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={false} setIsSlidding={() => { }}>
       <Viewing
-        data={getCurrent()}
+        data={current}
         loading={loading}
         error={error}
         loadingComponent={<Loading2 loading />}

@@ -1,5 +1,5 @@
 import HowToStudyContent from "@/component/atomic/HowToStudyContent";
-import ReturnLogoStructure from "../../../component/structure/ReturnLogo";
+import ReturnLogoStructure from "@/component/structure/ReturnLogo";
 import styles from "./page.module.css";
 
 type Props = {};

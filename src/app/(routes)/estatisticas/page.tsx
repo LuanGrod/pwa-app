@@ -61,7 +61,7 @@ export default function page({ }: Props) {
               </div>
             </div>
 
-            <SimpleLine name="Porcentagem geral de acerto" value={item.general.general.percentage.toString()} />
+            <SimpleLine name="Porcentagem geral de acerto" value={item.general.general.percentage.toString() + "%"} />
 
             <CardList
               title="Porcentagem de acerto por área:"

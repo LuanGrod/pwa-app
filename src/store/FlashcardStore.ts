@@ -1,6 +1,7 @@
 import { Flashcard as FlashcardType } from "@/type/Entities";
 import { Delete } from "@global/request/builder/api/Delete";
 import { Insert } from "@global/request/builder/api/Insert";
+import { Post } from "@global/request/builder/api/Post";
 import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.shared-runtime";
 import { startTransition } from "react";
 import { create } from "zustand";
@@ -14,14 +15,26 @@ type FlashcardAnswerEntry = {
 
 type FlashcardStore = {
   _hasHydrated: boolean;
-  deck: FlashcardType[] | null;
+  current: FlashcardType | null;
+  next: FlashcardType | null;
+  temas: number[];
+  sessaoId: number | null;
+  currentThemeIndex: number;
   answers: FlashcardAnswerEntry[];
   isShowingAnswer: boolean;
   isSaving: boolean;
-  setDeck: (flashcards: FlashcardType[]) => void;
-  getCurrent: () => FlashcardType | null;
-  getNext: () => FlashcardType | null;
-  handleSave: (userId: string, flashcard?: FlashcardType) => Promise<null | undefined>;
+  initializeSession: (data: {
+    temas: number[];
+    sessao_id: number;
+    flashcard: FlashcardType;
+  }) => void;
+  clearSession: () => void;
+  fetchNextFlashcard: () => Promise<void>;
+  getCurrentThemeId: () => number | null;
+  getNextThemeIndex: () => number | null;
+  setCurrent: (flashcard: FlashcardType) => void;
+  setNext: (flashcard: FlashcardType) => void;
+  handleSave: (userId: string) => Promise<null | undefined>;
   getSavedStatus: (flashcard?: FlashcardType) => boolean;
   toggleIsShowingAnswer: () => void;
   registerAnswer: (
@@ -29,9 +42,7 @@ type FlashcardStore = {
     value: string,
     router: AppRouterInstance
   ) => Promise<null | void>;
-  shift: () => void;
   toggleIsSaving: () => void;
-  count: () => number;
   getLogoColor: (flashcard?: FlashcardType) => string | undefined;
   setHasHydrated: (state: any) => void;
 };
@@ -42,48 +53,93 @@ const useFlashcards = create<FlashcardStore>()(
   persist(
     (set, get) => ({
       _hasHydrated: false,
-      deck: [],
+      current: null,
+      next: null,
+
+      // Novos campos para gerenciar sessão e temas
+      temas: [],
+      sessaoId: null,
+      currentThemeIndex: 0,
+
       answers: [],
       isShowingAnswer: false,
       isSaving: false,
-      setDeck: (flashcards: FlashcardType[]) => {
-        set({ deck: flashcards, answers: [] });
+
+      initializeSession: (data: {
+        temas: number[];
+        sessao_id: number;
+        flashcard: FlashcardType;
+      }) => {
+        set({
+          temas: data.temas,
+          sessaoId: data.sessao_id,
+          current: data.flashcard,
+          currentThemeIndex: data.temas.findIndex(
+            (tema) => tema === data.flashcard.flashcards_id_tema
+          ),
+          answers: [],
+        });
       },
-      getCurrent: () => {
-        const { deck } = get();
-        if (!deck || deck.length === 0) return null;
-        return deck[0];
+      clearSession: () => {
+        set({
+          answers: [],
+          current: null,
+          next: null,
+          temas: [],
+          sessaoId: null,
+          currentThemeIndex: 0,
+        });
       },
-      getNext: () => {
-        const { deck } = get();
-        if (!deck || deck.length < 2) return null;
-        return deck[1];
-      },
-      shift: () => {
+      fetchNextFlashcard: async () => {
+        const { currentThemeIndex, getNextThemeIndex, sessaoId, temas } = get();
+        const nextThemeIndex = getNextThemeIndex();
+
+        if (!sessaoId) return;
+
+        const proximoFlashcard = new Post({
+          entity: "proximo-flashcard",
+          body: {
+            tema_id: temas[nextThemeIndex!],
+            sessao_id: sessaoId,
+          },
+        });
+
+        const response = await proximoFlashcard.build(true);
+
         set((state) => ({
-          deck: state.deck ? state.deck.slice(1) : [],
+          next: response.flashcard,
         }));
       },
-      handleSave: async (userId: string, flashcard?: FlashcardType) => {
-        const { getCurrent, deck, toggleIsSaving } = get();
+      getCurrentThemeId: () => {
+        const { current } = get();
+        return current?.flashcards_id_tema || null;
+      },
+      getNextThemeIndex: () => {
+        const { temas, currentThemeIndex } = get();
+        if (temas.length === 0) return null;
+        const nextIndex = (currentThemeIndex + 1) % temas.length;
+        return nextIndex;
+      },
+      setCurrent: (flashcard: FlashcardType) => {
+        set({ current: flashcard });
+      },
+      setNext: (flashcard: FlashcardType) => {
+        set({ next: flashcard });
+      },
+      handleSave: async (userId: string) => {
+        const { current, toggleIsSaving } = get();
 
         toggleIsSaving();
 
-        if (!deck || deck.length === 0) return null;
+        if (!current) return null;
 
-        const currentFlashcard = flashcard || getCurrent();
+        if (current.flashcards_salvos_id) {
+          let tempId = current.flashcards_salvos_id;
 
-        if (!currentFlashcard) return null;
-
-        if (currentFlashcard.flashcards_salvos_id) {
-          let tempId = currentFlashcard.flashcards_salvos_id;
           set((state) => ({
-            deck: state.deck?.map((flashcards) =>
-              flashcards.flashcards_id === currentFlashcard.flashcards_id
-                ? { ...flashcards, flashcards_salvos_id: "" }
-                : flashcards
-            ),
+            current: state.current ? { ...state.current, flashcards_salvos_id: "" } : null,
           }));
+
           const deleting = new Delete({
             entity: "flashcards-salvos",
             id: tempId,
@@ -91,38 +147,39 @@ const useFlashcards = create<FlashcardStore>()(
           await deleting.build(true);
         } else {
           set((state) => ({
-            deck:
-              state.deck &&
-              state.deck.map((flashcard) =>
-                flashcard.flashcards_id === currentFlashcard.flashcards_id
-                  ? { ...flashcard, flashcards_salvos_id: "response.data.id" }
-                  : flashcard
-              ),
+            current: state.current
+              ? { ...state.current, flashcards_salvos_id: "response.data.id" }
+              : null,
           }));
+
           const insertData = {
-            ["flashcards_salvos_id_flashcard"]: currentFlashcard.flashcards_id,
+            ["flashcards_salvos_id_flashcard"]: current.flashcards_id,
             ["flashcards_salvos_id_estudante"]: userId,
           };
+
           const insert = new Insert({
             entity: "flashcards-salvos",
             body: insertData,
           });
+
           const response = await insert.build(true);
+
           if (response.success) {
             set((state) => ({
-              deck: state.deck?.map((flashcard) =>
-                flashcard.flashcards_id === currentFlashcard.flashcards_id
-                  ? { ...flashcard, flashcards_salvos_id: response.data.id || "" }
-                  : flashcard
-              ),
+              current: state.current
+                ? {
+                    ...state.current,
+                    flashcards_salvos_id: response.data.id || "",
+                  }
+                : null,
             }));
           }
         }
         toggleIsSaving();
       },
       getSavedStatus: (flashcard?: FlashcardType) => {
-        const { getCurrent } = get();
-        const currentFlashcard = flashcard || getCurrent();
+        const { current } = get();
+        const currentFlashcard = flashcard || current;
         if (!currentFlashcard) return false;
         return !!currentFlashcard.flashcards_salvos_id;
       },
@@ -133,26 +190,27 @@ const useFlashcards = create<FlashcardStore>()(
         });
       },
       registerAnswer: async (userId: string, value: string, router: AppRouterInstance) => {
-        const { getCurrent, shift, deck, count } = get();
-        const currentFlashcard = getCurrent();
-        if (!currentFlashcard) return null;
+        const { current, next, sessaoId, temas, currentThemeIndex, getNextThemeIndex } = get();
+        if (!current) return null;
 
-        set((state) => ({
-          answers: [
-            ...state.answers,
-            { flashcardId: currentFlashcard.flashcards_id, answer: value },
-          ],
-        }));
-
-        if (count() > 1) {
-          shift();
-        }
+        let tmpCurrent = getNextThemeIndex() || 0;
 
         const insertData = {
           respostas_flashcards_id_estudante: userId,
-          respostas_flashcards_id_flashcard: currentFlashcard.flashcards_id,
+          respostas_flashcards_id_flashcard: current.flashcards_id,
           respostas_flashcards_resposta2: value,
+          sessoes_estudos_flashcards_id: sessaoId,
+          temas_id_atual: temas[currentThemeIndex],
         };
+
+        set((state) => ({
+          answers: [...state.answers, { flashcardId: current.flashcards_id, answer: value }],
+          currentThemeIndex: tmpCurrent,
+        }));
+
+        if (next) {
+          set({ current: next, next: null });
+        }
 
         const insert = new Insert({
           entity: "respostas-flashcards",
@@ -161,7 +219,8 @@ const useFlashcards = create<FlashcardStore>()(
 
         await insert.build(true);
 
-        if (!deck || deck.length === 1) {
+        // Se não há próximo flashcard, vai para estatísticas
+        if (!next) {
           startTransition(() => {
             router.push("/flashcards/estatisticas");
           });
@@ -172,14 +231,9 @@ const useFlashcards = create<FlashcardStore>()(
           isSaving: !state.isSaving,
         }));
       },
-      count: () => {
-        const { deck } = get();
-        if (!deck || deck.length === 0) return 0;
-        return deck.length;
-      },
       getLogoColor: (flashcard?: FlashcardType) => {
-        const { getCurrent } = get();
-        const currentFlashcard = flashcard || getCurrent();
+        const { current } = get();
+        const currentFlashcard = flashcard || current;
         if (!currentFlashcard) return undefined;
         if (currentFlashcard.respostas_flashcards_ultima_resposta_flashcard === "Erro")
           return "#ff1ac6";
@@ -205,6 +259,8 @@ const useFlashcards = create<FlashcardStore>()(
       storage: createJSONStorage(() => flashcardStore),
       partialize: (state) => ({
         answers: state.answers,
+        current: state.current,
+        next: state.next,
       }),
       onRehydrateStorage: (state) => {
         return () => state.setHasHydrated(true);

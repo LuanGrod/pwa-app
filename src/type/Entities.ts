@@ -30,6 +30,7 @@ export type QuestoesSalvos = {
 
 export type Flashcard = {
   flashcards_id: string;
+  flashcards_id_tema: number;
   flashcards_pergunta_titulo: string;
   flashcards_pergunta: string;
   flashcards_comentario_pergunta?: string;

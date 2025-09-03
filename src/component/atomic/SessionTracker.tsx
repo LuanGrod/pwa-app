@@ -1,8 +1,10 @@
 "use client";
 
+import { publicRoutes } from "@/middleware";
 import { useUser } from "@global/hook/auth/useUser";
 import { Insert } from "@global/request/builder/api/Insert";
 import { Update } from "@global/request/builder/api/Update";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 
 const SESSION_STORAGE_KEY = "session";
@@ -16,9 +18,9 @@ type SessionData = {
 export default function SessionTracker() {
   const [sessionData, setSessionData] = useState<SessionData | null>(null);
   const { id: userId } = useUser();
+  const pathName = usePathname();
 
   const createSession = async () => {
-
     const insert = new Insert({
       entity: "sessoes-estudos",
       body: {
@@ -63,7 +65,7 @@ export default function SessionTracker() {
   };
 
   useEffect(() => {
-    if (!userId) return;
+    if (!userId || publicRoutes.includes(pathName)) return;
     const savedSession = sessionStorage.getItem(SESSION_STORAGE_KEY);
     if (savedSession) {
       setSessionData(JSON.parse(savedSession));

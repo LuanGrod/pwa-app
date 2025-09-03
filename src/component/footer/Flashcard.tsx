@@ -10,26 +10,28 @@ type Props = {
   setIsFlipped: (value: boolean) => void;
   isSlidding: boolean;
   setIsSlidding: (value: boolean) => void;
-  setTitle: (value: string) => void;
   title: string;
 };
 
-export default function Flashcard({ isFlipped, setIsFlipped, isSlidding, setIsSlidding, setTitle, title }: Props) {
+export default function Flashcard({ isFlipped, setIsFlipped, isSlidding, setIsSlidding }: Props) {
   const { id: userId } = useUser();
 
-  const { registerAnswer, getNext } = useFlashcards();
+  const { registerAnswer, fetchNextFlashcard, next } = useFlashcards();
 
   const router = useRouter();
+
+  const handleVerResposta = async () => {
+    setIsFlipped(true);
+    await fetchNextFlashcard();
+  };
 
   const handleRegisterAnswer = (value: string) => {
     if (isSlidding) return;
 
     setIsSlidding(true);
 
-    setTitle(getNext() ? `${getNext()?.areas_nome}: ${getNext()?.temas_nome}` : title);
-
-    if(getNext()) setIsFlipped(false);
-
+    if (next) setIsFlipped(false);
+    
     setTimeout(() => {
       registerAnswer(userId, value, router);
       setIsSlidding(false);
@@ -46,7 +48,7 @@ export default function Flashcard({ isFlipped, setIsFlipped, isSlidding, setIsSl
           <RespostaBtn onClick={() => handleRegisterAnswer("Acerto Fácil")} color="#0066FF" title="Fácil" value="Acerto Fácil" />
         </div>
       ) : (
-        <button onClick={() => setIsFlipped(true)} disabled={isSlidding} className="btn">
+        <button onClick={handleVerResposta} disabled={isSlidding} className="btn">
           VER RESPOSTA
         </button>
       )}
