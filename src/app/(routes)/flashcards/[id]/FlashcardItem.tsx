@@ -33,7 +33,7 @@ export default function FlashcardItem({ id }: Props) {
   }, [data])
 
   return (
-    <Structure title={title} isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={false} setIsSlidding={() => { }}>
+    <Structure setTitle={setTitle} title={title} isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={false} setIsSlidding={() => { }}>
       <Viewing
         data={current}
         loading={loading}
