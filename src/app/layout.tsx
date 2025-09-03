@@ -27,7 +27,7 @@ export default async function RootLayout({
     >
       <body className="screen">
         <AppHeightWrapper />
-        {/* <SessionTracker/> */}
+        <SessionTracker/>
         {!splashShown ? <SplashScreen /> : children}
         <div id="drawer-root"></div>
         <div id="dialog-root"></div>

@@ -1,6 +1,5 @@
 "use client";
 
-import { useListing } from "@global/hook/request/useListing";
 import { useSearchParams } from "next/navigation";
 import Flashcard from "@/component/atomic/Flashcard";
 import { Flashcard as FlashcardType } from "@/type/Entities";
@@ -27,8 +26,9 @@ export default function page({ }: Props) {
 
   const [isFlipped, setIsFlipped] = useState(false);
   const [isSlidding, setIsSlidding] = useState(false);
+  const [title, setTitle] = useState("");
 
-  const { initializeSession, current, next, temas, currentThemeIndex, sessaoId, getNextThemeIndex } = useFlashcards();
+  const { initializeSession, current, next } = useFlashcards();
 
   const { data, loading, error } = useGetRow<CustomFlashcard>({
     entity: "flashcards",
@@ -46,7 +46,6 @@ export default function page({ }: Props) {
     }
   }, [data]);
 
-
   // useEffect(() => {
   //   const interval = setInterval(() => {
   //     console.table({
@@ -62,9 +61,9 @@ export default function page({ }: Props) {
   //   return () => clearInterval(interval);
   // }, [current,next]);
 
-
-
-  let title = current ? `${current.areas_nome}: ${current.temas_nome}` : "";
+  useEffect(() => {
+    setTitle(current ? `${current.areas_nome}: ${current.temas_nome}` : "");
+  }, [current])
 
   if (loading) return <Loading2 loading />;
   if (error) return <ErrorMessage error={error} />;
@@ -75,7 +74,7 @@ export default function page({ }: Props) {
       {current && (
         <Structure
           title={title}
-          // setTitle={setTitle}
+          setTitle={setTitle}
           isFlipped={isFlipped}
           setIsFlipped={setIsFlipped}
           isSlidding={isSlidding}
