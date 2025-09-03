@@ -42,28 +42,21 @@ export class Login extends ResponseHandler {
   }
 
   protected async handleSuccess(result: LoginResponse): Promise<any> {
-    console.log("handleSuccess iniciado", result);
     this.successSetup(result);
 
     const router = this.data?.get("router");
-    console.log("Router obtido:", router, typeof router);
 
     if (!result.userNotFound) {
       const { token, id } = result;
-      console.log("Usuario encontrado, token:", !!token, "id:", id);
-      
       this.expirationDate.setMonth(this.expirationDate.getMonth() + 1);
       this.cookie.setCookie("token", token, this.expirationDate);
       this.cookie.setCookie("id", id.toString(), this.expirationDate);
-      
-      console.log("Cookies definidos");
 
       const setUser = this.data?.get("setUser");
       const entity = this.data?.get("entity");
       const params = this.data?.get("params");
 
       if (entity && params && setUser) {
-        console.log("Buscando dados do usuario...");
         const getRow = new GetRow({
           entity: entity,
           id: id,
@@ -79,30 +72,18 @@ export class Login extends ResponseHandler {
           {}
         );
 
-        console.log("Usuario configurado:", usuario);
         setUser(usuario);
       }
     }
 
-    console.log("Router antes do redirect:", router, typeof router?.push);
-
-    // Em produção, usar window.location pode ser mais confiável
-    if (typeof window !== 'undefined') {
-      console.log("Usando window.location.replace para redirect");
+    if (typeof window !== "undefined") {
       setTimeout(() => {
-        console.log("Executando redirect após delay");
-        window.location.replace('/');
+        window.location.replace("/");
       }, 100);
-    } else if (router && typeof router.push === 'function') {
-      console.log("Executando router.push (fallback)");
+    } else if (router && typeof router.push === "function") {
       startTransition(() => {
-        console.log("Dentro do startTransition, fazendo push para /");
         router.push("/");
       });
-    } else {
-      console.error('Nenhum método de redirect disponível');
     }
-    
-    console.log("handleSuccess finalizado");
   }
 }
