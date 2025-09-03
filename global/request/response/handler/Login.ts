@@ -76,8 +76,16 @@ export class Login extends ResponseHandler {
       }
     }
 
-    startTransition(() => {
-      router.push("/");
-    });
+    if (router && typeof router.push === 'function') {
+      startTransition(() => {
+        router.push("/");
+      });
+    } else {
+      console.error('Router não está disponível ou não possui método push');
+      // Fallback usando window.location se router não estiver disponível
+      if (typeof window !== 'undefined') {
+        window.location.href = '/';
+      }
+    }
   }
 }
