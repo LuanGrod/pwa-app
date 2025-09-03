@@ -48,7 +48,7 @@ export default function SessionTracker() {
     const durationMinutes = Math.floor(
       (now - sessionObj.timestampInitial) / 60000
     );
-    
+
     const update = new Update({
       entity: "sessoes-estudos",
       body: {
@@ -65,7 +65,11 @@ export default function SessionTracker() {
   };
 
   useEffect(() => {
-    if (!userId || publicRoutes.includes(pathName)) return;
+
+    console.log(publicRoutes)
+    console.log(pathName)
+    
+    if (!userId && publicRoutes.includes(pathName)) return;
     const savedSession = sessionStorage.getItem(SESSION_STORAGE_KEY);
     if (savedSession) {
       setSessionData(JSON.parse(savedSession));
