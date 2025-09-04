@@ -17,7 +17,6 @@ type Props = {
   title: string;
   text: string;
   imageUrl?: string;
-  header: string;
 };
 
 export default function FlashcardSide({
@@ -32,7 +31,6 @@ export default function FlashcardSide({
   toggleDialog,
   userId,
   imageUrl,
-  header,
 }: Props) {
   const { isSaving } = useFlashcards();
 

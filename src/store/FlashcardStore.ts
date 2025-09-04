@@ -55,12 +55,9 @@ const useFlashcards = create<FlashcardStore>()(
       _hasHydrated: false,
       current: null,
       next: null,
-
-      // Novos campos para gerenciar sessão e temas
       temas: [],
       sessaoId: null,
       currentThemeIndex: 0,
-
       answers: [],
       isShowingAnswer: false,
       isSaving: false,

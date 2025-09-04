@@ -10,7 +10,6 @@ type Props = {
   setIsFlipped: (value: boolean) => void;
   isSlidding: boolean;
   setIsSlidding: (value: boolean) => void;
-  title: string;
   setTitle: (value: string) => void;
 };
 
@@ -31,9 +30,10 @@ export default function Flashcard({ isFlipped, setIsFlipped, isSlidding, setIsSl
 
     setIsSlidding(true);
 
-    setTitle(next ? `${next.areas_nome}: ${next.temas_nome}` : "");
-
-    if (next) setIsFlipped(false);
+    if (next) {
+      setIsFlipped(false);
+      setTitle(`${next.areas_nome}: ${next.temas_nome}`);
+    }
 
     setTimeout(() => {
       registerAnswer(userId, value, router);

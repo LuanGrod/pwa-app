@@ -10,6 +10,7 @@ import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import { ErrorMessage } from "@global/component/listing/message/error";
 import { EmptyMessage } from "@global/component/listing/message/empty";
 import { useGetRow } from "@global/hook/request/useGetRow";
+import { AnimatePresence, motion } from "motion/react";
 
 type Props = {};
 
@@ -46,21 +47,6 @@ export default function page({ }: Props) {
     }
   }, [data]);
 
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     console.table({
-  //       'Current Flashcard ID': current?.flashcards_id,
-  //       'Current Theme ID': temas[currentThemeIndex],
-  //       'Next Flashcard ID': next?.flashcards_id,
-  //       "Next Theme ID": temas[getNextThemeIndex() || 0],
-  //       'Session ID': sessaoId,
-  //       'Temas': JSON.stringify(temas),
-  //     })
-  //   }, 2000);
-
-  //   return () => clearInterval(interval);
-  // }, [current,next]);
-
   useEffect(() => {
     setTitle(current ? `${current.areas_nome}: ${current.temas_nome}` : "");
   }, [current])
@@ -74,10 +60,10 @@ export default function page({ }: Props) {
       {current && (
         <Structure
           title={title}
-          setTitle={setTitle}
           isFlipped={isFlipped}
-          setIsFlipped={setIsFlipped}
           isSlidding={isSlidding}
+          setTitle={setTitle}
+          setIsFlipped={setIsFlipped}
           setIsSlidding={setIsSlidding}
         >
           <Flashcard

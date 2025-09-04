@@ -27,7 +27,6 @@ export default function Flashcard({ data, isFlipped, onFlip, customClass = "" }:
           status={getSavedStatus()}
           isOpen={isOpen}
           userId={userId}
-          header={`${data.areas_nome}: ${data.temas_nome}`}
           conteudoId={data.flashcards_id}
           title={data.flashcards_pergunta_titulo}
           text={data.flashcards_pergunta}
@@ -41,11 +40,12 @@ export default function Flashcard({ data, isFlipped, onFlip, customClass = "" }:
           status={getSavedStatus()}
           isOpen={isOpen}
           userId={userId}
-          header={`${data.areas_nome}: ${data.temas_nome}`}
           conteudoId={data.flashcards_id}
           title={data.flashcards_resposta_titulo}
           text={data.flashcards_resposta}
           imageUrl={data.flashcards_url_imagem}
-        /></div></div>
+        />
+      </div>
+    </div>
   );
 }
