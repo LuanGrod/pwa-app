@@ -4,7 +4,7 @@ import { RecuperacaoSenha as ResponseHandler } from "@global/request/response/ha
 import { RecuperacaoSenhaHandler as FormHandler } from "../RecuperacaoSenhaHandler";
 
 type RecuperacaoSenhaHandlerProps = {
-  entity: string;
+  entity?: string | null;
   needsAuthorization?: boolean;
   responseHandler?: ResponseHandlerInterface | null;
 };

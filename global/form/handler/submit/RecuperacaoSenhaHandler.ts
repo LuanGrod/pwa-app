@@ -4,7 +4,7 @@ import { RecuperacaoSenha } from "@global/request/builder/RecuperacaoSenha";
 import { RecuperacaoSenha as ResponseHandler } from "@global/request/response/handler/RecuperacaoSenha";
 
 type RecuperacaoSenhaHandlerProps = {
-  entity: string;
+  entity?: string | null;
   needsAuthorization?: boolean;
   responseHandler?: ResponseHandlerInterface | null;
 };
