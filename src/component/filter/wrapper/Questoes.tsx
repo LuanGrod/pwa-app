@@ -22,7 +22,7 @@ export function Questoes() {
           parentKey: "id_area",
           parentIdParamName: "temas_id_area",
           parentLabelParamName: "areas_nome",
-          queryFieldEntity: "flashcards",
+          queryFieldEntity: "questoes",
           parentKeyEntity: "temas",
           connectionOperator: "or",
           customOptionComponent: "AreaFilterItem",

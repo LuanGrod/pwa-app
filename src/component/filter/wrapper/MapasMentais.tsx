@@ -19,7 +19,7 @@ export function MapasMentais() {
           parentKey: "id_area",
           parentIdParamName: "temas_id_area",
           parentLabelParamName: "areas_nome",
-          queryFieldEntity: "flashcards",
+          queryFieldEntity: "mapas_mentais",
           parentKeyEntity: "temas",
           connectionOperator: "or",
           customOptionComponent: "AreaFilterItem",

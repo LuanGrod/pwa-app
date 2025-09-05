@@ -34,6 +34,8 @@ export class RecuperacaoSenha extends ResponseHandler {
 
     return {
       success: true,
+      messageType: "success",
+      message: this.successMessage,
       data: result,
     };
   }

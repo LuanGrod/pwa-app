@@ -7,7 +7,7 @@ import SubmitHandlerInterface from "@global/form/handler/submit/SubmitHandlerInt
 import { Shadow as ShadowBtn } from "../button/Shadow";
 import Notification from "./Notification";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
-import React from "react";
+import React, { useEffect } from "react";
 
 type FormProps = {
   formConfig: FormConfigProps;
@@ -18,17 +18,18 @@ type FormProps = {
 
 function Form({ formConfig, submitHandler, id, submitLabel = "ENTRAR" }: FormProps) {
   const { items, handleSubmit, submitReturn, loading } = useForm(formConfig.items, submitHandler, id);
+
   return (
     <form onSubmit={handleSubmit}>
       {formConfig.items.map(
         (config: ItemInterface, idx: number) => {
-            return React.createElement(
+          return React.createElement(
             config.getItemType(),
             {
               key: config.getName(),
               ...config.getItemProps(formConfig, items[idx])
             }
-            );
+          );
         }
       )}
       <ShadowBtn type="submit" disabled={loading}>

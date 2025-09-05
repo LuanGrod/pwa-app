@@ -19,7 +19,7 @@ export function HotTopics() {
           parentKey: "id_area",
           parentIdParamName: "temas_id_area",
           parentLabelParamName: "areas_nome",
-          queryFieldEntity: "flashcards",
+          queryFieldEntity: "hot_topics",
           parentKeyEntity: "temas",
           connectionOperator: "or",
           customOptionComponent: "AreaFilterItem",
