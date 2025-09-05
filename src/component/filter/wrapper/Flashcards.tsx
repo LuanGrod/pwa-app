@@ -24,6 +24,7 @@ export function Flashcards() {
           queryFieldEntity: "flashcards",
           parentKeyEntity: "temas",
           connectionOperator: "or",
+          customOptionComponent: "AreaFilterItem",
         }),
       ],
       connectionOperator: "or",

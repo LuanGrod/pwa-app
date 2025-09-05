@@ -2,6 +2,7 @@
 
 import SelectFilter from "@global/filter/ui/Select";
 import BooleanFilter from "@global/filter/ui/Boolean";
+import GroupFilter from "@global/filter/ui/Group";
 import FilterWrapperBase from "@global/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
 import useQuestoes from "@/store/QuestaoStore";
@@ -10,17 +11,24 @@ import { useEffect } from "react";
 
 export function Questoes() {
   const filterDefinitions = [
-    new SelectFilter({
-      entity: "temas",
-      label: "Área / Tema",
-      queryField: "id_tema",
-      idParamName: "temas_id",
-      labelParamName: "temas_nome",
-      parentKey: "id_area",
-      parentIdParamName: "temas_id_area",
-      parentLabelParamName: "areas_nome",
-      queryFieldEntity: "questoes",
-      parentKeyEntity: "temas",
+    new GroupFilter({
+      children: [
+        new SelectFilter({
+          entity: "temas",
+          label: "Área / Tema",
+          queryField: "id_tema",
+          idParamName: "temas_id",
+          labelParamName: "temas_nome",
+          parentKey: "id_area",
+          parentIdParamName: "temas_id_area",
+          parentLabelParamName: "areas_nome",
+          queryFieldEntity: "flashcards",
+          parentKeyEntity: "temas",
+          connectionOperator: "or",
+          customOptionComponent: "AreaFilterItem",
+        }),
+      ],
+      connectionOperator: "or",
     }),
     new SelectFilter({
       entity: "instituicoes",

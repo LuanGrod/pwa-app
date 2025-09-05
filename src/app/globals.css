@@ -834,11 +834,36 @@ form .link-recuperacao-senha {
   display: flex;
   align-items: center;
   font-size: 15px;
-  line-height: 1.25;
+  line-height: 1;
   font-weight: 800;
   margin-bottom: 20px;
 }
-.custom-checkbox input[type=checkbox], .custom-checkbox input[type=radio] {
+.custom-checkbox.has-domain {
+  justify-content: space-between;
+  gap: 20px;
+}
+.custom-checkbox.has-domain.child-checkbox .left-section {
+  max-width: 76%;
+}
+.custom-checkbox.has-domain .domain-indicator {
+  font-size: 15px;
+  line-height: 1.25;
+  font-weight: 700;
+  width: 51px;
+  height: 38px;
+  padding: 7px 0px;
+  text-align: center;
+  background-color: var(--background-variation);
+  border-radius: 7px;
+}
+.custom-checkbox.has-domain .left-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 80%;
+}
+.custom-checkbox input[type=checkbox],
+.custom-checkbox input[type=radio] {
   display: none;
 }
 .custom-checkbox .checkmark {
@@ -879,6 +904,7 @@ form .link-recuperacao-senha {
   line-clamp: 1;
   overflow: hidden;
   word-break: break-all;
+  height: 15px;
 }
 .custom-checkbox .expand-icon {
   display: flex;

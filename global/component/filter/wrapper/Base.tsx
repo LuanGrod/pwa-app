@@ -7,7 +7,7 @@ import { useKeyDrawer } from "@global/hook/overlay/useKeyDrawer";
 import { Grid as FiltersGrid } from "@global/component/filter/grid/grid";
 import Filtros from "@global/component/overlay/drawer/filter/Filtros";
 import { Shadow as ShadowBtn } from "@global/component/button/Shadow";
-import { ReactNode } from "react";
+import { ReactNode, useEffect } from "react";
 
 type Props = {
   filterDefinitions: FilterInterface[];
@@ -32,6 +32,14 @@ export default function FilterWrapperBase({ filterDefinitions, entity, gridColum
     definitions,
     clearFilter,
   } = useFilters(filterDefinitions);
+
+  useEffect(() => {
+    console.log(JSON.stringify(options, null, 2));
+  }, [options]);
+
+  useEffect(() => {
+    console.log(JSON.stringify(values, null, 2));
+  }, [values]);
 
   const { drawerKey, setDrawerKey, handleOpenDrawer } = useKeyDrawer({ openDrawer });
 

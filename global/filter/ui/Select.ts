@@ -196,9 +196,10 @@ export default class Select extends AbstractFilter {
           const parentId = item[this.parentIdParamName];
           const parentLabel = item[this.parentLabelParamName];
 
-          // Se o pai ainda não existe, cria
+          // Se o pai ainda não existe, cria preservando todos os campos disponíveis
           if (!acc[parentId]) {
             acc[parentId] = {
+              ...item, // Preserva todos os campos do primeiro item como base para o pai
               [this.parentIdParamName]: parentId,
               [this.parentLabelParamName]: parentLabel,
               children: [],
@@ -206,21 +207,11 @@ export default class Select extends AbstractFilter {
             };
           }
 
-          // Adiciona o filho ao pai correspondente
-          if (this.customOptionComponent) {
-            // Se tem componente customizado, preserva todos os campos
-            acc[parentId].children.push({
-              ...item, // Preserva todos os campos da API
-              isParent: false,
-            });
-          } else {
-            // Comportamento padrão: apenas campos específicos
-            acc[parentId].children.push({
-              [this.idParamName]: item[this.idParamName],
-              [this.labelParamName]: item[this.labelParamName],
-              isParent: false,
-            });
-          }
+          // Adiciona o filho ao pai correspondente - sempre preserva todos os campos
+          acc[parentId].children.push({
+            ...item, // Preserva todos os campos da API
+            isParent: false,
+          });
 
           return acc;
         }, {})
@@ -228,21 +219,11 @@ export default class Select extends AbstractFilter {
 
       this.options = agrupado;
     } else {
-      // Estrutura simples, uma entidade apenas
-      if (this.customOptionComponent) {
-        // Se tem componente customizado, preserva todos os campos
-        this.options = data.map((item: any) => ({
-          ...item, // Preserva todos os campos da API
-          isParent: false,
-        }));
-      } else {
-        // Comportamento padrão: apenas campos específicos
-        this.options = data.map((item: any) => ({
-          [this.idParamName]: item[this.idParamName],
-          [this.labelParamName]: item[this.labelParamName],
-          isParent: false,
-        }));
-      }
+      // Estrutura simples, uma entidade apenas - sempre preserva todos os campos
+      this.options = data.map((item: any) => ({
+        ...item, // Preserva todos os campos da API
+        isParent: false,
+      }));
     }
   }
 

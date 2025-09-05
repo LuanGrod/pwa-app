@@ -6,6 +6,7 @@ import ParentFilterItem from "./ParentFilterItem";
 import SearchBar from "@global/component/atomic/SearchBar";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import useSearch from "@global/hook/useSearch";
+import SimpleFilterItem from "@global/component/overlay/drawer/filter/SimpleFilterItem";
 import { getFilterComponent } from "@/component/overlay/drawer/filter/CustomFilterComponents";
 
 interface Props {
@@ -60,8 +61,8 @@ export default function Filtros({
     setSearchTerm("");
   }, [open])
 
-  // Obtém o componente correto para renderizar
-  const FilterItemComponent = getFilterComponent(customOptionComponent);
+  // Obtém o componente customizado (pode ser null)
+  const CustomFilterComponent = getFilterComponent(customOptionComponent);
 
   return (
     <BottomDrawer customClass="semi-full" open={open} title={title} onClose={onClose}>
@@ -80,7 +81,19 @@ export default function Filtros({
       ) : (
         <div className="filter-items">
           {filteredOptions.map((opt: any, idx: number) => {
-            if (opt["isParent"]) {
+            // Prioridade: Custom Component → Parent → Simple
+            if (CustomFilterComponent) {
+              return (
+                <CustomFilterComponent
+                  key={idx}
+                  opt={opt}
+                  selected={selected}
+                  parentOpen={parentOpen}
+                  setParentOpen={setParentOpen}
+                  {...props}
+                />
+              );
+            } else if (opt["isParent"]) {
               return (
                 <ParentFilterItem
                   key={idx}
@@ -93,7 +106,7 @@ export default function Filtros({
               );
             } else {
               return (
-                <FilterItemComponent
+                <SimpleFilterItem
                   key={idx}
                   opt={opt}
                   selected={selected}
