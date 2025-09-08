@@ -30,8 +30,8 @@ export default function Questao({ data }: Props) {
         <UploadImage
           alt={data.questoes_enunciado}
           src={data.questoes_url_imagem}
-          height={200}
-          width={200}
+          height={300}
+          width={300}
           className="imagem"
           priority
         />

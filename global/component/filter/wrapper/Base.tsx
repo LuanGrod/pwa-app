@@ -33,14 +33,6 @@ export default function FilterWrapperBase({ filterDefinitions, entity, gridColum
     clearFilter,
   } = useFilters(filterDefinitions);
 
-  useEffect(() => {
-    console.log(JSON.stringify(options, null, 2));
-  }, [options]);
-
-  useEffect(() => {
-    console.log(JSON.stringify(values, null, 2));
-  }, [values]);
-
   const { drawerKey, setDrawerKey, handleOpenDrawer } = useKeyDrawer({ openDrawer });
 
   const handleEstudar = useEstudar({ buildFilterString, entity });

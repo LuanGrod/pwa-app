@@ -93,8 +93,13 @@
       }
 
       .image {
-        width: 284px;
-        height: 284px;
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: 284px;
+        margin-bottom: 20px;
+        display: block;
+        object-fit: contain;
       }
     }
 

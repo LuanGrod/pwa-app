@@ -1434,8 +1434,13 @@ form .link-recuperacao-senha {
 }
 .flashcard .front .content .image,
 .flashcard .back .content .image {
-  width: 284px;
-  height: 284px;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 284px;
+  margin-bottom: 20px;
+  display: block;
+  object-fit: contain;
 }
 .flashcard .front .footer,
 .flashcard .back .footer {
@@ -1529,9 +1534,13 @@ form .link-recuperacao-senha {
   margin-bottom: 20px;
 }
 .questao-wrapper .imagem {
-  max-height: 200px;
-  width: auto;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 240px;
   margin-bottom: 21px;
+  display: block;
+  object-fit: contain;
 }
 .questao-wrapper .alternativas-wrapper {
   display: flex;

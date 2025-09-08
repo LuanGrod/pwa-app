@@ -48,9 +48,13 @@
   }
 
   .imagem {
-    max-height: 200px;
-    width: auto;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 240px;
     margin-bottom: 21px;
+    display: block;
+    object-fit: contain;
   }
 
   .alternativas-wrapper {

@@ -30,7 +30,7 @@ export default function page({ }: Props) {
   });
 
   return (
-    <Structure title="Hot Topics" handleSearch={toggleSearch}>
+    <Structure title="Hot Topics" handleSearch={toggleSearch} href="/hot-topics">
       <UnderHeader open={searchActive} onClose={toggleSearch}>
         <SearchBar
           value={searchTerm || ""}
