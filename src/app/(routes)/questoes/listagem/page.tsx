@@ -38,16 +38,18 @@ export default function page({ }: Props) {
   }, [data])
 
   return (
-    <Structure>
-      <Viewing
-        data={getCurrent()}
-        loading={loading}
-        error={error}
-        loadingComponent={<Loading2 loading />}
-        renderItem={(item: QuestaoType) => <Questao data={item} />}
-      />
-      <AlertaQuestao open={isShowingAlert} />
-      <RespostaQuestao data={getCurrent()} open={isShowingAnswer} onClose={toggleIsShowingAnswer} />
-    </Structure>
+    <Viewing
+      data={getCurrent()}
+      loading={loading}
+      error={error}
+      loadingComponent={<Loading2 loading />}
+      renderItem={(item: QuestaoType) => (
+        <Structure>
+          <Questao data={item} />
+          <AlertaQuestao open={isShowingAlert} />
+          <RespostaQuestao data={getCurrent()} open={isShowingAnswer} onClose={toggleIsShowingAnswer} />
+        </Structure>
+      )}
+    />
   );
 }

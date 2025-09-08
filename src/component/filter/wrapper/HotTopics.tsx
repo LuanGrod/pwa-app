@@ -38,8 +38,7 @@ export function HotTopics() {
     }),
     new BooleanFilter({
       queryField: "nao_visto",
-      label: "Excluir já visualizados",
-      denialOperator: true
+      label: "Excluir já visualizados"
     }),
   ];
 

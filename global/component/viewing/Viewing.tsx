@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 import { EmptyMessage } from "@global/component/listing/message/empty";
 import { ErrorMessage } from "@global/component/listing/message/error";
 import { LoadingMessage } from "@global/component/listing/message/loading";
+import Loading2 from "../overlay/popup/dialog/Loading2";
 
 interface ViewingProps<T> {
   data: T | null;
@@ -20,7 +21,7 @@ export function Viewing<T>({
   loading,
   error,
   renderItem,
-  loadingComponent = <LoadingMessage />,
+  loadingComponent = <Loading2 loading />,
   emptyComponent = <EmptyMessage />,
   errorComponent = error ? <ErrorMessage error={error} /> : null,
 }: ViewingProps<T>) {

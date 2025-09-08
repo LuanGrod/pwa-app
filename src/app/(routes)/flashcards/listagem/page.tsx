@@ -11,6 +11,7 @@ import { ErrorMessage } from "@global/component/listing/message/error";
 import { EmptyMessage } from "@global/component/listing/message/empty";
 import { useGetRow } from "@global/hook/request/useGetRow";
 import { AnimatePresence, motion } from "motion/react";
+import { Viewing } from "@global/component/viewing/Viewing";
 
 type Props = {};
 
@@ -51,36 +52,40 @@ export default function page({ }: Props) {
     setTitle(current ? `${current.areas_nome}: ${current.temas_nome}` : "");
   }, [current])
 
-  if (loading) return <Loading2 loading />;
-  if (error) return <ErrorMessage error={error} />;
-  if (!data || !data.rows.flashcard) return <EmptyMessage />;
-
   return (
-    <>
-      {current && (
-        <Structure
-          title={title}
-          isFlipped={isFlipped}
-          isSlidding={isSlidding}
-          setTitle={setTitle}
-          setIsFlipped={setIsFlipped}
-          setIsSlidding={setIsSlidding}
-        >
-          <Flashcard
-            data={current}
-            isFlipped={isFlipped}
-            onFlip={!setIsSlidding ? () => setIsFlipped(!isFlipped) : () => { }}
-          />
-          {next && isSlidding && (
-            <Flashcard
-              data={next}
-              isFlipped={false}
-              onFlip={() => { }}
-              customClass="card-enter"
-            />
+    <Viewing
+      data={current}
+      error={error}
+      loading={loading}
+      renderItem={(item) => (
+        <>
+          {item && (
+            <Structure
+              title={title}
+              isFlipped={isFlipped}
+              isSlidding={isSlidding}
+              setTitle={setTitle}
+              setIsFlipped={setIsFlipped}
+              setIsSlidding={setIsSlidding}
+            >
+              <Flashcard
+                data={item}
+                isFlipped={isFlipped}
+                onFlip={!setIsSlidding ? () => setIsFlipped(!isFlipped) : () => { }}
+              />
+              {next && isSlidding && (
+                <Flashcard
+                  data={next}
+                  isFlipped={false}
+                  onFlip={() => { }}
+                  customClass="card-enter"
+                />
+              )}
+            </Structure>
           )}
-        </Structure>
+        </>
       )}
-    </>
+    >
+    </Viewing>
   );
 }

@@ -3,6 +3,7 @@ import { RequestBuilder } from "./Builder";
 import { GetRow as ResponseHandler } from "@global/request/response/handler/GetRow";
 import { ResponseHandlerInterface } from "../response/handler/HandlerInterface";
 import { CollectionInterface as HeaderHandlerCollection } from "@global/request/header/handler/collection/CollectionInterface";
+import ParamBuilder from "../helper/ParamBuilder";
 
 export type GetRowProps = {
   entity: string;
@@ -43,11 +44,21 @@ export class GetRow extends RequestBuilder {
     responseHandler = null,
   }: GetRowProps) {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+
     const endpoint = parentEntity
       ? `${apiUrl}/${parentEntity}/${parentId}/${entity}${id ? `/${id}` : ""}`
-      : `${apiUrl}/${entity}${id ? "/" + id : ""}`;
+      : `${apiUrl}/${entity}${id ? `/${id}` : ""}`;
+
     const method: Methods = "GET";
+
     responseHandler = responseHandler || new ResponseHandler({});
+
     super({ endpoint, method, headers, body: null, responseHandler });
+
+    const paramBuilder = new ParamBuilder();
+    const query = paramBuilder.build(params);
+    if (query) {
+      this.endpoint += `?${query}`;
+    }
   }
 }

@@ -3,6 +3,7 @@ import { RequestBuilder } from "./Builder";
 import { Listing as ResponseHandler } from "@global/request/response/handler/Listing";
 import { ResponseHandlerInterface } from "../response/handler/HandlerInterface";
 import { CollectionInterface as HeaderHandlerCollection } from "@global/request/header/handler/collection/CollectionInterface";
+import ParamBuilder from "../helper/ParamBuilder";
 
 type ListingProps = {
   entity: string;
@@ -36,16 +37,10 @@ export class Listing extends RequestBuilder {
 
     super({ endpoint, method, headers, body: null, responseHandler });
 
-    const query = this.buildQuery(params);
+    const paramBuilder = new ParamBuilder();
+    const query = paramBuilder.build(params);
     if (query) {
       this.endpoint += `?${query}`;
     }
-  }
-
-  buildQuery(params: Record<string, any>) {
-    const esc = encodeURIComponent;
-    return Object.entries(params)
-      .map(([k, v]) => `${esc(k)}=${esc(v)}`)
-      .join("&");
   }
 }

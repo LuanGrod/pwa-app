@@ -39,7 +39,6 @@ export function MapasMentais() {
     new BooleanFilter({
       queryField: "nao_visto",
       label: "Excluir já visualizados",
-      denialOperator: true,
     }),
   ];
 
