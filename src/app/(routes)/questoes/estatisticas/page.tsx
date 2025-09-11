@@ -18,8 +18,8 @@ export default function page({ }: Props) {
     needsAuthorization: true,
   });
 
-  const rightAnswers = answers?.filter((answer) => answer.answer === answer.correct).length || 0;
-  const wrongAnswers = answers?.filter((answer) => answer.answer && answer.answer !== answer.correct).length || 0;
+  const rightAnswers = answers?.filter((answer) => answer.confirmed && answer.answer === answer.correct).length || 0;
+  const wrongAnswers = answers?.filter((answer) => answer.confirmed && answer.answer && answer.answer !== answer.correct).length || 0;
 
   return (
     <Viewing

@@ -1544,11 +1544,17 @@ form .link-recuperacao-senha {
 }
 .questao-wrapper .alternativas-wrapper {
   display: flex;
-  flex-direction: column;
   gap: 17px;
   width: 100%;
 }
-.questao-wrapper .alternativas-wrapper .multiplo {
+.questao-wrapper .alternativas-wrapper:has(.questao-multiplo), .questao-wrapper .alternativas-wrapper:has(.questao-imagem) {
+  flex-direction: column;
+}
+.questao-wrapper .alternativas-wrapper:has(.questao-verdadeiro-falso) {
+  flex-direction: row;
+  gap: 10px;
+}
+.questao-wrapper .alternativas-wrapper .questao-multiplo {
   width: 100%;
   padding: 10px;
   background: var(--background-variation);
@@ -1556,32 +1562,32 @@ form .link-recuperacao-senha {
   display: flex;
   gap: 15px;
 }
-.questao-wrapper .alternativas-wrapper .multiplo.ativo {
+.questao-wrapper .alternativas-wrapper .questao-multiplo.ativo {
   -webkit-box-shadow: inset 0px 0px 0px 1px var(--foreground);
   -moz-box-shadow: inset 0px 0px 0px 1px var(--foreground);
   box-shadow: inset 0px 0px 0px 1px var(--foreground);
 }
-.questao-wrapper .alternativas-wrapper .multiplo.correto {
+.questao-wrapper .alternativas-wrapper .questao-multiplo.correto {
   background-color: #00cc77;
 }
-.questao-wrapper .alternativas-wrapper .multiplo.correto .letra {
+.questao-wrapper .alternativas-wrapper .questao-multiplo.correto .letra {
   background-color: rgba(255, 255, 255, 0.4588235294);
 }
-.questao-wrapper .alternativas-wrapper .multiplo.correto .conteudo {
+.questao-wrapper .alternativas-wrapper .questao-multiplo.correto .conteudo {
   color: #fff;
   font-weight: 700;
 }
-.questao-wrapper .alternativas-wrapper .multiplo.incorreto {
+.questao-wrapper .alternativas-wrapper .questao-multiplo.incorreto {
   background-color: #ff1ac6;
 }
-.questao-wrapper .alternativas-wrapper .multiplo.incorreto .letra {
+.questao-wrapper .alternativas-wrapper .questao-multiplo.incorreto .letra {
   background-color: rgba(255, 255, 255, 0.4588235294);
 }
-.questao-wrapper .alternativas-wrapper .multiplo.incorreto .conteudo {
+.questao-wrapper .alternativas-wrapper .questao-multiplo.incorreto .conteudo {
   color: #fff;
   font-weight: 700;
 }
-.questao-wrapper .alternativas-wrapper .multiplo .letra {
+.questao-wrapper .alternativas-wrapper .questao-multiplo .letra {
   height: 40px;
   width: 40px;
   display: flex;
@@ -1593,7 +1599,186 @@ form .link-recuperacao-senha {
   background-color: var(--background);
   border-radius: 10px;
 }
-.questao-wrapper .alternativas-wrapper .multiplo .conteudo {
+.questao-wrapper .alternativas-wrapper .questao-multiplo .conteudo {
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 500;
+  text-align: start;
+  width: 80%;
+  align-self: center;
+  font-family: var(--font-text);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  word-break: break-all;
+}
+.questao-wrapper .alternativas-wrapper .questao-verdadeiro-falso {
+  width: 50%;
+  min-height: 200px;
+  padding: 10px;
+  background: var(--background-variation);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.questao-wrapper .alternativas-wrapper .questao-verdadeiro-falso.ativo {
+  -webkit-box-shadow: inset 0px 0px 0px 1px var(--foreground);
+  -moz-box-shadow: inset 0px 0px 0px 1px var(--foreground);
+  box-shadow: inset 0px 0px 0px 1px var(--foreground);
+}
+.questao-wrapper .alternativas-wrapper .questao-verdadeiro-falso.correto {
+  background-color: #00cc77;
+}
+.questao-wrapper .alternativas-wrapper .questao-verdadeiro-falso.correto .letra {
+  background-color: rgba(255, 255, 255, 0.4588235294);
+}
+.questao-wrapper .alternativas-wrapper .questao-verdadeiro-falso.correto .conteudo {
+  color: #fff;
+  font-weight: 700;
+}
+.questao-wrapper .alternativas-wrapper .questao-verdadeiro-falso.incorreto {
+  background-color: #ff1ac6;
+}
+.questao-wrapper .alternativas-wrapper .questao-verdadeiro-falso.incorreto .letra {
+  background-color: rgba(255, 255, 255, 0.4588235294);
+}
+.questao-wrapper .alternativas-wrapper .questao-verdadeiro-falso.incorreto .conteudo {
+  color: #fff;
+  font-weight: 700;
+}
+.questao-wrapper .alternativas-wrapper .questao-verdadeiro-falso .letra {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 700;
+  background-color: var(--background);
+  border-radius: 10px;
+}
+.questao-wrapper .alternativas-wrapper .questao-verdadeiro-falso .conteudo {
+  font-size: 14px;
+  line-height: 1.25;
+  font-weight: 500;
+  text-align: start;
+  width: 80%;
+  align-self: center;
+  font-family: var(--font-text);
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  overflow: hidden;
+  word-break: break-all;
+}
+.questao-wrapper .alternativas-wrapper .questao-imagem {
+  width: 100%;
+  min-height: 200px;
+  padding: 10px;
+  background: var(--background-variation);
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+.questao-wrapper .alternativas-wrapper .questao-imagem.ativo {
+  -webkit-box-shadow: inset 0px 0px 0px 1px var(--foreground);
+  -moz-box-shadow: inset 0px 0px 0px 1px var(--foreground);
+  box-shadow: inset 0px 0px 0px 1px var(--foreground);
+}
+.questao-wrapper .alternativas-wrapper .questao-imagem.correto {
+  background-color: #00cc77;
+}
+.questao-wrapper .alternativas-wrapper .questao-imagem.correto .letra {
+  background-color: rgba(255, 255, 255, 0.4588235294);
+}
+.questao-wrapper .alternativas-wrapper .questao-imagem.correto .conteudo {
+  color: #fff;
+  font-weight: 700;
+}
+.questao-wrapper .alternativas-wrapper .questao-imagem.incorreto {
+  background-color: #ff1ac6;
+}
+.questao-wrapper .alternativas-wrapper .questao-imagem.incorreto .letra {
+  background-color: rgba(255, 255, 255, 0.4588235294);
+}
+.questao-wrapper .alternativas-wrapper .questao-imagem.incorreto .conteudo {
+  color: #fff;
+  font-weight: 700;
+}
+.questao-wrapper .alternativas-wrapper .questao-imagem .letra {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 700;
+  background-color: var(--background);
+  border-radius: 10px;
+}
+.questao-wrapper .alternativas-wrapper .questao-imagem img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 180px;
+  display: block;
+  object-fit: contain;
+}
+.questao-wrapper .alternativas-wrapper .questao-aberta {
+  display: none;
+  width: 100%;
+  padding: 10px;
+  background: var(--background-variation);
+  border-radius: 6px;
+  gap: 15px;
+}
+.questao-wrapper .alternativas-wrapper .questao-aberta.ativo {
+  -webkit-box-shadow: inset 0px 0px 0px 1px var(--foreground);
+  -moz-box-shadow: inset 0px 0px 0px 1px var(--foreground);
+  box-shadow: inset 0px 0px 0px 1px var(--foreground);
+}
+.questao-wrapper .alternativas-wrapper .questao-aberta.correto {
+  background-color: #00cc77;
+}
+.questao-wrapper .alternativas-wrapper .questao-aberta.correto .letra {
+  background-color: rgba(255, 255, 255, 0.4588235294);
+}
+.questao-wrapper .alternativas-wrapper .questao-aberta.correto .conteudo {
+  color: #fff;
+  font-weight: 700;
+}
+.questao-wrapper .alternativas-wrapper .questao-aberta.incorreto {
+  background-color: #ff1ac6;
+}
+.questao-wrapper .alternativas-wrapper .questao-aberta.incorreto .letra {
+  background-color: rgba(255, 255, 255, 0.4588235294);
+}
+.questao-wrapper .alternativas-wrapper .questao-aberta.incorreto .conteudo {
+  color: #fff;
+  font-weight: 700;
+}
+.questao-wrapper .alternativas-wrapper .questao-aberta .letra {
+  height: 40px;
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  line-height: 1;
+  font-weight: 700;
+  background-color: var(--background);
+  border-radius: 10px;
+}
+.questao-wrapper .alternativas-wrapper .questao-aberta .conteudo {
   font-size: 14px;
   line-height: 1.25;
   font-weight: 500;
@@ -1685,11 +1870,15 @@ form .link-recuperacao-senha {
   color: var(--emphasis);
   margin-bottom: 10px;
 }
+.questoes-drawer .alternativa-imagem,
 .questoes-drawer .imagem {
-  max-height: 200px;
-  width: auto;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 180px;
+  display: block;
+  object-fit: contain;
   margin-bottom: 21px;
-  align-self: center;
 }
 .questoes-drawer .comentario,
 .questoes-drawer .referencia,
@@ -1751,6 +1940,21 @@ form .link-recuperacao-senha {
   position: absolute;
   top: 10px;
   right: 5px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 50%;
+  border: 1px solid #c4c4c4;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.pfp-wrapper .pfp .btn-delete {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 10px;
+  left: 5px;
   background: rgba(255, 255, 255, 0.8);
   border-radius: 50%;
   border: 1px solid #c4c4c4;

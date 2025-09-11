@@ -62,7 +62,7 @@ export default function page({ }: Props) {
     <main className="content-wrapper simulado-statistics-wrapper">
       <div className="section">
         <h1 className="title">Gabarito da prova</h1>
-        <p className="exam">{test?.estados_uf} {test?.instituicoes_nome}</p>
+        <p className="exam">{test?.estados_uf}: {test?.instituicoes_nome}</p>
         <p className="year">Prova de {test?.provas_ano}</p>
 
         <CardSimulado

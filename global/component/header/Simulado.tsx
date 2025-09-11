@@ -48,13 +48,11 @@ export default function Simulado({ }: Props) {
     // Atualiza o tempo restante imediatamente
     setCurrentRemainingTime({value: getRemainingTime(), formattedValue: getFormattedRemainingTime("detailed")});
 
-    // Atualiza o tempo restante a cada 30 segundos
     const updateInterval = setInterval(() => {
       const remaining = getRemainingTime();
       const formatted = getFormattedRemainingTime("detailed");
       setCurrentRemainingTime({value: remaining, formattedValue: formatted});
 
-      // Se tempo acabou, finaliza automaticamente
       if (remaining <= 0) {
         checkExamTimeout(router);
       }

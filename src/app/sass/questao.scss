@@ -59,16 +59,234 @@
 
   .alternativas-wrapper {
     display: flex;
-    flex-direction: column;
     gap: 17px;
     width: 100%;
 
-    .multiplo {
+    &:has(.questao-multiplo),
+    &:has(.questao-imagem) {
+      flex-direction: column;
+    }
+
+    &:has(.questao-verdadeiro-falso) {
+      flex-direction: row;
+      gap: 10px;
+    }
+
+    .questao-multiplo {
       width: 100%;
       padding: 10px;
       background: var(--background-variation);
       border-radius: 6px;
       display: flex;
+      gap: 15px;
+
+      &.ativo {
+        -webkit-box-shadow: inset 0px 0px 0px 1px var(--foreground);
+        -moz-box-shadow: inset 0px 0px 0px 1px var(--foreground);
+        box-shadow: inset 0px 0px 0px 1px var(--foreground);
+      }
+
+      &.correto {
+        background-color: #00cc77;
+
+        .letra {
+          background-color: #ffffff75;
+        }
+
+        .conteudo {
+          color: #fff;
+          font-weight: 700;
+        }
+      }
+
+      &.incorreto {
+        background-color: #ff1ac6;
+
+        .letra {
+          background-color: #ffffff75;
+        }
+
+        .conteudo {
+          color: #fff;
+          font-weight: 700;
+        }
+      }
+
+      .letra {
+        height: 40px;
+        width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        line-height: 1;
+        font-weight: 700;
+        background-color: var(--background);
+        border-radius: 10px;
+      }
+
+      .conteudo {
+        font-size: 14px;
+        line-height: 1.25;
+        font-weight: 500;
+        text-align: start;
+        width: 80%;
+        align-self: center;
+        font-family: var(--font-text);
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+        word-break: break-all;
+      }
+    }
+
+    .questao-verdadeiro-falso {
+      width: 50%;
+      min-height: 200px;
+      padding: 10px;
+      background: var(--background-variation);
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      &.ativo {
+        -webkit-box-shadow: inset 0px 0px 0px 1px var(--foreground);
+        -moz-box-shadow: inset 0px 0px 0px 1px var(--foreground);
+        box-shadow: inset 0px 0px 0px 1px var(--foreground);
+      }
+
+      &.correto {
+        background-color: #00cc77;
+
+        .letra {
+          background-color: #ffffff75;
+        }
+
+        .conteudo {
+          color: #fff;
+          font-weight: 700;
+        }
+      }
+
+      &.incorreto {
+        background-color: #ff1ac6;
+
+        .letra {
+          background-color: #ffffff75;
+        }
+
+        .conteudo {
+          color: #fff;
+          font-weight: 700;
+        }
+      }
+
+      .letra {
+        height: 40px;
+        width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        line-height: 1;
+        font-weight: 700;
+        background-color: var(--background);
+        border-radius: 10px;
+      }
+
+      .conteudo {
+        font-size: 14px;
+        line-height: 1.25;
+        font-weight: 500;
+        text-align: start;
+        width: 80%;
+        align-self: center;
+        font-family: var(--font-text);
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+        word-break: break-all;
+      }
+    }
+
+    .questao-imagem {
+      width: 100%;
+      min-height: 200px;
+      padding: 10px;
+      background: var(--background-variation);
+      border-radius: 6px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+
+      &.ativo {
+        -webkit-box-shadow: inset 0px 0px 0px 1px var(--foreground);
+        -moz-box-shadow: inset 0px 0px 0px 1px var(--foreground);
+        box-shadow: inset 0px 0px 0px 1px var(--foreground);
+      }
+
+      &.correto {
+        background-color: #00cc77;
+
+        .letra {
+          background-color: #ffffff75;
+        }
+
+        .conteudo {
+          color: #fff;
+          font-weight: 700;
+        }
+      }
+
+      &.incorreto {
+        background-color: #ff1ac6;
+
+        .letra {
+          background-color: #ffffff75;
+        }
+
+        .conteudo {
+          color: #fff;
+          font-weight: 700;
+        }
+      }
+
+      .letra {
+        height: 40px;
+        width: 40px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        line-height: 1;
+        font-weight: 700;
+        background-color: var(--background);
+        border-radius: 10px;
+      }
+
+      img {
+        width: 100%;
+        max-width: 100%;
+        height: auto;
+        max-height: 180px;
+        display: block;
+        object-fit: contain;
+      }
+    }
+
+    .questao-aberta {
+      display: none;
+      width: 100%;
+      padding: 10px;
+      background: var(--background-variation);
+      border-radius: 6px;
       gap: 15px;
 
       &.ativo {
@@ -220,11 +438,15 @@
     margin-bottom: 10px;
   }
 
+  .alternativa-imagem,
   .imagem {
-    max-height: 200px;
-    width: auto;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 180px;
+    display: block;
+    object-fit: contain;
     margin-bottom: 21px;
-    align-self: center;
   }
 
   .comentario,

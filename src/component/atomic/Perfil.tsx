@@ -16,6 +16,8 @@ import { Upload } from "@global/request/builder/api/Upload";
 import { useEstudante } from "@/store/EstudanteStore";
 import { Upload as UploadResponseHandler } from "@global/request/response/handler/api/Upload";
 import UpdateOnUploadFile from "@global/request/response/handler/action/UpdateOnUploadFile";
+import Fechar from "@global/component/icons/Fechar";
+import { Update } from "@global/request/builder/api/Update";
 
 type Props = {
   data: EstudanteType;
@@ -51,6 +53,31 @@ export default function Perfil({ data, setData }: Props) {
     }
   }
 
+  const handleDelete = async () => {
+    if (!data.estudantes_url_imagem) return;
+
+    const formData = {
+      estudantes_url_imagem: ""
+    }
+
+    const update = new Update({
+      entity: "estudantes3",
+      body: formData,
+      responseHandler: new UploadResponseHandler({
+        onSuccessCallback: () => {
+          setData({
+            ...data,
+            estudantes_url_imagem: ""
+          });
+          updateUrlImagem("");
+        },
+      })
+    });
+
+    await update.build(true);
+
+  }
+
   return (
     <>
       <div className="pfp-wrapper">
@@ -67,6 +94,9 @@ export default function Perfil({ data, setData }: Props) {
             <label htmlFor="teste">
               <Camera size={20} className="camera-icon" />
             </label>
+          </button>
+          <button className="btn-delete" onClick={handleDelete}>
+            <Fechar size={14} className="camera-icon" />
           </button>
         </div>
         <div className="title-wrapper">
@@ -87,6 +117,7 @@ export default function Perfil({ data, setData }: Props) {
         </PerfilItem>
         <PerfilItem label="Data de nascimento:" value={dateFormatter.format(data.estudantes_data_nascimento)} />
         <PerfilItem label="Whatsapp:" value={phoneFormatter.format(data.estudantes_whatsapp)} />
+        <PerfilItem label="Instagram:" value={data.estudantes_nome_instagram} />
         <PerfilItem label="Instituições de interesse:" value={data.estudantes_instituicoes_interesse} />
         <PerfilItem label="Especialidade-alvo:" value={data.estudantes_especialidade} />
       </div>

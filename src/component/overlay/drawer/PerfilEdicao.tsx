@@ -42,9 +42,21 @@ export default function PerfilEdicao({ open, onClose, data, setData }: Props) {
       entity: "estudantes",
       defaultValue: data.estudantes_email
     }),
+    new DataNascimento({
+      entity: "estudantes",
+      defaultValue: data.estudantes_data_nascimento,
+    }),
     new Whatsapp({
       entity: "estudantes",
       defaultValue: phoneFormatter.format(data.estudantes_whatsapp)
+    }),
+    new Text({
+      entity: "estudantes",
+      defaultValue: data.estudantes_nome_instagram,
+      formName: "Nome de usuário do Instagram",
+      fieldName: "nome_instagram",
+      textName: "nome de usuário do Instagram",
+      validators: [MaxLengthValidatorFactory.create(100)],
     }),
     new Textarea({
       entity: "estudantes",
@@ -61,10 +73,6 @@ export default function PerfilEdicao({ open, onClose, data, setData }: Props) {
       textName: "especialidade de interesse",
       textNameGender: false,
       validators: [MaxLengthValidatorFactory.create(200)],
-    }),
-    new DataNascimento({
-      entity: "estudantes",
-      defaultValue: data.estudantes_data_nascimento,
     }),
     new Hidden({
       entity: "estudantes",

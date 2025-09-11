@@ -17,6 +17,12 @@ export type QuestaoAnswerType = {
   ordem: string;
 };
 
+export type QuestionTypes =
+  | "questao-multiplo"
+  | "questao-verdadeiro-falso"
+  | "questao-imagem"
+  | "questao-aberta";
+
 type testType = {
   provas_id: string;
   instituicoes_nome: string;
@@ -78,6 +84,7 @@ type QuestoesStore = {
     area: string;
     accuracy: number; // Porcentagem de acerto (0-100)
   }>;
+  getQuestionType: (questao?: QuestaoType) => QuestionTypes;
 };
 
 let examStorage = createLocalStorageStore(10);
@@ -188,10 +195,16 @@ const useQuestoes = create<QuestoesStore>()(
           pack,
           answers,
           toggleAlert,
+          getQuestionType,
           user,
         } = get();
         const currentQuestao = getCurrent();
         const currentAnswer = getCurrentAnswer();
+        const tipo = getQuestionType();
+
+        if (tipo === "questao-aberta" && currentAnswer) {
+          currentAnswer.answer = currentAnswer.correct;
+        }
 
         if (
           !pack ||
@@ -218,7 +231,10 @@ const useQuestoes = create<QuestoesStore>()(
           toggleIsShowingAnswer();
 
           if (!currentAnswer.confirmed) {
-            toggleAlert();
+            //eu coloquei um delay por causa da demora na atualização do estado da resposta (205) quando a questão é aberta
+            setTimeout(() => {
+              toggleAlert();
+            }, 100);
 
             const insert = new Insert({
               entity: "respostas-questoes2",
@@ -370,7 +386,17 @@ const useQuestoes = create<QuestoesStore>()(
         return false; // Exame ainda está em andamento
       },
       finishExam: async (router: AppRouterInstance) => {
-        set({ examEndTime: Date.now(), isSaving: false });
+        const { pack, answers, getQuestionType } = get();
+
+        let newAnswers = answers;
+
+        pack?.map((questao, index) => {
+          if (newAnswers && getQuestionType(questao) === "questao-aberta") {
+            newAnswers[index].answer = newAnswers[index].correct;
+          }
+        });
+
+        set({ examEndTime: Date.now(), isSaving: false, answers: newAnswers });
 
         startTransition(() => {
           router.push("/simulados/gabarito");
@@ -558,6 +584,40 @@ const useQuestoes = create<QuestoesStore>()(
             };
           })
           .sort((a, b) => a.area.localeCompare(b.area)); // Ordena alfabeticamente
+      },
+      getQuestionType: (questao?: QuestaoType) => {
+        const { getCurrent } = get();
+
+        const data = questao || getCurrent();
+
+        if (!data) return "questao-multiplo";
+
+        const alternativas = [
+          data.questoes_alternativa_a || data.questoes_alternativa_a_url_imagem,
+          data.questoes_alternativa_b || data.questoes_alternativa_b_url_imagem,
+          data.questoes_alternativa_c || data.questoes_alternativa_c_url_imagem,
+          data.questoes_alternativa_d || data.questoes_alternativa_d_url_imagem,
+          data.questoes_alternativa_e || data.questoes_alternativa_e_url_imagem,
+        ];
+
+        const imageExtensions = [".jpg", ".png", ".jpeg"];
+
+        const qtdAlternativas = alternativas.filter((item) => item && item.trim() !== "").length;
+
+        const imagemAlternativa = alternativas.some(
+          (item) =>
+            item &&
+            item.trim() !== "" &&
+            imageExtensions.some((ext) => item.toLowerCase().endsWith(ext))
+        );
+
+        return imagemAlternativa
+          ? "questao-imagem"
+          : qtdAlternativas === 1
+          ? "questao-aberta"
+          : qtdAlternativas === 2
+          ? "questao-verdadeiro-falso"
+          : "questao-multiplo";
       },
     }),
     {

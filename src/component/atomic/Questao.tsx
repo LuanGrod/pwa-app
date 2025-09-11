@@ -1,25 +1,23 @@
 import { Questao as QuestaoType } from "@/type/Entities";
 import UploadImage from "@global/component/atomic/UploadImage";
 import QuestaoAlternativa from "./QuestaoAlternativa";
+import useQuestoes from "@/store/QuestaoStore";
 
 type Props = {
   data: QuestaoType;
 };
 
 export default function Questao({ data }: Props) {
+
+  const {getQuestionType} = useQuestoes();
+
   const alternativas = [
-    data.questoes_alternativa_a,
-    data.questoes_alternativa_b,
-    data.questoes_alternativa_c,
-    data.questoes_alternativa_d,
-    // data.questoes_alternativa_e,
+    data.questoes_alternativa_a || data.questoes_alternativa_a_url_imagem,
+    data.questoes_alternativa_b || data.questoes_alternativa_b_url_imagem,
+    data.questoes_alternativa_c || data.questoes_alternativa_c_url_imagem,
+    data.questoes_alternativa_d || data.questoes_alternativa_d_url_imagem,
+    data.questoes_alternativa_e || data.questoes_alternativa_e_url_imagem,
   ];
-  const imageExtensions = [".jpg", ".png", ".jpeg"];
-  const qtdAlternativas = alternativas.filter((item) => item && item.trim() !== "").length;
-  const imagemAlternativa = alternativas.some(
-    (item) => item && item.trim() !== "" && imageExtensions.some((ext) => item.toLowerCase().endsWith(ext))
-  );
-  const alternativaClassname = imagemAlternativa ? "imagem" : qtdAlternativas === 2 ? "verdadeiro" : "multiplo";
 
   return (
     <div className="questao-wrapper">
@@ -37,11 +35,11 @@ export default function Questao({ data }: Props) {
         />
       )}
       <div className="alternativas-wrapper">
-        <QuestaoAlternativa tipo={alternativaClassname} alternativa="A" conteudo={data.questoes_alternativa_a} />
-        <QuestaoAlternativa tipo={alternativaClassname} alternativa="B" conteudo={data.questoes_alternativa_b} />
-        <QuestaoAlternativa tipo={alternativaClassname} alternativa="C" conteudo={data.questoes_alternativa_c} />
-        <QuestaoAlternativa tipo={alternativaClassname} alternativa="D" conteudo={data.questoes_alternativa_d} />
-        <QuestaoAlternativa tipo={alternativaClassname} alternativa="E" conteudo={data.questoes_alternativa_e} />
+        <QuestaoAlternativa tipo={getQuestionType()} alternativa="A" conteudo={alternativas[0]} />
+        <QuestaoAlternativa tipo={getQuestionType()} alternativa="B" conteudo={alternativas[1]} />
+        <QuestaoAlternativa tipo={getQuestionType()} alternativa="C" conteudo={alternativas[2]} />
+        <QuestaoAlternativa tipo={getQuestionType()} alternativa="D" conteudo={alternativas[3]} />
+        <QuestaoAlternativa tipo={getQuestionType()} alternativa="E" conteudo={alternativas[4]} />
       </div>
     </div>
   );

@@ -1,8 +1,9 @@
 import useQuestoes from "@/store/QuestaoStore";
+import UploadImage from "@global/component/atomic/UploadImage";
 import cls from "clsx/lite";
 
 type Props = {
-  tipo: "multiplo" | "verdadeiro" | "imagem";
+  tipo: "questao-multiplo" | "questao-verdadeiro-falso" | "questao-imagem" | "questao-aberta";
   conteudo?: string;
   alternativa: "A" | "B" | "C" | "D" | "E";
 };
@@ -12,10 +13,6 @@ export default function QuestaoAlternativa({ tipo, conteudo, alternativa }: Prop
 
   if (!conteudo || conteudo.trim() === "") {
     return null;
-  }
-
-  if (tipo === "imagem") {
-    return <div>imagem</div>;
   }
 
   return (
@@ -34,7 +31,13 @@ export default function QuestaoAlternativa({ tipo, conteudo, alternativa }: Prop
       )}
     >
       <p className="letra">{alternativa}</p>
-      <p className="conteudo">{conteudo}</p>
+      {
+        tipo === "questao-imagem" ? (
+          <UploadImage alt={conteudo} src={conteudo} height={300} width={300} />
+        ) : (
+          <p className="conteudo">{conteudo}</p>
+        )
+      }
     </button>
   );
 }

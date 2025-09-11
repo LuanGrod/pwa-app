@@ -77,12 +77,12 @@ export function Questoes() {
     new BooleanFilter({
       queryField: "anulada",
       label: "Excluir anuladas",
-      denialOperator: true,
+      activeValue: "0",
     }),
     new BooleanFilter({
       queryField: "desatualizada",
       label: "Excluir desatualizadas",
-      denialOperator: true,
+      activeValue: "0",
     }),
     new BooleanFilter({
       queryFieldEntity: "questoes",

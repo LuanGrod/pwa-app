@@ -10,6 +10,8 @@ import { startTransition, useEffect } from "react";
 import { useListing } from "@global/hook/request/useListing";
 import Structure from "@/component/structure/Simulado";
 import { FilterParser } from "@global/filter/FilterParser";
+import AlertaQuestao from "@/component/overlay/drawer/AlertaQuestao";
+import RespostaQuestao from "@/component/overlay/drawer/RespostaQuestao";
 
 type Props = {};
 
@@ -34,7 +36,7 @@ export default function page({ }: Props) {
   }, [])
 
   const { data, loading, error } = useListing<QuestaoType>({
-    entity: "questoes",
+    entity: "questoes2",
     params: { filters: filters },
     needsAuthorization: true,
   });
@@ -42,20 +44,20 @@ export default function page({ }: Props) {
   useEffect(() => {
     if (data.rows && data.rows.length > 0) {
       setPack(data.rows);
-    } else {
-      setPack([]);
     }
-  }, [data, filters, provaId])
+  }, [data, provaId])
 
   return (
-    <Structure>
-      <Viewing
-        data={getCurrent()}
-        loading={loading && !_hasHydrated}
-        error={error}
-        loadingComponent={<Loading2 loading />}
-        renderItem={(item: QuestaoType) => <Questao data={item} />}
-      />
-    </Structure>
+    <Viewing
+      data={getCurrent()}
+      loading={loading}
+      error={error}
+      loadingComponent={<Loading2 loading overlay />}
+      renderItem={(item: QuestaoType) => (
+        <Structure>
+          <Questao data={item} />
+        </Structure>
+      )}
+    />
   );
 }

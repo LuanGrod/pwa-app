@@ -3,11 +3,16 @@
 export type Questao = {
   questoes_id: string;
   questoes_enunciado: string;
-  questoes_alternativa_a: string;
-  questoes_alternativa_b: string;
-  questoes_alternativa_c: string;
-  questoes_alternativa_d: string;
-  questoes_alternativa_e: string;
+  questoes_alternativa_a?: string;
+  questoes_alternativa_b?: string;
+  questoes_alternativa_c?: string;
+  questoes_alternativa_d?: string;
+  questoes_alternativa_e?: string;
+  questoes_alternativa_a_url_imagem?: string;
+  questoes_alternativa_b_url_imagem?: string;
+  questoes_alternativa_c_url_imagem?: string;
+  questoes_alternativa_d_url_imagem?: string;
+  questoes_alternativa_e_url_imagem?: string;
   questoes_gabarito: string;
   questoes_comentario_resposta: string;
   questoes_comentario_resposta_url_imagem?: string;
@@ -96,6 +101,7 @@ export type Estudante = {
   estudantes_especialidade: string;
   estudantes_data_nascimento: string;
   estudantes_url_imagem?: string;
+  estudantes_nome_instagram?: string;
 };
 
 // FATURA

@@ -28,7 +28,7 @@ export default function QuestoesErradas({ onClose, open, answers }: Props) {
   const rightColumnQuestions = answers.slice(halfLength);
 
   const handleSavePDF = async () => {
-    alert("Not Implemented Yet")
+    alert("Not Implemented Yet");
   }
 
   return (
