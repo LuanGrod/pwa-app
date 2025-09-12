@@ -1,3 +1,11 @@
+.extensivo-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .extensivo-week {
   .title {
     font-size: var(--font-base);

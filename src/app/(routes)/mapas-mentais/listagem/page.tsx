@@ -3,7 +3,6 @@
 import { Listing } from "@global/component/listing/Listing";
 import Structure from "@/component/structure/ReturnTitleSearch";
 import { useListing } from "@global/hook/request/useListing";
-import { ImageItem } from "@global/listing/ImageItem";
 import { useSearchParams } from "next/navigation";
 import SearchBar from "@global/component/atomic/SearchBar";
 import useSearch from "@global/hook/useSearch";
@@ -11,6 +10,8 @@ import { MapasMentaisListagem } from "@/type/Entities";
 import { UnderHeader } from "@global/component/overlay/drawer/UnderHeader";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import useDialog from "@global/hook/overlay/useDialog";
+import Estrela from "@global/component/icons/Estrela";
+import { ToggleableItem } from "@global/listing/ToggleableItem";
 
 type Props = {};
 
@@ -45,7 +46,7 @@ export default function page({ }: Props) {
         error={error}
         loadingComponent={<Loading2 loading={loading} />}
         renderItem={(item) => (
-          <ImageItem
+          <ToggleableItem
             data={item}
             setData={setFilteredData}
             entity="mapas-mentais"
@@ -53,14 +54,16 @@ export default function page({ }: Props) {
             imageSrc={item.areas_url_imagem}
             subtitle={item.mapas_mentais_nome}
             title={item.temas_nome}
-            hasViewed
             viewed={!!item.mapas_mentais_estudantes_id}
-            ToggleAddRemove={{
+            icon={<Estrela size={26} changeOnTheme className="status" />}
+            toggleConfig={{
               entity: "mapas-mentais-estudantes",
               idParamName: "mapas_mentais_estudantes_id",
               keyParamName: "mapas_mentais_id",
-              insertDataIdParamName: "id_mapa_mental",
-              insertDataEntityParamName: "mapas_mentais_estudantes",
+              insertDataConfig: {
+                entityIdField: "mapas_mentais_estudantes_id_mapa_mental",
+                userIdField: "mapas_mentais_estudantes_id_estudante",
+              },
             }}
           />
         )}

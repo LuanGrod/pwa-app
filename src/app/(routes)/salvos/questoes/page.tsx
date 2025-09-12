@@ -4,12 +4,13 @@ import Structure from "@/component/structure/ReturnTitleSearch";
 import { useListing } from "@global/hook/request/useListing";
 import { Listing } from "@global/component/listing/Listing";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
-import { ItemSalvo as ListItemSalvo } from "@global/listing/IconItem";
+import { IconItem } from "@global/listing/IconItem";
 import useSearch from "@global/hook/useSearch";
 import SearchBar from "@global/component/atomic/SearchBar";
 import { UnderHeader } from "@global/component/overlay/drawer/UnderHeader";
 import { QuestoesSalvos } from "@/type/Entities";
 import useDialog from "@global/hook/overlay/useDialog";
+import Bandeira from "@global/component/icons/Bandeira";
 
 type Props = {};
 
@@ -42,11 +43,12 @@ export default function page({ }: Props) {
         error={error}
         loadingComponent={<Loading2 loading={loading} />}
         renderItem={(item) => (
-          <ListItemSalvo
+          <IconItem
             subtitle={item.instituicoes_nome_instituicao_com_ano}
             title={item.questoes_enunciado}
             entity="questoes"
             entityId={item.questoes_salvos_id_questao}
+            icon={<Bandeira size={25} className="logo" />}
           />
         )}
       />

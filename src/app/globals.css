@@ -2137,6 +2137,14 @@ form .link-recuperacao-senha {
   justify-content: center;
 }
 
+.extensivo-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
 .extensivo-week .title {
   font-size: var(--font-base);
   line-height: 1.25;
@@ -2591,6 +2599,113 @@ form .link-recuperacao-senha {
   font-size: 2rem;
   font-weight: bold;
   height: 2rem;
+}
+
+.home-container {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+.home-container .title {
+  font-weight: 400;
+  text-align: center;
+  font-size: 32px;
+  font-family: var(--font-rounded);
+  color: var(--emphasis);
+}
+.home-container .title-salvos {
+  text-align: center;
+  font-size: 20px;
+  font-family: var(--font-rounded);
+}
+
+.login-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 1.5rem;
+}
+.login-container .logo {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 52px;
+  margin-bottom: 52px;
+}
+.login-container .logo .title {
+  font-size: 1.5rem;
+  line-height: 1.3333333333;
+  font-family: var(--font-rounded);
+  color: var(--emphasis);
+}
+
+.recuperacao-senha-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: calc(100vh - 183px);
+}
+.recuperacao-senha-container .description {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-bottom: 2.25rem;
+}
+.recuperacao-senha-container .description .title {
+  font-size: 1.5rem;
+  line-height: 1.3333333333;
+  font-family: var(--font-title);
+  text-align: start;
+  font-weight: 600;
+}
+.recuperacao-senha-container .description .subtitle {
+  font-size: 0.875rem;
+  line-height: 1.3333333333;
+  font-family: var(--font-text);
+  color: var(--foreground-variation);
+  text-align: start;
+}
+
+.geracao-nova-senha-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  padding: 1.5rem;
+}
+.geracao-nova-senha-container .description {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: start;
+  margin-bottom: 2.25rem;
+}
+.geracao-nova-senha-container .description .title {
+  font-size: 1.5rem;
+  line-height: 1.3333333333;
+  font-family: var(--font-title);
+  text-align: start;
+  font-weight: 600;
+}
+.geracao-nova-senha-container .description .subtitle {
+  font-size: 0.875rem;
+  line-height: 1.3333333333;
+  font-family: var(--font-text);
+  color: var(--foreground-variation);
+  text-align: start;
 }
 
 body {

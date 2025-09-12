@@ -7,8 +7,8 @@ type Props = {};
 export default function page({}: Props) {
   return (
     <Structure>
-      <div className={styles.container}>
-        <h1 className={styles.title}>Salvos</h1>
+      <div className="home-container">
+        <h1 className="title-salvos">Salvos</h1>
         <IconFrameContainer
           links={[
             { href: "/salvos/hot-topics", image: "/project/assets/HotTopics.svg", label: "Hot topics" },

@@ -30,7 +30,7 @@ export default function page({
       loadingComponent={<Loading2 loading />}
       renderItem={(item) =>
         <Structure title={item.extensivos_nome}>
-          <div className={styles.container}>
+          <div className="extensivo-container">
             <IconFrameContainer
               links={[
                 { href: `/hot-topics/listagem?filters=hot_topics_id_0{in}${item.hot_topics_extensivos_ids || ""}`, image: "/project/assets/HotTopics.svg", label: "Hot topics" },

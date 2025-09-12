@@ -6,9 +6,9 @@ type Props = {};
 
 export default function page({}: Props) {
   return (
-    <div className={styles.container}>
-      <div className={styles.logoContainer}>
-        <h1 className={styles.title}>MedRQE</h1>
+    <div className="login-container">
+      <div className="logo">
+        <h1 className="title">MedRQE</h1>
         <Logo size={139} className="logo" />
       </div>
       <Login />

@@ -28,7 +28,7 @@ interface Props {
   hasSearch?: boolean;
   selectionMode?: "multi" | "single";
   customLabelFields?: string[];
-  customOptionComponent?: ComponentType<any>;
+  customOptionComponent?: ComponentType<any> | null;
 }
 
 export default function Filtros({

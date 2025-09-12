@@ -24,6 +24,10 @@
 @use "howToStudy";
 @use "iconFrame";
 @use "splashScreen";
+@use "home";
+@use "login";
+@use "recuperacaoSenha";
+@use "geracaoNovaSenha";
 
 body {
   background: var(--background);

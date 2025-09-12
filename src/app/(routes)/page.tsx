@@ -5,8 +5,8 @@ import styles from "./page.module.css";
 export default function Home() {
   return (
     <Structure>
-      <div className={styles.container}>
-        <h1 className={styles.title}>MedRQE</h1>
+      <div className="home-container">
+        <h1 className="title">MedRQE</h1>
         <IconFrameContainer
           variation
           links={[
