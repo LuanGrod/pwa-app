@@ -1,4 +1,4 @@
-import Cookie from "@global/cookie/Cookie";
+import Cookie from "@global/cookie/handler/Handler";
 import type { HeaderHandlerInterface } from "./HandlerInterface";
 
 export default class Authorization implements HeaderHandlerInterface {

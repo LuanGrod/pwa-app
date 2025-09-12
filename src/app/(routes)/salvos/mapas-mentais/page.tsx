@@ -4,17 +4,17 @@ import Structure from "@/component/structure/ReturnTitleSearch";
 import { useListing } from "@global/hook/request/useListing";
 import { Listing } from "@global/component/listing/Listing";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
-import { ItemSalvo as ListItemSalvo } from "@/component/listing/ItemSalvo";
-import { useToggle } from "@global/hook/useToggle";
+import { ItemSalvo as ListItemSalvo } from "@global/listing/IconItem";
 import useSearch from "@global/hook/useSearch";
 import SearchBar from "@global/component/atomic/SearchBar";
 import { UnderHeader } from "@global/component/overlay/drawer/UnderHeader";
 import { MapasMentaisSalvos } from "@/type/Entities";
+import useDialog from "@global/hook/overlay/useDialog";
 
 type Props = {};
 
 export default function page({}: Props) {
-  const { status: searchActive, toggle: toggleSearch } = useToggle();
+  const { isOpen, toggleDialog } = useDialog();
 
   const { data, loading, error } = useListing<MapasMentaisSalvos>({
     entity: "mapas-mentais-salvos",
@@ -27,8 +27,8 @@ export default function page({}: Props) {
   });
 
   return (
-    <Structure title="Mapas Mentais salvos" handleSearch={toggleSearch}>
-      <UnderHeader open={searchActive} onClose={toggleSearch}>
+    <Structure title="Mapas Mentais salvos" handleSearch={toggleDialog}>
+      <UnderHeader open={isOpen} onClose={toggleDialog}>
         <SearchBar
           value={searchTerm || ""}
           onChange={(e) => {

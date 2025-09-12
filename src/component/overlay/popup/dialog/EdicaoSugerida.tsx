@@ -1,11 +1,12 @@
 "use client";
 
 import { InsertHandler } from "@global/form/handler/submit/api/InsertHandler";
-import Sugestion from "./Sugestion";
-import { Form } from "@global/form/Form";
+import { Form as FormDefinition } from "@global/form/Form";
 import { Hidden } from "@global/form/item/Hidden";
 import { Conteudo } from "@global/form/item/prebuilt/Conteudo";
 import { Insert as ResponseHandler } from "@global/request/response/handler/api/Insert";
+import Dialog from "@global/component/overlay/popup/dialog/Dialog";
+import Form from "@global/component/form/Form";
 
 type Props = {
   open?: boolean;
@@ -38,7 +39,11 @@ export default function EdicaoSugerida({
     new Hidden({ entity: formEntity, name: `${formEntity}_${conteudoName}`, defaultValue: conteudoId, fieldName: conteudoName }),
     new Hidden({ entity: formEntity, name: `${formEntity}_${estudanteName}`, defaultValue: estudanteId, fieldName: estudanteName }),
   ];
-  const form = new Form(formItems, "below");
+  const form = new FormDefinition(formItems, "below");
 
-  return <Sugestion formConfig={form} insertHandler={insertHandler} onClose={onClose} open={open} />;
+  return (
+  <Dialog open={open} onClose={onClose} title="Sugira uma edição:" overlay>
+    <Form submitLabel="ENVIAR" formConfig={form} submitHandler={insertHandler} />
+  </Dialog>
+  );
 }

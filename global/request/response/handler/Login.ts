@@ -1,8 +1,8 @@
 import { Default as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/Default";
 import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
 import { ResponseHandler } from "./Handler";
-import CookieInterface from "@global/cookie/CookieInterface";
-import Cookie from "@global/cookie/Cookie";
+import CookieInterface from "@global/cookie/handler/HandlerInterface";
+import Cookie from "@global/cookie/handler/Handler";
 import { LoginResponse } from "@global/type/request/Login";
 import { startTransition } from "react";
 import { GetRow } from "@global/request/builder/GetRow";

@@ -1,6 +1,7 @@
 import { ReactNode } from "react";
 import Header from "@global/component/header/Flashcard";
 import Footer from "../footer/Flashcard";
+import { unstable_ViewTransition as ViewTransition } from "react";
 
 type Props = {
   children: ReactNode;
@@ -15,8 +16,10 @@ type Props = {
 export default function Flashcard({ children, title, isFlipped, setIsFlipped, isSlidding, setIsSlidding, setTitle }: Props) {
   return (
     <>
-      <Header title={title} />
-      <main className="content-wrapper flashcards">{children}</main>
+      <ViewTransition default="handle">
+        <Header title={title} />
+        <main className="content-wrapper flashcards">{children}</main>
+      </ViewTransition>
       <Footer isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={isSlidding} setIsSlidding={setIsSlidding} setTitle={setTitle} />
     </>
   );

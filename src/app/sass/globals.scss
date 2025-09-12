@@ -1,6 +1,6 @@
 @use "variables";
 @use "layout";
-@use "view-transition";
+@use "viewTransition";
 @use "form";
 @use "input";
 @use "overlay";
@@ -21,17 +21,20 @@
 @use "chart";
 @use "stat";
 @use "estatisticas";
+@use "howToStudy";
+@use "iconFrame";
+@use "splashScreen";
 
 body {
   background: var(--background);
   color: var(--foreground);
-  // impedir copia
-  -webkit-user-select: none;
-  /* Safari */
-  -moz-user-select: none;
-  /* Firefox */
-  -ms-user-select: none;
-  /* IE10+ */
-  user-select: none;
-  /* Standard */
+  // // impedir copia
+  // -webkit-user-select: none;
+  // /* Safari */
+  // -moz-user-select: none;
+  // /* Firefox */
+  // -ms-user-select: none;
+  // /* IE10+ */
+  // user-select: none;
+  // /* Standard */
 }

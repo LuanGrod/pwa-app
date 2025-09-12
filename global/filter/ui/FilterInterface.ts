@@ -1,4 +1,5 @@
 import { FilterFragment } from "../StringAssembler";
+import { ComponentType } from "react";
 
 export type ConnectionOperator = "and" | "or";
 
@@ -215,13 +216,13 @@ export default interface FilterInterface {
    */
   getLabelFields(): string[];
   /**
-   * Returns the name of the custom option component used for this filter, if any.
+   * Returns the custom option component used for this filter, if any.
    * @class Select
-   * @default "SimpleFilterItem"
-   * @example "ProvaFilterItem"
-   * @returns The custom component name as a string.
+   * @default null
+   * @example AreaFilterItem
+   * @returns The custom component or null.
    */
-  getCustomOptionComponent(): string;
+  getCustomOptionComponent(): ComponentType<any> | null;
   /**
    * Returns if the filter has a clear filter button.
    * @class Select

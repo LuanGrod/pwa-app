@@ -3,20 +3,20 @@
 import { Listing } from "@global/component/listing/Listing";
 import Structure from "@/component/structure/ReturnTitleSearch";
 import { useListing } from "@global/hook/request/useListing";
-import { Item as ListItem } from "@/component/listing/Item";
+import { ImageItem } from "@global/listing/ImageItem";
 import { useSearchParams } from "next/navigation";
 import SearchBar from "@global/component/atomic/SearchBar";
 import useSearch from "@global/hook/useSearch";
-import { useToggle } from "@global/hook/useToggle";
 import { MapasMentaisListagem } from "@/type/Entities";
 import { UnderHeader } from "@global/component/overlay/drawer/UnderHeader";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
+import useDialog from "@global/hook/overlay/useDialog";
 
 type Props = {};
 
-export default function page({}: Props) {
+export default function page({ }: Props) {
   const filters = useSearchParams().get("filters") || "";
-  const { status: searchActive, toggle: toggleSearch } = useToggle();
+  const { isOpen, toggleDialog } = useDialog();
 
   const { data, setData, loading, error } = useListing<MapasMentaisListagem>({
     entity: "mapas-mentais",
@@ -30,8 +30,8 @@ export default function page({}: Props) {
   });
 
   return (
-    <Structure title="Mapas Mentais" handleSearch={toggleSearch}>
-      <UnderHeader open={searchActive} onClose={toggleSearch}>
+    <Structure title="Mapas Mentais" handleSearch={toggleDialog}>
+      <UnderHeader open={isOpen} onClose={toggleDialog}>
         <SearchBar
           value={searchTerm || ""}
           onChange={(e) => {
@@ -45,7 +45,7 @@ export default function page({}: Props) {
         error={error}
         loadingComponent={<Loading2 loading={loading} />}
         renderItem={(item) => (
-          <ListItem
+          <ImageItem
             data={item}
             setData={setFilteredData}
             entity="mapas-mentais"

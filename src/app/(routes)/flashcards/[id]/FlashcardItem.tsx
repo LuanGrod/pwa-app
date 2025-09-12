@@ -5,7 +5,7 @@ import { useGetRow } from "@global/hook/request/useGetRow";
 import { useEffect, useState } from "react";
 import { Flashcard as FlashcardType } from "@/type/Entities";
 import Structure from "@/component/structure/Flashcard";
-import Flashcard from "@/component/atomic/Flashcard";
+import Flashcard from "@/component/flashcard/Flashcard";
 import { Viewing } from "@global/component/viewing/Viewing";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 

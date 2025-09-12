@@ -6,7 +6,7 @@ import { AppRouterInstance } from "next/dist/shared/lib/app-router-context.share
 import { startTransition } from "react";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { createLocalStorageStore } from "./localStorageStore";
+import { createLocalStorageStore } from "../../global/store/localStorageStore";
 
 type FlashcardAnswerEntry = {
   flashcardId: string;

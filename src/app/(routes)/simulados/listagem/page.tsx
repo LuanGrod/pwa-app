@@ -4,7 +4,7 @@ import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Viewing } from "@global/component/viewing/Viewing";
 import { Questao as QuestaoType } from "@/type/Entities";
-import Questao from "@/component/atomic/Questao";
+import Questao from "@/component/questao/Questao";
 import useQuestoes from "@/store/QuestaoStore";
 import { startTransition, useEffect } from "react";
 import { useListing } from "@global/hook/request/useListing";

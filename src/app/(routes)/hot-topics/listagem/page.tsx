@@ -3,20 +3,21 @@
 import { Listing } from "@global/component/listing/Listing";
 import Structure from "@/component/structure/ReturnTitleSearch";
 import { useListing } from "@global/hook/request/useListing";
-import { Item as ListItem } from "@/component/listing/Item";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import { useSearchParams } from "next/navigation";
 import { UnderHeader } from "@global/component/overlay/drawer/UnderHeader";
 import SearchBar from "@global/component/atomic/SearchBar";
 import useSearch from "@global/hook/useSearch";
-import { useToggle } from "@global/hook/useToggle";
 import { HotTopicsListagem } from "@/type/Entities";
+import { ToggleableItem } from "@global/listing/ToggleableItem";
+import useDialog from "@global/hook/overlay/useDialog";
+import Estrela from "@global/component/icons/Estrela";
 
 type Props = {};
 
 export default function page({ }: Props) {
   const filters = useSearchParams().get("filters") || "";
-  const { status: searchActive, toggle: toggleSearch } = useToggle();
+  const { isOpen, toggleDialog } = useDialog();
 
   const { data, loading, error } = useListing<HotTopicsListagem>({
     entity: "hot-topics",
@@ -30,8 +31,8 @@ export default function page({ }: Props) {
   });
 
   return (
-    <Structure title="Hot Topics" handleSearch={toggleSearch} href="/hot-topics">
-      <UnderHeader open={searchActive} onClose={toggleSearch}>
+    <Structure title="Hot Topics" handleSearch={toggleDialog} href="/hot-topics">
+      <UnderHeader open={isOpen} onClose={toggleDialog}>
         <SearchBar
           value={searchTerm || ""}
           onChange={(e) => {
@@ -45,7 +46,7 @@ export default function page({ }: Props) {
         error={error}
         loadingComponent={<Loading2 loading={loading} />}
         renderItem={(item) => (
-          <ListItem
+          <ToggleableItem
             data={item}
             setData={setFilteredData}
             entity="hot-topics"
@@ -53,14 +54,16 @@ export default function page({ }: Props) {
             imageSrc={item.areas_url_imagem}
             subtitle={item.hot_topics_nome}
             title={item.temas_nome}
-            hasViewed
             viewed={!!item.hot_topics_estudantes_id}
-            ToggleAddRemove={{
+            icon={<Estrela size={26} changeOnTheme className="status" />}
+            toggleConfig={{
               entity: "hot-topics-estudantes",
               idParamName: "hot_topics_estudantes_id",
               keyParamName: "hot_topics_id",
-              insertDataIdParamName: "id_hot_topic",
-              insertDataEntityParamName: "hot_topics_estudantes",
+              insertDataConfig: {
+                entityIdField: "hot_topics_estudantes_id_hot_topic",
+                userIdField: "hot_topics_estudantes_id_estudante",
+              },
             }}
           />
         )}

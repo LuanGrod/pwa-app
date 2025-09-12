@@ -188,6 +188,12 @@
         margin-bottom: 5px;
       }
     }
+
+    .configuracoes-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
   }
 
   .drawer-under-header {

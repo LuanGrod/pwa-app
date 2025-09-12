@@ -2,7 +2,7 @@
 
 import { useEstudante } from "@/store/EstudanteStore";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
-import Cookie from "@global/cookie/Cookie";
+import Cookie from "@global/cookie/handler/Handler";
 import { useRouter } from "next/navigation";
 import { startTransition, useEffect } from "react";
 

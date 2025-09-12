@@ -1,6 +1,6 @@
 import Structure from "@/component/structure/GreetingsLogo";
 import styles from "./page.module.css";
-import IconFrameContainer from "@/component/atomic/IconFrameContainer";
+import IconFrameContainer from "@/component/iconFrame/IconFrameContainer";
 
 type Props = {};
 

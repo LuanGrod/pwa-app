@@ -11,33 +11,19 @@ import DrawerLinkWithIcon from "@global/component/overlay/drawer/item/LinkWithIc
 import DrawerBtnWithIcon from "@global/component/overlay/drawer/item/BtnWithIcon";
 import { Overlay } from "@public/global/js/types/Overlay";
 import { RefObject } from "react";
-import styles from "./Configuracoes.module.css";
 import { BottomRefDrawer } from "@global/component/overlay/drawer/BottomRef";
-import Cookie from "@global/cookie/Cookie";
+import useTheme from "@global/hook/useTheme";
 
 type Props = {
   menuRef?: RefObject<Overlay | null>;
 };
 
 export default function ConfiguracoesDrawer({ menuRef }: Props) {
-  const cookie = new Cookie();
-
-  const toggleTheme = () => {
-    const date = new Date();
-    date.setDate(date.getDate() + 30);
-    const dark = document.documentElement.classList.contains('dark-theme');
-    if (dark) {
-      document.documentElement.classList.remove('dark-theme');
-      cookie.setCookie("theme", "light", date);
-    } else {
-      document.documentElement.classList.add('dark-theme');
-      cookie.setCookie("theme", "dark", date);
-    }
-  }
+  const { toggleTheme } = useTheme({});
 
   return (
     <BottomRefDrawer ref={menuRef} title="Configurações">
-      <div className={styles.container}>
+      <div className="configuracoes-container">
         <DrawerLinkWithIcon href="/perfil" label="Perfil" icon={<Usuario size={33} changeOnTheme />} />
         <DrawerLinkWithIcon href="/faturas" label="Faturas" icon={<Faturas size={33} changeOnTheme />} />
         <DrawerBtnWithIcon onClick={toggleTheme} label="Mudar tema" icon={<MudarTema size={33} changeOnTheme />} />

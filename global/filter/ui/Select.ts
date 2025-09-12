@@ -8,6 +8,7 @@ import FilterInterface, {
   DEFAULT_VALUES,
 } from "./FilterInterface";
 import { FilterFragment } from "../StringAssembler";
+import { ComponentType } from "react";
 
 type SelectProps = {
   /**
@@ -94,9 +95,9 @@ type SelectProps = {
    */
   labelFields?: string[];
   /**
-   * Name of the custom option component (when you need more than just the default label)
+   * Custom option component (when you need more than just the default label)
    */
-  customOptionComponent?: string;
+  customOptionComponent?: ComponentType<any>;
   /**
    * Whether the filter has a clear filter button
    * @default true
@@ -128,7 +129,7 @@ export default class Select extends AbstractFilter {
   parentDenialOperator: boolean;
   selectionMode: SelectionMode;
   labelFields: string[];
-  customOptionComponent: string;
+  customOptionComponent: ComponentType<any> | null;
   hasClearFilter: boolean;
   hasSearch: boolean;
 
@@ -179,7 +180,7 @@ export default class Select extends AbstractFilter {
     this.parentDenialOperator = parentDenialOperator || DEFAULT_VALUES.DENIAL_OPERATOR;
     this.selectionMode = selectionMode;
     this.labelFields = labelFields || [];
-    this.customOptionComponent = customOptionComponent || "";
+    this.customOptionComponent = customOptionComponent || null;
     this.hasClearFilter = hasClearFilter;
     this.hasSearch = hasSearch;
   }
@@ -279,7 +280,7 @@ export default class Select extends AbstractFilter {
     return this.labelFields;
   }
 
-  getCustomOptionComponent(): string {
+  getCustomOptionComponent(): ComponentType<any> | null {
     return this.customOptionComponent;
   }
 

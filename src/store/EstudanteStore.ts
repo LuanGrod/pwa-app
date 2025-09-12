@@ -1,7 +1,6 @@
 import { create } from "zustand";
-import { persist, StateStorage, createJSONStorage } from "zustand/middleware";
-import Cookie from "../../global/cookie/Cookie";
-import { createCookieStorage } from "./cookieStorage";
+import { persist, createJSONStorage } from "zustand/middleware";
+import { createCookieStore } from "@global/store/cookieStore";
 
 type Estudante = {
   urlImagem?: string;
@@ -19,8 +18,7 @@ type EstudanteStore = {
   updateExpiration: (expiresInDays: number) => void;
 };
 
-
-let cookieStorage = createCookieStorage(30); // Padrão de 30 dias
+let cookieStorage = createCookieStore(30); 
 
 export const useEstudante = create<EstudanteStore>()(
   persist(
@@ -31,8 +29,7 @@ export const useEstudante = create<EstudanteStore>()(
         periodosPlanosId: "",
       },
       setEstudante: (estudante: Estudante, expiresInDays = 30) => {
-        // Recria o storage com nova expiração, se especificada
-        cookieStorage = createCookieStorage(expiresInDays);
+        cookieStorage = createCookieStore(expiresInDays);
         set({ estudante });
       },
       clearEstudante: () => {
@@ -55,9 +52,7 @@ export const useEstudante = create<EstudanteStore>()(
         set({ estudante: { ...estudante, urlImagem } });
       },
       updateExpiration: (expiresInDays: number) => {
-        // Recria o storage com nova expiração
-        cookieStorage = createCookieStorage(expiresInDays);
-        // Re-salva os dados com nova expiração
+        cookieStorage = createCookieStore(expiresInDays);
         const currentData = get();
         set({ estudante: currentData.estudante });
       },

@@ -1,6 +1,6 @@
 "use client";
 
-import Fatura from "@/component/atomic/Fatura";
+import Fatura from "@/component/fatura/Fatura";
 import Structure from "@/component/structure/ReturnTitle";
 import { Fatura as FaturaType } from "@/type/Entities";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";

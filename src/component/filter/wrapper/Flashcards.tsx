@@ -7,6 +7,7 @@ import FilterWrapperBase from "@global/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
 import { useEffect } from "react";
 import useFlashcards from "@/store/FlashcardStore";
+import AreaFilterItem from "@/component/overlay/drawer/filter/option/AreaFilterItem";
 
 export function Flashcards() {
   const filterDefinitions = [
@@ -24,7 +25,7 @@ export function Flashcards() {
           queryFieldEntity: "flashcards",
           parentKeyEntity: "temas",
           connectionOperator: "or",
-          customOptionComponent: "AreaFilterItem",
+          customOptionComponent: AreaFilterItem,
         }),
       ],
       connectionOperator: "or",

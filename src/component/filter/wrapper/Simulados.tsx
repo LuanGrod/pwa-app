@@ -8,6 +8,8 @@ import useQuestoes from "@/store/QuestaoStore";
 import RangeSelector from "@global/component/button/RangeSelector";
 import { useEffect } from "react";
 import { useUser } from "@global/hook/auth/useUser";
+import ProvaFilterItem from "@/component/overlay/drawer/filter/option/ProvaFilterItem";
+import HistoricoFilterItem from "@/component/overlay/drawer/filter/option/HistoricoFilterItem";
 
 export function Simulados() {
   const filterDefinitions = [
@@ -17,7 +19,7 @@ export function Simulados() {
       queryField: "questoes_id_prova",
       idParamName: "provas_id",
       labelFields: ["estados_uf", "instituicoes_nome", "provas_ano"],
-      customOptionComponent: "ProvaFilterItem",
+      customOptionComponent: ProvaFilterItem,
       selectionMode: "single" as SelectionMode,
       conditionalOperator: "eq",
       hasClearFilter: false
@@ -28,7 +30,7 @@ export function Simulados() {
       queryField: "nao_usa",
       idParamName: "nao_usa",
       labelFields: ["instituicoes_nome", "provas_ano", "simulados_data_hora_cadastro", "simulados_id_simulado3"],
-      customOptionComponent: "HistoricoFilterItem",
+      customOptionComponent: HistoricoFilterItem,
       hasClearFilter: false,
       hasSearch: false
     })

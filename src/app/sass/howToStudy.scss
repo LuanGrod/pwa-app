@@ -1,0 +1,62 @@
+.how-to-study-container {
+  padding-top: 40px;
+
+  .title {
+    position: fixed;
+    left: 0;
+    top: 80px;
+    width: 100%;
+    background-color: var(--background);
+    font-family: var(--font-rounded);
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    padding-bottom: 10px;
+  }
+
+  .paragraph {
+    font-size: var(--font-base);
+    font-family: var(--font-text);
+    margin-bottom: 20px;
+    text-align: justify;
+    padding: 0 6px;
+  }
+
+  .how-to-study-title {
+    font-size: var(--font-sm);
+    text-transform: uppercase;
+    color: var(--emphasis);
+    font-weight: 600;
+    margin-bottom: 9px;
+  }
+
+  .how-to-study-content {
+    background-color: var(--background-variation);
+    border-radius: 9px;
+    padding: 20px 24px;
+    margin-bottom: 20px;
+
+    .paragraph {
+      font-family: var(--font-text);
+      font-size: var(--font-sm);
+      margin-bottom: 16px;
+      text-align: justify;
+      font-weight: 300;
+    }
+
+    .list-item {
+      font-family: var(--font-text);
+      font-size: var(--font-sm);
+      font-weight: 300;
+      list-style: disc inside;
+    }
+  }
+}
+
+.how-to-study-method {
+  font-size: 10px;
+  font-family: var(--font-rounded);
+  color: var(--emphasis);
+  font-weight: 300;
+  text-align: center;
+}

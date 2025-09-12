@@ -1,6 +1,6 @@
 "use client";
 
-import SessionEndStatistics from "@/component/atomic/SessionEndStatistics";
+import SessionEndStatistics from "@/component/statistics/SessionEndStatistics";
 import { useGetRow } from "@global/hook/request/useGetRow";
 import { Estatisticas as EstatisticasType } from "@/type/Entities";
 import { Viewing } from "@global/component/viewing/Viewing";

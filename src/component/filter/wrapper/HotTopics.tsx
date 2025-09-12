@@ -5,6 +5,7 @@ import BooleanFilter from "@global/filter/ui/Boolean";
 import GroupFilter from "@global/filter/ui/Group";
 import FilterWrapperBase from "@global/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
+import AreaFilterItem from "@/component/overlay/drawer/filter/option/AreaFilterItem";
 
 export function HotTopics() {
   const filterDefinitions = [
@@ -22,7 +23,7 @@ export function HotTopics() {
           queryFieldEntity: "hot_topics",
           parentKeyEntity: "temas",
           connectionOperator: "or",
-          customOptionComponent: "AreaFilterItem",
+          customOptionComponent: AreaFilterItem,
         }),
       ],
       connectionOperator: "or",

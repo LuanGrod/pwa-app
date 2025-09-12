@@ -1,7 +1,6 @@
 "use client";
 
 import * as motion from "motion/react-client";
-import styles from "./SplashScreen.module.css";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { AnimatePresence } from "motion/react";
@@ -14,18 +13,16 @@ export default function SplashScreen({ onEnd }: Props) {
 
   const handleEndAnimation = () => {
     setIsVisible(false);
-    // // session-cookie: sem max-age nem expires
     document.cookie = "splash_shown=1; path=/; secure; samesite=strict";
     onEnd?.();
-    // // força re­render no server para pegar o cookie
     router.refresh();
   };
 
   return (
-    <div className={styles.container}>
+    <div className="spash-screen-container">
       <AnimatePresence>
         {isVisible && (
-          <div className={styles.content}>
+          <div className="content">
             <motion.img
               src="/project/assets/Logo.svg"
               width={165}
@@ -45,7 +42,7 @@ export default function SplashScreen({ onEnd }: Props) {
               }}
             />
             <motion.div
-              className={styles.textContainer}
+              className="text"
               initial="hidden"
               animate="visible"
               exit="exit"

@@ -6,6 +6,7 @@ import FilterInterface, {
   SelectionMode,
 } from "./FilterInterface";
 import { FilterFragment } from "../StringAssembler";
+import { ComponentType } from "react";
 
 export default abstract class AbstractFilter implements FilterInterface {
   queryField: string;
@@ -99,8 +100,8 @@ export default abstract class AbstractFilter implements FilterInterface {
     return [];
   }
 
-  getCustomOptionComponent(): string {
-    return "";
+  getCustomOptionComponent(): ComponentType<any> | null {
+    return null;
   }
 
   isGroup(): boolean {

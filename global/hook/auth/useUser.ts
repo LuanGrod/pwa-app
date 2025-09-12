@@ -1,4 +1,4 @@
-import Cookie from "@global/cookie/Cookie";
+import Cookie from "@global/cookie/handler/Handler";
 import { useEffect, useMemo, useState } from "react";
 
 export const useUser = () => {

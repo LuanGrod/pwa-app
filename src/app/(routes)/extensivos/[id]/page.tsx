@@ -2,7 +2,7 @@
 
 import Structure from "@/component/structure/ReturnTitle";
 import styles from "./page.module.css";
-import IconFrameContainer from "@/component/atomic/IconFrameContainer";
+import IconFrameContainer from "@/component/iconFrame/IconFrameContainer";
 import { use } from "react";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import {conteudosExtensivos as conteudosExtensivosType } from "@/type/Entities";

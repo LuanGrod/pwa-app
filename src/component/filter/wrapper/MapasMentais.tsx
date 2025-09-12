@@ -5,6 +5,7 @@ import BooleanFilter from "@global/filter/ui/Boolean";
 import GroupFilter from "@global/filter/ui/Group";
 import FilterWrapperBase from "@global/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
+import AreaFilterItem from "@/component/overlay/drawer/filter/option/AreaFilterItem";
 
 export function MapasMentais() {
   const filterDefinitions = [
@@ -22,7 +23,7 @@ export function MapasMentais() {
           queryFieldEntity: "mapas_mentais",
           parentKeyEntity: "temas",
           connectionOperator: "or",
-          customOptionComponent: "AreaFilterItem",
+          customOptionComponent: AreaFilterItem,
         }),
       ],
       connectionOperator: "or",

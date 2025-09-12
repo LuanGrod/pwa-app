@@ -1,8 +1,8 @@
 import { Default as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/Default";
 import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
 import { ResponseHandler } from "./Handler";
-import CookieInterface from "@global/cookie/CookieInterface";
-import Cookie from "@global/cookie/Cookie";
+import CookieInterface from "@global/cookie/handler/HandlerInterface";
+import Cookie from "@global/cookie/handler/Handler";
 import { GeracaoNovaSenhaResponse } from "@global/type/request/GeracaoNovaSenha";
 
 type GeracaoNovaSenhaProps = {

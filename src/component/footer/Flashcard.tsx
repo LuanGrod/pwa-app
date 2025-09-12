@@ -45,10 +45,10 @@ export default function Flashcard({ isFlipped, setIsFlipped, isSlidding, setIsSl
     <footer className="flashcard-footer">
       {isFlipped ? (
         <div className="respostas-wrapper">
-          <RespostaBtn onClick={() => handleRegisterAnswer("Erro")} color="#FF1AC6" title="Erro" value="Erro" />
-          <RespostaBtn onClick={() => handleRegisterAnswer("Acerto Parcial")} color="#FFA800" title="Acerto parcial" value="Acerto Parcial" />
-          <RespostaBtn onClick={() => handleRegisterAnswer("Acerto com Segurança")} color="#33FF66" title="Acerto seguro" value="Acerto com Segurança" />
-          <RespostaBtn onClick={() => handleRegisterAnswer("Acerto Fácil")} color="#0066FF" title="Fácil" value="Acerto Fácil" />
+          <RespostaBtn onClick={() => handleRegisterAnswer("Erro")} color="#FF1AC6" title="Erro" />
+          <RespostaBtn onClick={() => handleRegisterAnswer("Acerto Parcial")} color="#FFA800" title="Acerto parcial" />
+          <RespostaBtn onClick={() => handleRegisterAnswer("Acerto com Segurança")} color="#33FF66" title="Acerto seguro" />
+          <RespostaBtn onClick={() => handleRegisterAnswer("Acerto Fácil")} color="#0066FF" title="Fácil" />
         </div>
       ) : (
         <button onClick={handleVerResposta} disabled={isSlidding} className="btn">

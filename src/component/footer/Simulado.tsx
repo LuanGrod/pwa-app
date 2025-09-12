@@ -10,7 +10,7 @@ import { useRouter } from "next/navigation";
 type Props = {};
 
 export default function Simulado({ }: Props) {
-  const { previousIndex, index, finishExam, nextIndex, count, answers, examEndTime } = useQuestoes();
+  const { previousIndex, index, finishExam, nextIndex, count, examEndTime } = useQuestoes();
   const { isOpen, toggleDialog } = useDialog();
   const router = useRouter();
 

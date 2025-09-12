@@ -1,13 +1,12 @@
 "use client";
 
 import { BottomDrawer } from "@global/component/overlay/drawer/Bottom";
-import { useEffect, useState } from "react";
+import { useEffect, useState, ComponentType } from "react";
 import ParentFilterItem from "./ParentFilterItem";
 import SearchBar from "@global/component/atomic/SearchBar";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import useSearch from "@global/hook/useSearch";
 import SimpleFilterItem from "@global/component/overlay/drawer/filter/SimpleFilterItem";
-import { getFilterComponent } from "@/component/overlay/drawer/filter/CustomFilterComponents";
 
 interface Props {
   open: boolean;
@@ -29,7 +28,7 @@ interface Props {
   hasSearch?: boolean;
   selectionMode?: "multi" | "single";
   customLabelFields?: string[];
-  customOptionComponent?: string;
+  customOptionComponent?: ComponentType<any>;
 }
 
 export default function Filtros({
@@ -61,8 +60,8 @@ export default function Filtros({
     setSearchTerm("");
   }, [open])
 
-  // Obtém o componente customizado (pode ser null)
-  const CustomFilterComponent = getFilterComponent(customOptionComponent);
+  // Usa o componente customizado diretamente
+  const CustomFilterComponent = customOptionComponent;
 
   return (
     <BottomDrawer customClass="semi-full" open={open} title={title} onClose={onClose}>

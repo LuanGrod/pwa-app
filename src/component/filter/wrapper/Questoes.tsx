@@ -8,6 +8,7 @@ import Logo from "@/component/icon/Logo";
 import useQuestoes from "@/store/QuestaoStore";
 import { useUser } from "@global/hook/auth/useUser";
 import { useEffect } from "react";
+import AreaFilterItem from "@/component/overlay/drawer/filter/option/AreaFilterItem";
 
 export function Questoes() {
   const filterDefinitions = [
@@ -25,7 +26,7 @@ export function Questoes() {
           queryFieldEntity: "questoes",
           parentKeyEntity: "temas",
           connectionOperator: "or",
-          customOptionComponent: "AreaFilterItem",
+          customOptionComponent: AreaFilterItem,
         }),
       ],
       connectionOperator: "or",

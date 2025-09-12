@@ -1,4 +1,4 @@
-import IconFrameContainer from "@/component/atomic/IconFrameContainer";
+import IconFrameContainer from "@/component/iconFrame/IconFrameContainer";
 import Structure from "@/component/structure/Home";
 import styles from "./page.module.css";
 

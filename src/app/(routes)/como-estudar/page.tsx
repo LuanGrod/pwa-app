@@ -1,4 +1,4 @@
-import HowToStudyContent from "@/component/atomic/HowToStudyContent";
+import HowToStudyContent from "@/component/howToSudy/HowToStudyContent";
 import ReturnLogoStructure from "@/component/structure/ReturnLogo";
 import styles from "./page.module.css";
 
@@ -79,17 +79,17 @@ const conteudos = [
 export default function page({}: Props) {
   return (
     <ReturnLogoStructure>
-      <div className={styles.container}>
-        <h1 className={styles.pageTitle}>Como estudar com o aplicativo?</h1>
-        <p className={styles.paragraph}>
+      <div className="how-to-study-container">
+        <h1 className="title">Como estudar com o aplicativo?</h1>
+        <p className="paragraph">
           Este aplicativo foi desenvolvido com foco total na sua aprovação nas principais provas de residência médica do
           país.
         </p>
-        <p className={styles.paragraph}>
+        <p className="paragraph">
           Aqui, você encontra os recursos mais eficazes da preparação moderna, organizados de forma estratégica,
           didática e prática.
         </p>
-        <p className={styles.paragraph}>Entenda como cada seção pode ser aproveitada:</p>
+        <p className="paragraph">Entenda como cada seção pode ser aproveitada:</p>
 
         {conteudos.map((item) => (
           <HowToStudyContent
@@ -101,7 +101,7 @@ export default function page({}: Props) {
         ))}
       </div>
 
-      <h3 className={styles.method}>Metodologia MedRQE</h3>
+      <h3 className="how-to-study-method">Metodologia MedRQE</h3>
     </ReturnLogoStructure>
   );
 }
