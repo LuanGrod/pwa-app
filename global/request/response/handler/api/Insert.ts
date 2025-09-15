@@ -1,25 +1,17 @@
 import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
-import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
-import { Insert as InsertResponseHandler } from "../Insert";
+import { ResponseHandler } from "../Handler";
 import { InsertResponse } from "@global/type/request/Insert";
+import { ApiResponseHandlerProps } from "@global/type/request/ApiResponseHandlerProps";
 
-type InsertProps = {
-  successMessage?: string;
-  errorHandlerCollection?: ErrorHandlerCollection | null;
-  onSuccessCallback?: (result: InsertResponse) => Promise<void> | void;
-  onSuccessActions?: ActionInterface[];
-};
-
-export class Insert extends InsertResponseHandler {
+export class Insert extends ResponseHandler {
   constructor({
     successMessage = "Cadastro realizado com sucesso!",
-    errorHandlerCollection = null,
     onSuccessCallback,
     onSuccessActions,
-  }: InsertProps) {
+  }: ApiResponseHandlerProps<InsertResponse> = {}) {
     super({
       successMessage,
-      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+      errorHandlerCollection: new DefaultErrorHandlerCollection(),
       onSuccessCallback,
       onSuccessActions,
     });

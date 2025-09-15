@@ -1,21 +1,16 @@
 import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
-import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
-import { Listing as ListingResponseHandler } from "../Listing";
+import { ResponseHandler } from "../Handler";
+import { ApiResponseHandlerProps } from "@global/type/request/ApiResponseHandlerProps";
 
-type ListingProps<T> = {
-  errorHandlerCollection?: ErrorHandlerCollection | null;
-  onSuccessCallback?: (result: Listagem<T>) => Promise<void> | void;
-  onSuccessActions?: ActionInterface[];
-};
-
-export class Listing<T = any> extends ListingResponseHandler {
+export class Listing<T = any> extends ResponseHandler {
   constructor({
-    errorHandlerCollection = null,
+    successMessage,
     onSuccessCallback,
     onSuccessActions,
-  }: ListingProps<T>) {
+  }: ApiResponseHandlerProps<T> = {}) {
     super({
-      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+      successMessage,
+      errorHandlerCollection: new DefaultErrorHandlerCollection(),
       onSuccessCallback,
       onSuccessActions,
     });

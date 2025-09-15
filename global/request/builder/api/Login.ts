@@ -13,7 +13,7 @@ type LoginProps = {
 
 export class Login extends LoginRequestBuilder {
   constructor({ entity, body, headers = null, data, responseHandler = null }: LoginProps) {
-    responseHandler = responseHandler || new ResponseHandler({ data });
+    responseHandler = responseHandler || new ResponseHandler({});
 
     super({ entity, body, headers, responseHandler });
   }

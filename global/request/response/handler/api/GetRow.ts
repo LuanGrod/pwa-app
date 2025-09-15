@@ -1,21 +1,16 @@
 import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
-import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
-import { GetRow as GetRowResponseHandler } from "../GetRow";
+import { ResponseHandler } from "../Handler";
+import { ApiResponseHandlerProps } from "@global/type/request/ApiResponseHandlerProps";
 
-type GetRowProps<T> = {
-  errorHandlerCollection?: ErrorHandlerCollection | null;
-  onSuccessCallback?: (result: T) => Promise<void> | void;
-  onSuccessActions?: ActionInterface[];
-};
-
-export class GetRow<T = any> extends GetRowResponseHandler {
+export class GetRow<T = any> extends ResponseHandler {
   constructor({
-    errorHandlerCollection = null,
+    successMessage,
     onSuccessCallback,
     onSuccessActions,
-  }: GetRowProps<T>) {
+  }: ApiResponseHandlerProps<T> = {}) {
     super({
-      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+      successMessage,
+      errorHandlerCollection: new DefaultErrorHandlerCollection(),
       onSuccessCallback,
       onSuccessActions,
     });

@@ -1,3 +1,3 @@
-interface ActionInterface {
+export interface ActionInterface {
   handleSuccess: (result: any) => Promise<void> | void;
 }

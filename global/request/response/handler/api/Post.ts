@@ -1,21 +1,16 @@
 import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
-import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
-import { Post as PostResponseHandler } from "../Post";
+import { ResponseHandler } from "../Handler";
+import { ApiResponseHandlerProps } from "@global/type/request/ApiResponseHandlerProps";
 
-type PostProps<T = any> = {
-  errorHandlerCollection?: ErrorHandlerCollection | null;
-  onSuccessCallback?: (result: T) => Promise<void> | void;
-  onSuccessActions?: ActionInterface[];
-};
-
-export class Post<T = any> extends PostResponseHandler<T> {
+export class Post<T = any> extends ResponseHandler {
   constructor({
-    errorHandlerCollection = null,
+    successMessage,
     onSuccessCallback,
     onSuccessActions,
-  }: PostProps<T>) {
+  }: ApiResponseHandlerProps<T> = {}) {
     super({
-      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+      successMessage,
+      errorHandlerCollection: new DefaultErrorHandlerCollection(),
       onSuccessCallback,
       onSuccessActions,
     });

@@ -1,25 +1,17 @@
 import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
-import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
-import { Delete as DeleteResponseHandler } from "../Delete";
+import { ResponseHandler } from "../Handler";
 import { DeleteResponse } from "@global/type/request/Delete";
+import { ApiResponseHandlerProps } from "@global/type/request/ApiResponseHandlerProps";
 
-type DeleteProps = {
-  successMessage?: string;
-  errorHandlerCollection?: ErrorHandlerCollection | null;
-  onSuccessCallback?: (result: DeleteResponse) => Promise<void> | void;
-  onSuccessActions?: ActionInterface[];
-};
-
-export class Delete extends DeleteResponseHandler {
+export class Delete extends ResponseHandler {
   constructor({
     successMessage = "Exclusão realizada com sucesso!",
-    errorHandlerCollection = null,
     onSuccessCallback,
     onSuccessActions,
-  }: DeleteProps) {
+  }: ApiResponseHandlerProps<DeleteResponse> = {}) {
     super({
       successMessage,
-      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+      errorHandlerCollection: new DefaultErrorHandlerCollection(),
       onSuccessCallback,
       onSuccessActions,
     });

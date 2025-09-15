@@ -1,25 +1,17 @@
 import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
-import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
-import { Upload as UploadResponseHandler } from "../Upload";
+import { ResponseHandler } from "../Handler";
 import { UploadResponse } from "@global/type/request/Upload";
+import { ApiResponseHandlerProps } from "@global/type/request/ApiResponseHandlerProps";
 
-type UploadProps = {
-  successMessage?: string;
-  errorHandlerCollection?: ErrorHandlerCollection | null;
-  onSuccessCallback?: (result: UploadResponse) => Promise<void> | void;
-  onSuccessActions?: ActionInterface[];
-};
-
-export class Upload extends UploadResponseHandler {
+export class Upload extends ResponseHandler {
   constructor({
     successMessage = "Upload realizado com sucesso!",
-    errorHandlerCollection = null,
     onSuccessCallback,
     onSuccessActions,
-  }: UploadProps) {
+  }: ApiResponseHandlerProps<UploadResponse> = {}) {
     super({
       successMessage,
-      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+      errorHandlerCollection: new DefaultErrorHandlerCollection(),
       onSuccessCallback,
       onSuccessActions,
     });

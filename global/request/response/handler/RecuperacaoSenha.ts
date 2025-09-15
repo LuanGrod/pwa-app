@@ -1,42 +1,19 @@
-import { Default as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/Default";
-import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
 import { ResponseHandler } from "./Handler";
 import { RecuperacaoSenhaResponse } from "@global/type/request/RecuperacaoSenha";
-
-type RecuperacaoSenhaProps = {
-  successMessage?: string;
-  errorHandlerCollection?: ErrorHandlerCollection | null;
-  onSuccessCallback?: (result: RecuperacaoSenhaResponse) => Promise<void> | void;
-  onSuccessActions?: ActionInterface[];
-};
+import { ResponseHandlerProps } from "@global/type/request/ResponseHandlerProps";
 
 export class RecuperacaoSenha extends ResponseHandler {
-  protected successMessage: string;
-
   constructor({
     successMessage = "Email de recuperação enviado com sucesso!",
-    errorHandlerCollection = null,
+    errorHandlerCollection,
     onSuccessCallback,
     onSuccessActions,
-  }: RecuperacaoSenhaProps) {
+  }: ResponseHandlerProps<RecuperacaoSenhaResponse> = {}) {
     super({
-      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+      errorHandlerCollection,
       onSuccessCallback,
       onSuccessActions,
+      successMessage,
     });
-    this.successMessage = successMessage;
-    this.onSuccessFn = this.handleSuccess.bind(this);
-    this.onErrorFn = this.handleError.bind(this);
-  }
-
-  protected async handleSuccess(result: RecuperacaoSenhaResponse): Promise<any> {
-    this.successSetup(result);
-
-    return {
-      success: true,
-      messageType: "success",
-      message: this.successMessage,
-      data: result,
-    };
   }
 }

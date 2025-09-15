@@ -1,28 +1,17 @@
 import { DefaultApi2 as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi2";
-import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
-import { Login as LoginResponseHandler } from "../Login";
+import { ResponseHandler } from "../Handler";
 import { LoginResponse } from "@global/type/request/Login";
+import { ApiResponseHandlerProps } from "@global/type/request/ApiResponseHandlerProps";
 
-type LoginProps = {
-  successMessage?: string;
-  errorHandlerCollection?: ErrorHandlerCollection | null;
-  data?: Map<string, any>;
-  onSuccessCallback?: (result: LoginResponse) => Promise<void> | void;
-  onSuccessActions?: ActionInterface[];
-};
-
-export class Login extends LoginResponseHandler {
+export class Login extends ResponseHandler {
   constructor({
     successMessage = "Login realizado com sucesso!",
-    errorHandlerCollection = null,
-    data,
     onSuccessCallback,
     onSuccessActions,
-  }: LoginProps) {
+  }: ApiResponseHandlerProps<LoginResponse> = {}) {
     super({
       successMessage,
-      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
-      data,
+      errorHandlerCollection: new DefaultErrorHandlerCollection(),
       onSuccessCallback,
       onSuccessActions,
     });

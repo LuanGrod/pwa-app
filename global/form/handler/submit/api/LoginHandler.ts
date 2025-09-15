@@ -12,7 +12,7 @@ type LoginHandlerProps = {
 
 export class LoginHandler extends FormHandler {
   constructor({ entity, data, needsAuthorization, responseHandler = null }: LoginHandlerProps) {
-    responseHandler = responseHandler || new ResponseHandler({ data });
+    responseHandler = responseHandler || new ResponseHandler({});
     super({ entity, data, needsAuthorization, responseHandler });
   }
 

@@ -1,5 +1,6 @@
 import { ItemInterface } from "@global/form/item/ItemInterface";
 import { MessageInterface } from "@global/validator/MessageInterface";
+
 export class Message implements MessageInterface {
   constructor() {}
 

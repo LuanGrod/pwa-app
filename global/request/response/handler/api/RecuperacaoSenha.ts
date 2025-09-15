@@ -1,25 +1,17 @@
 import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
-import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
-import { RecuperacaoSenha as RecuperacaoSenhaResponseHandler } from "../RecuperacaoSenha";
+import { ResponseHandler } from "../Handler";
 import { RecuperacaoSenhaResponse } from "@global/type/request/RecuperacaoSenha";
+import { ApiResponseHandlerProps } from "@global/type/request/ApiResponseHandlerProps";
 
-type RecuperacaoSenhaProps = {
-  successMessage?: string;
-  errorHandlerCollection?: ErrorHandlerCollection | null;
-  onSuccessCallback?: (result: RecuperacaoSenhaResponse) => Promise<void> | void;
-  onSuccessActions?: ActionInterface[];
-};
-
-export class RecuperacaoSenha extends RecuperacaoSenhaResponseHandler {
+export class RecuperacaoSenha extends ResponseHandler {
   constructor({
     successMessage = "Email de recuperação enviado com sucesso!",
-    errorHandlerCollection = null,
     onSuccessCallback,
     onSuccessActions,
-  }: RecuperacaoSenhaProps) {
+  }: ApiResponseHandlerProps<RecuperacaoSenhaResponse> = {}) {
     super({
       successMessage,
-      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+      errorHandlerCollection: new DefaultErrorHandlerCollection(),
       onSuccessCallback,
       onSuccessActions,
     });

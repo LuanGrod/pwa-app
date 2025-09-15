@@ -1,4 +1,5 @@
 import { Update } from "@global/request/builder/api/Update";
+import { ActionInterface } from "./ActionInterface";
 
 export default class UpdateOnUploadFile implements ActionInterface {
   // Properties

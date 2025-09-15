@@ -1,25 +1,17 @@
 import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
-import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
-import { GeracaoNovaSenha as GeracaoNovaSenhaResponseHandler } from "../GeracaoNovaSenha";
+import { ResponseHandler } from "../Handler";
 import { GeracaoNovaSenhaResponse } from "@global/type/request/GeracaoNovaSenha";
+import { ApiResponseHandlerProps } from "@global/type/request/ApiResponseHandlerProps";
 
-type GeracaoNovaSenhaProps = {
-  successMessage?: string;
-  errorHandlerCollection?: ErrorHandlerCollection | null;
-  onSuccessCallback?: (result: GeracaoNovaSenhaResponse) => Promise<void> | void;
-  onSuccessActions?: ActionInterface[];
-};
-
-export class GeracaoNovaSenha extends GeracaoNovaSenhaResponseHandler {
+export class GeracaoNovaSenha extends ResponseHandler {
   constructor({
     successMessage = "Senha alterada com sucesso!",
-    errorHandlerCollection = null,
     onSuccessCallback,
     onSuccessActions,
-  }: GeracaoNovaSenhaProps) {
+  }: ApiResponseHandlerProps<GeracaoNovaSenhaResponse> = {}) {
     super({
       successMessage,
-      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+      errorHandlerCollection: new DefaultErrorHandlerCollection(),
       onSuccessCallback,
       onSuccessActions,
     });

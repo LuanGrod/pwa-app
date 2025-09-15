@@ -1,35 +1,18 @@
-import { Default as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/Default";
-import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
 import { ResponseHandler } from "./Handler";
-
-type GetRowProps<T> = {
-  errorHandlerCollection?: ErrorHandlerCollection | null;
-  onSuccessCallback?: (result: T) => Promise<void> | void;
-  onSuccessActions?: ActionInterface[];
-};
+import { ResponseHandlerProps } from "@global/type/request/ResponseHandlerProps";
 
 export class GetRow<T = any> extends ResponseHandler {
   constructor({
-    errorHandlerCollection = null,
+    successMessage,
+    errorHandlerCollection,
     onSuccessCallback,
     onSuccessActions,
-  }: GetRowProps<T>) {
+  }: ResponseHandlerProps<T> = {}) {
     super({
-      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+      errorHandlerCollection,
       onSuccessCallback,
       onSuccessActions,
+      successMessage,
     });
-    this.onSuccessFn = this.handleSuccess.bind(this);
-    this.onErrorFn = this.handleError.bind(this);
-  }
-
-
-  protected async handleSuccess(data: T): Promise<any> {
-    this.successSetup(data);
-
-    return {
-      success: true,
-      data: data,
-    };
   }
 }

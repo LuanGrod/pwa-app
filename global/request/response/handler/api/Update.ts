@@ -1,25 +1,17 @@
 import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
-import { CollectionInterface as ErrorHandlerCollection } from "@global/request/error/handler/collection/CollectionInterface";
-import { Update as UpdateResponseHandler } from "../Update";
+import { ResponseHandler } from "../Handler";
 import { UpdateResponse } from "@global/type/request/Update";
+import { ApiResponseHandlerProps } from "@global/type/request/ApiResponseHandlerProps";
 
-type UpdateProps<T> = {
-  successMessage?: string;
-  errorHandlerCollection?: ErrorHandlerCollection | null;
-  onSuccessCallback?: (result: UpdateResponse<T>) => Promise<void> | void;
-  onSuccessActions?: ActionInterface[];
-};
-
-export class Update<T = any> extends UpdateResponseHandler {
+export class Update<T = any> extends ResponseHandler {
   constructor({
     successMessage = "Edição realizada com sucesso!",
-    errorHandlerCollection = null,
     onSuccessCallback,
     onSuccessActions
-  }: UpdateProps<T>) {
+  }: ApiResponseHandlerProps<UpdateResponse<T>> = {}) {
     super({
       successMessage,
-      errorHandlerCollection: errorHandlerCollection || new DefaultErrorHandlerCollection(),
+      errorHandlerCollection: new DefaultErrorHandlerCollection(),
       onSuccessCallback,
       onSuccessActions
     });
