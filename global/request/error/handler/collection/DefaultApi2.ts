@@ -1,29 +1,28 @@
-import { Error400 } from "../Error400";
-import { Error401c } from "../Error401c";
-import { Error403 } from "../Error403";
-import { Error404 } from "../Error404";
-import { Error422b } from "../Error422b";
-import { Error500 } from "../Error500";
-import { Fetch } from "../Fetch";
+import { ApiError as Error200Api } from "../status/200/ApiError";
+import { GenericError as Error400Generic } from "../status/400/GenericError";
+import { ApiError as Error401Api } from "../status/401/ApiError";
+import { GenericError as Error403Generic } from "../status/403/GenericError";
+import { GenericError as Error404Generic } from "../status/404/GenericError";
+import { ApiError as Error422Api } from "../status/422/ApiError";
+import { GenericError as Error500Generic } from "../status/500/GenericError";
+import { GenericError as FetchGeneric } from "../status/fetch/GenericError";
 import { Collection } from "./Collection";
 
 /**
- * Mostra as mensagens de erro vindo da api
- * Usado para a tela de login
- * 401 -> /sair
- * login - 401 -> mostra mensagem de erro
+ * Mostra as mensagens de erro vindo da api (quando não tem usa o genérico)
  */
 export class DefaultApi2 extends Collection {
   constructor() {
     super({
       elements: [
-        new Error400(),
-        new Error401c(),
-        new Error403(),
-        new Error404(),
-        new Error422b(),
-        new Error500(),
-        new Fetch(),
+        new Error200Api(),
+        new Error400Generic(),
+        new Error401Api(),
+        new Error403Generic(),
+        new Error404Generic(),
+        new Error422Api(),
+        new Error500Generic(),
+        new FetchGeneric(),
       ],
     });
   }

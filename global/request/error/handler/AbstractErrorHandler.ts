@@ -1,6 +1,6 @@
 import { HandlerInterface } from "./HandlerInterface";
 
-export class HandlerFixed implements HandlerInterface {
+export abstract class AbstractErrorHandler implements HandlerInterface {
   protected errorContent: string;
   protected msg: string;
 
@@ -11,9 +11,10 @@ export class HandlerFixed implements HandlerInterface {
 
   handle(error: Error): string[] | null {
     if (error.message.includes(this.errorContent)) {
-      return [this.msg];
+      return this.processError(error);
     }
-
     return null;
   }
+
+  protected abstract processError(error: Error): string[] | null;
 }
