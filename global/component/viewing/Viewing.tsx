@@ -1,15 +1,14 @@
 "use client";
 
 import React, { ReactNode } from "react";
-import { EmptyMessage } from "@global/component/listing/message/empty";
-import { ErrorMessage } from "@global/component/listing/message/error";
-import { LoadingMessage } from "@global/component/listing/message/loading";
-import Loading2 from "../overlay/popup/dialog/Loading2";
+import { EmptyMessage } from "@global/component/message/empty";
+import { ErrorMessage } from "@global/component/message/error";
+import { LoadingMessage } from "@global/component/message/loading";
 
 interface ViewingProps<T> {
-  data: T | null;
+  data?: T;
   loading: boolean;
-  error: string | null;
+  error?: string;
   renderItem: (item: T) => ReactNode;
   loadingComponent?: ReactNode;
   emptyComponent?: ReactNode;
@@ -21,7 +20,7 @@ export function Viewing<T>({
   loading,
   error,
   renderItem,
-  loadingComponent = <Loading2 loading />,
+  loadingComponent = <LoadingMessage />,
   emptyComponent = <EmptyMessage />,
   errorComponent = error ? <ErrorMessage error={error} /> : null,
 }: ViewingProps<T>) {

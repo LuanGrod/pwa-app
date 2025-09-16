@@ -46,7 +46,7 @@ type QuestoesStore = {
   examEndTime: number | null;
   setPack: (questoes: QuestaoType[]) => void;
   clearAnswers: () => void;
-  getCurrent: () => QuestaoType | null;
+  getCurrent: () => QuestaoType | undefined;
   setIndex: (index: number) => void;
   nextIndex: () => void;
   previousIndex: () => void;
@@ -157,7 +157,7 @@ const useQuestoes = create<QuestoesStore>()(
       },
       getCurrent: () => {
         const { pack, index } = get();
-        if (!pack || pack.length === 0) return null;
+        if (!pack || pack.length === 0) return undefined;
         return pack[index];
       },
       getCurrentAnswer: () => {

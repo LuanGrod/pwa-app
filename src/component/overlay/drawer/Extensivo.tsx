@@ -25,14 +25,12 @@ export default function Extensivo({ open, onClose, title, data, setData, loading
         <Viewing
           data={data}
           loading={loading}
-          error={null}
           loadingComponent={<Loading2 loading />}
           renderItem={() => (
             <>
               <Listing
                 data={data}
                 loading={loading}
-                error={null}
                 loadingComponent={<Loading2 loading />}
                 renderItem={(item) => (
                   <ExtensivoItem data={item} setData={setData} />

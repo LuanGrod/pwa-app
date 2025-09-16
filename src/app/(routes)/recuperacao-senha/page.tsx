@@ -1,6 +1,5 @@
 import Structure from "@/component/structure/Return";
-import styles from "./page.module.css";
-import RecuperacaoSenha from "@global/component/form/RecuperacaoSenha";
+import RecuperacaoSenha from "@/component/form/RecuperacaoSenha";
 
 type Props = {};
 

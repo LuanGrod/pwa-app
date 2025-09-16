@@ -1,4 +1,4 @@
-import Login from "@global/component/form/Login";
+import Login from "@/component/form/Login";
 import styles from "./page.module.css";
 import Logo from "@/component/icon/Logo";
 

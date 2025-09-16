@@ -15,10 +15,10 @@ type FlashcardAnswerEntry = {
 
 type FlashcardStore = {
   _hasHydrated: boolean;
-  current: FlashcardType | null;
-  next: FlashcardType | null;
+  current?: FlashcardType;
+  next?: FlashcardType;
   temas: number[];
-  sessaoId: number | null;
+  sessaoId?: number;
   currentThemeIndex: number;
   answers: FlashcardAnswerEntry[];
   isShowingAnswer: boolean;
@@ -53,10 +53,10 @@ const useFlashcards = create<FlashcardStore>()(
   persist(
     (set, get) => ({
       _hasHydrated: false,
-      current: null,
-      next: null,
+      current: undefined,
+      next: undefined,
       temas: [],
-      sessaoId: null,
+      sessaoId: undefined,
       currentThemeIndex: 0,
       answers: [],
       isShowingAnswer: false,
@@ -80,10 +80,10 @@ const useFlashcards = create<FlashcardStore>()(
       clearSession: () => {
         set({
           answers: [],
-          current: null,
-          next: null,
+          current: undefined,
+          next: undefined,
           temas: [],
-          sessaoId: null,
+          sessaoId: undefined,
           currentThemeIndex: 0,
         });
       },
@@ -134,7 +134,7 @@ const useFlashcards = create<FlashcardStore>()(
           let tempId = current.flashcards_salvos_id;
 
           set((state) => ({
-            current: state.current ? { ...state.current, flashcards_salvos_id: "" } : null,
+            current: state.current ? { ...state.current, flashcards_salvos_id: "" } : undefined,
           }));
 
           const deleting = new Delete({
@@ -146,7 +146,7 @@ const useFlashcards = create<FlashcardStore>()(
           set((state) => ({
             current: state.current
               ? { ...state.current, flashcards_salvos_id: "response.data.id" }
-              : null,
+              : undefined,
           }));
 
           const insertData = {
@@ -168,7 +168,7 @@ const useFlashcards = create<FlashcardStore>()(
                     ...state.current,
                     flashcards_salvos_id: response.data.id || "",
                   }
-                : null,
+                : undefined,
             }));
           }
         }
@@ -206,7 +206,7 @@ const useFlashcards = create<FlashcardStore>()(
         }));
 
         if (next) {
-          set({ current: next, next: null });
+          set({ current: next, next: undefined });
         }
 
         const insert = new Insert({

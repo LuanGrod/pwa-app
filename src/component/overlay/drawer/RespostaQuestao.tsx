@@ -8,7 +8,7 @@ import useQuestoes from "@/store/QuestaoStore";
 type Props = {
   open?: boolean;
   onClose?: () => void;
-  data: QuestaoType | null;
+  data?: QuestaoType;
 };
 
 export default function RespostaQuestao({ onClose, open, data }: Props) {

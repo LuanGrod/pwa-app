@@ -3,7 +3,7 @@
 import { useEstudante } from "@/store/EstudanteStore";
 import Form from "@global/component/form/Form";
 import LoginHandlerFactory from "@global/form/handler/submit/api/LoginHandlerFactory";
-import LoginForm from "@global/form/Login";
+import LoginForm from "@/form/Login";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
 

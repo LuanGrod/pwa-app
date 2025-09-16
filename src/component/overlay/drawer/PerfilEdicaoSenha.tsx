@@ -2,7 +2,7 @@ import { Estudante as EstudanteType } from "@/type/Entities";
 import Form from "@global/component/form/Form";
 import { BottomDrawer } from "@global/component/overlay/drawer/Bottom"
 import { UpdateHandler } from "@global/form/handler/submit/api/UpdateHandler";
-import EditarSenha from "@global/form/EditarSenha";
+import EditarSenha from "@/form/EditarSenha";
 
 type Props = {
   open: boolean;

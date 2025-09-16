@@ -13,7 +13,7 @@ import { useGetRow } from "@global/hook/request/useGetRow";
 type Props = {};
 
 export default function page({ }: Props) {
-  const { data, setData, loading, error } = useGetRow<EstatisticasType>({
+  const { data, loading, error } = useGetRow<EstatisticasType>({
     entity: "estatisticas",
     needsAuthorization: true,
   });
