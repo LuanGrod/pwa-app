@@ -1,16 +1,16 @@
 /**
- * Utilitário para extrair valores de strings de filtro
- * 
+ * Usado para extrair valores de strings de filtro
+ *
  * Suporta o formato padrão: campo_entidade_0{operador}valor
  * Exemplo: questoes_id_prova_0{eq}6
  */
 
-export type FilterOperation = 'eq' | 'in' | 'gt' | 'geq' | 'lt' | 'leq' | 'lk';
+import { ConditionalOperator } from "@global/type/filter/ConditionalOpeator";
 
 export interface ParsedFilter {
   field: string;
   entity?: string;
-  operation: FilterOperation;
+  operation: ConditionalOperator;
   value: string;
   rawFilter: string;
 }
@@ -23,21 +23,17 @@ export class FilterParser {
    * @param entity - Entidade associada (opcional, ex: "questoes")
    * @returns O valor extraído ou null se não encontrado
    */
-  static extractFilterValue(
-    filters: string,
-    field: string,
-    entity?: string
-  ): string | null {
+  static extractFilterValue(filters: string, field: string, entity?: string): string | null {
     if (!filters || !field) return null;
 
     // Constrói o padrão de busca
-    const pattern = entity 
-      ? `${entity}_${field}_0\\{(\\w+)\\}([^&]+)` 
+    const pattern = entity
+      ? `${entity}_${field}_0\\{(\\w+)\\}([^&]+)`
       : `\\w*_?${field}_0\\{(\\w+)\\}([^&]+)`;
-    
+
     const regex = new RegExp(pattern);
     const match = filters.match(regex);
-    
+
     return match ? match[2] : null;
   }
 
@@ -55,7 +51,7 @@ export class FilterParser {
   ): number | null {
     const value = this.extractFilterValue(filters, field, entity);
     if (!value) return null;
-    
+
     const numValue = parseInt(value, 10);
     return isNaN(numValue) ? null : numValue;
   }
@@ -79,7 +75,7 @@ export class FilterParser {
     return {
       field,
       entity,
-      operation: operation as FilterOperation,
+      operation: operation as ConditionalOperator,
       value,
       rawFilter: filterString,
     };
@@ -96,9 +92,9 @@ export class FilterParser {
     // Divide a string por operadores lógicos (and/or) mantendo os filtros
     // Para simplificar, assume que os filtros são separados por & ou similares
     const filterParts = filters.split(/[&|]/);
-    
+
     return filterParts
-      .map(part => this.parseFilter(part.trim()))
+      .map((part) => this.parseFilter(part.trim()))
       .filter((parsed): parsed is ParsedFilter => parsed !== null);
   }
 }

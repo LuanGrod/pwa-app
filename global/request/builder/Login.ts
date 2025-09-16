@@ -2,7 +2,7 @@ import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Login as ResponseHandler } from "@global/request/response/handler/Login";
 import { LoginBuilderProps } from "@global/type/request/builder/Login";
-import { BUILDER_PATHS } from "./constants/ApiPaths";
+import { BUILDER_PATHS } from "@global/constants/request/builder/ApiPaths";
 
 export class Login extends RequestBuilder {
   constructor(props: LoginBuilderProps) {

@@ -2,7 +2,7 @@ import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { GetRow as ResponseHandler } from "@global/request/response/handler/GetRow";
 import { GetRowBuilderProps } from "@global/type/request/builder/GetRow";
-import { BUILDER_PATHS } from "./constants/ApiPaths";
+import { BUILDER_PATHS } from "@global/constants/request/builder/ApiPaths";
 import ParamBuilder from "../helper/ParamBuilder";
 
 export class GetRow extends RequestBuilder {

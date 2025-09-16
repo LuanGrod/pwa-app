@@ -2,7 +2,7 @@ import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { RecuperacaoSenha as ResponseHandler } from "@global/request/response/handler/RecuperacaoSenha";
 import { RecuperacaoSenhaBuilderProps } from "@global/type/request/builder/RecuperacaoSenha";
-import { BUILDER_PATHS } from "./constants/ApiPaths";
+import { BUILDER_PATHS } from "@global/constants/request/builder/ApiPaths";
 
 export class RecuperacaoSenha extends RequestBuilder {
   constructor(props: RecuperacaoSenhaBuilderProps) {

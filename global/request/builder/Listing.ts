@@ -2,7 +2,7 @@ import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Listing as ResponseHandler } from "@global/request/response/handler/Listing";
 import { ListingBuilderProps } from "@global/type/request/builder/Listing";
-import { BUILDER_PATHS } from "./constants/ApiPaths";
+import { BUILDER_PATHS } from "@global/constants/request/builder/ApiPaths";
 import ParamBuilder from "../helper/ParamBuilder";
 
 export class Listing extends RequestBuilder {

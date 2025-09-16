@@ -3,7 +3,7 @@ import { RequestBuilder } from "./Builder";
 import { Upload as ResponseHandler } from "@global/request/response/handler/Upload";
 import { Collection as HeaderCollection } from "../header/handler/collection/Collection";
 import { UploadBuilderProps } from "@global/type/request/builder/Upload";
-import { BUILDER_PATHS } from "./constants/ApiPaths";
+import { BUILDER_PATHS } from "@global/constants/request/builder/ApiPaths";
 
 export class Upload extends RequestBuilder {
   private uploadField: string;

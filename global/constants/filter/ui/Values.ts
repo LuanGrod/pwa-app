@@ -1,0 +1,9 @@
+export const DEFAULT_FILTER_VALUES: Record<string, string | boolean> = {
+  BOOLEAN_ACTIVE: "1",
+  BOOLEAN_INACTIVE: "0",
+  SELECT_CONDITIONAL_OPERATOR: "in",
+  BOOLEAN_CONDITIONAL_OPERATOR: "eq",
+  SELECTION_MODE: "multi",
+  CONNECTION_OPERATOR: "and",
+  DENIAL_OPERATOR: false,
+} as const;

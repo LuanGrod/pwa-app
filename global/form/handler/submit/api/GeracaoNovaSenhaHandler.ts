@@ -1,30 +1,15 @@
-import { ResponseHandlerInterface } from "@global/request/response/handler/HandlerInterface";
 import { GeracaoNovaSenhaHandler as FormHandler } from "../GeracaoNovaSenhaHandler";
 import { GeracaoNovaSenha } from "@global/request/builder/api/GeracaoNovaSenha";
 import { GeracaoNovaSenha as ResponseHandler } from "@global/request/response/handler/api/GeracaoNovaSenha";
-
-type GeracaoNovaSenhaHandlerProps = {
-  entity: string;
-  needsAuthorization?: boolean;
-  responseHandler?: ResponseHandlerInterface | null;
-};
+import { FormHandlerProps } from "@global/type/form/handler/FormHandlerProps";
 
 export class GeracaoNovaSenhaHandler extends FormHandler {
-  constructor({
-    entity,
-    needsAuthorization,
-    responseHandler = null,
-  }: GeracaoNovaSenhaHandlerProps) {
-    responseHandler = responseHandler || new ResponseHandler({});
-    super({ entity, needsAuthorization, responseHandler });
+  constructor({ entity, needsAuthorization, responseHandler }: FormHandlerProps) {
+    const finalResponseHandler = responseHandler || new ResponseHandler();
+    super({ entity, needsAuthorization, responseHandler: finalResponseHandler });
   }
 
-  async onSubmit(values: any, id?: string): Promise<any> {
-    const geracaoNovaSenhaRequestBuilder = new GeracaoNovaSenha({
-      entity: this.entity,
-      body: values,
-      responseHandler: this.responseHandler,
-    });
-    return await geracaoNovaSenhaRequestBuilder.build();
+  protected createRequestBuilder(props: any) {
+    return new GeracaoNovaSenha(props);
   }
 }

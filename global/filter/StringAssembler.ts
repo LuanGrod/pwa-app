@@ -1,4 +1,4 @@
-import { ConnectionOperator } from "./ui/FilterInterface";
+import { ConnectionOperator } from "@global/type/filter/ConnectionOperator";
 
 /**
  * FilterFragment represents a single filter condition and its connector.

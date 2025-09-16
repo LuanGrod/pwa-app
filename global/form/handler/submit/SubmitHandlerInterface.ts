@@ -1,3 +1,3 @@
 export default interface SubmitHandlerInterface {
-  onSubmit(values: any, id?: string): Promise<any>;
+  onSubmit(values: { [key: string]: string }, id?: string): Promise<any>;
 }

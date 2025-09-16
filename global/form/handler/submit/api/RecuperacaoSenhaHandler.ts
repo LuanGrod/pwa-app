@@ -1,30 +1,15 @@
-import { ResponseHandlerInterface } from "@global/request/response/handler/HandlerInterface";
 import { RecuperacaoSenha } from "@global/request/builder/api/RecuperacaoSenha";
 import { RecuperacaoSenha as ResponseHandler } from "@global/request/response/handler/api/RecuperacaoSenha";
 import { RecuperacaoSenhaHandler as FormHandler } from "../RecuperacaoSenhaHandler";
-
-type RecuperacaoSenhaHandlerProps = {
-  entity?: string;
-  needsAuthorization?: boolean;
-  responseHandler?: ResponseHandlerInterface | null;
-};
+import { FormHandlerProps } from "@global/type/form/handler/FormHandlerProps";
 
 export class RecuperacaoSenhaHandler extends FormHandler {
-  constructor({
-    entity,
-    needsAuthorization,
-    responseHandler = null,
-  }: RecuperacaoSenhaHandlerProps) {
-    responseHandler = responseHandler || new ResponseHandler({});
-    super({ entity, needsAuthorization, responseHandler });
+  constructor({ entity, needsAuthorization, responseHandler }: FormHandlerProps) {
+    const finalResponseHandler = responseHandler || new ResponseHandler();
+    super({ entity, needsAuthorization, responseHandler: finalResponseHandler });
   }
 
-  async onSubmit(values: any, id?: string): Promise<any> {
-    const RecuperacaoSenhaRequestBuilder = new RecuperacaoSenha({
-      entity: this.entity,
-      body: values,
-      responseHandler: this.responseHandler,
-    });
-    return await RecuperacaoSenhaRequestBuilder.build();
+  protected createRequestBuilder(props: any) {
+    return new RecuperacaoSenha(props);
   }
 }

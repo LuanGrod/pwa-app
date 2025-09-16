@@ -1,31 +1,15 @@
-import SubmitHandlerInterface from "./SubmitHandlerInterface";
+import { BaseSubmitHandler } from "./BaseSubmitHandler";
 import { Login } from "@global/request/builder/Login";
 import { Login as ResponseHandler } from "@global/request/response/handler/Login";
-import { ResponseHandlerInterface } from "@global/request/response/handler/HandlerInterface";
+import { FormHandlerProps } from "@global/type/form/handler/FormHandlerProps";
 
-type LoginHandlerProps = {
-  entity?: string;
-  needsAuthorization?: boolean;
-  responseHandler?: ResponseHandlerInterface;
-};
-
-export class LoginHandler implements SubmitHandlerInterface {
-  protected entity?: string;
-  protected needsAuthorization: boolean;
-  protected responseHandler: ResponseHandlerInterface;
-
-  constructor({ entity, needsAuthorization, responseHandler }: LoginHandlerProps) {
-    this.entity = entity;
-    this.needsAuthorization = needsAuthorization || false;
-    this.responseHandler = responseHandler || new ResponseHandler({});
+export class LoginHandler extends BaseSubmitHandler {
+  constructor({ entity, needsAuthorization, responseHandler }: FormHandlerProps) {
+    const finalResponseHandler = responseHandler || new ResponseHandler();
+    super({ entity, needsAuthorization, responseHandler: finalResponseHandler });
   }
 
-  async onSubmit(values: any, id?: string): Promise<any> {
-    const loginRequestBuilder = new Login({
-      entity: this.entity,
-      body: values,
-      responseHandler: this.responseHandler,
-    });
-    return await loginRequestBuilder.build();
+  protected createRequestBuilder(props: any) {
+    return new Login(props);
   }
 }

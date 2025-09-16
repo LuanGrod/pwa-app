@@ -1,32 +1,15 @@
-import { ResponseHandlerInterface } from "@global/request/response/handler/HandlerInterface";
-import SubmitHandlerInterface from "./SubmitHandlerInterface";
+import { BaseSubmitHandler } from "./BaseSubmitHandler";
 import { Insert } from "@global/request/builder/Insert";
 import { Insert as ResponseHandler } from "@global/request/response/handler/Insert";
+import { FormHandlerProps } from "@global/type/form/handler/FormHandlerProps";
 
-type InsertHandlerProps = {
-  entity: string;
-  needsAuthorization?: boolean;
-  responseHandler?: ResponseHandlerInterface | null;
-};
-
-export class InsertHandler implements SubmitHandlerInterface {
-  protected entity: string;
-  protected needsAuthorization: boolean;
-  protected responseHandler: ResponseHandlerInterface;
-
-  constructor({ entity, needsAuthorization, responseHandler = null }: InsertHandlerProps) {
-    this.entity = entity;
-    this.needsAuthorization = needsAuthorization || false;
-    this.responseHandler = responseHandler || new ResponseHandler({});
+export class InsertHandler extends BaseSubmitHandler {
+  constructor({ entity, needsAuthorization, responseHandler }: FormHandlerProps) {
+    const finalResponseHandler = responseHandler || new ResponseHandler();
+    super({ entity, needsAuthorization, responseHandler: finalResponseHandler });
   }
 
-  async onSubmit(values: any, id?: string): Promise<any> {
-    const insertRequestBuilder = new Insert({
-      entity: this.entity,
-      body: values,
-      responseHandler: this.responseHandler,
-    });
-
-    return await insertRequestBuilder.build(this.needsAuthorization);
+  protected createRequestBuilder(props: any) {
+    return new Insert(props);
   }
 }

@@ -1,15 +1,12 @@
 import AbstractFilter from "./AbstractFilter";
 import { Listing } from "@global/request/builder/api/Listing";
 import { Listing as ListingResponseHandler } from "@global/request/response/handler/api/Listing";
-import FilterInterface, {
-  ConditionalOperator,
-  ConnectionOperator,
-  SelectionMode,
-  FilterType,
-  DEFAULT_VALUES,
-} from "./FilterInterface";
 import { FilterFragment } from "../StringAssembler";
 import { ComponentType } from "react";
+import { ConditionalOperator } from "@global/type/filter/ConditionalOpeator";
+import { ConnectionOperator } from "@global/type/filter/ConnectionOperator";
+import { SelectionMode } from "@global/type/filter/SelectionMode";
+import { DEFAULT_FILTER_VALUES } from "@global/constants/filter/ui/Values";
 
 type SelectProps = {
   /**
@@ -115,7 +112,6 @@ type SelectProps = {
    */
   selectionMode?: SelectionMode;
 };
-
 export default class Select extends AbstractFilter {
   options: string[];
   entity: string;
@@ -152,7 +148,7 @@ export default class Select extends AbstractFilter {
     parentConditionalOperator,
     parentConnectionOperator,
     parentDenialOperator,
-    selectionMode = SelectionMode.MULTI,
+    selectionMode = "multi",
     labelFields,
     customOptionComponent,
     hasClearFilter = true,
@@ -161,10 +157,10 @@ export default class Select extends AbstractFilter {
     super(
       queryField,
       label,
-      FilterType.SELECT,
-      conditionalOperator || DEFAULT_VALUES.SELECT_CONDITIONAL_OPERATOR,
-      connectionOperator || DEFAULT_VALUES.CONNECTION_OPERATOR,
-      denialOperator || DEFAULT_VALUES.DENIAL_OPERATOR,
+      "select",
+      conditionalOperator || DEFAULT_FILTER_VALUES.SELECT_CONDITIONAL_OPERATOR,
+      connectionOperator || DEFAULT_FILTER_VALUES.CONNECTION_OPERATOR,
+      denialOperator || (DEFAULT_FILTER_VALUES.DENIAL_OPERATOR as false),
       key,
       queryFieldEntity || ""
     );
@@ -176,9 +172,14 @@ export default class Select extends AbstractFilter {
     this.parentIdParamName = parentIdParamName || "";
     this.parentLabelParamName = parentLabelParamName || "";
     this.parentKeyEntity = parentKeyEntity || "";
-    this.parentConditionalOperator = parentConditionalOperator || DEFAULT_VALUES.SELECT_CONDITIONAL_OPERATOR;
-    this.parentConnectionOperator = parentConnectionOperator || DEFAULT_VALUES.CONNECTION_OPERATOR;
-    this.parentDenialOperator = parentDenialOperator || DEFAULT_VALUES.DENIAL_OPERATOR;
+    this.parentConditionalOperator =
+      parentConditionalOperator ||
+      (DEFAULT_FILTER_VALUES.SELECT_CONDITIONAL_OPERATOR as ConditionalOperator);
+    this.parentConnectionOperator =
+      parentConnectionOperator ||
+      (DEFAULT_FILTER_VALUES.CONNECTION_OPERATOR as ConnectionOperator);
+    this.parentDenialOperator =
+      parentDenialOperator || (DEFAULT_FILTER_VALUES.DENIAL_OPERATOR as boolean);
     this.selectionMode = selectionMode;
     this.labelFields = labelFields || [];
     this.customOptionComponent = customOptionComponent || null;
@@ -187,9 +188,9 @@ export default class Select extends AbstractFilter {
   }
 
   async loadOptions() {
-    const listing = new Listing({ 
+    const listing = new Listing({
       entity: this.entity,
-      responseHandler: new ListingResponseHandler({})
+      responseHandler: new ListingResponseHandler({}),
     });
     const result = await listing.build(true);
     const data = result.data.rows || [];

@@ -2,7 +2,7 @@ import { RequestBuilder } from "./Builder";
 import { Insert as ResponseHandler } from "../response/handler/Insert";
 import { Methods } from "@global/type/Methods";
 import { InsertBuilderProps } from "@global/type/request/builder/Insert";
-import { BUILDER_PATHS } from "./constants/ApiPaths";
+import { BUILDER_PATHS } from "@global/constants/request/builder/ApiPaths";
 
 export class Insert extends RequestBuilder {
   constructor(props: InsertBuilderProps) {

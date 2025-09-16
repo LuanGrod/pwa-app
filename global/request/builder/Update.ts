@@ -2,7 +2,7 @@ import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Update as ResponseHandler } from "@global/request/response/handler/Update";
 import { UpdateBuilderProps } from "@global/type/request/builder/Update";
-import { BUILDER_PATHS } from "./constants/ApiPaths";
+import { BUILDER_PATHS } from "@global/constants/request/builder/ApiPaths";
 
 export class Update extends RequestBuilder {
   constructor(props: UpdateBuilderProps) {

@@ -2,7 +2,7 @@ import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { GeracaoNovaSenha as ResponseHandler } from "@global/request/response/handler/GeracaoNovaSenha";
 import { GeracaoNovaSenhaBuilderProps } from "@global/type/request/builder/GeracaoNovaSenha";
-import { BUILDER_PATHS } from "./constants/ApiPaths";
+import { BUILDER_PATHS } from "@global/constants/request/builder/ApiPaths";
 
 export class GeracaoNovaSenha extends RequestBuilder {
   constructor(props: GeracaoNovaSenhaBuilderProps) {
