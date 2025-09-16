@@ -6,7 +6,7 @@ import { useGetRow } from "@global/hook/request/useGetRow";
 import { Viewing } from "@global/component/viewing/Viewing";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import EdicaoSugerida from "../overlay/popup/dialog/EdicaoSugerida";
-import useDialog from "@global/hook/overlay/useDialog";
+import useToggleStatus from "@global/hook/overlay/useToggleStatus";
 import LazyPdfVisualizer from "@global/component/pdf/LazyPdfVisualizer";
 import { useEnv } from "@global/hook/useEnv";
 import { useUser } from "@global/hook/auth/useUser";
@@ -44,7 +44,7 @@ export default function PdfContent({
   ToggleAddRemove,
 }: Props) {
   const { uploadUrl } = useEnv();
-  const { isOpen, toggleDialog } = useDialog();
+  const { isActive, toggle } = useToggleStatus();
   const { id: userId } = useUser();
 
   const insertData = {
@@ -71,15 +71,15 @@ export default function PdfContent({
       <ViewTransition default="handle">
         <Header
           title={data ? (data as any)[titleParamName] : ""}
-          handleAddSugestion={toggleDialog}
+          handleAddSugestion={toggle}
           handleSave={toggleAddRemove}
           status={data && data[ToggleAddRemove.idParamName]}
           isSaving={isSaving}
         />
         <main className="content-wrapper pdf">
           <EdicaoSugerida
-            onClose={toggleDialog}
-            open={isOpen}
+            onClose={toggle}
+            open={isActive}
             estudanteId={userId}
             conteudoId={entityId}
             conteudoName={edicaoSugerida.conteudoName}

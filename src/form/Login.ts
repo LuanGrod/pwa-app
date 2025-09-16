@@ -1,8 +1,8 @@
-import { Form } from "./Form";
-import { Email } from "./item/prebuilt/Email";
-import { Hidden } from "./item/Hidden";
-import { Link } from "./item/prebuilt/Link";
-import { Senha } from "./item/prebuilt/Senha";
+import { Form } from "@global/form/Form";
+import { Hidden } from "@global/form/item/Hidden";
+import { Senha } from "@global/form/item/prebuilt/Senha";
+import { Link } from "@global/form/item/prebuilt/Link";
+import { Email } from "@global/form/item/prebuilt/Email";
 
 const formItems = [
   new Email({ entity: "estudantes", defaultValue: "mail@mail.com" }),

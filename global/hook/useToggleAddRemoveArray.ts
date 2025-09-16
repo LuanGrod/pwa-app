@@ -56,7 +56,7 @@ export default function useToggleAddRemoveArray({
         setData((prevData) =>
           prevData.map((item) =>
             item[keyParamName] === data[keyParamName]
-              ? { ...item, [idParamName]: "loading" }
+              ? { ...item, [idParamName]: "temp" } // aqui só precisa ser um valor temporário, depois vai ser atualizado pelo valor real
               : item
           )
         );

@@ -7,7 +7,7 @@ import IncreaseFontSizeBtn from "./item/IncreaseFontSizeBtn";
 import SaveBtn from "./item/SaveBtn";
 import useQuestoes from "@/store/QuestaoStore";
 import { useUser } from "@global/hook/auth/useUser";
-import useDialog from "@global/hook/overlay/useDialog";
+import useToggleStatus from "@global/hook/overlay/useToggleStatus";
 import EdicaoSugerida from "@/component/overlay/popup/dialog/EdicaoSugerida";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -17,7 +17,7 @@ type Props = {};
 export default function Simulado({ }: Props) {
   const { handleSave, getCurrentSavedStatus, getCurrent, isSaving, getRemainingTime, getFormattedRemainingTime, checkExamTimeout, _hasHydrated } = useQuestoes();
   const { id: userId } = useUser();
-  const { isOpen, toggleDialog } = useDialog();
+  const { isActive, toggle } = useToggleStatus();
   const router = useRouter();
   
   // Estado simples para o tempo restante - atualizado automaticamente
@@ -28,7 +28,7 @@ export default function Simulado({ }: Props) {
       <IncreaseFontSizeBtn elementsClassNames={["enunciado", "area-tema", "ano", "conteudo", "gabarito", "alternativa", "comentario", "titulo-referencia", "referencia", "empty", "enviar", "questao-timer"]} />
       <DecreaseFontSizeBtn elementsClassNames={["enunciado", "area-tema", "ano", "conteudo", "gabarito", "alternativa", "comentario", "titulo-referencia", "referencia", "empty", "enviar", "questao-timer"]} />
       <SaveBtn handleSave={() => handleSave()} disabled={isSaving} status={getCurrentSavedStatus()} />
-      <EditBtn handleEdit={toggleDialog} size={24} />
+      <EditBtn handleEdit={toggle} size={24} />
     </div>
   );
 
@@ -66,8 +66,8 @@ export default function Simulado({ }: Props) {
   return <>
     <BaseHeader left={remainingTime()} right={RightWrapper} className="questoes-header" />
     <EdicaoSugerida
-      onClose={toggleDialog}
-      open={isOpen}
+      onClose={toggle}
+      open={isActive}
       estudanteId={userId}
       conteudoId={getCurrent()?.questoes_id || ""}
       conteudoName="id_questao"

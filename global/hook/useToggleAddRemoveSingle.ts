@@ -40,7 +40,7 @@ export default function useToggleAddRemoveSingle({
       } else {
         setData((prevData) => ({
           ...prevData,
-          [idParamName]: "loading",
+          [idParamName]: "temp", // aqui só precisa ser um valor temporário, depois vai ser atualizado pelo valor real
         }));
 
         const insert = new Insert({

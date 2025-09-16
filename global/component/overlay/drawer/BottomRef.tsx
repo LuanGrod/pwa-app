@@ -1,7 +1,7 @@
 "use client";
 
 import { forwardRef, ReactNode } from "react";
-import useDrawer from "@global/hook/overlay/useDrawer";
+import useRefDrawer from "@global/hook/overlay/useRefDrawer";
 import { BottomDrawer } from "./Bottom";
 
 type Props = {
@@ -10,7 +10,7 @@ type Props = {
 };
 
 export const BottomRefDrawer = forwardRef(function BottomDrawerRef({ children, title }: Props, ref) {
-  const { isOpen, setIsOpen } = useDrawer({ ref });
+  const { isOpen, setIsOpen } = useRefDrawer({ ref });
 
   return (
     <BottomDrawer title={title} open={isOpen} onClose={() => setIsOpen(false)}>

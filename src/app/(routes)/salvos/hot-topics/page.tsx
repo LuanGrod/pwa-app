@@ -9,13 +9,13 @@ import useSearch from "@global/hook/useSearch";
 import SearchBar from "@global/component/atomic/SearchBar";
 import { UnderHeader } from "@global/component/overlay/drawer/UnderHeader";
 import { HotTopicSalvos } from "@/type/Entities";
-import useDialog from "@global/hook/overlay/useDialog";
+import useToggleStatus from "@global/hook/overlay/useToggleStatus";
 import Bandeira from "@global/component/icons/Bandeira";
 
 type Props = {};
 
 export default function page({ }: Props) {
-  const { isOpen, toggleDialog } = useDialog();
+  const { isActive, toggle } = useToggleStatus();
 
   const { data, loading, error } = useListing<HotTopicSalvos>({
     entity: "hot-topics-salvos",
@@ -28,8 +28,8 @@ export default function page({ }: Props) {
   });
 
   return (
-    <Structure title="Hot Topics salvos" handleSearch={toggleDialog}>
-      <UnderHeader open={isOpen} onClose={toggleDialog}>
+    <Structure title="Hot Topics salvos" handleSearch={toggle}>
+      <UnderHeader open={isActive} onClose={toggle}>
         <SearchBar
           value={searchTerm || ""}
           onChange={(e) => {

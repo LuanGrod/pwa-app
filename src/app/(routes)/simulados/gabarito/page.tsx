@@ -5,7 +5,7 @@ import useQuestoes from "@/store/QuestaoStore";
 import { Shadow as ShadowBtn } from "@global/component/button/Shadow";
 import { Switch as SwitchBtn } from "@global/component/button/Switch";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
-import useDialog from "@global/hook/overlay/useDialog";
+import useToggleStatus from "@global/hook/overlay/useToggleStatus";
 import { useRouter } from "next/navigation";
 import { startTransition, useEffect } from "react";
 import CardList from "@global/component/stat/CardList";
@@ -26,7 +26,7 @@ export default function page({ }: Props) {
     saveExam
   } = useQuestoes();
   const router = useRouter()
-  const { isOpen, toggleDialog } = useDialog();
+  const { isActive, toggle } = useToggleStatus();
 
   const {
     totalQuestions,
@@ -87,9 +87,9 @@ export default function page({ }: Props) {
       </div>
 
       <div className="section">
-        <ShadowBtn className="view-wrong" onClick={toggleDialog}>Ver questões erradas</ShadowBtn>
+        <ShadowBtn className="view-wrong" onClick={toggle}>Ver questões erradas</ShadowBtn>
         <SwitchBtn className="save-exit" onClick={() => saveExam(router)}>Sair e salvar</SwitchBtn>
-        <QuestoesErradas open={isOpen} onClose={toggleDialog} answers={answers?.filter(answer => answer.answer && answer.answer !== answer.correct).map(answer => ({ id: answer.id, ordem: answer.ordem }))} />
+        <QuestoesErradas open={isActive} onClose={toggle} answers={answers?.filter(answer => answer.answer && answer.answer !== answer.correct).map(answer => ({ id: answer.id, ordem: answer.ordem }))} />
       </div>
     </main>
   )

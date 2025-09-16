@@ -4,12 +4,25 @@ type Props<T> = {
   options: T[];
   keyParams: string[];
   caseSensitive?: boolean;
+  childrenProperty?: string;
 };
 
+/**
+ * Hook para busca em listas de objetos.
+ * @param options Lista de objetos a serem filtrados.
+ * @param keyParams Campos dos objetos onde a busca será realizada.
+ * @param caseSensitive Define se a busca é sensível a maiúsculas/minúsculas. Padrão é false.
+ * @param childrenProperty (opcional) Nome da propriedade que contém filhos (para buscas em estruturas hierárquicas).
+ * @returns filteredData - Lista filtrada com base no termo de busca.
+ * @returns searchTerm - Termo de busca atual.
+ * @returns setSearchTerm - Função para atualizar o termo de busca.
+ * @returns setFilteredData - Função para atualizar manualmente os dados filtrados (se necessário).
+ */
 export default function useSearch<T = any>({
   options,
   keyParams,
   caseSensitive = false,
+  childrenProperty,
 }: Props<T>) {
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredData, setFilteredData] = useState(options);
@@ -32,18 +45,22 @@ export default function useSearch<T = any>({
     if (!term.trim()) return data;
 
     return data.filter((item: any) => {
-      // Verifica se é um item hierárquico (tem children)
-      if (item.isParent && item.children && Array.isArray(item.children)) {
-        // Busca no parent
+      const hasChildren =
+        childrenProperty &&
+        item[childrenProperty] &&
+        Array.isArray(item[childrenProperty]) &&
+        item[childrenProperty].length > 0;
+
+      if (hasChildren) {
         const parentMatch = searchInObject(item, term);
 
-        // Busca nos children
-        const childMatch = item.children.some((child: any) => searchInObject(child, term));
+        const childMatch = item[childrenProperty].some((child: any) =>
+          searchInObject(child, term)
+        );
 
         return parentMatch || childMatch;
       }
 
-      // Para itens simples, busca diretamente nos keyParams
       return searchInObject(item, term);
     });
   };
@@ -51,16 +68,12 @@ export default function useSearch<T = any>({
   useEffect(() => {
     const filtered = filterData(options, searchTerm);
     setFilteredData(filtered);
-  }, [options, searchTerm, setSearchTerm]);
-
-  // Função auxiliar para uso externo (mantém compatibilidade)
-  const filterOptions = (data: any[], term: string) => filterData(data, term);
+  }, [options, searchTerm]);
 
   return {
     filteredData,
     searchTerm,
     setSearchTerm,
     setFilteredData,
-    filterOptions, // Para compatibilidade com código existente
   };
 }

@@ -9,7 +9,7 @@ import useSearch from "@global/hook/useSearch";
 import { MapasMentaisListagem } from "@/type/Entities";
 import { UnderHeader } from "@global/component/overlay/drawer/UnderHeader";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
-import useDialog from "@global/hook/overlay/useDialog";
+import useToggleStatus from "@global/hook/overlay/useToggleStatus";
 import Estrela from "@global/component/icons/Estrela";
 import { ToggleableItem } from "@global/listing/ToggleableItem";
 
@@ -17,7 +17,7 @@ type Props = {};
 
 export default function page({ }: Props) {
   const filters = useSearchParams().get("filters") || "";
-  const { isOpen, toggleDialog } = useDialog();
+  const { isActive, toggle } = useToggleStatus();
 
   const { data, setData, loading, error } = useListing<MapasMentaisListagem>({
     entity: "mapas-mentais",
@@ -31,8 +31,8 @@ export default function page({ }: Props) {
   });
 
   return (
-    <Structure title="Mapas Mentais" handleSearch={toggleDialog}>
-      <UnderHeader open={isOpen} onClose={toggleDialog}>
+    <Structure title="Mapas Mentais" handleSearch={toggle}>
+      <UnderHeader open={isActive} onClose={toggle}>
         <SearchBar
           value={searchTerm || ""}
           onChange={(e) => {

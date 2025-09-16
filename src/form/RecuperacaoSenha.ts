@@ -1,5 +1,5 @@
-import { Form } from "./Form";
-import { Email } from "./item/prebuilt/Email";
+import { Form } from "@global/form/Form";
+import { Email } from "@global/form/item/prebuilt/Email";
 
 const formItems = [new Email({ entity: "estudantes" })];
 const form = new Form(formItems, "below");

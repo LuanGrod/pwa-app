@@ -11,13 +11,13 @@ import CardList from "@global/component/stat/CardList";
 import SimpleLine from "@global/component/stat/SimpleLine";
 import { Viewing } from "@global/component/viewing/Viewing";
 import { BrazilianDateFormatter } from "@global/formatter/date/Brazilian";
-import useDialog from "@global/hook/overlay/useDialog";
+import useToggleStatus from "@global/hook/overlay/useToggleStatus";
 import { useListing } from "@global/hook/request/useListing";
 
 type Props = { id: string };
 
 export default function SimuladoStats({ id }: Props) {
-  const { isOpen, toggleDialog } = useDialog();
+  const { isActive, toggle } = useToggleStatus();
 
   const { data, loading, error } = useListing<RespostasQuestoes>({
     entity: "respostas-questoes",
@@ -109,9 +109,9 @@ export default function SimuladoStats({ id }: Props) {
           </div>
 
           <div className="section">
-            <ShadowBtn className="view-wrong" onClick={toggleDialog}>Ver questões erradas</ShadowBtn>
+            <ShadowBtn className="view-wrong" onClick={toggle}>Ver questões erradas</ShadowBtn>
             <LinkView href="/simulados"><SwitchBtn className="save-exit">Sair</SwitchBtn></LinkView>
-            <QuestoesErradas open={isOpen} onClose={toggleDialog} answers={answersForErradasDialog} />
+            <QuestoesErradas open={isActive} onClose={toggle} answers={answersForErradasDialog} />
           </div>
         </main>)
       }}

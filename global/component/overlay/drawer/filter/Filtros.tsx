@@ -54,6 +54,7 @@ export default function Filtros({
   } = useSearch({
     options: options,
     keyParams: [props.optionLabel || "", props.parentOptionLabel || "", ...(customLabelFields || [])],
+    childrenProperty: "children"
   });
 
   useEffect(() => {

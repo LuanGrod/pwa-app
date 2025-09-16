@@ -10,14 +10,14 @@ import SearchBar from "@global/component/atomic/SearchBar";
 import useSearch from "@global/hook/useSearch";
 import { HotTopicsListagem } from "@/type/Entities";
 import { ToggleableItem } from "@global/listing/ToggleableItem";
-import useDialog from "@global/hook/overlay/useDialog";
+import useToggleStatus from "@global/hook/overlay/useToggleStatus";
 import Estrela from "@global/component/icons/Estrela";
 
 type Props = {};
 
 export default function page({ }: Props) {
   const filters = useSearchParams().get("filters") || "";
-  const { isOpen, toggleDialog } = useDialog();
+  const { isActive, toggle } = useToggleStatus();
 
   const { data, loading, error } = useListing<HotTopicsListagem>({
     entity: "hot-topics",
@@ -27,12 +27,12 @@ export default function page({ }: Props) {
 
   const { filteredData, setFilteredData, searchTerm, setSearchTerm } = useSearch<HotTopicsListagem>({
     options: data.rows,
-    keyParams: ["hot_topics_nome", "temas_nome"],
+    keyParams: ["hot_topics_nome", "temas_nome"]
   });
 
   return (
-    <Structure title="Hot Topics" handleSearch={toggleDialog} href="/hot-topics">
-      <UnderHeader open={isOpen} onClose={toggleDialog}>
+    <Structure title="Hot Topics" handleSearch={toggle} href="/hot-topics">
+      <UnderHeader open={isActive} onClose={toggle}>
         <SearchBar
           value={searchTerm || ""}
           onChange={(e) => {

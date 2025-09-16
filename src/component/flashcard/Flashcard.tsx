@@ -1,5 +1,5 @@
 import { useUser } from "@global/hook/auth/useUser";
-import useDialog from "@global/hook/overlay/useDialog";
+import useToggleStatus from "@global/hook/overlay/useToggleStatus";
 import FlashcardSide from "./FlascardSide";
 import { Flashcard as FlashcardType } from "@/type/Entities";
 import useFlashcards from "@/store/FlashcardStore";
@@ -12,7 +12,7 @@ type Props = {
 };
 
 export default function Flashcard({ data, isFlipped, onFlip, customClass = "" }: Props) {
-  const { isOpen, toggleDialog } = useDialog();
+  const { isActive, toggle } = useToggleStatus();
   const { id: userId } = useUser();
   const { getSavedStatus, handleSave, getLogoColor } = useFlashcards();
 
@@ -23,9 +23,9 @@ export default function Flashcard({ data, isFlipped, onFlip, customClass = "" }:
           side={"front"}
           logoColor={getLogoColor(data)}
           handleSave={() => handleSave(userId)}
-          toggleDialog={toggleDialog}
+          toggleDialog={toggle}
           status={getSavedStatus()}
-          isOpen={isOpen}
+          isOpen={isActive}
           userId={userId}
           conteudoId={data.flashcards_id}
           title={data.flashcards_pergunta_titulo}
@@ -36,9 +36,9 @@ export default function Flashcard({ data, isFlipped, onFlip, customClass = "" }:
           side={"back"}
           logoColor={getLogoColor(data)}
           handleSave={() => handleSave(userId)}
-          toggleDialog={toggleDialog}
+          toggleDialog={toggle}
           status={getSavedStatus()}
-          isOpen={isOpen}
+          isOpen={isActive}
           userId={userId}
           conteudoId={data.flashcards_id}
           title={data.flashcards_resposta_titulo}

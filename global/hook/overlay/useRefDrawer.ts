@@ -4,7 +4,7 @@ type Props = {
   ref: ForwardedRef<any>;
 };
 
-export default function useDrawer({ ref }: Props) {
+export default function useRefDrawer({ ref }: Props) {
   const [isOpen, setIsOpen] = useState(false);
 
   useImperativeHandle(

@@ -1,19 +1,26 @@
-import { useState, useEffect, Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { GetRow } from "@global/request/builder/api/GetRow";
 import { GetRowBuilderProps } from "@global/type/request/builder/GetRow";
+import { useApiRequest } from "./useApiRequest";
 
 type UseGetRowProps = Omit<GetRowBuilderProps, "responseHandler"> & {
-  autoFetch?: boolean;
   needsAuthorization?: boolean;
 };
 
 type UseGetRowReturn<T> = {
-  data: T | null;
-  setData: Dispatch<SetStateAction<T | null>>;
+  data?: T;
+  setData: Dispatch<SetStateAction<T | undefined>>;
   loading: boolean;
-  error: string | null;
+  error?: string;
+  refetch: () => Promise<void>;
 };
 
+/**
+ * Hook especializado para buscar uma única linha de dados
+ * 
+ * @param props - Propriedades do GetRow builder
+ * @returns Estado e funções para gerenciar a busca de linha
+ */
 export function useGetRow<T = any>({
   entity,
   id,
@@ -21,53 +28,20 @@ export function useGetRow<T = any>({
   parentId,
   headers,
   params,
-  autoFetch = true,
   needsAuthorization = false,
 }: UseGetRowProps): UseGetRowReturn<T> {
-  const [data, setData] = useState<T | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const fetchData = async () => {
-    setLoading(true);
-    setError(null);
-
-    if (!entity || id === "" ) {
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const getRow = new GetRow({
-        entity: entity,
-        id: id,
-        parentEntity: parentEntity || "",
-        parentId: parentId || 0,
-        headers: headers || undefined,
-        params: params || {},
-      });
-      const result = await getRow.build(needsAuthorization);
-
-      if (!result.success) {
-        setError(result.message[0]);
-      }
-
-      setData(result.data || null);
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (autoFetch) {
-      fetchData();
-    }
-  }, [entity, id, parentEntity, parentId, autoFetch]);
-
-  return {
-    data,
-    setData,
-    loading,
-    error,
-  };
+  return useApiRequest<T | undefined, GetRow>({
+    builderClass: GetRow,
+    builderProps: {
+      entity,
+      id,
+      parentEntity,
+      parentId,
+      headers,
+      params,
+    },
+    needsAuthorization,
+    initialData: undefined,
+    dependencies: [entity, id, parentEntity, parentId],
+  });
 }

@@ -1,6 +1,6 @@
-import { Form } from "./Form";
-import { ConfirmarSenha } from "./item/prebuilt/ConfirmarSenha";
-import { Senha } from "./item/prebuilt/Senha";
+import { Form } from "@global/form/Form";
+import { ConfirmarSenha } from "@global/form/item/prebuilt/ConfirmarSenha";
+import { Senha } from "@global/form/item/prebuilt/Senha";
 
 const formItems = [
   new Senha({
