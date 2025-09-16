@@ -2,7 +2,7 @@ import { ResponseHandlerInterface } from "./HandlerInterface";
 import { CollectionInterface as ErrorHandlerCollection } from "../../error/handler/collection/CollectionInterface";
 import { HandlerInterface } from "@global/request/error/handler/HandlerInterface";
 import { ActionInterface } from "./action/ActionInterface";
-import { DefaultResponse } from "@global/type/request/response/handler/actions/DefaultResponse";
+import { DefaultResponse } from "@global/type/request/response/handler/DefaultResponse";
 import { Default as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/Default";
 import { ResponseHandlerProps } from "@global/type/request/response/handler/ResponseHandlerProps";
 

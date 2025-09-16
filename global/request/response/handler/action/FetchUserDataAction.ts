@@ -1,5 +1,5 @@
 import { GetRow } from "@global/request/builder/GetRow";
-import { LoginResponse } from "@global/type/request/response/handler/actions/Login";
+import { LoginResponse } from "@global/type/request/response/handler/Login";
 import { ActionInterface } from "./ActionInterface";
 
 export default class FetchUserDataAction implements ActionInterface {

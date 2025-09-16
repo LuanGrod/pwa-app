@@ -1,6 +1,6 @@
 import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
 import { ResponseHandler } from "../Handler";
-import { InsertResponse } from "@global/type/request/response/handler/actions/Insert";
+import { InsertResponse } from "@global/type/request/response/handler/Insert";
 import { ApiResponseHandlerProps } from "@global/type/request/response/handler/ApiResponseHandlerProps";
 
 export class Insert extends ResponseHandler {

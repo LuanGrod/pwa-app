@@ -1,6 +1,6 @@
 import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
 import { ResponseHandler } from "../Handler";
-import { RecuperacaoSenhaResponse } from "@global/type/request/response/handler/actions/RecuperacaoSenha";
+import { RecuperacaoSenhaResponse } from "@global/type/request/response/handler/RecuperacaoSenha";
 import { ApiResponseHandlerProps } from "@global/type/request/response/handler/ApiResponseHandlerProps";
 
 export class RecuperacaoSenha extends ResponseHandler {

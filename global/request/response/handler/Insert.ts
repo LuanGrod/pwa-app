@@ -1,5 +1,5 @@
 import { ResponseHandler } from "./Handler";
-import { InsertResponse } from "@global/type/request/response/handler/actions/Insert";
+import { InsertResponse } from "@global/type/request/response/handler/Insert";
 import { ResponseHandlerProps } from "@global/type/request/response/handler/ResponseHandlerProps";
 
 export class Insert extends ResponseHandler {

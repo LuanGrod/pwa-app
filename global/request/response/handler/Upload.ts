@@ -1,5 +1,5 @@
 import { ResponseHandler } from "./Handler";
-import { UploadResponse } from "@global/type/request/response/handler/actions/Upload";
+import { UploadResponse } from "@global/type/request/response/handler/Upload";
 import { ResponseHandlerProps } from "@global/type/request/response/handler/ResponseHandlerProps";
 
 export class Upload extends ResponseHandler {

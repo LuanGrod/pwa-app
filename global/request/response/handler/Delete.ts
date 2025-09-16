@@ -1,5 +1,5 @@
 import { ResponseHandler } from "./Handler";
-import { DeleteResponse } from "@global/type/request/response/handler/actions/Delete";
+import { DeleteResponse } from "@global/type/request/response/handler/Delete";
 import { ResponseHandlerProps } from "@global/type/request/response/handler/ResponseHandlerProps";
 
 export class Delete extends ResponseHandler {
