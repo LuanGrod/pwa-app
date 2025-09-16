@@ -31,7 +31,7 @@ export default function Perfil({ data, setData }: Props) {
   const phoneFormatter = new BrazilianPhoneFormatter();
   const { updateUrlImagem } = useEstudante()
 
-  const handleUpdate = async (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUpdatePfp = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
 
     if (file) {
@@ -40,16 +40,16 @@ export default function Perfil({ data, setData }: Props) {
       formData.append("estudantes_url_imagem", file);
       formData.append("profile", "image");
 
-      const update = new Upload({
+      const upload = new Upload({
         entity: "estudantes",
         body: formData,
-        data: new Map([["field", "url-imagem"]]),
+        uploadField: "url-imagem",
         responseHandler: new UploadResponseHandler({
           onSuccessActions: [new UpdateOnUploadFile("estudantes3", "estudantes_url_imagem", data, setData, updateUrlImagem)]
         })
       });
 
-      await update.build(true);
+      await upload.build(true);
     }
   }
 
@@ -90,7 +90,7 @@ export default function Perfil({ data, setData }: Props) {
             )
           }
           <button className="btn-edit">
-            <input type="file" name="teste" id="teste" style={{ display: "none" }} onChange={handleUpdate} />
+            <input type="file" name="teste" id="teste" style={{ display: "none" }} onChange={handleUpdatePfp} />
             <label htmlFor="teste">
               <Camera size={20} className="camera-icon" />
             </label>

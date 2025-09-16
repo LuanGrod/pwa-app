@@ -1,5 +1,5 @@
 import { GetRow } from "@global/request/builder/GetRow";
-import { LoginResponse } from "@global/type/request/Login";
+import { LoginResponse } from "@global/type/request/response/handler/actions/Login";
 import { ActionInterface } from "./ActionInterface";
 
 export default class FetchUserDataAction implements ActionInterface {
@@ -44,7 +44,7 @@ export default class FetchUserDataAction implements ActionInterface {
     // Fetch user data
     const getRow = new GetRow({
       entity: this.entity,
-      id: id,
+      id: String(id),
     });
 
     const response = await getRow.build(true);

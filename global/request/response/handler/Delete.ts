@@ -1,6 +1,6 @@
 import { ResponseHandler } from "./Handler";
-import { DeleteResponse } from "@global/type/request/Delete";
-import { ResponseHandlerProps } from "@global/type/request/ResponseHandlerProps";
+import { DeleteResponse } from "@global/type/request/response/handler/actions/Delete";
+import { ResponseHandlerProps } from "@global/type/request/response/handler/ResponseHandlerProps";
 
 export class Delete extends ResponseHandler {
   constructor({

@@ -1,6 +1,6 @@
 import { ResponseHandler } from "./Handler";
-import { GeracaoNovaSenhaResponse } from "@global/type/request/GeracaoNovaSenha";
-import { ResponseHandlerProps } from "@global/type/request/ResponseHandlerProps";
+import { GeracaoNovaSenhaResponse } from "@global/type/request/response/handler/actions/GeracaoNovaSenha";
+import { ResponseHandlerProps } from "@global/type/request/response/handler/ResponseHandlerProps";
 
 export class GeracaoNovaSenha extends ResponseHandler {
   constructor({

@@ -1,8 +1,8 @@
 import { useState, useEffect, Dispatch, SetStateAction } from "react";
 import { GetRow } from "@global/request/builder/api/GetRow";
-import { GetRowProps } from "@global/request/builder/GetRow";
+import { GetRowBuilderProps } from "@global/type/request/builder/GetRow";
 
-type UseGetRowProps = Omit<GetRowProps, "responseHandler"> & {
+type UseGetRowProps = Omit<GetRowBuilderProps, "responseHandler"> & {
   autoFetch?: boolean;
   needsAuthorization?: boolean;
 };
@@ -43,7 +43,7 @@ export function useGetRow<T = any>({
         id: id,
         parentEntity: parentEntity || "",
         parentId: parentId || 0,
-        headers: headers || null,
+        headers: headers || undefined,
         params: params || {},
       });
       const result = await getRow.build(needsAuthorization);

@@ -3,28 +3,64 @@ import { ResponseHandlerInterface } from "@global/request/response/handler/Handl
 import Authorization from "../header/handler/Authorization";
 import { Default as DefaultHeaderCollection } from "../header/handler/collection/Default";
 import { CollectionInterface as HeaderHandlerCollection } from "@global/request/header/handler/collection/CollectionInterface";
+import { RequestBuilderProps } from "@global/type/request/builder/RequestBuilderProps";
 
-type BuilderProps = {
-  endpoint: string;
-  method: Methods;
-  headers?: HeaderHandlerCollection | null;
-  body: any;
-  responseHandler: ResponseHandlerInterface;
-};
-
-export class RequestBuilder {
+export abstract class RequestBuilder {
   protected endpoint: string;
   protected method: Methods;
   protected headers: HeaderHandlerCollection;
   protected body: any;
   protected responseHandler: ResponseHandlerInterface;
 
-  constructor({ endpoint, method = "GET", headers, body = {}, responseHandler }: BuilderProps) {
-    this.endpoint = endpoint;
-    this.method = method;
-    this.headers = headers || new DefaultHeaderCollection();
-    this.body = body;
-    this.responseHandler = responseHandler;
+  constructor(props: any) {
+    const config = this.configure(props);
+    this.endpoint = config.endpoint;
+    this.method = config.method;
+    this.headers = config.headers;
+    this.body = config.body;
+    this.responseHandler = config.responseHandler;
+  }
+
+  protected abstract getApiPath(): string;
+
+  protected abstract getMethod(): Methods;
+
+  private configure(props: any) {
+    const { entity, headers, responseHandler, body, id, parentEntity, parentId } = props;
+
+    return {
+      endpoint: this.buildEndpoint(entity, id, parentEntity, parentId),
+      method: this.getMethod(),
+      headers: headers || new DefaultHeaderCollection(),
+      body: body || null,
+      responseHandler,
+    };
+  }
+
+  protected buildEndpoint(
+    entity?: string,
+    id?: string,
+    parentEntity?: string,
+    parentId?: number
+  ): string {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL || "";
+    const path = this.getApiPath();
+
+    if (parentEntity && parentId) {
+      const basePath = path ? `${apiUrl}/${path}` : apiUrl;
+      return entity 
+        ? `${basePath}/${parentEntity}/${parentId}/${entity}${id ? `/${id}` : ""}`
+        : `${basePath}/${parentEntity}/${parentId}${id ? `/${id}` : ""}`;
+    }
+
+    if (entity) {
+      const basePath = path ? `${apiUrl}/${path}/${entity}` : `${apiUrl}/${entity}`;
+      return id ? `${basePath}/${id}` : basePath;
+    }
+
+    // Para casos sem entity (como login, auth, etc)
+    const basePath = path ? `${apiUrl}/${path}` : apiUrl;
+    return id ? `${basePath}/${id}` : basePath;
   }
 
   setEndpoint(endpoint: string): void {
@@ -35,10 +71,6 @@ export class RequestBuilder {
     this.method = method;
   }
 
-  /**
-   * Sets the header handler collection to be used for this request.
-   * @param headerCollection Header handler collection implementing CollectionInterface
-   */
   setHeaders(headerCollection: HeaderHandlerCollection): void {
     this.headers = headerCollection;
   }
@@ -51,10 +83,6 @@ export class RequestBuilder {
     this.responseHandler = responseHandler;
   }
 
-  /**
-   * Builds and sends the request, applying all header handlers in the collection.
-   * @param needsAuthorization Whether to apply the Authorization header handler.
-   */
   async build(needsAuthorization?: boolean): Promise<any> {
     try {
       let finalHeaders: HeadersInit = {};

@@ -4,13 +4,13 @@ import { RecuperacaoSenha } from "@global/request/builder/RecuperacaoSenha";
 import { RecuperacaoSenha as ResponseHandler } from "@global/request/response/handler/RecuperacaoSenha";
 
 type RecuperacaoSenhaHandlerProps = {
-  entity?: string | null;
+  entity?: string;
   needsAuthorization?: boolean;
   responseHandler?: ResponseHandlerInterface | null;
 };
 
 export class RecuperacaoSenhaHandler implements SubmitHandlerInterface {
-  protected entity?: string | null;
+  protected entity?: string;
   protected needsAuthorization: boolean;
   protected responseHandler: ResponseHandlerInterface;
 

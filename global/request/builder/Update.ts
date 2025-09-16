@@ -1,26 +1,20 @@
 import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Update as ResponseHandler } from "@global/request/response/handler/Update";
-import { ResponseHandlerInterface } from "../response/handler/HandlerInterface";
-import { CollectionInterface as HeaderHandlerCollection } from "@global/request/header/handler/collection/CollectionInterface";
-
-type UpdateProps = {
-  entity: string;
-  body: any;
-  id?: string | null;
-  headers?: HeaderHandlerCollection | null;
-  responseHandler?: ResponseHandlerInterface | null;
-};
+import { UpdateBuilderProps } from "@global/type/request/builder/Update";
+import { BUILDER_PATHS } from "./constants/ApiPaths";
 
 export class Update extends RequestBuilder {
-  constructor({ entity, body, id = null, headers = null, responseHandler = null }: UpdateProps) {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    let endpoint = `${apiUrl}/edicao/${entity}`;
-    if (id) {
-      endpoint += `/${id}`;
-    }
-    const method: Methods = "POST";
-    responseHandler = responseHandler || new ResponseHandler({});
-    super({ endpoint, method, headers, body, responseHandler });
+  constructor(props: UpdateBuilderProps) {
+    const responseHandler = props.responseHandler || new ResponseHandler({});
+    super({ ...props, responseHandler });
+  }
+
+  protected getApiPath(): string {
+    return BUILDER_PATHS.Update;
+  }
+
+  protected getMethod(): Methods {
+    return "POST";
   }
 }

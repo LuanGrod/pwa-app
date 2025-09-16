@@ -1,5 +1,6 @@
 import AbstractFilter from "./AbstractFilter";
 import { Listing } from "@global/request/builder/api/Listing";
+import { Listing as ListingResponseHandler } from "@global/request/response/handler/api/Listing";
 import FilterInterface, {
   ConditionalOperator,
   ConnectionOperator,
@@ -186,7 +187,10 @@ export default class Select extends AbstractFilter {
   }
 
   async loadOptions() {
-    const listing = new Listing({ entity: this.entity });
+    const listing = new Listing({ 
+      entity: this.entity,
+      responseHandler: new ListingResponseHandler({})
+    });
     const result = await listing.build(true);
     const data = result.data.rows || [];
 

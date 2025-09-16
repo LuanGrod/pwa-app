@@ -1,6 +1,6 @@
 import { ResponseHandler } from "./Handler";
-import { RecuperacaoSenhaResponse } from "@global/type/request/RecuperacaoSenha";
-import { ResponseHandlerProps } from "@global/type/request/ResponseHandlerProps";
+import { RecuperacaoSenhaResponse } from "@global/type/request/response/handler/actions/RecuperacaoSenha";
+import { ResponseHandlerProps } from "@global/type/request/response/handler/ResponseHandlerProps";
 
 export class RecuperacaoSenha extends ResponseHandler {
   constructor({

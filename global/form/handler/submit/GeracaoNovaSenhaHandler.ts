@@ -10,7 +10,7 @@ type GeracaoNovaSenhaHandlerProps = {
 };
 
 export class GeracaoNovaSenhaHandler implements SubmitHandlerInterface {
-  protected entity?: string | null;
+  protected entity: string;
   protected needsAuthorization: boolean;
   protected responseHandler: ResponseHandlerInterface;
 

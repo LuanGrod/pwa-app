@@ -1,6 +1,6 @@
 import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
 import { ResponseHandler } from "../Handler";
-import { ApiResponseHandlerProps } from "@global/type/request/ApiResponseHandlerProps";
+import { ApiResponseHandlerProps } from "@global/type/request/response/handler/ApiResponseHandlerProps";
 
 export class Post<T = any> extends ResponseHandler {
   constructor({

@@ -1,5 +1,5 @@
 import Cookie from "@global/cookie/handler/Handler";
-import { LoginResponse } from "@global/type/request/Login";
+import { LoginResponse } from "@global/type/request/response/handler/actions/Login";
 import { ActionInterface } from "./ActionInterface";
 
 export default class SaveLoginCookiesAction implements ActionInterface {

@@ -1,6 +1,6 @@
 import { ResponseHandler } from "./Handler";
-import { LoginResponse } from "@global/type/request/Login";
-import { ResponseHandlerProps } from "@global/type/request/ResponseHandlerProps";
+import { LoginResponse } from "@global/type/request/response/handler/actions/Login";
+import { ResponseHandlerProps } from "@global/type/request/response/handler/ResponseHandlerProps";
 
 export class Login extends ResponseHandler {
   constructor({

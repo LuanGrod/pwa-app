@@ -1,22 +1,20 @@
 import { Methods } from "@global/type/Methods";
 import { RequestBuilder } from "./Builder";
 import { Post as ResponseHandler } from "@global/request/response/handler/Post";
-import { ResponseHandlerInterface } from "../response/handler/HandlerInterface";
-import { CollectionInterface as HeaderHandlerCollection } from "@global/request/header/handler/collection/CollectionInterface";
-
-type PostProps = {
-  entity: string;
-  body: any;
-  headers?: HeaderHandlerCollection | null;
-  responseHandler?: ResponseHandlerInterface | null;
-};
+import { PostBuilderProps } from "@global/type/request/builder/Post";
+import { BUILDER_PATHS } from "./constants/ApiPaths";
 
 export class Post extends RequestBuilder {
-  constructor({ entity, body, headers = null, responseHandler = null }: PostProps) {
-    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    const endpoint = `${apiUrl}/${entity}`;
-    const method: Methods = "POST";
-    responseHandler = responseHandler || new ResponseHandler({});
-    super({ endpoint, method, headers, body, responseHandler });
+  constructor(props: PostBuilderProps) {
+    const responseHandler = props.responseHandler || new ResponseHandler({});
+    super({ ...props, responseHandler });
+  }
+
+  protected getApiPath(): string {
+    return BUILDER_PATHS.Post;
+  }
+
+  protected getMethod(): Methods {
+    return "POST";
   }
 }

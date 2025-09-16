@@ -1,7 +1,7 @@
 import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
 import { ResponseHandler } from "../Handler";
-import { GeracaoNovaSenhaResponse } from "@global/type/request/GeracaoNovaSenha";
-import { ApiResponseHandlerProps } from "@global/type/request/ApiResponseHandlerProps";
+import { GeracaoNovaSenhaResponse } from "@global/type/request/response/handler/actions/GeracaoNovaSenha";
+import { ApiResponseHandlerProps } from "@global/type/request/response/handler/ApiResponseHandlerProps";
 
 export class GeracaoNovaSenha extends ResponseHandler {
   constructor({

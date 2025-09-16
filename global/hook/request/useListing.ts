@@ -53,7 +53,7 @@ export function useListing<T = any>({
           id: id || "",
           parentEntity: parentEntity || "",
           parentId: parentId || 0,
-          headers: headers || null,
+          headers: headers || undefined,
           params: params || {},
         });
         const result = await listing.build(needsAuthorization);

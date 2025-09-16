@@ -1,7 +1,7 @@
 import { DefaultApi as DefaultErrorHandlerCollection } from "@global/request/error/handler/collection/DefaultApi";
 import { ResponseHandler } from "../Handler";
-import { UpdateResponse } from "@global/type/request/Update";
-import { ApiResponseHandlerProps } from "@global/type/request/ApiResponseHandlerProps";
+import { UpdateResponse } from "@global/type/request/response/handler/actions/Update";
+import { ApiResponseHandlerProps } from "@global/type/request/response/handler/ApiResponseHandlerProps";
 
 export class Update<T = any> extends ResponseHandler {
   constructor({
