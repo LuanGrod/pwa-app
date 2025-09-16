@@ -158,9 +158,10 @@ export default class Select extends AbstractFilter {
       queryField,
       label,
       "select",
-      conditionalOperator || DEFAULT_FILTER_VALUES.SELECT_CONDITIONAL_OPERATOR,
-      connectionOperator || DEFAULT_FILTER_VALUES.CONNECTION_OPERATOR,
-      denialOperator || (DEFAULT_FILTER_VALUES.DENIAL_OPERATOR as false),
+      conditionalOperator ||
+        (DEFAULT_FILTER_VALUES.SELECT_CONDITIONAL_OPERATOR as ConditionalOperator),
+      connectionOperator || (DEFAULT_FILTER_VALUES.CONNECTION_OPERATOR as ConnectionOperator),
+      denialOperator || (DEFAULT_FILTER_VALUES.DENIAL_OPERATOR as boolean),
       key,
       queryFieldEntity || ""
     );

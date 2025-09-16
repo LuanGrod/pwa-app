@@ -1,11 +1,8 @@
 import AbstractFilter from "./AbstractFilter";
-import {
-  ConditionalOperator,
-  ConnectionOperator,
-  DEFAULT_VALUES,
-  FilterType,
-} from "./FilterInterface";
 import { FilterFragment } from "../StringAssembler";
+import { ConditionalOperator } from "@global/type/filter/ConditionalOpeator";
+import { ConnectionOperator } from "@global/type/filter/ConnectionOperator";
+import { DEFAULT_FILTER_VALUES } from "@global/constants/filter/ui/Values";
 
 type BooleanProps = {
   queryField: string;
@@ -34,20 +31,21 @@ export default class Boolean extends AbstractFilter {
     super(
       queryField,
       label,
-      FilterType.BOOLEAN,
-      conditionalOperator || DEFAULT_VALUES.BOOLEAN_CONDITIONAL_PERATOR,
-      connectionOperator || DEFAULT_VALUES.CONNECTION_OPERATOR,
-      denialOperator || DEFAULT_VALUES.DENIAL_OPERATOR,
+      "boolean",
+      conditionalOperator ||
+        (DEFAULT_FILTER_VALUES.BOOLEAN_CONDITIONAL_PERATOR as ConditionalOperator),
+      connectionOperator || (DEFAULT_FILTER_VALUES.CONNECTION_OPERATOR as ConnectionOperator),
+      denialOperator || (DEFAULT_FILTER_VALUES.DENIAL_OPERATOR as boolean),
       key,
-      queryFieldEntity,
+      queryFieldEntity
     );
-    this.activeValue = activeValue || DEFAULT_VALUES.BOOLEAN_ACTIVE;
+    this.activeValue = activeValue || (DEFAULT_FILTER_VALUES.BOOLEAN_ACTIVE as string);
   }
 
   getActiveValue(): string {
     return this.activeValue;
   }
-  
+
   getInitialValue(): any {
     return "";
   }

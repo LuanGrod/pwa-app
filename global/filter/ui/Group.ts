@@ -1,10 +1,9 @@
 import AbstractFilter from "./AbstractFilter";
-import FilterInterface, {
-  ConnectionOperator,
-  DEFAULT_VALUES,
-  FilterType,
-} from "./FilterInterface";
+import FilterInterface from "./FilterInterface";
 import { FilterFragment } from "../StringAssembler";
+import { ConnectionOperator } from "@global/type/filter/ConnectionOperator";
+import { DEFAULT_FILTER_VALUES } from "@global/constants/filter/ui/Values";
+import { ConditionalOperator } from "@global/type/filter/ConditionalOpeator";
 
 type GroupProps = {
   children: FilterInterface[];
@@ -18,10 +17,10 @@ export default class Group extends AbstractFilter {
     super(
       "",
       "",
-      FilterType.GROUP,
-      DEFAULT_VALUES.BOOLEAN_CONDITIONAL_PERATOR,
-      connectionOperator || DEFAULT_VALUES.CONNECTION_OPERATOR,
-      DEFAULT_VALUES.DENIAL_OPERATOR
+      "group",
+      DEFAULT_FILTER_VALUES.BOOLEAN_CONDITIONAL_PERATOR as ConditionalOperator,
+      connectionOperator || (DEFAULT_FILTER_VALUES.CONNECTION_OPERATOR as ConnectionOperator),
+      DEFAULT_FILTER_VALUES.DENIAL_OPERATOR as boolean
     );
     this.children = children;
   }

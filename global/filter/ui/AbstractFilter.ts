@@ -1,12 +1,11 @@
-import FilterInterface, {
-  ConditionalOperator,
-  ConnectionOperator,
-  DEFAULT_VALUES,
-  FilterType,
-  SelectionMode,
-} from "./FilterInterface";
+import FilterInterface from "./FilterInterface";
 import { FilterFragment } from "../StringAssembler";
 import { ComponentType } from "react";
+import { ConditionalOperator } from "@global/type/filter/ConditionalOpeator";
+import { ConnectionOperator } from "@global/type/filter/ConnectionOperator";
+import { FilterType } from "@global/type/filter/FilterType";
+import { DEFAULT_FILTER_VALUES } from "@global/constants/filter/ui/Values";
+import { SelectionMode } from "@global/type/filter/SelectionMode";
 
 export default abstract class AbstractFilter implements FilterInterface {
   queryField: string;
@@ -77,23 +76,23 @@ export default abstract class AbstractFilter implements FilterInterface {
   }
 
   getActiveValue(): string {
-    return DEFAULT_VALUES.BOOLEAN_ACTIVE;
+    return DEFAULT_FILTER_VALUES.BOOLEAN_ACTIVE as string;
   }
 
   getParentConditionalOperator(): ConditionalOperator {
-    return DEFAULT_VALUES.SELECT_CONDITIONAL_OPERATOR;
+    return DEFAULT_FILTER_VALUES.SELECT_CONDITIONAL_OPERATOR as ConditionalOperator;
   }
 
   getParentConnectionOperator(): ConnectionOperator {
-    return DEFAULT_VALUES.CONNECTION_OPERATOR;
+    return DEFAULT_FILTER_VALUES.CONNECTION_OPERATOR as ConnectionOperator;
   }
 
   getParentDenialOperator(): boolean {
-    return DEFAULT_VALUES.DENIAL_OPERATOR;
+    return DEFAULT_FILTER_VALUES.DENIAL_OPERATOR as boolean;
   }
 
   getSelectionMode(): SelectionMode {
-    return DEFAULT_VALUES.SELECTION_MODE as SelectionMode;
+    return DEFAULT_FILTER_VALUES.SELECTION_MODE as SelectionMode;
   }
 
   getLabelFields(): string[] {

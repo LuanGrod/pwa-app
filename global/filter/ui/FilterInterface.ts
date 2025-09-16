@@ -3,6 +3,7 @@ import { ComponentType } from "react";
 import { ConnectionOperator } from "@global/type/filter/ConnectionOperator";
 import { ConditionalOperator } from "@global/type/filter/ConditionalOpeator";
 import { FilterType } from "@global/type/filter/FilterType";
+import { SelectionMode } from "@global/type/filter/SelectionMode";
 
 export default interface FilterInterface {
   /**

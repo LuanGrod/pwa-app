@@ -3,13 +3,13 @@
 import SelectFilter from "@global/filter/ui/Select";
 import FilterWrapperBase from "@global/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
-import { SelectionMode } from "@global/filter/ui/FilterInterface";
 import useQuestoes from "@/store/QuestaoStore";
 import RangeSelector from "@global/component/button/RangeSelector";
 import { useEffect } from "react";
 import { useUser } from "@global/hook/auth/useUser";
 import ProvaFilterItem from "@/component/overlay/drawer/filter/option/ProvaFilterItem";
 import HistoricoFilterItem from "@/component/overlay/drawer/filter/option/HistoricoFilterItem";
+import { SelectionMode } from "@global/type/filter/SelectionMode";
 
 export function Simulados() {
   const filterDefinitions = [
