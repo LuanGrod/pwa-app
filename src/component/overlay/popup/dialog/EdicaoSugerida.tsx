@@ -34,10 +34,14 @@ export default function EdicaoSugerida({
     responseHandler: new ResponseHandler({ successMessage: "Sugestão enviada com sucesso!" })
   });
 
+  // Garante que os valores sejam strings válidas para evitar problemas nos filtros
+  const safeConteudoId = conteudoId?.toString() || "";
+  const safeEstudanteId = estudanteId?.toString() || "";
+
   const formItems = [
     new Conteudo({ entity: formEntity, fieldName: "conteudo" }),
-    new Hidden({ entity: formEntity, name: `${formEntity}_${conteudoName}`, defaultValue: conteudoId, fieldName: conteudoName }),
-    new Hidden({ entity: formEntity, name: `${formEntity}_${estudanteName}`, defaultValue: estudanteId, fieldName: estudanteName }),
+    new Hidden({ entity: formEntity, name: `${formEntity}_${conteudoName}`, defaultValue: safeConteudoId, fieldName: conteudoName }),
+    new Hidden({ entity: formEntity, name: `${formEntity}_${estudanteName}`, defaultValue: safeEstudanteId, fieldName: estudanteName }),
   ];
   const form = new FormDefinition(formItems, "below");
 

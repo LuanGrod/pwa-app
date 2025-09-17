@@ -16,6 +16,7 @@ export default function page({ }: Props) {
   const { data, setData, loading, error } = useGetRow<EstatisticasType>({
     entity: "estatisticas",
     needsAuthorization: true,
+    needsId: false,
   });
 
   const rightAnswers = answers.filter((answer) => answer.answer !== "Erro").length;
@@ -26,7 +27,7 @@ export default function page({ }: Props) {
       data={data}
       error={error}
       loading={loading}
-      loadingComponent={<Loading2 loading/>}
+      loadingComponent={<Loading2 loading overlay />}
       renderItem={(item) => (
         <SessionEndStatistics
           entity="flashcards"

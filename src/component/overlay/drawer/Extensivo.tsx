@@ -24,7 +24,6 @@ export default function Extensivo({ open, onClose, title, data, setData, loading
         <AsyncRenderer
           data={data}
           loading={loading}
-          loadingComponent={<Loading2 loading />}
           renderItem={(item) => (
             <ExtensivoItem data={item} setData={setData} />
           )}

@@ -16,6 +16,7 @@ export default function page({ }: Props) {
   const { data, loading, error } = useGetRow<EstatisticasType>({
     entity: "estatisticas",
     needsAuthorization: true,
+    needsId: false,
   });
 
   const brazilianDateFormatter = new BrazilianDateFormatter();

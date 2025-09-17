@@ -104,7 +104,7 @@ const useFlashcards = create<FlashcardStore>()(
         const response = await proximoFlashcard.build(true);
 
         set((state) => ({
-          next: response.flashcard,
+          next: response.data.flashcard,
         }));
       },
       getCurrentThemeId: () => {

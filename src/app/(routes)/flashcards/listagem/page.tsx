@@ -33,6 +33,7 @@ export default function page({ }: Props) {
     entity: "flashcards",
     params: { filters: filters },
     needsAuthorization: true,
+    needsId: false,
   });
 
   useEffect(() => {

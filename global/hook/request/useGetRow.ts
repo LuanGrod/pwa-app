@@ -5,6 +5,7 @@ import { useApiRequest } from "./useApiRequest";
 
 type UseGetRowProps = Omit<GetRowBuilderProps, "responseHandler"> & {
   needsAuthorization?: boolean;
+  needsId?: boolean;
 };
 
 type UseGetRowReturn<T> = {
@@ -29,8 +30,9 @@ export function useGetRow<T = any>({
   headers,
   params,
   needsAuthorization = false,
+  needsId = true,
 }: UseGetRowProps): UseGetRowReturn<T> {
-  const shouldFetch = Boolean(entity && id);
+  const shouldFetch = Boolean(entity && (needsId ? id : true));
 
   return useApiRequest<T | undefined, GetRow>({
     builderClass: GetRow,

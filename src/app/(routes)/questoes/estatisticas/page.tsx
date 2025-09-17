@@ -16,6 +16,7 @@ export default function page({ }: Props) {
   const { data, loading, error } = useGetRow<EstatisticasType>({
     entity: "estatisticas",
     needsAuthorization: true,
+    needsId: false,
   });
 
   const rightAnswers = answers?.filter((answer) => answer.confirmed && answer.answer === answer.correct).length || 0;
