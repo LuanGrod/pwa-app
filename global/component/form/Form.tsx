@@ -16,8 +16,8 @@ type FormProps = {
   submitLabel?: string;
 };
 
-function Form({ formConfig, submitHandler, id, submitLabel = "ENTRAR" }: FormProps) {
-  const { items, handleSubmit, submitReturn, loading } = useForm(formConfig.items, submitHandler, id);
+function Form<T>({ formConfig, submitHandler, id, submitLabel = "ENTRAR" }: FormProps) {
+  const { items, handleSubmit, submitReturn, loading } = useForm<T>(formConfig.items, submitHandler, id);
 
   return (
     <form onSubmit={handleSubmit}>

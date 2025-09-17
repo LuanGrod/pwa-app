@@ -1,4 +1,4 @@
-import Structure from "@/component/structure/GreetingsLogo";
+import Structure from "@/component/structure/GreetingsEstudanteLogo";
 import styles from "./page.module.css";
 import IconFrameContainer from "@/component/iconFrame/IconFrameContainer";
 

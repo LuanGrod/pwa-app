@@ -1,7 +1,7 @@
 "use client";
 
-import SetaDireita from "@global/component/icons/SetaDireita";
-import SetaEsquerda from "@global/component/icons/SetaEsquerda";
+import SetaDireita from "@global/component/icon/SetaDireita";
+import SetaEsquerda from "@global/component/icon/SetaEsquerda";
 import useQuestoes from "@/store/QuestaoStore";
 import useToggleStatus from "@global/hook/overlay/useToggleStatus";
 import Confirmation from "@global/component/overlay/popup/dialog/Confirmation";

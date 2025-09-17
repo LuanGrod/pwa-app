@@ -1,5 +1,5 @@
 import { Questao as QuestaoType } from "@/type/Entities";
-import UploadImage from "@global/component/atomic/UploadImage";
+import UploadImage from "@global/component/image/UploadImage";
 import QuestaoAlternativa from "./QuestaoAlternativa";
 import useQuestoes from "@/store/QuestaoStore";
 

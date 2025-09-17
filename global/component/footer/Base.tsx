@@ -15,7 +15,7 @@ type Props = {
 
 export default function BaseFooter({ className = "", links }: Props) {
   return (
-    <footer className="footer-wrapper">
+    <footer className={`footer-wrapper ${className}`}>
       {links?.map((item, index) => (
         <IconLink key={index} href={item.href} icon={item.icon} label={item.label} />
       ))}

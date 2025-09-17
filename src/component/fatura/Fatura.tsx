@@ -1,5 +1,5 @@
 import { Fatura as FaturaType } from "@/type/Entities";
-import Download from "@global/component/icons/Download";
+import Download from "@global/component/icon/Download";
 import { BrazilianDateFormatter } from "@global/formatter/date/Brazilian";
 
 type Props = {

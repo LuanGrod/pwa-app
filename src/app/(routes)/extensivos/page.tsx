@@ -2,7 +2,7 @@
 
 import Logo from "@/component/icon/Logo"
 import Extensivo from "@/component/overlay/drawer/Extensivo";
-import Structure from "@/component/structure/GreetingsLogo"
+import Structure from "@/component/structure/GreetingsEstudanteLogo"
 import { diaExtensivo } from "@/type/Entities";
 import { Filter } from "@global/component/button/Filter"
 import { useKeyDrawer } from "@global/hook/overlay/useKeyDrawer";

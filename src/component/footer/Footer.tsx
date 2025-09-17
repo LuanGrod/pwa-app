@@ -1,7 +1,7 @@
 import BaseFooter from "@global/component/footer/Base";
-import Bandeira from "@global/component/icons/Bandeira";
-import Casa from "@global/component/icons/Casa";
-import Grafico from "@global/component/icons/Grafico";
+import Bandeira from "@global/component/icon/Bandeira";
+import Casa from "@global/component/icon/Casa";
+import Grafico from "@global/component/icon/Grafico";
 
 type Props = {};
 

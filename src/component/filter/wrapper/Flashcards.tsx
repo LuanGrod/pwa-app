@@ -3,7 +3,7 @@
 import SelectFilter from "@global/filter/ui/Select";
 import BooleanFilter from "@global/filter/ui/Boolean";
 import GroupFilter from "@global/filter/ui/Group";
-import FilterWrapperBase from "@global/component/filter/wrapper/Base";
+import FilterWrapperBase from "@/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
 import { useEffect } from "react";
 import useFlashcards from "@/store/FlashcardStore";

@@ -1,7 +1,7 @@
 "use client";
 
-import { LinkView } from "@global/component/atomic/LinkView";
-import UploadImage from "@global/component/atomic/UploadImage";
+import { LinkView } from "@global/component/link/LinkView";
+import UploadImage from "@global/component/image/UploadImage";
 
 type ItemProps = {
   entity: string;

@@ -1,3 +1,5 @@
+import { DefaultResponse } from "@global/type/request/response/handler/DefaultResponse";
+
 export default interface SubmitHandlerInterface {
-  onSubmit(values: { [key: string]: string }, id?: string): Promise<any>;
+  onSubmit<T>(values: { [key: string]: string }, id?: string): Promise<DefaultResponse<T>>;
 }

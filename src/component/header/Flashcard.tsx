@@ -1,7 +1,8 @@
-import ReturnRoute from "./item/ReturnRoute";
-import BaseHeader from "./Base";
-import MenuToggle from "./item/MenuToggle";
+
 import ConfiguracoesDrawer from "@/component/overlay/drawer/Configuracoes";
+import BaseHeader from "@global/component/header/Base";
+import MenuToggle from "@global/component/header/item/MenuToggle";
+import ReturnRoute from "@global/component/header/item/ReturnRoute";
 
 type Props = {
   title: string;

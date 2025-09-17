@@ -1,4 +1,4 @@
-import Structure from "@/component/structure/GreetingsLogo";
+import Structure from "@/component/structure/GreetingsEstudanteLogo";
 import { HotTopics as HotTopicsFiltersWrapper } from "@/component/filter/wrapper/HotTopics";
 
 type Props = {};

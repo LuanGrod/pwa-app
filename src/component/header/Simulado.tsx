@@ -1,16 +1,17 @@
 "use client";
 
-import BaseHeader from "./Base";
-import DecreaseFontSizeBtn from "./item/DecreaseFontSizeBtn";
-import EditBtn from "./item/EditBtn";
-import IncreaseFontSizeBtn from "./item/IncreaseFontSizeBtn";
-import SaveBtn from "./item/SaveBtn";
+
 import useQuestoes from "@/store/QuestaoStore";
 import { useUser } from "@global/hook/auth/useUser";
 import useToggleStatus from "@global/hook/overlay/useToggleStatus";
 import EdicaoSugerida from "@/component/overlay/popup/dialog/EdicaoSugerida";
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
+import BaseHeader from "@global/component/header/Base";
+import DecreaseFontSizeBtn from "@global/component/header/item/DecreaseFontSizeBtn";
+import EditBtn from "@global/component/header/item/EditBtn";
+import IncreaseFontSizeBtn from "@global/component/header/item/IncreaseFontSizeBtn";
+import SaveBtn from "@global/component/header/item/SaveBtn";
 
 type Props = {};
 
@@ -25,8 +26,8 @@ export default function Simulado({ }: Props) {
 
   const RightWrapper = (
     <div className="flex">
-      <IncreaseFontSizeBtn elementsClassNames={["enunciado", "area-tema", "ano", "conteudo", "gabarito", "alternativa", "comentario", "titulo-referencia", "referencia", "empty", "enviar", "questao-timer"]} />
-      <DecreaseFontSizeBtn elementsClassNames={["enunciado", "area-tema", "ano", "conteudo", "gabarito", "alternativa", "comentario", "titulo-referencia", "referencia", "empty", "enviar", "questao-timer"]} />
+      <IncreaseFontSizeBtn elementsClassNames={["enunciado", "area-tema", "ano", "conteudo", "gabarito", "alternativa", "comentario", "titulo-referencia", "referencia", "empty"]} />
+      <DecreaseFontSizeBtn elementsClassNames={["enunciado", "area-tema", "ano", "conteudo", "gabarito", "alternativa", "comentario", "titulo-referencia", "referencia", "empty"]} />
       <SaveBtn handleSave={() => handleSave()} disabled={isSaving} status={getCurrentSavedStatus()} />
       <EditBtn handleEdit={toggle} size={24} />
     </div>

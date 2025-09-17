@@ -4,13 +4,13 @@ import { Listing } from "@global/component/listing/Listing";
 import Structure from "@/component/structure/ReturnTitleSearch";
 import { useListing } from "@global/hook/request/useListing";
 import { useSearchParams } from "next/navigation";
-import SearchBar from "@global/component/atomic/SearchBar";
+import SearchBar from "@global/component/search/SearchBar";
 import useSearch from "@global/hook/useSearch";
 import { MapasMentaisListagem } from "@/type/Entities";
 import { UnderHeader } from "@global/component/overlay/drawer/UnderHeader";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import useToggleStatus from "@global/hook/overlay/useToggleStatus";
-import Estrela from "@global/component/icons/Estrela";
+import Estrela from "@global/component/icon/Estrela";
 import { ToggleableItem } from "@global/listing/ToggleableItem";
 
 type Props = {};

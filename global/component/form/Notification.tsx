@@ -1,6 +1,6 @@
 type Props = {
   type: NotificationType;
-  message: string[];
+  message?: string[] | string;
 };
 
 export default function Notification({ message, type }: Props) {

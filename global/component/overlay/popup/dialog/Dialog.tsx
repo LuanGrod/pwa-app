@@ -1,6 +1,6 @@
 "use client";
 
-import Fechar from "@global/component/icons/Fechar";
+import Fechar from "@global/component/icon/Fechar";
 import clsx from "clsx/lite";
 import { ReactNode, useEffect, useState } from "react";
 import { createPortal } from "react-dom";

@@ -3,7 +3,7 @@
 import QuestoesErradas from "@/component/overlay/drawer/QuestoesErradas";
 import CardSimulado from "@/component/stat/CardSimulado";
 import { RespostasQuestoes } from "@/type/Entities";
-import { LinkView } from "@global/component/atomic/LinkView";
+import { LinkView } from "@global/component/link/LinkView";
 import { Shadow as ShadowBtn } from "@global/component/button/Shadow";
 import { Switch as SwitchBtn } from "@global/component/button/Switch";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";

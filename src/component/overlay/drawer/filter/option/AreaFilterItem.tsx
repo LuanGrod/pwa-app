@@ -1,4 +1,4 @@
-import Seta from "@global/component/icons/Seta";
+import Seta from "@global/component/icon/Seta";
 import clsx from "clsx";
 import useAreaDomain from "@/hook/useAreaDomain";
 import useCheckSelected from "@global/hook/filter/useCheckSelected";

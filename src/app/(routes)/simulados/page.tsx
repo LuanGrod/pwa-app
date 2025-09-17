@@ -1,4 +1,4 @@
-import Structure from "@/component/structure/GreetingsLogo"
+import Structure from "@/component/structure/GreetingsEstudanteLogo"
 import { Simulados as SimuladosFiltersWrapper } from "@/component/filter/wrapper/Simulados";
 
 type Props = {}

@@ -1,7 +1,7 @@
 "use client";
 
 import Footer from "@/component/footer/Footer";
-import Header from "@global/component/header/PdfContent";
+import Header from "@/component/header/PdfContent";
 import { useGetRow } from "@global/hook/request/useGetRow";
 import { Viewing } from "@global/component/viewing/Viewing";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";

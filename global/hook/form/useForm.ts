@@ -2,10 +2,11 @@ import { ItemInterface } from "@global/form/item/ItemInterface";
 import { useItem, Item as ItemDef } from "./item/useItem";
 import { FormEvent, useState } from "react";
 import SubmitHandlerInterface from "@global/form/handler/submit/SubmitHandlerInterface";
+import { DefaultResponse } from "@global/type/request/response/handler/DefaultResponse";
 
-export function useForm(itemsConfig: ItemInterface[], submitHandler: SubmitHandlerInterface, id?: string) {
+export function useForm<T>(itemsConfig: ItemInterface[], submitHandler: SubmitHandlerInterface, id?: string) {
   const items = itemsConfig.map((config: ItemInterface) => useItem(config));
-  const [submitReturn, setSubmitReturn] = useState<any>();
+  const [submitReturn, setSubmitReturn] = useState<DefaultResponse<T>>();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
@@ -25,7 +26,7 @@ export function useForm(itemsConfig: ItemInterface[], submitHandler: SubmitHandl
 
     if (isValid) {
       setLoading(true);
-      const result = await submitHandler.onSubmit(values, id);
+      const result = await submitHandler.onSubmit<T>(values, id);
       setSubmitReturn(result);
       setLoading(false);
     }

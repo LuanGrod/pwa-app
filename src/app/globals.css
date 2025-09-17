@@ -2708,6 +2708,10 @@ form .link-recuperacao-senha {
   text-align: start;
 }
 
+.divider {
+  color: var(--divider);
+}
+
 body {
   background: var(--background);
   color: var(--foreground);

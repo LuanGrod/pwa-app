@@ -1,6 +1,6 @@
 "use client";
 
-import Structure from "@/component/structure/GreetingsLogo";
+import Structure from "@/component/structure/GreetingsEstudanteLogo";
 import { Estatisticas as EstatisticasType } from "@/type/Entities";
 import Pie from "@global/component/chart/Pie";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";

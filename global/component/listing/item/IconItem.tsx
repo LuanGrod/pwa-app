@@ -1,6 +1,6 @@
 "use client";
 
-import { LinkView } from "@global/component/atomic/LinkView";
+import { LinkView } from "@global/component/link/LinkView";
 import { ReactNode } from "react";
 
 type Props = {

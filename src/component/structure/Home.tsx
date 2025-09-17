@@ -1,5 +1,5 @@
 import ConfiguracoesDrawer from "@/component/overlay/drawer/Configuracoes";
-import Header from "@global/component/header/MenuTitleLogo";
+import Header from "@/component/header/MenuTitleLogo";
 import { ReactNode, unstable_ViewTransition as ViewTransition } from "react";
 import Footer from "@/component/footer/Footer";
 

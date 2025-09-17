@@ -1,43 +1,48 @@
 "use client";
 
 import { useEstudante } from "@/store/EstudanteStore";
-import UploadImage from "@global/component/atomic/UploadImage";
+import UploadImage from "@global/component/image/UploadImage";
 import Image from "next/image";
 
-type Props = {};
+type Props = {
+  name?: string;
+  imageUrl?: string;
+  imageAlt?: string;
+  imagePlaceholder?: string;
+  loading?: boolean;
+};
 
-export default function Greetings({ }: Props) {
-  const { estudante, _hasHydrated } = useEstudante()
+export default function Greetings({ imageAlt = "Foto do usuário", imagePlaceholder = "/project/assets/avatar-mock.webp", imageUrl, loading, name }: Props) {
 
   return (
     <div className="greetings">
-      {_hasHydrated ? (
+      {loading ? (
+        <>
+          <div className="avatar skeleton" />
+          <div className="title skeleton" />
+        </>
+      ) : (
         <>
           {
-            estudante.urlImagem ? (<UploadImage
-              src={`${estudante.urlImagem}`}
-              alt="Foto do usuário"
+            imageUrl ? (<UploadImage
+              src={imageUrl}
+              alt={imageAlt}
               width={45}
               height={45}
               className="avatar"
               priority
             />) : (
               <Image
-              src="/project/assets/avatar-mock.webp"
-              alt="Foto do usuário"
-              width={45}
-              height={45}
-              className="avatar"
-              priority
-            />
+                src={imagePlaceholder}
+                alt={imageAlt}
+                width={45}
+                height={45}
+                className="avatar"
+                priority
+              />
             )
           }
-          <p className="title">Olá {estudante.nomeCompleto}!</p>
-        </>
-      ) : (
-        <>
-          <div className="avatar skeleton" />
-          <div className="title skeleton" />
+          <p className="title">Olá {name}!</p>
         </>
       )}
     </div>

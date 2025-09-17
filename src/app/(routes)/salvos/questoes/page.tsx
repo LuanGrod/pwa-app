@@ -6,11 +6,11 @@ import { Listing } from "@global/component/listing/Listing";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import { IconItem } from "@global/listing/IconItem";
 import useSearch from "@global/hook/useSearch";
-import SearchBar from "@global/component/atomic/SearchBar";
+import SearchBar from "@global/component/search/SearchBar";
 import { UnderHeader } from "@global/component/overlay/drawer/UnderHeader";
 import { QuestoesSalvos } from "@/type/Entities";
 import useToggleStatus from "@global/hook/overlay/useToggleStatus";
-import Bandeira from "@global/component/icons/Bandeira";
+import Bandeira from "@global/component/icon/Bandeira";
 
 type Props = {};
 

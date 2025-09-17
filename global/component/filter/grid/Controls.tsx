@@ -14,17 +14,8 @@ interface FiltrosGridProps {
   afterComponent?: ReactNode;
 }
 
-// Helper to flatten definitions, extracting children from groups
-function flattenDefinitions(definitions: FilterInterface[]): FilterInterface[] {
-  return definitions.flatMap((def) =>
-    typeof def.isGroup === "function" && def.isGroup()
-      ? flattenDefinitions(def.getChildren())
-      : [def]
-  );
-}
-
-export function Grid({ filters, definitions, onOpenDrawer, onToggleBoolean, gridColumns = 3, filterBtnIcon, beforeComponent, afterComponent }: FiltrosGridProps) {
-  const flatDefinitions = flattenDefinitions(definitions);
+export default function Controls({ filters, definitions, onOpenDrawer, onToggleBoolean, gridColumns = 3, filterBtnIcon, beforeComponent, afterComponent }: FiltrosGridProps) {
+  const flatDefinitions = definitions.flatMap(def => def.getFlatChildren());
   const selectFIlters = flatDefinitions.filter((def) => def.getType() === "select");
   const booleanFilters = flatDefinitions.filter((def) => def.getType() === "boolean");
 

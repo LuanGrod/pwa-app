@@ -1,6 +1,6 @@
 "use client";
 
-import Editar from "@global/component/icons/Editar";
+import Caneta from "@global/component/icon/Caneta";
 
 
 type Props = {
@@ -11,7 +11,7 @@ type Props = {
 export default function EditBtn({ handleEdit = () => {}, size = 23 }: Props) {
   return (
     <button onClick={handleEdit} className="btn">
-      <Editar size={size} changeOnTheme />
+      <Caneta size={size} changeOnTheme />
     </button>
   );
 }

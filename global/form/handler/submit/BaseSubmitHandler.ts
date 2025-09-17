@@ -1,5 +1,6 @@
 import { ResponseHandlerInterface } from "@global/request/response/handler/HandlerInterface";
 import SubmitHandlerInterface from "./SubmitHandlerInterface";
+import { DefaultResponse } from "@global/type/request/response/handler/DefaultResponse";
 
 export type BaseSubmitHandlerProps = {
   entity?: string;
@@ -26,7 +27,7 @@ export abstract class BaseSubmitHandler implements SubmitHandlerInterface {
 
   protected abstract createRequestBuilder(props: any): any;
 
-  async onSubmit(values: { [key: string]: string }, id?: string): Promise<any> {
+  async onSubmit<T>(values: { [key: string]: string }, id?: string): Promise<DefaultResponse<T>> {
     const builderProps = {
       entity: this.entity,
       body: values,

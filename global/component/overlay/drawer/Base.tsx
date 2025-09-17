@@ -2,7 +2,7 @@
 
 import clsx from "clsx/lite";
 import { ReactNode, useEffect, useState } from "react";
-import Fechar from "@global/component/icons/Fechar";
+import Fechar from "@global/component/icon/Fechar";
 import { createPortal } from "react-dom";
 
 type Props = {

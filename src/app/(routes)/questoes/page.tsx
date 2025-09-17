@@ -1,5 +1,5 @@
 import { Questoes as QuestoesFiltersWrapper } from "@/component/filter/wrapper/Questoes";
-import Structure from "@/component/structure/GreetingsLogo";
+import Structure from "@/component/structure/GreetingsEstudanteLogo";
 
 type Props = {};
 

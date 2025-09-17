@@ -6,12 +6,12 @@ import { useListing } from "@global/hook/request/useListing";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import { useSearchParams } from "next/navigation";
 import { UnderHeader } from "@global/component/overlay/drawer/UnderHeader";
-import SearchBar from "@global/component/atomic/SearchBar";
+import SearchBar from "@global/component/search/SearchBar";
 import useSearch from "@global/hook/useSearch";
 import { HotTopicsListagem } from "@/type/Entities";
 import { ToggleableItem } from "@global/listing/ToggleableItem";
 import useToggleStatus from "@global/hook/overlay/useToggleStatus";
-import Estrela from "@global/component/icons/Estrela";
+import Estrela from "@global/component/icon/Estrela";
 
 type Props = {};
 

@@ -4,10 +4,10 @@ import FilterInterface from "@global/filter/ui/FilterInterface";
 import { useFilters } from "@global/hook/filter/useFilters";
 import { useEstudar } from "@/hook/useEstudar";
 import { useKeyDrawer } from "@global/hook/overlay/useKeyDrawer";
-import { Grid as FiltersGrid } from "@global/component/filter/grid/grid";
+import FiltersControllsGrid from "@global/component/filter/grid/Controls";
 import Filtros from "@global/component/overlay/drawer/filter/Filtros";
 import { Shadow as ShadowBtn } from "@global/component/button/Shadow";
-import { ReactNode, useEffect } from "react";
+import { ReactNode } from "react";
 
 type Props = {
   filterDefinitions: FilterInterface[];
@@ -43,7 +43,7 @@ export default function FilterWrapperBase({ filterDefinitions, entity, gridColum
 
   return (
     <div className="filter-wrapper">
-      <FiltersGrid
+      <FiltersControllsGrid
         filters={values}
         definitions={definitions}
         onOpenDrawer={handleOpenDrawer}

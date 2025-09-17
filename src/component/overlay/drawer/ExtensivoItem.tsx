@@ -1,5 +1,5 @@
 import { diaExtensivo } from "@/type/Entities";
-import { LinkView } from "@global/component/atomic/LinkView";
+import { LinkView } from "@global/component/link/LinkView";
 import { useUser } from "@global/hook/auth/useUser";
 import useToggleAddRemoveArray from "@global/hook/useToggleAddRemoveArray";
 import { data } from "motion/react-client";

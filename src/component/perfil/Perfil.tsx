@@ -1,10 +1,10 @@
 "use client";
 
 import { Estudante as EstudanteType } from "@/type/Entities";
-import UploadImage from "@global/component/atomic/UploadImage";
-import Camera from "@global/component/icons/Camera";
+import UploadImage from "@global/component/image/UploadImage";
+import Camera from "@global/component/icon/Camera";
 import PerfilItem from "./PerfilItem";
-import Editar from "@global/component/icons/Editar";
+import Caneta from "@global/component/icon/Caneta";
 import Image from "next/image";
 import { BrazilianDateFormatter } from "@global/formatter/date/Brazilian";
 import { BrazilianPhoneFormatter } from "@global/formatter/phone/Brazilian";
@@ -16,7 +16,7 @@ import { Upload } from "@global/request/builder/api/Upload";
 import { useEstudante } from "@/store/EstudanteStore";
 import { Upload as UploadResponseHandler } from "@global/request/response/handler/api/Upload";
 import UpdateOnUploadFile from "@global/request/response/handler/action/UpdateOnUploadFile";
-import Fechar from "@global/component/icons/Fechar";
+import Fechar from "@global/component/icon/Fechar";
 import { Update } from "@global/request/builder/api/Update";
 
 type Props = {
@@ -104,7 +104,7 @@ export default function Perfil({ data, setData }: Props) {
             {data.estudantes_nome_completo}
           </h1>
           <button onClick={edicaoToggleDialog}>
-            <Editar size={20} changeOnTheme />
+            <Caneta size={20} changeOnTheme />
           </button>
         </div>
       </div>
@@ -112,7 +112,7 @@ export default function Perfil({ data, setData }: Props) {
         <PerfilItem label="Email:" value={data.estudantes_email} />
         <PerfilItem label="Senha:" value={"********"} customClass="edit">
           <button onClick={edicaoSenhaToggleDialog}>
-            <Editar size={18} changeOnTheme />
+            <Caneta size={18} changeOnTheme />
           </button>
         </PerfilItem>
         <PerfilItem label="Data de nascimento:" value={dateFormatter.format(data.estudantes_data_nascimento)} />

@@ -1,5 +1,5 @@
 import useQuestoes from "@/store/QuestaoStore";
-import UploadImage from "@global/component/atomic/UploadImage";
+import UploadImage from "@global/component/image/UploadImage";
 import cls from "clsx/lite";
 
 type Props = {

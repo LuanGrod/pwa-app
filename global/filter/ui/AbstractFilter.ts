@@ -150,4 +150,17 @@ export default abstract class AbstractFilter implements FilterInterface {
   getHasSearch(): boolean {
     return true;
   }
+
+  /**
+   * Retorna um array de filtros achatados, extraindo filhos de grupos.
+   * Para filtros de grupo, retorna todos os filhos folha recursivamente.
+   * Para filtros não-grupo, retorna o próprio filtro.
+   * @returns Array de instâncias FilterInterface folha.
+   */
+  getFlatChildren(): FilterInterface[] {
+    if (this.isGroup()) {
+      return this.getChildren().flatMap(child => child.getFlatChildren());
+    }
+    return [this];
+  }
 }

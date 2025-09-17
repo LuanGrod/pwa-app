@@ -1,5 +1,5 @@
-import Mais from "@global/component/icons/Mais";
-import Menos from "@global/component/icons/Menos";
+import Mais from "@global/component/icon/Mais";
+import Menos from "@global/component/icon/Menos";
 
 type Props = {
   label?: string;

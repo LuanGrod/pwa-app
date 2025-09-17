@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
-import Header from "@global/component/header/Flashcard";
-import Footer from "../footer/Flashcard";
+import Header from "@/component/header/Flashcard";
+import Footer from "@/component/footer/Flashcard";
 import { unstable_ViewTransition as ViewTransition } from "react";
 
 type Props = {

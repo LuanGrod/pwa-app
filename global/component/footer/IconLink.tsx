@@ -1,6 +1,6 @@
 "use client";
 
-import { LinkView } from "@global/component/atomic/LinkView";
+import { LinkView } from "@global/component/link/LinkView";
 import { Icon } from "@public/global/js/types/Icon";
 import { usePathname } from "next/navigation";
 import { ReactElement, cloneElement } from "react";

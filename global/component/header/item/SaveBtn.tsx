@@ -1,6 +1,6 @@
 "use client";
 
-import Bandeira from "@global/component/icons/Bandeira";
+import Bandeira from "@global/component/icon/Bandeira";
 
 type Props = {
   handleSave?: (e?: any) => any;

@@ -1,7 +1,7 @@
 "use client";
 
 import SelectFilter from "@global/filter/ui/Select";
-import FilterWrapperBase from "@global/component/filter/wrapper/Base";
+import FilterWrapperBase from "@/component/filter/wrapper/Base";
 import Logo from "@/component/icon/Logo";
 import useQuestoes from "@/store/QuestaoStore";
 import RangeSelector from "@global/component/button/RangeSelector";

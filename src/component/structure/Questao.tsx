@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Header from "@global/component/header/Questao";
+import Header from "@/component/header/Questao";
 import Footer from "../footer/Questao";
 import { unstable_ViewTransition as ViewTransition } from "react";
 

@@ -3,7 +3,7 @@
 import { motion } from "motion/react";
 import Link from "next/link";
 import Image from "next/image";
-import { LinkView } from "@global/component/atomic/LinkView";
+import { LinkView } from "@global/component/link/LinkView";
 
 type Link = {
   href: string;

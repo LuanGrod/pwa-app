@@ -1,7 +1,7 @@
-import ReturnRoute from "./item/ReturnRoute";
-import BaseHeader from "./Base";
-import EditBtn from "./item/EditBtn";
-import SaveBtn from "./item/SaveBtn";
+import BaseHeader from "@global/component/header/Base";
+import EditBtn from "@global/component/header/item/EditBtn";
+import ReturnRoute from "@global/component/header/item/ReturnRoute";
+import SaveBtn from "@global/component/header/item/SaveBtn";
 
 type Props = {
   title: string;

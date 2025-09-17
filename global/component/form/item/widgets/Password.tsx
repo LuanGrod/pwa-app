@@ -1,5 +1,5 @@
-import OlhoAberto from "@global/component/icons/OlhoAberto";
-import OlhoFechado from "@global/component/icons/OlhoFechado";
+import OlhoAberto from "@global/component/icon/OlhoAberto";
+import OlhoFechado from "@global/component/icon/OlhoFechado";
 
 type Props = {
   type: string;

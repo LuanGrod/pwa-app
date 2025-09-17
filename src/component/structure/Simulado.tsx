@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import Header from "@global/component/header/Simulado";
+import Header from "@/component/header/Simulado";
 import Footer from "@/component/footer/Simulado";
 import { unstable_ViewTransition as ViewTransition } from "react";
 

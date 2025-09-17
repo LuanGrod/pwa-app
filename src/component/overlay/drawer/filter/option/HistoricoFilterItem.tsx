@@ -1,4 +1,4 @@
-import { LinkView } from "@global/component/atomic/LinkView";
+import { LinkView } from "@global/component/link/LinkView";
 import { BrazilianDateFormatter } from "@global/formatter/date/Brazilian";
 
 type HistoricoFilterItemProps = {

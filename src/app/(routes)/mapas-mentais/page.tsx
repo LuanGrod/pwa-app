@@ -1,4 +1,4 @@
-import Structure from "@/component/structure/GreetingsLogo";
+import Structure from "@/component/structure/GreetingsEstudanteLogo";
 import { MapasMentais as MapasMentaisFiltersWrapper } from "@/component/filter/wrapper/MapasMentais";
 
 type Props = {};

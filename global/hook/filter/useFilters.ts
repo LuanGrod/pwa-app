@@ -2,16 +2,9 @@ import { useEffect, useState } from "react";
 import FilterInterface from "@global/filter/ui/FilterInterface";
 import FilterStringAssembler, { FilterFragment } from "@global/filter/StringAssembler";
 
-// Helper to flatten definitions, extracting children from groups
-function flattenDefinitions(definitions: FilterInterface[]): FilterInterface[] {
-  return definitions.flatMap((def) =>
-    def.isGroup() ? flattenDefinitions(def.getChildren()) : [def]
-  );
-}
-
 export function useFilters(definitions: FilterInterface[]) {
   // Flatten the definitions to get all leaf filters (no groups)
-  const flatDefinitions = flattenDefinitions(definitions);
+  const flatDefinitions = definitions.flatMap(def => def.getFlatChildren());
 
   const [values, setValues] = useState<any>(() =>
     Object.fromEntries(flatDefinitions.map((def) => [def.getKey(), def.getInitialValue()]))

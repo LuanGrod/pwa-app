@@ -2,7 +2,7 @@
 
 import { BottomDrawer } from "@global/component/overlay/drawer/Bottom";
 import { Questao as QuestaoType } from "@/type/Entities";
-import UploadImage from "@global/component/atomic/UploadImage";
+import UploadImage from "@global/component/image/UploadImage";
 import useQuestoes from "@/store/QuestaoStore";
 
 type Props = {

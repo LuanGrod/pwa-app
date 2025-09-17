@@ -235,4 +235,12 @@ export default interface FilterInterface {
    * @returns True if the filter has a search input, false otherwise.
    */
   getHasSearch(): boolean;
+
+  /**
+   * Returns an array of flattened filters, extracting children from groups.
+   * For group filters, returns all leaf children recursively.
+   * For non-group filters, returns the filter itself.
+   * @returns An array of leaf FilterInterface instances.
+   */
+  getFlatChildren(): FilterInterface[];
 }

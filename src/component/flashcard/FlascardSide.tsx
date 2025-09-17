@@ -1,4 +1,4 @@
-import UploadImage from "@global/component/atomic/UploadImage";
+import UploadImage from "@global/component/image/UploadImage";
 import EditBtn from "@global/component/header/item/EditBtn";
 import SaveBtn from "@global/component/header/item/SaveBtn";
 import Logo from "../icon/Logo";

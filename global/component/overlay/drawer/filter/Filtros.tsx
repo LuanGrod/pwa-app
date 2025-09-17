@@ -3,7 +3,7 @@
 import { BottomDrawer } from "@global/component/overlay/drawer/Bottom";
 import { useEffect, useState, ComponentType } from "react";
 import ParentFilterItem from "./ParentFilterItem";
-import SearchBar from "@global/component/atomic/SearchBar";
+import SearchBar from "@global/component/search/SearchBar";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import useSearch from "@global/hook/useSearch";
 import SimpleFilterItem from "@global/component/overlay/drawer/filter/SimpleFilterItem";
@@ -73,7 +73,7 @@ export default function Filtros({
       )}
       {hasSearch && (
         <div className="search-wrapper">
-          <SearchBar value={searchTerm || ""} onChange={(e) => setSearchTerm(e)} customClass="variation" />
+          <SearchBar value={searchTerm || ""} onChange={(e) => setSearchTerm(e)} className="variation" />
         </div>
       )}
       {props.loading ? (

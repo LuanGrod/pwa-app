@@ -1,6 +1,6 @@
 "use client";
 
-import Lupa from "@global/component/icons/Lupa";
+import Lupa from "@global/component/icon/Lupa";
 
 type Props = {
   handleSearch?: () => void;

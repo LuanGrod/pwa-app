@@ -1,6 +1,6 @@
 "use client";
 
-import Voltar from "@global/component/icons/Voltar";
+import Voltar from "@global/component/icon/Voltar";
 import { useRouter } from "next/navigation";
 import { useEffect, useCallback, startTransition } from "react";
 

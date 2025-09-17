@@ -1,12 +1,12 @@
 "use client";
 
-import Divider from "@global/component/atomic/Divider";
-import Email from "@global/component/icons/Email";
-import Faturas from "@global/component/icons/Faturas";
-import Info from "@global/component/icons/Info";
-import MudarTema from "@global/component/icons/MudarTema";
-import Sair from "@global/component/icons/Sair";
-import Usuario from "@global/component/icons/Usuario";
+import Divider from "@global/component/divider/Divider";
+import Email from "@global/component/icon/Email";
+import Faturas from "@global/component/icon/Faturas";
+import Info from "@global/component/icon/Info";
+import MudarTema from "@global/component/icon/MudarTema";
+import Sair from "@global/component/icon/Sair";
+import Usuario from "@global/component/icon/Usuario";
 import DrawerLinkWithIcon from "@global/component/overlay/drawer/item/LinkWithIcon";
 import DrawerBtnWithIcon from "@global/component/overlay/drawer/item/BtnWithIcon";
 import { Overlay } from "@public/global/js/types/Overlay";

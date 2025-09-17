@@ -1,7 +1,7 @@
 "use client";
 
-import { LinkView } from "../component/atomic/LinkView";
-import UploadImage from "@global/component/atomic/UploadImage";
+import { LinkView } from "../component/link/LinkView";
+import UploadImage from "@global/component/image/UploadImage";
 import { useUser } from "@global/hook/auth/useUser";
 import { Dispatch, ReactNode, SetStateAction } from "react";
 import useToggleAddRemoveArray from "@global/hook/useToggleAddRemoveArray";

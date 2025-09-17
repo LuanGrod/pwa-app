@@ -28,6 +28,7 @@
 @use "login";
 @use "recuperacaoSenha";
 @use "geracaoNovaSenha";
+@use "divider";
 
 body {
   background: var(--background);
