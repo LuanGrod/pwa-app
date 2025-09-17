@@ -11,8 +11,9 @@ export class Upload extends RequestBuilder {
   constructor(props: UploadBuilderProps) {
     const headers = props.headers || new HeaderCollection({ elements: [] });
     const responseHandler = props.responseHandler || new ResponseHandler({});
-    
+
     super({ ...props, headers, responseHandler });
+
     this.uploadField = props.uploadField;
   }
 
@@ -24,8 +25,21 @@ export class Upload extends RequestBuilder {
     return "POST";
   }
 
-  protected buildEndpoint(entity: string): string {
+  protected configure(props: any) {
+    const { entity, headers, responseHandler, body, uploadField } =
+      props;
+
+    return {
+      endpoint: this.buildCustomEndpoint(entity, uploadField),
+      method: this.getMethod(),
+      headers: headers,
+      body: body || null,
+      responseHandler: responseHandler || new ResponseHandler({}),
+    };
+  }
+
+  private buildCustomEndpoint(entity?: string, uploadField?: string): string {
     const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-    return `${apiUrl}/upload/${entity}/${this.uploadField}`;
+    return `${apiUrl}/upload/${entity}/${uploadField}`;
   }
 }

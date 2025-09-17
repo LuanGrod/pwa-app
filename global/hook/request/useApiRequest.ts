@@ -12,6 +12,7 @@ type UseApiRequestProps<TData, TBuilder extends RequestBuilder> = {
   needsAuthorization?: boolean;
   initialData: TData;
   dependencies?: any[];
+  shouldFetch?: boolean;
 };
 
 type UseApiRequestReturn<TData> = {
@@ -30,6 +31,7 @@ type UseApiRequestReturn<TData> = {
  * @param needsAuthorization - Se o request necessita autorização
  * @param initialData - Valor inicial para o estado data
  * @param dependencies - Array de dependências para o useEffect
+ * @param shouldFetch - booleano que indica se a requisição deve ser feita (vide useGetRow)
  * @returns Estado e funções para gerenciar o request
  */
 export function useApiRequest<TData, TBuilder extends RequestBuilder>({
@@ -38,6 +40,7 @@ export function useApiRequest<TData, TBuilder extends RequestBuilder>({
   needsAuthorization = false,
   initialData,
   dependencies = [],
+  shouldFetch = true,
 }: UseApiRequestProps<TData, TBuilder>): UseApiRequestReturn<TData> {
   const [data, setData] = useState<TData>(initialData);
   const [loading, setLoading] = useState(true);
@@ -68,7 +71,9 @@ export function useApiRequest<TData, TBuilder extends RequestBuilder>({
   };
 
   useEffect(() => {
-    fetchData();
+    if (shouldFetch) {
+      fetchData();
+    }
   }, dependencies);
 
   return {

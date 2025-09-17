@@ -3,7 +3,6 @@ import { ResponseHandlerInterface } from "@global/request/response/handler/Handl
 import Authorization from "../header/handler/Authorization";
 import { Default as DefaultHeaderCollection } from "../header/handler/collection/Default";
 import { CollectionInterface as HeaderHandlerCollection } from "@global/request/header/handler/collection/CollectionInterface";
-import { RequestBuilderProps } from "@global/type/request/builder/RequestBuilderProps";
 
 export abstract class RequestBuilder {
   protected endpoint: string;
@@ -25,7 +24,7 @@ export abstract class RequestBuilder {
 
   protected abstract getMethod(): Methods;
 
-  private configure(props: any) {
+  protected configure(props: any) {
     const { entity, headers, responseHandler, body, id, parentEntity, parentId } = props;
 
     return {

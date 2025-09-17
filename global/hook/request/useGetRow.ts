@@ -30,6 +30,8 @@ export function useGetRow<T = any>({
   params,
   needsAuthorization = false,
 }: UseGetRowProps): UseGetRowReturn<T> {
+  const shouldFetch = Boolean(entity && id);
+
   return useApiRequest<T | undefined, GetRow>({
     builderClass: GetRow,
     builderProps: {
@@ -43,5 +45,6 @@ export function useGetRow<T = any>({
     needsAuthorization,
     initialData: undefined,
     dependencies: [entity, id, parentEntity, parentId],
+    shouldFetch,
   });
 }

@@ -11,7 +11,7 @@ import { AsyncRenderer } from "@global/component/data/AsyncRenderer";
 type Props = {};
 
 export default function page({ }: Props) {
-  const { id: userId } = useUser()
+  const { id: userId, loading: userLoading } = useUser()
 
   const { data, setData, loading, error } = useGetRow<EstudanteType>({
     entity: "estudantes2",
@@ -23,9 +23,8 @@ export default function page({ }: Props) {
     <Structure title="Perfil" className="perfil">
       <AsyncRenderer
         data={data}
-        loading={loading}
+        loading={userLoading || loading}
         error={error}
-        emptyComponent={<></>}
         loadingComponent={<Loading2 loading />}
         renderItem={(item) => <Perfil data={item} setData={setData} />}
       />

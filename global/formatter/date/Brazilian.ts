@@ -4,39 +4,67 @@ import { FormatterInterface } from "../FormatterInterface";
 
 
 export class BrazilianDateFormatter implements FormatterInterface<string> {
+
+  /**
+   * @param value String da data no formato ISO ou timestamp
+   * @returns Data formatada no padrão brasileiro dd/mm/yyyy
+   */
   format(value: string): string {
     if (!value) return "";
-    const date = new Date(value);
-    return date.toLocaleDateString("pt-BR", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
-    });
+    
+    const isoDateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    
+    if (isoDateRegex.test(value)) {
+      const [year, month, day] = value.split('-').map(Number);
+      const date = new Date(year, month - 1, day); 
+      return date.toLocaleDateString("pt-BR");
+    } else {
+      const date = new Date(value);
+      return date.toLocaleDateString("pt-BR");
+    }
   }
 
+  /**
+   * @param value String da data no formato ISO ou timestamp
+   * @returns Abreviação do mês (JAN, FEV, etc.)
+   */
   shortFormatMonth(value: string): string {
     if (!value) return "";
-    const date = new Date(value);
+    
+    const isoDateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    let date: Date;
+    
+    if (isoDateRegex.test(value)) {
+      const [year, month, day] = value.split('-').map(Number);
+      date = new Date(year, month - 1, day);
+    } else {
+      date = new Date(value);
+    }
+    
     const monthAbbr = [
-      "JAN",
-      "FEV",
-      "MAR",
-      "ABR",
-      "MAI",
-      "JUN",
-      "JUL",
-      "AGO",
-      "SET",
-      "OUT",
-      "NOV",
-      "DEZ",
+      "JAN", "FEV", "MAR", "ABR", "MAI", "JUN",
+      "JUL", "AGO", "SET", "OUT", "NOV", "DEZ",
     ];
     return monthAbbr[date.getMonth()];
   }
 
+  /**
+   * @param value String da data no formato ISO ou timestamp
+   * @returns Ano como string
+   */
   shortFormatYear(value: string): string {
     if (!value) return "";
-    const date = new Date(value);
+    
+    const isoDateRegex = /^\d{4}-\d{2}-\d{2}$/;
+    let date: Date;
+    
+    if (isoDateRegex.test(value)) {
+      const [year, month, day] = value.split('-').map(Number);
+      date = new Date(year, month - 1, day);
+    } else {
+      date = new Date(value);
+    }
+    
     return date.getFullYear().toString();
   }
 
