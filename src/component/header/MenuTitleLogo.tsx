@@ -1,5 +1,5 @@
 import { ReactElement } from "react";
-import { Overlay } from "@public/global/js/types/Overlay";
+import { Overlay } from "@global/type/props/Overlay";
 import MenuToggle from "@global/component/header/item/MenuToggle";
 import BaseHeader from "@global/component/header/Base";
 import LogoOverlay from "@/component/header/item/LogoOverlay";

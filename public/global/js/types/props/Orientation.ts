@@ -1,1 +1,0 @@
-type Orientation = "vertical" | "horizontal";

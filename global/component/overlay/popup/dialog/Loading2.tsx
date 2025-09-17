@@ -4,7 +4,7 @@ type Props = {
   className?: string;
 };
 
-export default function Loading2({ loading, overlay = false, className }: Props) {
+export default function Loading2({ loading, overlay = false, className = "" }: Props) {
   if (!loading) return null;
 
   return (

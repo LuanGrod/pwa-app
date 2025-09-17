@@ -1,3 +1,0 @@
-type Position = 
-  | "first"
-  | "last";

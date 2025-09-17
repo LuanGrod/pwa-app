@@ -6,12 +6,12 @@ type Props = {
   onClose?: () => void;
   onConfirm?: () => void;
   onCancel?: () => void;
-  customClass?: string;
+  className?: string;
 }
 
-export default function Confirmation({ title, open, onClose, onConfirm, onCancel, customClass = "" }: Props) {
+export default function Confirmation({ title, open, onClose, onConfirm, onCancel, className = "" }: Props) {
   return (
-    <Dialog open={open} onClose={onClose} customClass={`confirmation ${customClass}`} overlay title={title}>
+    <Dialog open={open} onClose={onClose} className={`confirmation ${className}`} overlay title={title}>
       <div className="action-wrapper">
         <button className="confirm" onClick={onConfirm}>Sim</button>
         <button className="cancel" onClick={onCancel}>Não</button>

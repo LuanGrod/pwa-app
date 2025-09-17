@@ -8,16 +8,16 @@ type Props = {
   data: FlashcardType;
   isFlipped: boolean;
   onFlip: () => void;
-  customClass?: string;
+  className?: string;
 };
 
-export default function Flashcard({ data, isFlipped, onFlip, customClass = "" }: Props) {
+export default function Flashcard({ data, isFlipped, onFlip, className = "" }: Props) {
   const { isActive, toggle } = useToggleStatus();
   const { id: userId } = useUser();
   const { getSavedStatus, handleSave, getLogoColor } = useFlashcards();
 
   return (
-    <div className={`flashcard ${isFlipped ? "show-answer" : ""} ${customClass}`} onClick={onFlip}>
+    <div className={`flashcard ${isFlipped ? "show-answer" : ""} ${className}`} onClick={onFlip}>
       <div className="flashcard-inner">
         <FlashcardSide
           side={"front"}

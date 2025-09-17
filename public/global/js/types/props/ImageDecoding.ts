@@ -1,1 +1,0 @@
-type ImageDecoding = "async" | "sync" | "auto"

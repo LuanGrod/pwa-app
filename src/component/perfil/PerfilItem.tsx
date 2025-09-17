@@ -1,15 +1,15 @@
 type Props = {
   label: string;
   value?: string;
-  customClass?: string;
+  className?: string;
   children?: React.ReactNode;
 }
 
-export default function PerfilItem({ label, value, customClass = "", children }: Props) {
+export default function PerfilItem({ label, value, className = "", children }: Props) {
   if(!value) return null;
 
   return (
-    <div className={`perfil-item ${customClass}`}>
+    <div className={`perfil-item ${className}`}>
       <div>
         <p className="label">{label}</p>
         <p className="value">{value}</p>

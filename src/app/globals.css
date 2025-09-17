@@ -1672,7 +1672,7 @@ form .link-recuperacao-senha {
   line-height: 1.25;
   font-weight: 500;
   text-align: start;
-  width: 80%;
+  width: 70%;
   align-self: center;
   font-family: var(--font-text);
   display: -webkit-box;
@@ -1731,7 +1731,7 @@ form .link-recuperacao-senha {
   border-radius: 10px;
 }
 .questao-wrapper .alternativas-wrapper .questao-imagem img {
-  width: 100%;
+  width: 85%;
   max-width: 100%;
   height: auto;
   max-height: 180px;

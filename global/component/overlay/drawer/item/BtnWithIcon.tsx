@@ -1,4 +1,4 @@
-import { Icon } from "@public/global/js/types/Icon";
+import { Icon } from "@global/type/props/Icon";
 import { ReactElement } from "react";
 
 type Props = {

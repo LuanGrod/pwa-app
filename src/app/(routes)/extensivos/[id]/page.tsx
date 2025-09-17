@@ -4,9 +4,9 @@ import Structure from "@/component/structure/ReturnTitle";
 import IconFrameContainer from "@/component/iconFrame/IconFrameContainer";
 import { use } from "react";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
-import {conteudosExtensivos as conteudosExtensivosType } from "@/type/Entities";
+import { conteudosExtensivos as conteudosExtensivosType } from "@/type/Entities";
 import { useListing } from "@global/hook/request/useListing";
-import { Listing } from "@global/component/listing/Listing";
+import { AsyncRenderer } from "@global/component/data/AsyncRenderer";
 
 export default function page({
   params,
@@ -22,7 +22,7 @@ export default function page({
   });
 
   return (
-    <Listing
+    <AsyncRenderer
       data={data.rows}
       loading={loading}
       error={error}

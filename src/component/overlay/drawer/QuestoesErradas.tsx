@@ -24,7 +24,7 @@ export default function QuestoesErradas({ onClose, open, answers = [] }: Props) 
   }
 
   return (
-    <BottomDrawer open={open} onClose={onClose} title="Questões erradas" customClass="simulado-drawer">
+    <BottomDrawer open={open} onClose={onClose} title="Questões erradas" className="simulado-drawer">
       {
         !answers || answers.length === 0 ? (
           <div className="no-questions">Nenhuma questão incorreta.</div>

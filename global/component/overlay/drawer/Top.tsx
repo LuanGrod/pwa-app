@@ -9,16 +9,16 @@ type Props = {
   open?: boolean;
   overlay?: boolean;
   onClose?: () => void;
-  customClass?: string;
+  className?: string;
   hasCloseBtn?: boolean;
 };
 
-export function TopDrawer({ children, title, onClose, open, customClass = "", overlay = false, hasCloseBtn = false }: Props) {
+export function TopDrawer({ children, title, onClose, open, className = "", overlay = false, hasCloseBtn = false }: Props) {
 
   return (
     <BaseDrawer
       position="top"
-      customClass={customClass}
+      className={className}
       onClose={onClose}
       open={open}
       title={title}

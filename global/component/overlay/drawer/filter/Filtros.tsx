@@ -2,11 +2,11 @@
 
 import { BottomDrawer } from "@global/component/overlay/drawer/Bottom";
 import { useEffect, useState, ComponentType } from "react";
-import ParentFilterItem from "./ParentFilterItem";
-import SearchBar from "@global/component/search/SearchBar";
+import SearchBar from "@global/component/search/bar/SearchBar";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import useSearch from "@global/hook/useSearch";
-import SimpleFilterItem from "@global/component/overlay/drawer/filter/SimpleFilterItem";
+import ParentFilterItem from "./option/ParentFilterItem";
+import SimpleFilterItem from "./option/SimpleFilterItem";
 
 interface Props {
   open: boolean;
@@ -65,7 +65,7 @@ export default function Filtros({
   const CustomFilterComponent = customOptionComponent;
 
   return (
-    <BottomDrawer customClass="semi-full" open={open} title={title} onClose={onClose}>
+    <BottomDrawer className="semi-full" open={open} title={title} onClose={onClose}>
       {onClearFilter && hasClearFilter && (
         <button className="clear" onClick={() => onClearFilter(props.filterKey)}>
           Limpar filtro

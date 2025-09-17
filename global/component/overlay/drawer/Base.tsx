@@ -11,12 +11,12 @@ type Props = {
   open?: boolean;
   overlay?: boolean;
   onClose?: () => void;
-  customClass?: string;
+  className?: string;
   position: "top" | "bottom";
   hasCloseBtn?: boolean;
 };
 
-export function BaseDrawer({ children, title, onClose, open, customClass = "", overlay = true, position, hasCloseBtn = true }: Props) {
+export function BaseDrawer({ children, title, onClose, open, className = "", overlay = true, position, hasCloseBtn = true }: Props) {
   const [drawerRoot, setDrawerRoot] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export function BaseDrawer({ children, title, onClose, open, customClass = "", o
     createPortal(
       <div className={clsx("drawer-wrapper", open ? "open" : "closed", overlay && "overlay")}>
         <div className={"close-area"} onClick={onClose}></div>
-        <div className={clsx(`drawer-${position}`, open ? "open" : "closed", customClass)}>
+        <div className={clsx(`drawer-${position}`, open ? "open" : "closed", className)}>
           {
             title &&
             <div className={"header"}>

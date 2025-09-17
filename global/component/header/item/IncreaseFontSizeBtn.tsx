@@ -1,14 +1,14 @@
 "use client";
 
 import AumentarFonte from "@global/component/icon/AumentarFonte";
-import useFontSizeController from "@global/hook/useFontSizeController";
+import useFontSize from "@global/hook/ui/useFontSize";
 
 type Props = {
   elementsClassNames?: string[];
 };
 
 export default function IncreaseFontSizeBtn({ elementsClassNames }: Props) {
-  const { increaseFontSize } = useFontSizeController({ elementsClassNames });
+  const { increaseFontSize } = useFontSize({ elementsClassNames });
 
   return (
     <button onClick={increaseFontSize} className="btn">

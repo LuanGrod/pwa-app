@@ -10,17 +10,20 @@ type Props = {
   data: Data[];
   title?: string;
   subtitle?: string;
+  className?: string;
 }
 
 /**
  * Component that applies custom styles to the PieChart component from the react-minimal-pie-chart library.
  * @param {Data[]} data - Array of data objects for the pie chart.
- * @param {string} [customClass] - Optional custom CSS class for styling. 
- * @returns 
+ * @param {string} [title] - Optional title to be displayed above the pie chart.
+ * @param {string} [subtitle] - Optional subtitle to be displayed below the title.
+ * @param {string} [className] - Optional custom CSS class for styling.
+ * @returns {JSX.Element}
  */
-export default function Pie({ data, title, subtitle }: Props) {
+export default function Pie({ data, title, subtitle, className }: Props) {
   return (
-    <div className="graph-wrapper">
+    <div className={`graph-wrapper ${className}`}>
       <PieChart
         data={data}
         startAngle={180}

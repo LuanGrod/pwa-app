@@ -1,5 +1,5 @@
+import { Icon } from "@global/type/props/Icon";
 import IconLink from "./IconLink";
-import { Icon } from "@public/global/js/types/Icon";
 import { ReactElement } from "react";
 
 type Link = {

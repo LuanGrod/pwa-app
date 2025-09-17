@@ -9,10 +9,11 @@ import { Switch as SwitchBtn } from "@global/component/button/Switch";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import CardList from "@global/component/stat/CardList";
 import SimpleLine from "@global/component/stat/SimpleLine";
-import { Viewing } from "@global/component/viewing/Viewing";
+import { AsyncRenderer } from "@global/component/data/AsyncRenderer";
 import { BrazilianDateFormatter } from "@global/formatter/date/Brazilian";
 import useToggleStatus from "@global/hook/overlay/useToggleStatus";
 import { useListing } from "@global/hook/request/useListing";
+import { ListingResponse } from "@global/type/request/response/handler/Listing";
 
 type Props = { id: string };
 
@@ -28,7 +29,7 @@ export default function SimuladoStats({ id }: Props) {
   const brazilianDateFormatter = new BrazilianDateFormatter()
 
   return (
-    <Viewing<Listagem<RespostasQuestoes>>
+    <AsyncRenderer<ListingResponse<RespostasQuestoes>>
       data={data}
       loading={loading}
       error={error}

@@ -1,7 +1,7 @@
 "use client";
 
 import { LinkView } from "@global/component/link/LinkView";
-import { Icon } from "@public/global/js/types/Icon";
+import { Icon } from "@global/type/props/Icon";
 import { usePathname } from "next/navigation";
 import { ReactElement, cloneElement } from "react";
 

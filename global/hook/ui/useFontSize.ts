@@ -1,14 +1,14 @@
 type FontSizeOperation = "increment" | "decrement";
 
-type UseFontSizeControllerProps = {
+type UseFontSizeProps = {
   elementsClassNames?: string[];
   step?: number;
 };
 
-export default function useFontSizeController({
+export default function useFontSize({
   elementsClassNames,
   step = 2,
-}: UseFontSizeControllerProps = {}) {
+}: UseFontSizeProps = {}) {
   const adjustFontSize = (operation: FontSizeOperation) => {
     const delta = operation === "increment" ? step : -step;
 

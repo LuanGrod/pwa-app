@@ -1,10 +1,9 @@
 "use client";
 
 import { diaExtensivo } from "@/type/Entities";
-import { Listing } from "@global/component/listing/Listing";
 import { BottomDrawer } from "@global/component/overlay/drawer/Bottom"
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
-import { Viewing } from "@global/component/viewing/Viewing";
+import { AsyncRenderer } from "@global/component/data/AsyncRenderer";
 import { Dispatch, SetStateAction } from "react";
 import ExtensivoItem from "./ExtensivoItem";
 
@@ -22,27 +21,18 @@ export default function Extensivo({ open, onClose, title, data, setData, loading
     <BottomDrawer open={open} title={title} onClose={onClose} >
       <h2 className="subtitle">Recomendação semanal de estudo</h2>
       <div className="filter-items extensivo-week">
-        <Viewing
+        <AsyncRenderer
           data={data}
           loading={loading}
           loadingComponent={<Loading2 loading />}
-          renderItem={() => (
-            <>
-              <Listing
-                data={data}
-                loading={loading}
-                loadingComponent={<Loading2 loading />}
-                renderItem={(item) => (
-                  <ExtensivoItem data={item} setData={setData} />
-                )}
-              />
-              <div className="footer">
-                <p>O Modo Extensivo é um planejamento anual de estudos guiado por um checklist completo, com todos os temas e tarefas essenciais — como simulados, revisões e exercícios — organizados ao longo de 52 semanas.</p>
-                <p>Ele foi criado para garantir constância, foco e progresso real até a prova de residência, oferecendo uma trilha clara e estruturada que abrange todo o conteúdo necessário, sem perder tempo com o que não cai.</p>
-              </div>
-            </>
+          renderItem={(item) => (
+            <ExtensivoItem data={item} setData={setData} />
           )}
         />
+        <div className="footer">
+          <p>O Modo Extensivo é um planejamento anual de estudos guiado por um checklist completo, com todos os temas e tarefas essenciais — como simulados, revisões e exercícios — organizados ao longo de 52 semanas.</p>
+          <p>Ele foi criado para garantir constância, foco e progresso real até a prova de residência, oferecendo uma trilha clara e estruturada que abrange todo o conteúdo necessário, sem perder tempo com o que não cai.</p>
+        </div>
       </div>
     </BottomDrawer>
   )

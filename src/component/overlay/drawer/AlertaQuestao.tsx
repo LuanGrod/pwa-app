@@ -14,7 +14,7 @@ export default function AlertaQuestao({ onClose, open }: Props) {
   const isCorrect = getCurrentAnswer()?.answer === getCurrentAnswer()?.correct;
 
   return (
-    <TopDrawer open={open} onClose={onClose} customClass={`questoes-alerta ${isCorrect ? "correto" : "incorreto"}`}>
+    <TopDrawer open={open} onClose={onClose} className={`questoes-alerta ${isCorrect ? "correto" : "incorreto"}`}>
       <h1>{isCorrect ? "Parabéns! Resposta correta." : "Resposta incorreta!"}</h1>
     </TopDrawer>
   );

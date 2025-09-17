@@ -2,7 +2,7 @@
 
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import { useSearchParams } from "next/navigation";
-import { Viewing } from "@global/component/viewing/Viewing";
+import { AsyncRenderer } from "@global/component/data/AsyncRenderer";
 import { Questao as QuestaoType } from "@/type/Entities";
 import Questao from "@/component/questao/Questao";
 import useQuestoes from "@/store/QuestaoStore";
@@ -38,11 +38,11 @@ export default function page({ }: Props) {
   }, [data])
 
   return (
-    <Viewing
+    <AsyncRenderer
       data={getCurrent()}
       loading={loading}
       error={error}
-      loadingComponent={<Loading2 loading />}
+      loadingComponent={<Loading2 loading overlay />}
       renderItem={(item: QuestaoType) => (
         <Structure>
           <Questao data={item} />

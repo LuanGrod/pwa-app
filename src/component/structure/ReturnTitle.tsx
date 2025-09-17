@@ -5,15 +5,15 @@ import Header from "@global/component/header/ReturnTitle";
 type Props = {
   children: ReactNode;
   title: string;
-  customClass?: string;
+  className?: string;
 };
 
-export default function ReturnTitleStructure({ children, title, customClass }: Props) {
+export default function ReturnTitleStructure({ children, title, className }: Props) {
   return (
     <>
       <ViewTransition default="handle">
         <Header title={title} />
-        <main className={`content-wrapper ${customClass}`}>{children}</main>
+        <main className={`content-wrapper ${className}`}>{children}</main>
       </ViewTransition>
       <Footer />
     </>

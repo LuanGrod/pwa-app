@@ -8,10 +8,10 @@ type Props = {
   children: ReactNode;
   open?: boolean;
   onClose?: () => void;
-  customClass?: string;
+  className?: string;
 };
 
-export function UnderHeader({ children, onClose, open, customClass = "" }: Props) {
+export function UnderHeader({ children, onClose, open, className = "" }: Props) {
   const [drawerRoot, setDrawerRoot] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export function UnderHeader({ children, onClose, open, customClass = "" }: Props
     createPortal(
       <div className={clsx("drawer-wrapper", open ? "open" : "closed")}>
         <div className={"close-area"} onClick={onClose}></div>
-        <div className={clsx("drawer-under-header", open ? "open" : "closed", customClass)}>
+        <div className={clsx("drawer-under-header", open ? "open" : "closed", className)}>
           {children}
         </div>
       </div>,

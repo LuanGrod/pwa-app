@@ -1,10 +1,10 @@
 "use client";
 
-import { Listing } from "@global/component/listing/Listing";
+import { AsyncRenderer } from "@global/component/data/AsyncRenderer";
 import Structure from "@/component/structure/ReturnTitleSearch";
 import { useListing } from "@global/hook/request/useListing";
 import { useSearchParams } from "next/navigation";
-import SearchBar from "@global/component/search/SearchBar";
+import SearchBar from "@global/component/search/bar/SearchBar";
 import useSearch from "@global/hook/useSearch";
 import { MapasMentaisListagem } from "@/type/Entities";
 import { UnderHeader } from "@global/component/overlay/drawer/UnderHeader";
@@ -40,7 +40,7 @@ export default function page({ }: Props) {
           }}
         />
       </UnderHeader>
-      <Listing<MapasMentaisListagem>
+      <AsyncRenderer<MapasMentaisListagem>
         data={filteredData}
         loading={loading}
         error={error}

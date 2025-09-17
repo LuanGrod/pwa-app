@@ -15,7 +15,7 @@ export default function RespostaQuestao({ onClose, open, data }: Props) {
   const { getQuestionType } = useQuestoes();
 
   return (
-    <BottomDrawer open={open} onClose={onClose} customClass="questoes-drawer" overlay={false}>
+    <BottomDrawer open={open} onClose={onClose} className="questoes-drawer" overlay={false}>
 
       <h1 className="gabarito">Gabarito: {getQuestionType() !== "questao-aberta" && data?.questoes_gabarito}</h1>
       <h2 className="alternativa">

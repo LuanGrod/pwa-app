@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { Flashcard as FlashcardType } from "@/type/Entities";
 import Structure from "@/component/structure/Flashcard";
 import Flashcard from "@/component/flashcard/Flashcard";
-import { Viewing } from "@global/component/viewing/Viewing";
+import { AsyncRenderer } from "@global/component/data/AsyncRenderer";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 
 type Props = {
@@ -34,7 +34,7 @@ export default function FlashcardItem({ id }: Props) {
 
   return (
     <Structure setTitle={setTitle} title={title} isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={false} setIsSlidding={() => { }}>
-      <Viewing
+      <AsyncRenderer
         data={current}
         loading={loading}
         error={error}

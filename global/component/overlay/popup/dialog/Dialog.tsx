@@ -12,10 +12,10 @@ type Props = {
   open?: boolean;
   overlay?: boolean;
   onClose?: () => void;
-  customClass?: string;
+  className?: string;
 };
 
-export default function Dialog({ children, customClass = "", onClose, open, overlay = true, title }: Props) {
+export default function Dialog({ children, className = "", onClose, open, overlay = true, title }: Props) {
   const [dialogRoot, setDialogRoot] = useState<HTMLElement | null>(null);
 
   useEffect(() => {
@@ -38,7 +38,7 @@ export default function Dialog({ children, customClass = "", onClose, open, over
             >
               <div className={"close-area"} onClick={onClose}></div>
               <motion.div 
-                className={clsx("popup", open ? "open" : "closed", customClass)}
+                className={clsx("popup", open ? "open" : "closed", className)}
                 initial={{ opacity: 0, y: "7px" }} 
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, transition: { duration: 0.2, ease: "easeIn" } }}

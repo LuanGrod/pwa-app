@@ -2,14 +2,15 @@ import { Dispatch, SetStateAction } from "react";
 import { Listing } from "@global/request/builder/api/Listing";
 import { ListingBuilderProps } from "@global/type/request/builder/Listing";
 import { useApiRequest } from "./useApiRequest";
+import { ListingResponse } from "@global/type/request/response/handler/Listing";
 
 type UseListingProps = Omit<ListingBuilderProps, "responseHandler"> & {
   needsAuthorization?: boolean;
 };
 
 type UseListingReturn<T> = {
-  data: Listagem<T>;
-  setData: Dispatch<SetStateAction<Listagem<T>>>;
+  data: ListingResponse<T>;
+  setData: Dispatch<SetStateAction<ListingResponse<T>>>;
   loading: boolean;
   error?: string;
   refetch: () => Promise<void>;
@@ -30,7 +31,7 @@ export function useListing<T = any>({
   params,
   needsAuthorization = false,
 }: UseListingProps): UseListingReturn<T> {
-  return useApiRequest<Listagem<T>, Listing>({
+  return useApiRequest<ListingResponse<T>, Listing>({
     builderClass: Listing,
     builderProps: {
       entity,

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
+import usePdf from "@global/hook/pdf/usePdf";
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
@@ -11,11 +12,7 @@ type Props = {
 };
 
 export default function PdfVisualizer({ fileUrl }: Props) {
-  const [numPages, setNumPages] = useState<number>();
-
-  function onDocumentLoadSuccess({ numPages }: { numPages: number }): void {
-    setNumPages(numPages);
-  }
+  const { numPages, onDocumentLoadSuccess } = usePdf();
 
   return (
     <div className="pdf-viewer">

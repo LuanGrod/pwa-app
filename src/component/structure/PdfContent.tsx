@@ -3,7 +3,7 @@
 import Footer from "@/component/footer/Footer";
 import Header from "@/component/header/PdfContent";
 import { useGetRow } from "@global/hook/request/useGetRow";
-import { Viewing } from "@global/component/viewing/Viewing";
+import { AsyncRenderer } from "@global/component/data/AsyncRenderer";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import EdicaoSugerida from "../overlay/popup/dialog/EdicaoSugerida";
 import useToggleStatus from "@global/hook/overlay/useToggleStatus";
@@ -86,7 +86,7 @@ export default function PdfContent({
             formEntity={edicaoSugerida.formEntity}
             insertEntity={edicaoSugerida.insertEntity}
           />
-          <Viewing
+          <AsyncRenderer
             data={data}
             loading={loading}
             error={error}

@@ -1,4 +1,4 @@
-import { Icon } from "@public/global/js/types/Icon";
+import { Icon } from "@global/type/props/Icon";
 import clsx from "clsx/lite";
 
 export default function Menos({ color = "#000", size, className, changeOnTheme = false }: Icon) {

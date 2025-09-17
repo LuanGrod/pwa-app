@@ -7,7 +7,8 @@ import { useEffect, useState } from "react";
 import useFlashcards from "@/store/FlashcardStore";
 import Structure from "@/component/structure/Flashcard";
 import { useGetRow } from "@global/hook/request/useGetRow";
-import { Viewing } from "@global/component/viewing/Viewing";
+import { AsyncRenderer } from "@global/component/data/AsyncRenderer";
+import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 
 type Props = {};
 
@@ -49,9 +50,10 @@ export default function page({ }: Props) {
   }, [current])
 
   return (
-    <Viewing
+    <AsyncRenderer
       data={current}
       error={error}
+      loadingComponent={<Loading2 loading overlay />}
       loading={loading}
       renderItem={(item) => (
         <>
@@ -74,14 +76,13 @@ export default function page({ }: Props) {
                   data={next}
                   isFlipped={false}
                   onFlip={() => { }}
-                  customClass="card-enter"
+                  className="card-enter"
                 />
               )}
             </Structure>
           )}
         </>
       )}
-    >
-    </Viewing>
+    />
   );
 }

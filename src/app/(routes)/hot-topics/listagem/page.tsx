@@ -1,12 +1,12 @@
 "use client";
 
-import { Listing } from "@global/component/listing/Listing";
+import { AsyncRenderer } from "@global/component/data/AsyncRenderer";
 import Structure from "@/component/structure/ReturnTitleSearch";
 import { useListing } from "@global/hook/request/useListing";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import { useSearchParams } from "next/navigation";
 import { UnderHeader } from "@global/component/overlay/drawer/UnderHeader";
-import SearchBar from "@global/component/search/SearchBar";
+import SearchBar from "@global/component/search/bar/SearchBar";
 import useSearch from "@global/hook/useSearch";
 import { HotTopicsListagem } from "@/type/Entities";
 import { ToggleableItem } from "@global/listing/ToggleableItem";
@@ -40,7 +40,7 @@ export default function page({ }: Props) {
           }}
         />
       </UnderHeader>
-      <Listing<HotTopicsListagem>
+      <AsyncRenderer<HotTopicsListagem>
         data={filteredData}
         loading={loading}
         error={error}

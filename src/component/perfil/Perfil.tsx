@@ -110,7 +110,7 @@ export default function Perfil({ data, setData }: Props) {
       </div>
       <div className="perfil-info">
         <PerfilItem label="Email:" value={data.estudantes_email} />
-        <PerfilItem label="Senha:" value={"********"} customClass="edit">
+        <PerfilItem label="Senha:" value={"********"} className="edit">
           <button onClick={edicaoSenhaToggleDialog}>
             <Caneta size={18} changeOnTheme />
           </button>

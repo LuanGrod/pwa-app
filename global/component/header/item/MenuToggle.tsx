@@ -1,7 +1,7 @@
 "use client";
 
 import Elipse from "@global/component/icon/Elipse";
-import { Overlay } from "@public/global/js/types/Overlay";
+import { Overlay } from "@global/type/props/Overlay";
 import { cloneElement, ReactElement, useRef } from "react";
 
 type Props = {

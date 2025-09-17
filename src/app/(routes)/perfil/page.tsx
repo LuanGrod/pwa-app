@@ -6,7 +6,7 @@ import { Estudante as EstudanteType } from "@/type/Entities";
 import { useUser } from "@global/hook/auth/useUser";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import Perfil from "@/component/perfil/Perfil";
-import { Viewing } from "@global/component/viewing/Viewing";
+import { AsyncRenderer } from "@global/component/data/AsyncRenderer";
 
 type Props = {};
 
@@ -20,8 +20,8 @@ export default function page({ }: Props) {
   });
 
   return (
-    <Structure title="Perfil" customClass="perfil">
-      <Viewing
+    <Structure title="Perfil" className="perfil">
+      <AsyncRenderer
         data={data}
         loading={loading}
         error={error}

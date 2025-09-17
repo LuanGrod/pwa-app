@@ -1,4 +1,4 @@
-import { Icon } from "@public/global/js/types/Icon";
+import { Icon } from "@global/type/props/Icon";
 
 import clsx from "clsx/lite";
 

@@ -3,7 +3,7 @@
 import { useGetRow } from "@global/hook/request/useGetRow";
 import { useEffect } from "react";
 import { Questao as QuestaoType } from "@/type/Entities";
-import { Viewing } from "@global/component/viewing/Viewing";
+import { AsyncRenderer } from "@global/component/data/AsyncRenderer";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import useQuestoes from "@/store/QuestaoStore";
 import Questao from "@/component/questao/Questao";
@@ -41,7 +41,7 @@ export default function QuestaoItem({ id }: Props) {
 
   return (
     <Structure >
-      <Viewing
+      <AsyncRenderer
         data={getCurrent()}
         loading={loading}
         error={error}

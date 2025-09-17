@@ -3,7 +3,7 @@
 import SessionEndStatistics from "@/component/statistics/SessionEndStatistics";
 import { useGetRow } from "@global/hook/request/useGetRow";
 import { Estatisticas as EstatisticasType } from "@/type/Entities";
-import { Viewing } from "@global/component/viewing/Viewing";
+import { AsyncRenderer } from "@global/component/data/AsyncRenderer";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import useQuestoes from "@/store/QuestaoStore";
 
@@ -22,7 +22,7 @@ export default function page({ }: Props) {
   const wrongAnswers = answers?.filter((answer) => answer.confirmed && answer.answer && answer.answer !== answer.correct).length || 0;
 
   return (
-    <Viewing
+    <AsyncRenderer
       data={data}
       error={error}
       loading={loading}

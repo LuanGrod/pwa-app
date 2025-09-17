@@ -5,15 +5,15 @@ import Footer from "@/component/footer/Footer";
 
 type Props = {
   children: ReactNode;
-  customClass?: string;
+  className?: string;
 };
 
-export default function GreetingsEstudanteLogoStructure({ children, customClass = "" }: Props) {
+export default function GreetingsEstudanteLogoStructure({ children, className = "" }: Props) {
   return (
     <>
       <ViewTransition default="handle">
         <Header />
-        <main className={`content-wrapper ${customClass}`}>{children}</main>
+        <main className={`content-wrapper ${className}`}>{children}</main>
       </ViewTransition>
       <Footer />
     </>

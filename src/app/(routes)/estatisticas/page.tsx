@@ -6,7 +6,7 @@ import Pie from "@global/component/chart/Pie";
 import Loading2 from "@global/component/overlay/popup/dialog/Loading2";
 import CardList from "@global/component/stat/CardList";
 import SimpleLine from "@global/component/stat/SimpleLine";
-import { Viewing } from "@global/component/viewing/Viewing";
+import { AsyncRenderer } from "@global/component/data/AsyncRenderer";
 import { BrazilianDateFormatter } from "@global/formatter/date/Brazilian";
 import { useGetRow } from "@global/hook/request/useGetRow";
 
@@ -21,8 +21,8 @@ export default function page({ }: Props) {
   const brazilianDateFormatter = new BrazilianDateFormatter();
 
   return (
-    <Structure customClass="estudante-statistics-wrapper">
-      <Viewing
+    <Structure className="estudante-statistics-wrapper">
+      <AsyncRenderer
         data={data}
         loading={loading}
         error={error}

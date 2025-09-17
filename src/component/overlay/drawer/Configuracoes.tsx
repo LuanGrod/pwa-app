@@ -9,10 +9,10 @@ import Sair from "@global/component/icon/Sair";
 import Usuario from "@global/component/icon/Usuario";
 import DrawerLinkWithIcon from "@global/component/overlay/drawer/item/LinkWithIcon";
 import DrawerBtnWithIcon from "@global/component/overlay/drawer/item/BtnWithIcon";
-import { Overlay } from "@public/global/js/types/Overlay";
+import { Overlay } from "@global/type/props/Overlay";
 import { RefObject } from "react";
 import { BottomRefDrawer } from "@global/component/overlay/drawer/BottomRef";
-import useTheme from "@global/hook/useTheme";
+import useTheme from "@global/hook/ui/useTheme";
 
 type Props = {
   menuRef?: RefObject<Overlay | null>;
