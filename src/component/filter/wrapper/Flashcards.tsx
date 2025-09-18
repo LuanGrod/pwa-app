@@ -55,6 +55,7 @@ export function Flashcards() {
 
   useEffect(() => {
     clearSession();
+    console.log(JSON.stringify(filterDefinitions, null, 2))
   }, [])
 
   return <FilterWrapperBase filterBtnIcon={<Logo size={26} className="logo" />} filterDefinitions={filterDefinitions} entity="flashcards" gridColumns={2} />;

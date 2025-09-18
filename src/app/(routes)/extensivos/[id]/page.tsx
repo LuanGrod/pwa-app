@@ -34,8 +34,8 @@ export default function page({
               links={[
                 { href: `/hot-topics/listagem?filters=hot_topics_id_0{in}${item.hot_topics_extensivos_ids || ""}`, image: "/project/assets/HotTopics.svg", label: "Hot topics" },
                 { href: `/mapas-mentais/listagem?filters=mapas_mentais_id_0{in}${item.mapas_mentais_extensivos_ids || ""}`, image: "/project/assets/MapasMentais.svg", label: "Mapas Mentais" },
-                { href: `/flashcards/listagem?filters=flashcards_id_0{in}${item.flashcards_extensivos_ids || ""}`, image: "/project/assets/Flashcards.svg", label: "Flashcards" },
-                { href: `/questoes/listagem?filters=questoes_id_0{in}${item.questoes_extensivos_ids || ""}`, image: "/project/assets/Questoes.svg", label: "Questões" },
+                { href: `/flashcards/listagem?filters=flashcards_id_0{in}${item.flashcards_extensivos_ids || ""}&redirect=/extensivos/${item.extensivos_id}`, image: "/project/assets/Flashcards.svg", label: "Flashcards" },
+                { href: `/questoes/listagem?filters=questoes_id_0{in}${item.questoes_extensivos_ids || ""}&redirect=/extensivos/${item.extensivos_id}`, image: "/project/assets/Questoes.svg", label: "Questões" },
               ]}
             />
           </div>

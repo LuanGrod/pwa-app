@@ -11,13 +11,14 @@ type Props = {
   setTitle: (value: string) => void;
   setIsFlipped: (value: boolean) => void;
   setIsSlidding: (value: boolean) => void;
+  href?: string;
 };
 
-export default function Flashcard({ children, title, isFlipped, setIsFlipped, isSlidding, setIsSlidding, setTitle }: Props) {
+export default function Flashcard({ children, title, isFlipped, setIsFlipped, isSlidding, setIsSlidding, setTitle, href }: Props) {
   return (
     <>
       <ViewTransition default="handle">
-        <Header title={title} />
+        <Header title={title} href={href} />
         <main className="content-wrapper flashcards">{children}</main>
       </ViewTransition>
       <Footer isFlipped={isFlipped} setIsFlipped={setIsFlipped} isSlidding={isSlidding} setIsSlidding={setIsSlidding} setTitle={setTitle} />

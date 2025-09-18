@@ -16,6 +16,7 @@ type Props = {};
 
 export default function page({ }: Props) {
   const filters = useSearchParams().get("filters") || "";
+  const redirect = useSearchParams().get("redirect") || "/questoes/estatisticas";
 
   const {
     getCurrent,
@@ -44,7 +45,7 @@ export default function page({ }: Props) {
       error={error}
       loadingComponent={<Loading2 loading overlay />}
       renderItem={(item: QuestaoType) => (
-        <Structure>
+        <Structure href={redirect}>
           <Questao data={item} />
           <AlertaQuestao open={isShowingAlert} />
           <RespostaQuestao data={getCurrent()} open={isShowingAnswer} onClose={toggleIsShowingAnswer} />

@@ -40,7 +40,7 @@ export default function QuestaoItem({ id }: Props) {
   }, [data])
 
   return (
-    <Structure >
+    <Structure>
       <AsyncRenderer
         data={getCurrent()}
         loading={loading}

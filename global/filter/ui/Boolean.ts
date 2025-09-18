@@ -33,7 +33,7 @@ export default class Boolean extends AbstractFilter {
       label,
       "boolean",
       conditionalOperator ||
-        (DEFAULT_FILTER_VALUES.BOOLEAN_CONDITIONAL_PERATOR as ConditionalOperator),
+        (DEFAULT_FILTER_VALUES.BOOLEAN_CONDITIONAL_OPERATOR as ConditionalOperator),
       connectionOperator || (DEFAULT_FILTER_VALUES.CONNECTION_OPERATOR as ConnectionOperator),
       denialOperator || (DEFAULT_FILTER_VALUES.DENIAL_OPERATOR as boolean),
       key,

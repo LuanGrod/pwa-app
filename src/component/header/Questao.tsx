@@ -11,9 +11,11 @@ import MenuToggle from "@global/component/header/item/MenuToggle";
 import ReturnRoute from "@global/component/header/item/ReturnRoute";
 import SaveBtn from "@global/component/header/item/SaveBtn";
 
-type Props = {};
+type Props = {
+  href?: string
+};
 
-export default function Questao({ }: Props) {
+export default function Questao({ href }: Props) {
   const { handleSave, getCurrentSavedStatus, getCurrent, isSaving } = useQuestoes();
   const { id: userId } = useUser();
   const { isActive, toggle } = useToggleStatus();
@@ -29,7 +31,7 @@ export default function Questao({ }: Props) {
   );
 
   return <>
-    <BaseHeader left={<ReturnRoute href="/questoes/estatisticas" />} right={RightWrapper} className="questoes-header" />
+    <BaseHeader left={<ReturnRoute href={href} />} right={RightWrapper} className="questoes-header" />
     <EdicaoSugerida
       onClose={toggle}
       open={isActive}

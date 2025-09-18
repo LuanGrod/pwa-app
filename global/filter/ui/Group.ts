@@ -18,7 +18,7 @@ export default class Group extends AbstractFilter {
       "",
       "",
       "group",
-      DEFAULT_FILTER_VALUES.BOOLEAN_CONDITIONAL_PERATOR as ConditionalOperator,
+      DEFAULT_FILTER_VALUES.BOOLEAN_CONDITIONAL_OPERATOR as ConditionalOperator,
       connectionOperator || (DEFAULT_FILTER_VALUES.CONNECTION_OPERATOR as ConnectionOperator),
       DEFAULT_FILTER_VALUES.DENIAL_OPERATOR as boolean
     );

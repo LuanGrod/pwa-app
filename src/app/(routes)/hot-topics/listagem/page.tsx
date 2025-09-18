@@ -31,7 +31,7 @@ export default function page({ }: Props) {
   });
 
   return (
-    <Structure title="Hot Topics" handleSearch={toggle} href="/hot-topics">
+    <Structure title="Hot Topics" handleSearch={toggle}>
       <UnderHeader open={isActive} onClose={toggle}>
         <SearchBar
           value={searchTerm || ""}

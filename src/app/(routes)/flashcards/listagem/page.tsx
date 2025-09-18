@@ -22,6 +22,7 @@ type CustomFlashcard = {
 
 export default function page({ }: Props) {
   const filters = useSearchParams().get("filters") || "";
+  const redirect = useSearchParams().get("redirect") || "/flashcards/estatisticas";
 
   const [isFlipped, setIsFlipped] = useState(false);
   const [isSlidding, setIsSlidding] = useState(false);
@@ -66,6 +67,7 @@ export default function page({ }: Props) {
               setTitle={setTitle}
               setIsFlipped={setIsFlipped}
               setIsSlidding={setIsSlidding}
+              href={redirect}
             >
               <Flashcard
                 data={item}

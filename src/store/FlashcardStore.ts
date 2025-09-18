@@ -219,7 +219,7 @@ const useFlashcards = create<FlashcardStore>()(
         // Se não há próximo flashcard, vai para estatísticas
         if (!next) {
           startTransition(() => {
-            router.push("/flashcards/estatisticas");
+            router.back();
           });
         }
       },
